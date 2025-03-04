@@ -3,7 +3,7 @@
 \author{Massimo Perego}
 \date{}
 
-\documentclass[11pt]{article}
+\documentclass[11pt]{report}
 \usepackage{graphicx} 
 \usepackage{amsmath}
 \usepackage{amssymb}
@@ -12,12 +12,21 @@
 \usepackage[parfill]{parskip}
 \MakeOuterQuote{"}
 
+\usepackage{./commands}
+\usepackage{dutchcal}
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows,positioning}
+
 \begin{document}
+	
+	\tikzstyle{block} = [draw, rectangle, minimum height=2em, minimum width=3em]
+	
 	\maketitle
 	\tableofcontents
 	\newpage
 	
 	\include{chapters/Intro}
-
+	
+	\include{chapters/Calc}
 
 \end{document}

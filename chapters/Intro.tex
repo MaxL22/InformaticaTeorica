@@ -1,5 +1,8 @@
 % !TeX spellcheck = it_IT
-\section{Introduzione}
+% !TeX root = ../it.tex
+
+\chapter*{Introduzione}
+\addcontentsline{toc}{chapter}{Introduzione}
 
 Si "contrappone" all'informatica applicata, ovvero qualsiasi applicazione dell'informatica atta a raggiunger uno scopo, dove l'informatica è solamente lo strumento per raggiungere in maniera efficace un obiettivo.\\
 Con "\textit{informatica teorica}" l'oggetto è l'informatica stessa, si studiano i fondamenti della disciplina in modo rigoroso e scientifico. Può essere fatto ponendosi delle questioni fondamentali: il \textit{cosa} e il \textit{come} dell'informatica, ovvero cosa è in grado di fare l'informatica e come è in grado di farlo.
@@ -10,38 +13,4 @@ La branca dell'informatica teorica che studia cosa è risolvibile si chiama \tex
 
 \paragraph{Come:} Una volta individuati i problemi calcolabili, come possiamo calcolarli? Il dominio della \textbf{Teoria della Complessità} vuole descrivere le risoluzione dei problemi tramite mezzi automatici in termini di risorse computazionali necessarie. Una "risorsa computazionale" è qualsiasi cosa che viene consumata durante l'esecuzione per risolvere il problema, come possono essere elettricità o numero di processori, generalmente i parametri più importanti considerati sono tempo e spazio di memoria. Bisognerà definire in modo preciso cosa si intende con "tempo" e "spazio". Una volta fissati i parametri bisogna definire anche cosa si intende con "risolvere efficientemente" un problema, in termini di tempo e spazio.\\
 
-La teoria della calcolabilità dice quali problemi sono calcolabili, la teoria della complessità dice, all'interno dei problemi calcolabili, quali sono risolvibili efficientemente.
-
-\newpage
-
-\subsection{Ripasso di Matematica}
-
-\paragraph{Funzione:} Una funzione $f$ dall'insieme $A$ all'insieme $B$ è una legge che dice come associare a ogni elemento di $A$ un elemento di $B$. Si scrive
-$$ f: A \rightarrow B $$
-E chiamiamo $A$ dominio e $B$ codominio. Per dire come agisce su un elemento si usa $f(a) = b$, $b$ è l'immagine di $a$ secondo $f$ (di conseguenza $a$ è la controimmagine).\\
-Per definizione di funzione, è possibile che elementi del codominio siano raggiungibili da più elementi del dominio, ma non il contrario. Possiamo classificare le funzioni in base a questa caratteristica:
-\begin{itemize}
-	\item \textbf{Iniettiva:} $f: A \rightarrow B$ è iniettiva sse $\forall a,b \in A$, $a \neq b \implies f(a) \neq f(b)$
-	\item \textbf{Suriettiva:} $f: A \rightarrow B$ è suriettiva sse $\forall b \in B$, $\exists a \in A: f(a) = b$: un altro modo per definirla è tramite l'insieme immagine di $f$, definito come
-	$$ \text{Im}_f = \{b \in B: \exists a, f(a) = b \} = \{f(a): a \in A \} $$
-	Solitamente $\text{Im}_f \subseteq B$, ma $f$ è suriettiva sse $\text{Im}_f = B$;
-	\item \textbf{Biettiva:} $f: A \rightarrow B$ è biettiva sse è sia iniettiva che suriettiva, ovvero
-	$$
-	\begin{array}{c l}
-		\forall a, b \in A, a \neq b: & f(a) \neq f(b) \\
-		\forall b \in B, \exists a \in A: & f(a) = b
-	\end{array}
-	\implies \forall b \in B, \exists! a \in A: f(a) = b
-	$$
-\end{itemize}
-
-\paragraph{Inversa:} Per le funzioni biettive si può naturalmente associare il concetto di "inversa": dato $f: A \rightarrow B$ biettiva, si definisce inversa la funzione $f^{-1}: B \rightarrow A$ tale che $f^{-1} (b) = a \Leftrightarrow f(a) = b$.\\
-
-\paragraph{Composizione di funzioni:} Date $f: A \rightarrow B$ e $g: B \rightarrow C$, $f$ composto $g$ è la funzione $g \circ f: A \rightarrow C$ definita come $g \circ f(a) = g(f(a))$. Generalmente non commutativo, $f \circ g \neq g \circ f$, ma è associativo.\\
-
-\paragraph{Funzione identità:} Dato l'insieme $A$, la funzione identità su $A$ è la funzione $i_A: A \rightarrow A$ tale che $i_A (a) = a$, $\forall a \in A$.\\
-
-Un'altra possibile definizione per l'inversa diventa:
-$$ f^{-1} \circ f = i_A \wedge f \circ f^{-1} = i_B $$
-
-%End L1
+La teoria della calcolabilità dice quali problemi sono calcolabili, la teoria della complessità dice, all'interno dei problemi calcolabili, quali sono risolvibili efficientemente.\\

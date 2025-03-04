@@ -1,0 +1,133 @@
+% !TeX spellcheck = it_IT
+% !TeX root = ../it.tex
+
+\chapter{Teoria della Calcolabilità}
+
+\section{Notazione}
+
+\subsection{Funzioni}
+
+\paragraph{Funzione:} Una funzione $f$ dall'insieme $A$ all'insieme $B$ è una legge che dice come associare a ogni elemento di $A$ un elemento di $B$. Si scrive
+$$ f: A \rightarrow B $$
+E chiamiamo $A$ dominio e $B$ codominio. Per dire come agisce su un elemento si usa $f(a) = b$, $b$ è l'immagine di $a$ secondo $f$ (di conseguenza $a$ è la controimmagine).\\
+Per definizione di funzione, è possibile che elementi del codominio siano raggiungibili da più elementi del dominio, ma non il contrario. Possiamo classificare le funzioni in base a questa caratteristica:
+\begin{itemize}
+	\item \textbf{Iniettiva:} $f: A \rightarrow B$ è iniettiva sse $\forall a,b \in A$, $a \neq b \implies f(a) \neq f(b)$
+	\item \textbf{Suriettiva:} $f: A \rightarrow B$ è suriettiva sse $\forall b \in B$, $\exists a \in A: f(a) = b$: un altro modo per definirla è tramite l'insieme immagine di $f$, definito come
+	$$ \ImSet_f = \{b \in B: \exists a, f(a) = b \} = \{f(a): a \in A \} $$
+	Solitamente $\text{Im}_f \subseteq B$, ma $f$ è suriettiva sse $ \ImSet_f = B$;
+	\item \textbf{Biettiva:} $f: A \rightarrow B$ è biettiva sse è sia iniettiva che suriettiva, ovvero
+	$$
+	\begin{array}{c l}
+		\forall a, b \in A, a \neq b: & f(a) \neq f(b) \\
+		\forall b \in B, \exists a \in A: & f(a) = b
+	\end{array}
+	\implies \forall b \in B, \exists! a \in A: f(a) = b
+	$$
+\end{itemize}
+
+\paragraph{Inversa:} Per le funzioni biettive si può naturalmente associare il concetto di "inversa": dato $f: A \rightarrow B$ biettiva, si definisce inversa la funzione $f^{-1}: B \rightarrow A$ tale che $f^{-1} (b) = a \Leftrightarrow f(a) = b$.\\
+
+\paragraph{Composizione di funzioni:} Date $f: A \rightarrow B$ e $g: B \rightarrow C$, $f$ composto $g$ è la funzione $g \circ f: A \rightarrow C$ definita come $g \circ f(a) = g(f(a))$. Generalmente non commutativo, $f \circ g \neq g \circ f$, ma è associativo.\\
+
+\paragraph{Funzione identità:} Dato l'insieme $A$, la funzione identità su $A$ è la funzione $i_A: A \rightarrow A$ tale che $i_A (a) = a$, $\forall a \in A$.\\
+
+Un'altra possibile definizione per l'inversa diventa:
+$$ f^{-1} \circ f = i_A \wedge f \circ f^{-1} = i_B $$
+
+%End L1
+
+\paragraph{Funzioni Parziali:} Se una funzione $f: A \rightarrow B$ è definita per $a \in A$ si indica con $f(a) \downarrow$ e da questo proviene la categorizzazione: una funzione è \textbf{totale} se definita $\forall a \in A$, \textbf{parziale} altrimenti (definita solo per qualche elemento di $A$).\\
+
+\paragraph{Insieme Dominio:} Chiamiamo \textbf{dominio} (o campo di esistenza) di $f$ l'insieme
+$$ \Dom_f = \left\{a \in A | f(a) \downarrow \right\} \subseteq A $$
+Quindi se $\Dom_f = A$ la funzione è totale, se $\Dom_f \subset A$ allora è una funzione parziale.\\
+
+\paragraph{Totalizzazione:} Si può \textbf{totalizzare una funzione parziale} $f$ definendo una funzione a tratti $\overline{f}: A \rightarrow B \cup \{\bot\}$ tale che
+$$ 
+\overline{f} (a) = \begin{cases}
+	f(a) & a \in \Dom_f(a) \\
+	\bot & \text{altrimenti}
+\end{cases}
+$$
+Dove $\bot$ è il \textbf{simbolo di indefinito}, per tutti i valori per cui la funzione di partenza $f$ non è definita. Da qui in poi $B_\bot$ significa $B \cup \{\bot\}$.\\
+
+\paragraph{Insieme delle funzioni:} L'insieme di tutte le funzioni che vanno da $A$ a $B$ si denota con
+$$ B^A = \{f: A \rightarrow B \} $$
+La notazione viene usata in quanto la cardinalità di $B^A$ è esattamente $|B|^{|A|}$, con $A$ e $B$ insiemi finiti.\\
+Volendo includere anche tutte le funzioni parziali: 
+$$ B^A_\bot = \{f: A \rightarrow B_\bot \} $$
+Le due definizioni coincidono, $B^A = B^A_\bot$, ma quest'ultima permette di mettere in evidenza che tutte le funzioni presenti sono totali o totalizzate.\\ 
+
+\subsection{Prodotto Cartesiano}
+
+Chiamiamo \textbf{prodotto cartesiano} l'insieme 
+$$ A \times B = \{(a,b) | a \in A \wedge b \in B \} $$
+Rappresenta l'insieme di tutte le coppie ordinate di valori in $A$ e $B$. In generale non è commutativo, a meno che $A=B$.\\
+
+Può essere esteso a $n$-uple di valori:
+$$ A_1 \times \dots \times A_n = \{(a_1, \dots, a_n) | a_i \in A_i\} $$
+Il prodotto di $n$ volte lo stesso insieme verrà, per comodità, indicato come
+$$ A \times \dots \times A = A^n $$
+
+\paragraph{Proiettore:} Operazione "opposta", il proiettore $i$-esimo è una funzione che estrae l'$i$-esimo elemento di una tupla, quindi è una funzione
+$$ \pi_i: A_1 \times \dots \times A_n \rightarrow A_i \tc \pi_i (a_1, \dots, a_n) = a_i $$
+La proiezione sull'asse in cui sono presenti i valori dell'insieme $a_i$.\\
+
+\subsection{Funzione di Valutazione}
+Dati $A,B$ e $B^A_\bot$ si definisce \textbf{funzione di valutazione} la funzione
+$$ \omega: \bat \times A \rightarrow B \tc \omega (f,a) = f(a) $$
+Prende una funzione $f$ e la valuta su un elemento $a$ del dominio. Si possono fare due tipi di analisi su questa funzione: 
+\begin{itemize}
+	\item Fisso $a$ e provo tutte le $f$, ottenendo un \textit{benchmark} di tutte le funzioni su $a$
+	\item Fisso $f$ e provo tutte le $a$ del dominio, ottenendo il \textit{grafico} di $f$
+\end{itemize}
+
+\section{Sistemi di Calcolo}
+
+Vogliamo modellare teoricamente un \textbf{sistema di calcolo}; quest'ultimo può essere visto come una black box che prende in input un programma $P$, dei dati $x$ e calcola il risultato $y$ di $P$ su input $x$. La macchina restituisce $y$ se è riuscita a calcolare un risultato, $\bot$ (indefinito) se è entrata in un loop.
+\begin{center}
+	\begin{tikzpicture}[>=stealth, auto, node distance=2cm]
+		\node [block] (C) { Calcolatore };
+		\node [left=of C.west, below] (P)  {$P$};
+		\node [left=of C.west, above] (x)  {$x$};
+		\node [right=of C] (out)  {$y/\bot$};
+		
+		\draw [->] (x) -- node {} (C.169);
+		\draw [->] (P) -- node {} (C.194);
+		\draw [->] (C) -- node {} (out);
+	\end{tikzpicture}
+\end{center}
+
+Quindi, formalmente, possiamo definire un sistema di calcolo come una funzione 
+$$ \mathcal{C}: \text{PROG} \times \text{DATI} \rightarrow \text{DATI}_\bot $$
+
+Possiamo vedere un sistema di calcolo come una funzione di valutazione:
+\begin{itemize}
+	\item i dati $x$ corrispondono all'input $a$
+	\item il programma $P$ corrisponde alla funzione $f$
+\end{itemize}
+
+Formalmente, un programma $P \in \text{PROG}$ è una sequenza di regole che trasformano un dato input in uno di output, ovvero l'espressione di una funzione secondo una sintassi 
+$$ P: \text{DATI} \rightarrow \text{DATI}_\bot $$
+e di conseguenza $P \in \text{DATI}^{\text{DATI}}_\bot$. In questo modo abbiamo mappato l'insieme $\text{PROG}$ sull'insieme delle funzioni, il che ci permette di definire il sistema di calcolo come la funzione
+$$ \mathcal{C}: \text{DATI}^{\text{DATI}}_\bot \times \text{DATI} \rightarrow \text{DATI} $$
+
+Analoga alla funzione di valutazione. Con $\mathcal{C}(P,x)$ indichiamo la funzione calcolata da $P$ su $x$ dal sistema di calcolo $\mathcal{C}$, che viene detta \textbf{semantica}, ovvero il suo "significato" su input $x$.\\
+
+Il modello solitamente considerato quando si parla di calcolatori è quello di \textbf{Von Neumann}.\\
+
+\section{Potenza Computazionale}
+%Pag 11
+
+
+
+
+
+
+
+
+
+
+
+
