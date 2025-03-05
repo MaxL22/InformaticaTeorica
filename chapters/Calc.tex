@@ -41,7 +41,7 @@ $$ f^{-1} \circ f = i_A \wedge f \circ f^{-1} = i_B $$
 
 \paragraph{Insieme Dominio:} Chiamiamo \textbf{dominio} (o campo di esistenza) di $f$ l'insieme
 $$ \Dom_f = \left\{a \in A | f(a) \downarrow \right\} \subseteq A $$
-Quindi se $\Dom_f = A$ la funzione è totale, se $\Dom_f \subset A$ allora è una funzione parziale.\\
+Quindi se $\Dom_f = A$ la funzione è totale, se $\Dom_f \subsetneq A$ allora è una funzione parziale.\\
 
 \paragraph{Totalizzazione:} Si può \textbf{totalizzare una funzione parziale} $f$ definendo una funzione a tratti $\overline{f}: A \rightarrow B \cup \{\bot\}$ tale che
 $$ 
@@ -100,7 +100,7 @@ Vogliamo modellare teoricamente un \textbf{sistema di calcolo}; quest'ultimo pu�
 \end{center}
 
 Quindi, formalmente, possiamo definire un sistema di calcolo come una funzione 
-$$ \mathcal{C}: \text{PROG} \times \text{DATI} \rightarrow \text{DATI}_\bot $$
+$$ \C: \prog \times \dati \rightarrow \dati_\bot $$
 
 Possiamo vedere un sistema di calcolo come una funzione di valutazione:
 \begin{itemize}
@@ -108,22 +108,35 @@ Possiamo vedere un sistema di calcolo come una funzione di valutazione:
 	\item il programma $P$ corrisponde alla funzione $f$
 \end{itemize}
 
-Formalmente, un programma $P \in \text{PROG}$ è una sequenza di regole che trasformano un dato input in uno di output, ovvero l'espressione di una funzione secondo una sintassi 
-$$ P: \text{DATI} \rightarrow \text{DATI}_\bot $$
-e di conseguenza $P \in \text{DATI}^{\text{DATI}}_\bot$. In questo modo abbiamo mappato l'insieme $\text{PROG}$ sull'insieme delle funzioni, il che ci permette di definire il sistema di calcolo come la funzione
-$$ \mathcal{C}: \text{DATI}^{\text{DATI}}_\bot \times \text{DATI} \rightarrow \text{DATI} $$
+Formalmente, un programma $P \in \prog$ è una sequenza di regole che trasformano un dato input in uno di output, ovvero l'espressione di una funzione secondo una sintassi 
+$$ P: \dati \rightarrow \dati_\bot $$
+e di conseguenza $P \in \dati^{\dati}_\bot$. In questo modo abbiamo mappato l'insieme $\prog$ sull'insieme delle funzioni, il che ci permette di definire il sistema di calcolo come la funzione
+$$ \C: \dati^{\dati}_\bot \times \dati \rightarrow \dati $$
 
-Analoga alla funzione di valutazione. Con $\mathcal{C}(P,x)$ indichiamo la funzione calcolata da $P$ su $x$ dal sistema di calcolo $\mathcal{C}$, che viene detta \textbf{semantica}, ovvero il suo "significato" su input $x$.\\
+Analoga alla funzione di valutazione. Con $\C(P,x)$ indichiamo la funzione calcolata da $P$ su $x$ dal sistema di calcolo $\C$, che viene detta \textbf{semantica}, ovvero il suo "significato" su input $x$.\\
 
 Il modello solitamente considerato quando si parla di calcolatori è quello di \textbf{Von Neumann}.\\
 
 \section{Potenza Computazionale}
-%Pag 11
+Indicando con 
+$$ \C (P, \_): \dati \rightarrow \dati $$
+la funzione che viene calcolata dal programma $P$ (semantica di $P$).\\
 
+La \textbf{potenza computazionale} di un calcolatore è definita come l'insieme di tutte le funzioni che quel sistema di calcolo è in grado di calcolare, ovvero
+$$ F(\C) = \{\C (P, \_) | P \in \prog\} \subseteq \dati_\bot^{\dati} $$
 
+Ovvero, l'insieme di tutte le possibili semantiche di funzioni calcolabili con il sistema $\C$. Stabilire il carattere di quest'ultima inclusione equivale a stabilire \textit{cosa può fare l'informatica}:
+\begin{itemize}
+	\item se $F(\C) \subsetneq \dati_\bot^{\dati}$ allora esistono compiti \textbf{non automatizzabili}
+	\item se $F(\C) = \dati_\bot^{\dati}$ allora l'informatica \textit{può fare tutto}
+\end{itemize}
 
+Calcolare funzioni vuol dire risolvere problemi \textit{in generale}, a ogni problema è possibile associare una funzione soluzione che permette di risolverlo automaticamente.\\
 
+Un possibile approccio per risolvere l'inclusione è tramite la \textbf{cardinalità} (funzione che associa ogni insieme al numero di elementi che contiene) dei due insiemi. Potrebbe però presentare dei problemi: è efficace solo quando si parla di insiemi finiti. Ad esempio, l'insieme dei numeri naturali contiene l'insieme dei numeri pari $\mathbb{P} \subsetneq \mathbb{N}$, ma $|\mathbb{N}| = |\mathbb{P}| = \infty$.\\
+Serve una diversa definizione di cardinalità che considera l'esistenza di infiniti \textit{più densi di altri}.\\
 
+%Pag 13
 
 
 
