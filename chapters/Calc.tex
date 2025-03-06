@@ -35,8 +35,6 @@ Per definizione di funzione, è possibile che elementi del codominio siano raggi
 Un'altra possibile definizione per l'inversa diventa:
 $$ f^{-1} \circ f = i_A \wedge f \circ f^{-1} = i_B $$
 
-%End L1
-
 \paragraph{Funzioni Parziali:} Se una funzione $f: A \rightarrow B$ è definita per $a \in A$ si indica con $f(a) \downarrow$ e da questo proviene la categorizzazione: una funzione è \textbf{totale} se definita $\forall a \in A$, \textbf{parziale} altrimenti (definita solo per qualche elemento di $A$).\\
 
 \paragraph{Insieme Dominio:} Chiamiamo \textbf{dominio} (o campo di esistenza) di $f$ l'insieme
@@ -136,8 +134,169 @@ Calcolare funzioni vuol dire risolvere problemi \textit{in generale}, a ogni pro
 Un possibile approccio per risolvere l'inclusione è tramite la \textbf{cardinalità} (funzione che associa ogni insieme al numero di elementi che contiene) dei due insiemi. Potrebbe però presentare dei problemi: è efficace solo quando si parla di insiemi finiti. Ad esempio, l'insieme dei numeri naturali contiene l'insieme dei numeri pari $\mathbb{P} \subsetneq \mathbb{N}$, ma $|\mathbb{N}| = |\mathbb{P}| = \infty$.\\
 Serve una diversa definizione di cardinalità che considera l'esistenza di infiniti \textit{più densi di altri}.\\
 
-%Pag 13
+\section{Relazioni di Equivalenza}
+Dati due insiemi $A,B$, una relazione binaria $R$ è un sottoinsieme $R \subseteq A \times B$ di coppie ordinate. Data $R \subseteq A^2$, due elementi sono in relazione sse $(a,b) \in R$. Indichiamo la relazione tra due elementi anche con la notazione infissa $aRb$. \\
 
+Una classe importante di relazioni è quella delle \textbf{relazioni di equivalenza}: una relazione $R \subseteq A^2$ è una relazione di equivalenza sse rispetta le proprietà di
+\begin{itemize}
+	\item riflessività: $\forall a \in A$, $(a,a) \in R$
+	\item simmetria: $\forall a,b \in A$, $(a,b) \in R \Leftrightarrow (b,a) \in R$
+	\item transitività: $\forall a,b,c \in A$, $(a,b) \in R \wedge (b,c) \in R \implies (a,c) \in R$
+\end{itemize}
+
+\subsection{Partizione indotta dalla relazione di equivalenza}
+A ogni relazione di equivalenza $R \subseteq A^2$ si può associare una \textbf{partizione}, ovvero un insieme di sottoinsiemi $A_i \subseteq A$ tali che
+\begin{itemize}
+	\item $\forall i \in \mathbb{N}^+$, $A_i \neq \emptyset$
+	\item $\forall i,j \in \mathbb{N}^+$, se $i \neq j$ allora $A_i \cap A_j = \emptyset$
+	\item $\bigcup_{i \in \mathbb{N}^+} A_i = A$
+\end{itemize}
+
+La relazione $R$ definita su $A^2$ \textit{induce} una partizione $\{A_1, A_2, \dots\}$ su $A$.\\
+
+\subsection{Classi di equivalenza e Insieme quoziente}
+Dato un elemento $a \in A$, chiamiamo \textbf{classe di equivalenza} di $a$ l'insieme
+$$ [a]_R = \{b \in A | (a,b) \in R \} $$
+Ovvero, tutti gli elementi in relazione con $a$, chiamato \textbf{rappresentante} della classe. \\
+
+Si può dimostrare che
+\begin{itemize}
+	\item non esistono classi di equivalenza vuote, per riflessività
+	\item dati $a,b \in A$, allora $[a]_R \cap [b]_R = \emptyset$, oppure $[a]_R = [b]_R$, i due elementi o sono in relazione o non lo sono
+	\item $\bigcup_{a \in A} [a]_R = A$
+\end{itemize}
+
+L'insieme delle classi di equivalenza, per definizione, è una partizione indotta da $R$ su $A$, detta \textbf{insieme quoziente} di $A$ rispetto ad $R$, denotato con $A / R$.\\
+
+\section{Cardinalità}
+
+\subsection{Isomorfismi}
+
+Due insiemi $A$ e $B$ sono \textbf{isomorfi} (\textit{equi-numerosi}) se esiste una biezione tra essi, denotato come $A \sim B$. Chiamando $\U$ l'insieme di tutti gli insiemi, la relazione $\sim$ è $\sim \subseteq \U^2$.\\
+
+Dimostriamo che $\sim$ è una relazione di equivalenza: 
+\begin{itemize}
+	\item riflessività: $A \sim A$, la biezione è data dalla funzione identità $i_A$
+	\item simmetria: $A \sim B \Leftrightarrow B \sim A$, la biezione è data dalla funzione inversa
+	\item transitività: $A \sim B \wedge B \sim C \implies A \sim C$, la biezione è data dalla composizione delle funzioni usate per $A \sim B$ e $B \sim C$
+\end{itemize}
+
+Dato che $\sim$ è una relazione di equivalenza, permette di partizionare l'insieme $\U$, risultando in classi di equivalenza contenenti insiemi isomorfi, ovvero con la stessa cardinalità. Possiamo quindi definire la \textbf{cardinalità} come l'insieme quoziente di $\U$ rispetto alla relazione $\sim$.\\
+
+Questo approccio permette il \textit{confronto delle cardinalità di insiemi infiniti}, basta trovare una funzione biettiva tra i due insiemi per poter affermare che sono isomorfi.\\
+
+\subsection{Cardinalità finita}
+La prima classe di cardinalità è quella delle cardinalità finite. Definiamo la seguente famiglia di insiemi:
+$$ J_n = \begin{cases}
+	\emptyset & \text{ se } n = 0 \\
+	\{1, \dots , n\} & \text{ se } n > 0 \\
+\end{cases}$$
+Un insieme $A$ ha \textbf{cardinalità finita} sse $A \sim J_n$ per qualche $n \in \mathbb{N}$; in tal caso possiamo scrivere $|A| = n$. La classe di equivalenza $[J_n]_{\sim}$ identifica tutti gli insiemi di $\U$ contenenti $n$ elementi.\\
+
+\subsection{Cardinalità infinita}
+L'altra classe di cardinalità è quella delle \textbf{cardinalità infinite}, ovvero gli insiemi non in relazione con $J_n$. Si possono dividere in \textbf{numerabili} e \textbf{non numerabili}.
+
+\subsubsection{Insiemi numerabili}
+Un insieme $A$ è numerabile sse $A \sim \mathbb{N}$, ovvero $A \in [\mathbb{N}]_\sim$. Vengono anche detti \textbf{listabili}, in quanto è possibile elencare tutti gli elementi dell'insieme $A$ tramite una funzione $f$ biettiva tra $\mathbb{N}$ e $A$; grazie ad $f$ possiamo elencare gli elementi di $A$, formando l'insieme 
+$$ A = \{f(0), f(1). \dots \} $$
+Ed è esaustivo, in quanto elenca tutti gli elementi di $A$.\\
+
+Questi insiemi hanno cardinalità $\aleph_0$ (\textit{aleph}).\\
+
+\subsubsection{Insiemi non numerabili}
+Gli insiemi non numerabili sono insiemi a cardinalità infinita ma non listabili, sono "più fitti" di $\mathbb{N}$; ogni lista generata non può essere esaustiva.\\
+
+Il più noto tra gli insiemi non numerabili è l'insieme $\mathbb{R}$ dei numeri reali.\\
+
+\begin{theor}
+	L'insieme $\mathbb{R}$ non è numerabile ($\mathbb{R} \not \sim \mathbb{N}$)
+\end{theor}
+\begin{proof}
+	Suddividiamo la dimostrazione in 3 punti: 
+	\begin{enumerate}
+		\item dimostriamo che $\mathbb{R} \sim (0,1)$
+		\item dimostriamo che $\mathbb{N} \not \sim (0,1)$
+		\item dimostriamo che $\mathbb{R} \not \sim \mathbb{N}$
+	\end{enumerate}
+	
+	Per dimostrare che $\mathbb{R} \sim (0,1)$ serve trovare una biezione tra $\mathbb{R}$ e $(0,1)$. Usiamo una rappresentazione grafica: 
+	\begin{itemize}
+		\item disegnare una semicirconferenza di raggio $1/2$, centrata in $1/2$, quindi con diametro $1$
+		\item disegnare la perpendicolare al punto da mappare che interseca la circonferenza
+		\item disegnare la semiretta passante per il centro $C$ e l'intersezione precedente
+	\end{itemize}
+	L'intersezione tra asse reale (parallela al diametro) e semiretta finale è il punto mappato. 
+	
+	\begin{center}
+		\begin{tikzpicture}[scale=6]
+			
+			% Real line
+			\draw (0.4,0.5) -- (1.6,0.5);
+			% Draw the semicircle
+			\draw[dashed] (0.75,1) arc (180:360:0.25);
+			% Draw the top line segment
+			\draw (0.75,1) -- (1.25,1);
+			
+			% Labels
+			\node[above] at (0.75,1) {0};
+			\node[above] at (1.25,1) {1};
+			\node[above] at (1,1) {\textit{C}};
+			\node[above] at (1.5,0.5) {$\mathbb{R}$};
+			
+			% Paths for first red ray, semicircle and first intersection
+			\path [name path=rr1] (0.9,0) -- (0.9,1);
+			\path [name path=semicircle] (0.75,1) arc (180:360:0.25);
+			\path [name intersections={of=rr1 and semicircle, by=i1}];
+			
+			% First red line
+			\draw[dashed,red] (0.9,1) -- (i1);
+			
+			% Find point beyond, draw the paths for the red ray and real, find the intersection
+			\coordinate (Beyond) at ($(i1)!-1.179!(1,1)$); 
+			\path [name path=rr2] (1,1) -- (Beyond);
+			\path [name path=r] (0.25,0.5) -- (1.75,0.5);
+			\path [name intersections={of=rr2 and r, by=i2}];
+			% Draw second red ray
+			\draw[dashed,red] (1,1) -- (i2);
+		\end{tikzpicture}
+	\end{center}
+	
+	Questo approccio permette di dire che $\mathbb{R}$ è isomorfo a qualsiasi segmento di lunghezza maggiore di $0$. La stessa biezione vale anche sull'intervallo chiuso $[0,1]$ (e di conseguenza qualsiasi intervallo chiuso), usando la "compattificazione" $\mathbb{R} = \mathbb{R} \cup \{\pm \infty\}$ e mappando $0$ su $-\infty$ e 1 su $+ \infty$.\\
+	
+	Continuiamo dimostrando che $\mathbb{N} \not \sim (0,1)$: serve dimostrare che l'intervallo $(0,1)$ non è listabile, quindi che ogni lista manca di almeno un elemento. Proviamo a "costruire" un elemento che andrà a mancare. Per assurdo, sia $\mathbb{N} \sim (0,1)$, allora possiamo listare gli elementi di $(0,1)$ come 
+	$$ 
+	\begin{array}{c c c c c}
+		0. & a_{00} & a_{01} & a_{02} & \dots \\
+		0. & a_{10} & a_{11} & a_{12} & \dots \\
+		0. & a_{20} & a_{21} & a_{22} & \dots \\
+		0. & \multicolumn{4}{c}{\dots}
+	\end{array}
+	$$
+	dove con $a_{ij}$ indichiamo la cifra di posto $j$ dell'$i$-esimo elemento della lista.\\
+	
+	Costruiamo il numero $c = 0.c_0 c_1 \dots$ tale che
+	$$ c_{i} = \begin{cases}
+		2 & \text{ se } a_{ii} \neq 2 \\
+		3 & \text{ se } a_{ii} = 2 \\
+	\end{cases}$$
+	
+	Viene costruito "guardando" le cifre sulla diagonale principale, apparterrà sicuramente a $(0,1)$ ma differirà per almeno una posizione (quella sulla diagonale principale) da ogni numero presente all'interno della lista. Questo è assurdo sotto l'assunzione che $(0,1)$ è numerabile, quindi abbiamo provato che $\mathbb{N} \not \sim (0,1)$.\\
+	
+	Il terzo punto $\mathbb{R} \not \sim \mathbb{N}$ si dimostra per transitività.\\
+	
+	Più in generale, non si riesce a listare nessun segmento di lunghezza maggiore di 0.\\
+\end{proof}
+
+Questa dimostrazione (punto 2 in particolare) è detta \textbf{dimostrazione per diagonalizzazione}.\\
+
+L'insieme $\mathbb{R}$ viene detto \textbf{insieme continuo} e tutti gli insiemi isomorfi a $\mathbb{R}$ si dicono continui a loro volta.\\
+
+Gli insiemi continui hanno cardinalità $\aleph_1$.\\
+
+%Decidi se sub o subsub
+\subsection{Insieme delle Parti}
+
+%P16
 
 
 
