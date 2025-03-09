@@ -1,0 +1,10 @@
+\begin{tikzpicture}[>=stealth, auto, node distance=2cm]
+		\node [block] (C) { Calcolatore };
+		\node [left=of C.west, below] (P)  {$P$};
+		\node [left=of C.west, above] (x)  {$x$};
+		\node [right=of C] (out)  {$y/\bot$};
+		
+		\draw [->] (x) -- node {} (C.169);
+		\draw [->] (P) -- node {} (C.194);
+		\draw [->] (C) -- node {} (out);
+\end{tikzpicture}

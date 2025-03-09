@@ -1,0 +1,31 @@
+\begin{tikzpicture}[scale=6]
+			
+			% Real line
+			\draw (0.4,0.5) -- (1.6,0.5);
+			% Draw the semicircle
+			\draw[dashed] (0.75,1) arc (180:360:0.25);
+			% Draw the top line segment
+			\draw (0.75,1) -- (1.25,1);
+			
+			% Labels
+			\node[above] at (0.75,1) {0};
+			\node[above] at (1.25,1) {1};
+			\node[above] at (1,1) {\textit{C}};
+			\node[above] at (1.5,0.5) {$\mathbb{R}$};
+			
+			% Paths for first red ray, semicircle and first intersection
+			\path [name path=rr1] (0.9,0) -- (0.9,1);
+			\path [name path=semicircle] (0.75,1) arc (180:360:0.25);
+			\path [name intersections={of=rr1 and semicircle, by=i1}];
+			
+			% First red line
+			\draw[dashed,red] (0.9,1) -- (i1);
+			
+			% Find point beyond, draw the paths for the red ray and real, find the intersection
+			\coordinate (Beyond) at ($(i1)!-1.179!(1,1)$); 
+			\path [name path=rr2] (1,1) -- (Beyond);
+			\path [name path=r] (0.25,0.5) -- (1.75,0.5);
+			\path [name intersections={of=rr2 and r, by=i2}];
+			% Draw second red ray
+			\draw[dashed,red] (1,1) -- (i2);
+\end{tikzpicture}
