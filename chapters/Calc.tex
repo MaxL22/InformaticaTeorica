@@ -586,8 +586,129 @@ $$ x - y = \begin{cases}
 
 \subsubsection{Esecuzione di un programma RAM}
 
-%P28
+L'esecuzione di un programma su una macchina RAM segue i passi:
+\begin{enumerate}
+	\item \textbf{Inizializzazione}:
+	\begin{itemize}
+		\item viene caricato il programma $P \equiv \text{Istr}_1, \dots \text{Istr}_n$ in memoria
+		\item il PC viene posto a 1 per indicare di eseguire la prima istruzione del programma
+		\item viene caricato l'input in $R_1$
+		\item ogni altro registro è azzerato
+	\end{itemize}
+	\item \textbf{Esecuzione}: le istruzioni vengono eseguite una dopo l'altra, a ogni iterazione passa da $L$ a $L+1$ (escluse operazioni di salto). Essendo il linguaggio RAM \textit{non strutturato} richiede un PC per sapere l'operazione da eseguire al passo successivo.
+	\item \textbf{Terminazione}: per convenzione, si usa $L=0$ per indicare che l'esecuzione del programma è terminata o andata in loop. Nel caso in cui il programma termini, è detto \textbf{segnale di halt} e arresta la macchina
+	\item \textbf{Output}: il contenuto di $R_0$, in caso di halt, contiene il risultato dell'esecuzione del programma $P$. Si indica con $\varphi_P(n)$ il contenuto del registro $R_0$ in caso di halt, oppure $\bot$ in caso di loop
+	$$ 
+	\varphi_P (n) = \begin{cases}
+		cont(R_0) & \text{ se halt} \\
+		\bot & \text{ se loop}
+	\end{cases}
+	$$
+\end{enumerate}
+Con $\varphi_P: \mathbb{N} \rightarrow \mathbb{N}_\bot$ indichiamo la semantica del programma $P$.\\
 
+Con $\C(P,\_)$ indicavamo la semantica di $P$ nel sistema di calcolo $\C$, quindi con $\ram(P,\_) = \varphi_P$ indichiamo la semantica di $P$ nel sistema di calcolo RAM.\\
 
+\subsubsection{Semantica Operazionale}
 
+Per dare una definizione formale della semantica di un programma RAM va specificato il significato di ogni istruzione (\textbf{semantica operazionale}), esplicitando l'effetto che quell'istruzione ha sui registri della macchina.\\
 
+Ogni istruzione fa passare la macchina da uno stato all'altro e la \textbf{semantica operazionale} di un'istruzione è la \textbf{coppia} formata dagli \textbf{stati} della macchina \textbf{prima e dopo l'istruzione}.
+$$ \text{STATO}_1 \rightarrow \boxed{\text{Istr}_i} \rightarrow \text{STATO}_2 $$
+$$ (\text{STATO}_1,\text{STATO}_2) = \text{semantica operazionale di Istr}_i $$
+
+Uno stato deve descrivere completamente la situazione della macchina in un certo istante. Il programma rimane uguale, quindi l'informazione da salvare è la situazione globale dei registri $R_k$ e il registro $L$.\\
+
+La \textbf{computazione} del programma $P$ è una sequenza di stati $\st_i$, ognuno generato dall'esecuzione di un'istruzione del programma; $P$ induce una sequenza di stati $\st_i$, se questa è formata da un numero infinito di stati, allora il programma è andato in loop; in caso contrario, nel registro $R_0$ si trova il risultato $y$ della computazione di $P$.
+$$ 
+\varphi_P: \mathbb{N} \rightarrow \mathbb{N}_\bot \tc \varphi_P(n) = \begin{cases}
+	y & \text{ se } \exists \st_{fin} \\
+	\bot & \text{ altrimenti}
+\end{cases}
+$$
+
+Per definire come passare da uno stato all'altro, definiamo formalmente: 
+\begin{itemize}
+	\item \textbf{Stato}: istantanea di tutte le componenti della macchina, è una funzione 
+	$$ \st: \{L, R_i\} \rightarrow \mathbb{N} $$
+	tale che $\st (R_k)$ restituisce il contenuto del registro $R_k$ quando la macchina si trova nello stato $\st$. Gli stati possibili di una macchina appartengono all'insieme 
+	$$ \stati = \{f: \{L, R_i\} \rightarrow \mathbb{N}\} = \mathbb{N}^{\{L,R_i\}} $$
+	%Questa rappresentazione permette un numero di registri potenzialmente infinito. Se così non fosse, avremmo tuple per indicare tutti i possibili registri al posto dell'insieme $\{L,R_i\}$
+	
+	\item \textbf{Stato Finale}: uno stato finale $\st_{fin}$ è un qualsiasi stato $\st$ tale che $\st (L) = 0$
+	\item \textbf{Dati}: già dimostrato come $\dati \sim \mathbb{N}$
+	\item \textbf{Inizializzazione}: serve una funzione che, preso l'input, restituisca lo stato iniziale della macchina: 
+	$$ \text{in}: \mathbb{N} \rightarrow \stati \tc \text{in}(n) = \st_{init}$$
+	Lo stato iniziale $\st_{init}$ è tale che 
+	$$ 
+	\st_{init} (R) = \begin{cases}
+		1 & \text{ se } R=L \\
+		n & \text{ se } R=R_1 \\
+		0 & \text{ altrimenti}
+	\end{cases}
+	$$
+	\item \textbf{Programmi}: $\prog$ è definito come l'insieme dei programmi $\ram$
+\end{itemize}
+
+Manca da definire la \textit{parte dinamica} del programma, ovvero l'esecuzione. Per farlo, definiamo la \textbf{funzione di stato prossimo}: 
+$$ \delta : \stati \times \prog \rightarrow \stati_\bot $$
+tale che 
+$$ \delta (\st,P) = \st' $$
+dove $\st$ rappresenta lo stato attuale e $\st'$ rappresenta lo stato prossimo dopo l'esecuzione di un'istruzione di $P$.\\
+
+La funzione $\delta (\st, P) = \st'$ è tale che
+\begin{itemize}
+	\item se $\st(L) = 0$ ho halt, ovvero deve terminare la computazione. Poniamo lo stato come indefinito, ovvero $\st' = \bot$
+	\item Se $\st(L)>|P|$ vuol dire che $P$ non contiene istruzioni che bloccano esplicitamente l'esecuzione del programma. Lo stato $\st'$ è tale che 
+	$$ 
+	\st'(R) = \begin{cases}
+		0 & \text{ se } R = L \\
+		\st(R_i) \text{ se } R = R_i \forall i
+	\end{cases}
+	$$
+	\item Se $1 \leq \st(L) \leq |P|$ considero l'istruzione $\st(L)$-esima:
+	\begin{itemize}
+		\item se ho un incremento/decremento sul registro $R_k$ definisco $\st'$ tale che 
+		$$ 
+		\begin{cases}
+			\st'(L) & = \st (L) + 1\\
+			\st'(R_k) & = \st (R_k) \pm 1\\
+			\st'(R_i) & = \st (R_i) \; \text{ per } \; i \neq k \\
+		\end{cases}
+		$$
+		\item Se ho un \texttt{goto} sul registro $R_k$ che salta all'indirizzo $m$, definisco $\st'$ tale che 
+		$$ 
+		\st' (L) = \begin{cases}
+			m & \text{ se } \st (R_k) = 0 \\
+			\st (L) + 1 & \text{ altrimenti}
+		\end{cases}
+		$$
+		$$ \st' (R_i) = \st (R_i) \; \forall i $$
+	\end{itemize}
+\end{itemize}
+
+L'esecuzione di un programma $P \in \prog$ su input $n \in \mathbb{N}$ genera una sequenza di stati 
+$$ \st_0, \st_1, \dots, \st_i, \st_{i+1}, \dots $$
+tali che 
+$$
+\begin{array}{l l c l}
+	& \st_0 & = & \text{in}(n) \\
+	\forall i & \st_{i+1} & = & \delta (\st_i,P) 
+\end{array}
+$$
+La sequenza è infinita quando $P$ va in loop, mentre se termina raggiunge uno stato $\st_m$ tale che $\st_m (L) = 0$, ovvero ha ricevuto il segnale di halt. \\
+
+La semantica di $P$ è 
+$$ 
+\varphi_P (n) = \begin{cases}
+	y & \text{ se } P \text{ termina in } \st_m, \text{ con } \st_m (L) = 0 \text{ e } \st_m(R_0) = y \\
+	\bot & \text{ se } $P$ \text{ va in loop}
+\end{cases}
+$$
+
+La potenza computazionale del sistema $\ram$ è 
+$$ F(\ram) = \left\{f \in \mathbb{N}^{\mathbb{N}}_\bot | \exists P \in \prog | \varphi_P = f \right\} = \left\{\varphi_P | P \in \prog \right\} \subsetneq \mathbb{N}^{\mathbb{N}}_\bot $$
+L'insieme è formato da tutte le funzioni $f: \mathbb{N} \rightarrow \mathbb{N}_\bot$ che hanno un programma che le calcola in un sistema $\ram$.\\
+
+\subsection{Aritmetizzazione di un programma}
+%P30
