@@ -1,0 +1,29 @@
+\begin{tikzpicture}
+    \node at (0,0)
+        {$ P \equiv \text{Istr}_1,\text{Istr}_2,\dots,\text{Istr}_m$};
+    \node at (.25,-.4) 
+        {$\updownarrow \qquad \updownarrow \qquad \ \ \ \ \ \updownarrow$};
+    
+    \draw (-1.2,-1.1) rectangle (-.6,-.7) node[midway] {$Ar$};
+    \begin{scope}[xshift=.85cm]
+        \draw (-1.2,-1.1) rectangle (-.6,-.7) node[midway] {$Ar$};
+    \end{scope}
+    \begin{scope}[xshift=2.35cm]
+        \draw (-1.2,-1.1) rectangle (-.6,-.7) node[midway] {$Ar$};
+    \end{scope}
+    \node at (.75,-.9) {$\dots$};
+
+    \node at (.25,-1.4) 
+        {$\updownarrow \qquad \updownarrow \qquad \ \ \ \ \ \updownarrow$};
+    \node at (.3,-1.8) 
+        {$c_1,\ \ \ \ c_2, \ \ \dots \  ,c_m$};
+    \node at (.25,-2.2) 
+        {$\updownarrow \qquad \updownarrow \qquad \ \ \ \ \ \updownarrow$};
+    \draw (-1.2,-3) rectangle (1.75,-2.5) node[midway] 
+        {$\langle c_1,c_2,\dots,c_m \rangle$};
+    \node at (.25,-3.3) {$\updownarrow$};
+    \node at (.25,-3.7) {$n$};
+    \node at (-1.3,-3.7) {$cod(P) \quad =$};
+    \draw [->] (-1.8,-.2) -- (-1.8,-3.45);
+
+\end{tikzpicture}

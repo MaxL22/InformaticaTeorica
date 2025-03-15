@@ -711,4 +711,184 @@ $$ F(\ram) = \left\{f \in \mathbb{N}^{\mathbb{N}}_\bot | \exists P \in \prog | \
 L'insieme è formato da tutte le funzioni $f: \mathbb{N} \rightarrow \mathbb{N}_\bot$ che hanno un programma che le calcola in un sistema $\ram$.\\
 
 \subsection{Aritmetizzazione di un programma}
-%P30
+
+Per verificare che $\prog \sim \mathbb{N}$ basterebbe trovare una funzione che permetta di codificare i programmi in numeri in modo biunivoco. Data una lista di istruzioni semplici $P \equiv \text{Istr}_1, \dots, \text{Istr}_m$ se questa fosse codificata come una lista di interi potremmo sfruttare la funzione coppia di Cantor per ottenere un numero associato al programma $P$.\\
+
+Quindi vogliamo trovare una funzione $Ar$ che associ a ogni istruzione $I_k$ la sua codifica numerica $c_k$. Se la funzione trovata è anche biunivoca siamo sicuri di poter trovare anche la sua inversa, ovvero la funzione che ci permette di ricavare $I_k$ da $c_k$.\\
+
+Riassumendo, vogliamo trasformare la lista di istruzioni un una lista di numeri su cui successivamente applicare la funzione coppia di Cantor. Vorremmo anche ottenere la lista di istruzioni originale data la codifica.
+\begin{center}
+	\input{img/calc/ram_codifica}
+\end{center} 
+L'associazione biunivoca di un numero a una struttura si dice aritmetizzazione o G\"odelizzazione.\\
+
+\subsubsection{Applicazione ai programmi RAM}
+Dovendo codificare tre istruzioni nel linguaggio $\ram$, definiamo la funzione $Ar$ tale che
+$$ 
+Ar(I) = \begin{cases}
+	3k & \text{ se } I \equiv R_k \leftarrow R_k + 1 \\
+	3k + 1 & \text{ se } I \equiv R_k \leftarrow R_k \dotminus 1 \\
+	3k \langle k,m\rangle - 1 & \text{ se } I \equiv \text{ \texttt{if} } R_k = 0 \text{ \texttt{then goto} } m \\
+\end{cases}
+$$
+Per l'inversa, in base al modulo tra $n$ e 3 ottengo una certa istruzione: 
+$$
+Ar^{-1} (n) = \begin{cases}
+	R_{\frac{n}{3}} \leftarrow R_{\frac{n}{3}} + 1 & \text{ se } n \mod 3 = 0 \\
+	R_{\frac{n-1}{3}} \leftarrow R_{\frac{n-1}{3}} \dotminus 1 & \text{ se } n \mod 3 = 1 \\
+	\text{\texttt{if} } R_{\sin\left(\frac{n+1}{3}\right)} = 0 \text{ \texttt{then goto} } \des\left(\frac{n+1}{3}\right) & \text{ se } n \mod 3 = 2 \\
+\end{cases}
+$$
+
+Per tornare indietro devo prima invertire la funzione coppia di Cantor e poi invertire la funzione $Ar$.\\
+La lunghezza del programma $P$, indicata con $|P|$, si calcola come $len(cod(P))$.\\
+
+Abbiamo quindi dimostrato che $\prog \sim \mathbb{N}$.\\
+
+\subsubsection{Osservazioni}
+Avendo $n = cod(P)$ si può scrivere
+$$ \varphi_P (t) = \varphi_n (t) $$
+Ovvero, la semantica di $P$ è uguale alla semantica della sua codifica. \\
+
+I numeri diventano un \textit{linguaggio di programmazione}.\\
+
+Si può scrivere l'insieme 
+$$ F(\ram) = \{\varphi_P: P \in \prog \}$$
+come 
+$$ F(\ram) = \{\varphi_i\}_{i \in \mathbb{N}} $$
+L'insieme, grazie alla dimostrazione di $\prog \sim \mathbb{N}$, è numerabile.\\
+
+Abbiamo dimostrato rigorosamente che 
+$$ F(\ram) \sim \mathbb{N} \nsim \mathbb{N}^{\mathbb{N}}_\bot $$
+Di conseguenza, anche nel sistema di calcolo $\ram$ esistono funzioni no calcolabili.\\
+
+La $\ram$ è troppo elementare affinché $F(\ram)$ rappresenti formalmente la "classe dei problemi risolubili automaticamente", quindi considerando un sistema di calcolo $\C$ più sofisticato, ma comunque trattabile rigorosamente come il sistema $\ram$, potremmo dare un'idea formale di "ciò che è calcolabile automaticamente".\\
+
+Se riesco a dimostrare che $F(\ram) = F(\C)$ allora cambiare la tecnologia non cambia ciò che è calcolabile, ovvero la calcolabilità è intrinseca ai problemi, quindi la si può caratterizzare matematicamente. \\
+
+\subsection{Sistema di calcolo $\while$}
+Introduciamo quindi il sistema di calcolo $\while$ per vedere se riusciamo a "catturare" più o meno funzioni calcolabili dalla macchina $\ram$.
+
+\subsubsection{Struttura}
+La macchina $\while$ ha anch'essa, come la macchina $\ram$, una serie di registri, ma al posto di essere \textit{potenzialmente infiniti} sono esattamente 21. Il registro $R_0$ è il \textbf{registro di output}, mentre $R_1$ è il \textbf{registro di input}. Non esiste il Program Counter in quanto il linguaggio è \textbf{strutturato} e ogni istruzione in questo linguaggio va eseguita in ordine.\\
+
+Il linguaggio $\while$ prevede una \textbf{definizione induttiva}: vengono definiti alcuni comandi base e i comandi più complessi sono una concatenazione dei comandi base.\\
+
+\paragraph{Assegnamento:} Comando di base, ne esistono di tre tipi: 
+\begin{align*}
+	x_k & := 0, \\
+	x_k & := x_j + 1 \\
+	x_k & := x_j \dotminus 1
+\end{align*}
+Queste istruzioni sono più complete rispetto alle istruzioni $\ram$, in una sola istruzione possiamo azzerare il valore di una variabile o assegnare a una variabile il valore di un'altra aumentato/diminuito di 1.
+
+\paragraph{While:} Primo comando "induttivo". Si tratta di un comando della forma: 
+\begin{center}
+	\texttt{while} $x_k \neq 0$ \texttt{do} $C$
+\end{center}
+Dove $C$ è detto \textbf{corpo} e può essere un assegnamento, un comando while o un comando composto.
+
+\paragraph{Composto:} Altro comando induttivo. Si tratta di un comando nella forma
+\begin{center}
+	\texttt{begin} $C_1; \dots; C_n$ \texttt{end}
+\end{center}
+Dove i vari $C_i$ sono, come prima, assegnamenti, comandi while o comandi composti.\\
+
+\paragraph{Programma $\while$:} Un programma $\while$ è un comando composto, e l'insieme di tutti i programmi $\while$ è l'insieme
+$$ W-\prog = \{\prog \text{ scritti in linguaggio } \while \} $$
+
+Chiamiamo 
+$$ \Psi_W : \mathbb{N} \rightarrow \mathbb{N}_\bot $$
+la \textbf{semantica} del programma $W \in W-\prog$.\\
+
+Per dimostrare una proprietà $P$ di un programma $W \in W-\prog$, data la definizione induttiva del linguaggio $\while$, è naturale procedere induttivamente: 
+\begin{enumerate}
+	\item dimostro $P$ vera sugli assegnamenti 
+	\item suppongo $P$ vera sul comando $C$ e la dimostro vera per \texttt{while $x_k \neq 0$ do $C$}
+	\item suppongo $P$ vera sui comandi $C_1, \dots, C_n$ e la dimostro vera per \texttt{begin $C_1; \dots; C_n$ end}
+\end{enumerate}
+
+\subsubsection{Esecuzione di un programma $\while$}
+L'esecuzione di un programma $\while$ $W$ è composta dalle seguenti fasi: 
+\begin{enumerate}
+	\item \textbf{Inizializzazione}: ogni registro $x_i$ viene posto a $0$, tranne $x_1$, che contiene l'input $n$
+	\item \textbf{Esecuzione}: essendo $\while$ un linguaggio con strutture di controllo, non serve un Program Counter, poiché le istruzioni di $W$ vengono eseguite l'una dopo l'altra
+	\item \textbf{Terminazione}: l'esecuzione di $W$ può 
+	\begin{itemize}
+		\item \textit{arrestarsi}: se arriva al termine delle istruzioni
+		\item \textit{non arrestarsi}: se entra in un loop
+	\end{itemize}
+	\item \textbf{Output}: Se il programma va in halt, l'output è contenuto nel registro $x_0$. Possiamo scrivere
+	$$ \Psi_W (n) = \begin{cases}
+		cont(x_0) & \text{ se halt} \\
+		\bot & \text{ se loop}
+	\end{cases}$$
+\end{enumerate}
+
+\subsubsection{Definizione formale per l'esecuzione}
+Come per i programmi $\ram$, serve una definizione formale per la semantica di un programma $\while$, per la quale servono una serie di elementi
+\begin{itemize}
+	\item \textbf{Stato}: una tupla grande quanto il numero di variabili, dove quindi $\underline{x} = (c_0, \dots, c_{20})$ rappresenta uno stato, con $c_i$ rappresentante il contenuto della variabile $i$
+	\item \textbf{$\wstati$}: Insieme di tutti gli stati possibili, contenuto in $\mathbb{N}^{21}$ vista la definizione degli stati 
+	\item \textbf{Dati}: già visto che $\dati \sim \mathbb{N}$
+	\item \textbf{Inizializzazione}: Lo stato iniziale è descritto dalla funzione 
+	$$ w\text{-}in(n) = (0, n, 0, \dots, 0) $$
+	\item \textbf{Semantica operazionale}: Vogliamo trovare una funzione che, presi comando da eseguire e stato corrente, restituisce lo stato successivo
+\end{itemize}
+
+\paragraph{Funzione stato prossimo:} Soffermandoci sull'ultimo punto, vogliamo trovare la funzione
+$$  \llbracket \rrbracket (): \wcom \times \wstati \rightarrow \wstati_\bot $$
+Che, dati un comando $C$ del linguaggio $\while$ e lo stato corrente $\underline{x}$, calcoli
+$$ \llbracket C \rrbracket (\underline{x}) = \underline{y} $$
+con $\underline{y}$ stato prossimo. Quest'ultimo dipende dal comando $C$, ma essendo $C$ induttivo, possiamo provare a dare una definizione induttiva della funzione.\\
+
+Partendo dal passo base, gli \textbf{assegnamenti}:
+$$
+\llbracket x_k := 0 \rrbracket (\underline{x}) = \underline{y} = \begin{cases}
+	x_i & \text{ se } i \neq k \\
+	0 & \text{ se } i = k
+\end{cases}
+$$
+$$ 
+\llbracket x_k := x_j \pm 1 \rrbracket (\underline{x}) = \underline{y} = \begin{cases}
+	x_i & \text{ se } i \neq k \\
+	x_j \pm 1 & \text{ se } i = k
+\end{cases}
+$$
+
+Proseguiamo con il \textbf{passo induttivo}:
+\begin{itemize}
+	\item \textbf{Comando composto}: vogliamo calcolare
+	$$ \llbracket \text{\texttt{begin }} C_1; \dots; C_n \text{\texttt{ end}} \rrbracket (\underline{x}) $$
+	Conoscendo ogni $\llbracket C_i \rrbracket$ per ipotesi induttiva, calcoliamo la funzione
+	$$ \llbracket C_n \rrbracket \left(\dots \left(\llbracket C_2 \rrbracket \left(\llbracket C_1 \rrbracket (\underline{x})\right)\right) \dots \right) = \left(\llbracket C_n \rrbracket \circ \dots \circ \llbracket C_1 \rrbracket \right) (\underline{x}) $$
+	Ovvero, applichiamo in ordine i comandi $C_i$ presenti nel comando composto $C$
+	
+	\item \textbf{Comando while}: vogliamo calcolare
+	$$ \llbracket \text{\texttt{while }} x_k \neq 0 \text{ \texttt{do} } C \rrbracket (\underline{x}) $$
+	Conoscendo ogni $\llbracket C_i \rrbracket$ per ipotesi induttiva, calcoliamo la funzione 
+	$$ \llbracket C \rrbracket \left(\dots \left(\llbracket C \rrbracket (\underline{x})\right) \dots \right) $$
+	Bisogna capire quante volte eseguire il ciclo: dato $\llbracket C \rrbracket^e$ (comando $C$ eseguito $e$ volte) vorremmo trovare il valore di $e$. Questo è il numero minimo di iterazioni che portano in uno stato in cui $x_k = 0$, ovvero il comando \texttt{while} diventa
+	$$ \text{\texttt{while} } x_k \neq 0 \text{ \texttt{do} } C = \begin{cases}
+		\llbracket C \rrbracket^e (\underline{x}) & \text{ se } e = \mu_t \\
+		\bot & \text{ altrimenti}
+	\end{cases}$$
+	Il valore $e = \mu_t$ è quel numero tale che $\llbracket C \rrbracket^e (\underline{x})$ ha  la $k$-esima componente dello stato uguale a 0
+\end{itemize}
+
+Definita la semantica operazionale, manca solo da definire cos'è la \textbf{semantica del programma} $W$ su input $n$. Questa è la funzione 
+$$ \Psi_W: \mathbb{N} \rightarrow \mathbb{N}_\bot \; | \; \Psi_W (n) = \text{Proj}\left(0, \llbracket W \rrbracket (w\text{-}in(n))\right)$$
+
+Questo è valido in quanto $W$ programma $\while$ è un programma composto, e abbiamo definito come deve comportarsi la funzione $\llbracket \rrbracket ()$ sui comandi composti.\\
+
+\paragraph{Potenza Computazionale:} La potenza computazionale del sistema di calcolo $\while$ è l'insieme 
+$$ F(\while) = \left\{f \in \mathbb{N}^{\mathbb{N}}_\bot | \exists W \in \wprog | f = \Psi_W \right\} = \left\{\Psi_W : W \in \wprog \right\}$$
+
+Ovvero, l'insieme formato da tutte le funzioni che possono essere calcolate con un programma in $\wprog$.\\
+
+\subsection{Confronto tra macchina $\ram$ e $\while$}
+
+%Pag 34
+
+
+
