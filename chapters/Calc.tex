@@ -887,8 +887,244 @@ $$ F(\while) = \left\{f \in \mathbb{N}^{\mathbb{N}}_\bot | \exists W \in \wprog 
 Ovvero, l'insieme formato da tutte le funzioni che possono essere calcolate con un programma in $\wprog$.\\
 
 \subsection{Confronto tra macchina $\ram$ e $\while$}
+Viene naturale confrontare i due sistemi presentati per capire il "più potente", sempre che ce ne sia uno. Le possibilità sono: 
+\begin{itemize}
+	\item $F(\ram) \subsetneq F(\while)$, data l'estrema semplicità del sistema $\ram$
+	\item $F(\ram) \cap F(\while) = \emptyset$, avere insiemi disgiunti significherebbe che il concetto di calcolabile dipende dalla macchina considerata
+	\item $F(\while) \subseteq F(\ram)$, che sarebbe sorprendente vista l'apparente maggiore sofisticatezza del sistema $\while$
+	\item $F(\while) = F(\ram)$, ovvero il concetto di calcolabile non dipende dalla tecnologia utilizzata ma è intrinseco nei problemi
+\end{itemize}
 
-%Pag 34
+\paragraph{Confronto tra sistemi di calcolo:} Ponendo di avere $\C_1$ e $\C_2$ sistemi di calcolo con programmi in $\cprog{1}$ e $\cprog{2}$ e le relative potenze computazionali
+$$ F(\C_1) = \left\{f: \mathbb{N} \rightarrow \mathbb{N}_\bot | \exists P_1 \in \cprog{1} | f = \Psi_{P_1} \right\} = \left\{\Psi_{P_1}: P_1 \in \cprog{1} \right\} $$
+$$ F(\C_2) = \left\{f: \mathbb{N} \rightarrow \mathbb{N}_\bot | \exists P_2 \in \cprog{2} | f = \Psi_{P_2} \right\} = \left\{\Psi_{P_2}: P_2 \in \cprog{2} \right\} $$
+
+Mostrare che il primo sistema non è più potente del secondo $F(\C_1) \subseteq F(\C_2)$ vuol dire dimostrare che ogni elemento nel primo insieme deve stare anche nel secondo
+$$ \forall f \in F(\C_1) \implies f \in F(C_2) $$
+
+\textit{Espandendo} la definizione di $f \in F(\C)$ la relazione diventa
+$$ \forall P_1 \in \cprog{1} | f = \Psi_{P_1} \implies \exists P_2 \in \cprog{2} | f = \Psi_{P_2} $$
+
+Per ogni programma calcolabile nel primo sistema di calcolo ne esiste uno con la stessa semantica nel secondo sistema. Vogliamo trovare un \textbf{compilatore} (o \textbf{traduttore}), ovvero una funzione che trasformi un programma del primo sistema in uno del secondo.\\
+
+\subsubsection{Traduzioni}
+Dati $\C_1$ e $\C_2$ due sistemi di calcolo, definiamo \textbf{traduzione} da $\C_1$ a $\C_2$ una funzione
+$$ T: \cprog{1} \rightarrow \cprog{2} $$
+
+Con le seguenti proprietà:
+\begin{itemize}
+	\item \textbf{programmabile}: esiste un modo per programmarla
+	\item \textbf{completa}: deve saper tradurre \textit{ogni} programma in $\cprog{1}$ in un programma in $\cprog{2}$
+	\item \textbf{corretta}: mantiene la semantica dei programmi di partenza, ovvero
+	$$ \forall P \in \cprog{1} \;\; \Psi_P = \varphi_{T(P)}$$
+	dove $\Psi$ rappresenta la semantica dei programmi in $\cprog{1}$ e $\varphi$ rappresenta la semantica dei programmi in $\cprog{2}$\\
+\end{itemize}
 
 
+\begin{theor}
+	Se esiste $T: \cprog{1} \rightarrow \cprog{2}$ allora $F(\C_1) \subseteq F(\C_2)$
+\end{theor}
+\begin{proof}
+	Se $f \in F(\C_1)$ allora esiste un programma $P_1 \in \cprog{1}$ tale che $\Psi_{P_1} = f$.\\
+	
+	A questo programma $P_1$ applico $T$, ottenendo $T(P_1) = P_2 \in \cprog{2}$ (per \textit{completezza}) tale che $\varphi_{P_2} = \Psi_{P_1} = f$ (per \textit{correttezza}).\\
+	
+	Ho trovato un programma $P_2 \in \cprog{2}$ la cui semantica è $f$, allora $F(\C_1) \subseteq F(\C_2)$.\\
+\end{proof}
 
+Mostreremo che $F(\while) \subseteq F(\ram)$, ovvero che il sistema $\while$ non è più potente del sistema $\ram$. Costruiremo un compilatore
+$$ \comp: \wprog \rightarrow \prog $$
+che rispetti le caratteristiche di programmabilità, completezza e correttezza.\\
+
+\subsection{$F(\while) \subseteq F(\ram)$}
+
+Per provare che $F(\while) \subseteq F(\ram)$ vogliamo costruire un compilatore da $\while$ a $\ram$.\\
+
+Per comodità, introduciamo un linguaggio $\ram$ \textit{etichettato}: aggiunge la possibilità di etichettare un'istruzione che indica un punto di salto o di arrivo (stile label assembly). Non altera la potenza espressiva del linguaggio in quanto si tratta di un'aggiunta puramente sintattica: il $\ram$ etichettato si traduce facilmente in $\ram$ puro.\\
+
+Essendo $\wprog$ un insieme definito induttivamente, possiamo definire induttivamente anche il compilatore:
+\begin{itemize}
+	\item \textbf{Passo base}: come compilare gli assegnamenti
+	\item \textbf{Passo induttivo}:
+	\begin{enumerate}
+		\item Per I.H., assumo di sapere $\comp(C_1), \dots, \comp(C_m)$ e mostro come compilare il comando composto \texttt{begin $C_1; \dots; C:n$ end}
+		\item Per I.H., assumo di sapere $\comp(C)$ e mostro come compilare il comando \texttt{while $x_k \neq 0$ do $C$}
+	\end{enumerate}
+\end{itemize}
+
+Nelle traduzioni andremo a mappare la variabile $\while$ $x_k$ nel registro $\ram$ $R_k$. Questo non crea problemi in quanto stiamo mappando un numero finito di registri in un insieme infinito.\\
+
+Il primo assegnamento che mappiamo è $x_k := 0$
+\begin{center}
+	\renewcommand{\arraystretch}{1.25}
+	\begin{tabular}{l|r l|}
+		\cline{2-3}
+		$\comp(x_k:=0) =$ & \texttt{LOOP}:& \texttt{IF $R_k = 0$ THEN GOTO EXIT}\\
+		&& $R_k\leftarrow R_k \dotminus 1$ \\
+		&& \texttt{IF $R_{21} = 0$ THEN GOTO LOOP} \\
+		&\texttt{EXIT}:& $R_k \leftarrow R_k \dotminus 1$ \\
+		\cline{2-3}
+	\end{tabular}\vspace{.15cm}
+\end{center}
+
+Questo programma $\ram$ azzera il valore di $R_k$ usando il registro $R_{21}$ per saltare al check della condizione iniziale. Viene utilizzato il registro $R_{21}$ perché, non essendo mappato a nessuna variabile $\while$, sarà sempre nullo dopo la fase di inizializzazione.\\
+
+Gli altri due assegnamenti da mappare sono $x_k:= x_j+1$ e $x_k := x_j \dotminus 1$:
+\begin{itemize}
+	\item Se $k=j$, la traduzione è banale e l'istruzione $\ram$ è
+	$$ \comp(x_k := x_k \pm 1) = R_k \leftarrow R_k \pm 1 $$
+	\item Invece se $k \neq j$ la prima idea è quella di "spostare" $x_j$ in $x_k$ e poi fare $\pm 1$ ma non funziona per due ragioni
+	\begin{enumerate}
+		\item se $R_k \neq 0$ la migrazione (quindi sommare $R_j$ a $R_k$) non genera $R_j$ dentro $R_k$. Si può risolvere azzerando il registro $R_k$ prima della migrazione
+		\item $R_j$ dopo il trasferimento è ridotto a 0, ma questo non è il senso dell'istruzione, vorrei solo "\textit{fotocopiarlo}" dentro $R_k$. Questo può essere risolto salvando $R_j$ in un altro registro, azzerare $R_k$, spostare $R_j$ e ripristinare il valore originale di $R_j$
+	\end{enumerate}
+%	Ricapitolando: 
+%	\begin{itemize}
+%		\item salviamo $x_j$ in $R_{22}$, registro \textit{sicuro} perché mai coinvolto in altre istruzioni
+%		\item azzeriamo $R_k$
+%		\item Rigeneriamo $R_j$ e settiamo $R_k$ da $R_{22}$
+%		\item $\pm 1$ in $R_k$
+%	\end{itemize}
+	Quindi possiamo mappare come:
+	\begin{center}
+		\renewcommand{\arraystretch}{1.25}
+		\begin{tabular}{l|r l|l}\cline{2-3}
+			$\comp (x_k := x_j \pm 1)$: & \texttt{LOOP}:& \texttt{IF $R_j = 0$ THEN GOTO E1}
+			&\multirow{4}{*}{\hspace{-.2cm}
+				$\begin{rcases}
+					\phantom{}\\
+					\phantom{}\\
+					\phantom{}\\
+					\phantom{}\\
+				\end{rcases}$ Salva $R_j$ in $R_{22}$
+			} \\
+			&& $R_j\leftarrow R_j \dotminus 1$ & \\
+			&& $R_{22} \leftarrow R_{22} + 1$ & \\
+			&& \texttt{IF $R_{21} = 0$ THEN GOTO LOOP} & \\
+			& \texttt{E1:} & \texttt{IF $R_k = 0$ THEN GOTO E2} &\multirow{3}{*}{\hspace{-.2cm}
+				$\begin{rcases}
+					\phantom{}\\
+					\phantom{}\\
+					\phantom{}\\
+				\end{rcases}$ Azzera $R_k$
+				}\\
+			&& $R_k \leftarrow R_k \dotminus 1$ & \\
+			&& \texttt{IF $R_{21} = 0$ THEN GOTO EXIT 1} & \\
+			& \texttt{E2} & \texttt{IF $R_{22} = 0$ THEN GOTO E3} & \multirow{4}{*}{\hspace{-.2cm} 
+			$\begin{rcases}
+				\phantom{}\\
+				\phantom{}\\
+				\phantom{}\\
+				\phantom{}\\
+				\phantom{}\\
+			\end{rcases}$ Rigenera $R_j$ e $R_k$ da $R_{22}$
+			} \\
+			&& $R_k \leftarrow R_k + 1$ & \\
+			&& $R_j \leftarrow R_j + 1$ & \\
+			&& $R_{22} \leftarrow R_{22} \dotminus 1$ & \\
+			&& \texttt{IF $R_{21} = 0$ THEN GOTO E2} & \\ 
+			& \texttt{E3:} & $R_k \leftarrow R_k \pm 1$ & \\
+			\cline{2-3} 
+		\end{tabular}\vspace{.5cm}
+	\end{center}
+\end{itemize}
+
+Per I.H. sappiamo come compilare $C_1, \dots C_m$. Possiamo calcolare la compilazione del comando composto come
+\begin{center}
+	\begin{tabular}{r |l|}
+		\cline{2-2}
+		$\comp($\texttt{begin $C_1; \dots; C_n$ end$)$} = & $\comp (C_1)$ \\
+		& $\dots$ \\
+		& $\comp(C_m)$ \\
+		\cline{2-2}
+	\end{tabular}
+\end{center}
+
+Per I.H. sappiamo come compilare $C$. Possiamo calcolare la compilazione del comando \texttt{while} come
+\begin{center}
+	\begin{tabular}{l |r l|}
+		\cline{2-3} 
+		$\comp(\text{\texttt{while }} x_k \neq 0 \texttt{ do } C) = $ & \texttt{LOOP:} & \texttt{IF $R_k = 0$ THEN GOTO EXIT} \\
+		&& $\comp(C)$ \\
+		&& \texttt{IF $R_{21} = 0$ THEN GOTO LOOP} \\
+		& \texttt{EXIT:} & $R_k \leftarrow R_k \dotminus 1$ \\
+		\cline{2-3}
+	\end{tabular}
+\end{center}
+
+La funzione
+$$ \comp: \wprog \rightarrow \prog $$
+appena costruita soddisfa le tre proprietà desiderate in quanto:
+\begin{itemize}
+	\item Programmabile
+	\item Compila sempre 
+	\item Mantiene la semantica
+\end{itemize}
+
+Di conseguenza
+$$ F(\while) \subseteq F (\ram) $$
+
+\subsection{$F(\ram) \subseteq F(\while)$}
+
+Abbiamo mostrato che una macchina $\while$ non è più potente di una macchina $\ram$, ora vogliamo fare l'inverso. Per farlo si userà il concetto di interprete.\\
+
+\subsubsection{Interprete in $\while$ per $\ram$}
+
+Introduciamo il concetto di \textbf{interprete}. Chiamiamo $I_W$ l'interprete scritto in linguaggio $\while$ per programmi scritti in linguaggio $\ram$.\\
+
+$I_W$ prende in input un programma $P \in \prog$ e un dato $x \in \mathbb{N}$ e restituisce "\textit{l'esecuzione}" di $P$ sull'input $x$. Più formalmente, restituisce la semantica di $P$ su $x$, quindi $\varphi_P (x)$.
+
+\begin{center}
+	\input{img/calc/interprete1}
+\end{center}
+
+Notiamo come l'interprete non crei dei prodotti intermedi, ma si limita a eseguire $P$ sull'input $x$.\\
+
+Due problemi principali: 
+\begin{enumerate}
+	\item Il primo riguarda il tipo di input della macchina $\while$ in quanto questa non sa leggere il programma $P$ (listato di istruzioni $\ram$), sa leggere solo numeri. Dobbiamo modificare $I_W$ in modo che non passi più $P$ ma la sua codifica $cod(P) = n \in \mathbb{N}$. Questo restituisce la semantica del programma codificato con $n$, che è $P$, quindi $\varphi_n (x) ) \varphi_P (x)$
+	\item Il secondo problema riguarda la quantità di dati in input alla macchina $\while$: questa legge l'input da un singolo registro, mentre qui ne stiamo passando due. Bisogna modificare $I_W$, condensando l'input tramite la funzione coppia di Cantor, che diventa $\langle x,n \rangle$
+\end{enumerate}
+Quindi
+\begin{center}
+	\input{img/calc/interprete2}
+\end{center}
+
+La semantica di $I_W$ diventa
+$$ \forall x,n \in \mathbb{N} \;\;\;\; \Psi_{I_W} \left(\langle x,n \rangle \right) = \varphi_n (x) = \varphi_P (x) $$
+
+Similmente a prima, useremo per comodità il linguaggio \textbf{macro-$\while$}, che include alcune macro comode nella scrittura di $I_W$. Viene modificata solo la sintassi e di conseguenza non la potenza del linguaggio.\\
+
+Le \textbf{macro} utilizzate sono: 
+\begin{itemize}
+	\item $x_k := x_j + x_s$
+	\item $x_k := \langle x_j, x_s \rangle$
+	\item $x_k := \langle x_1, \dots, x_n \rangle$
+	\item $x_k := \proj(x_j, x_s)$, proiezione, estrae l'elemento $x_j$-esimo dalla lista codificata in $x_s$
+	\item $x_k := \incr (x_j, x_s)$, incremento, codifica la lista $x_s$ con l'elemento in posizione $x_j$-esima aumentato di 1
+	\item $x_k := \decr(x_j, x_s)$, decremento, codifica la lista $x_s$ con l'elemento in posizione $x_j$-esima diminuito di 1
+	\item $x_k := \sin (x_j)$
+	\item $x_k := \des (x_j)$
+	\item Costrutto \texttt{If} \dots \texttt{then} \dots \texttt{else}
+\end{itemize}
+
+\subsubsection{Stato della macchina $\ram$ nell'interprete}
+
+Risolto il problema dell'input di un interprete scritto in linguaggio $\while$ per i programmi $\ram$, ora vogliamo scrivere questo interprete. In sintesi, l'interprete esegue una dopo l'altra le istruzioni $\ram$ del programma $P$ e restituisce il risultato $\varphi_P (x)$ (da notare che restituisce il risultato, non un eseguibile).\\
+
+L'interprete ricostruisce virtualmente tutto ciò che gli serve per gestire il programma. Nel caso di $I_W$ deve ricostruire l'ambiente di una macchina $\ram$. Quello che faremo sarà ricreare il programma $P$, il Program Counter $L$ e i registri $R_0, R_1, \dots$, dentro le variabili messe a disposizione dalla macchina $\while$.\\
+
+Primo problema: i programmi $\ram$ possono utilizzare infiniti registri, mentre i programmi $\while$ ne hanno solo 21. \textit{Ma $P$ usa veramente un numero infinito di registri?}
+
+In realtà no; se $cod(P) = n$ allora $P$ non userà mai registri $R_j$ con $j > n$. Il programma $P$ userà sempre un numero finito di registri il cui contenuto può essere racchiuso in una lista $a_0, \dots, a_n$. La soluzione consiste nel raggruppare tutti i valori dei registri tramite Cantor $\langle a_0, \dots, a_n \rangle$ e salvarne la codifica in un unica variabile. Useremo due registri in più per comodità (possono essere utili, you never know).\\
+
+L'interprete $I_W$ salva lo stato della macchina $\ram$ nel seguente modo (con $I_W (\langle x,n\rangle) = \varphi_n (x)$)
+\begin{itemize}
+	\item $x_0 \leftarrow \langle R_0, \dots, R_{n+2} \rangle$: stato della memoria della macchina $\ram$
+	\item $x_1 \leftarrow L$: Program Counter
+	\item $x_2 \leftarrow x$: dato su cui lavora $P$
+	\item $x_3 \leftarrow n$: "listato" del programma $P$
+	\item $x_4$: codice dell'istruzione da eseguire, prelevata da $x_3$ grazie a $x_1$
+\end{itemize}
+
+%P39
