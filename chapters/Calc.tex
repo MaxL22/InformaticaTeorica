@@ -1127,4 +1127,266 @@ L'interprete $I_W$ salva lo stato della macchina $\ram$ nel seguente modo (con $
 	\item $x_4$: codice dell'istruzione da eseguire, prelevata da $x_3$ grazie a $x_1$
 \end{itemize}
 
-%P39
+Implementazione 
+\begin{tcolorbox}[colback=white,sharp corners,boxrule=.3mm]
+	\begin{algorithm}[H]
+		\setstretch{1.2}
+		\SetArgSty{relax}
+		\SetAlgoNoEnd
+		\SetKwSty{texttt}
+		\tcp{Inizialmente l'input si trova in $x_1$}
+		$x_2 := \sin(x_1)$\;
+		$x_3 := \des(x_1)$\;
+		$x_0 := \langle 0,x_2,\dots,0 \rangle$\;
+		$x_1 := 1$\;
+		\While(\hfill\texttt{// se $x_1=0$ allora STOP}){$x_1\neq 0$}{
+			\eIf(\hfill\texttt{// supero l'ultima istruzione}){($x_1>\text{length($x_3$))}$}{
+				$x_1:=0$\tcp*{STOP}
+			}{
+				$x_4 := \pro(x_1,x_3)$\tcp*{estraggo istruzione corrente}
+				\If(\hfill\texttt{// }$R_k\leftarrow R_k+1$){$x_4\bmod{3}=0$}{
+					$x_5 := x_4 / 3$\tcp*{$k$}
+					$x_0 := \text{incr}(x_5,x_0)$\;
+					$x_1 := x_1+1$\;
+				}
+				\If(\hfill\texttt{// }$R_k\leftarrow R_k\dotminus1$){$x_4\bmod{3}=1$}{
+					$x_5 := (x_4-1) / 3$\tcp*{$k$}
+					$x_0 := \text{decr}(x_5,x_0)$\;
+					$x_1 := x_1+1$\;
+				}
+				\If(\hfill\texttt{// IF $R_k=0$ THEN GOTO $m$}){$x_4\bmod{3}=2$}{
+					$x_5 := \sin((x_4+1)/3)$\tcp*{$k$}
+					$x_6 := \des((x_4+1)/3)$\tcp*{$m$}
+					\eIf(\hfill\texttt{// verifico }$R_k=0$){Pro$(x_5,x_0)=0$}{
+						$x_1:=x_6$\;
+					}{
+						$x_1:=x_1+1$\;
+					}
+				}
+			}
+		}
+		$x_0 = \sin(x_0)$\tcp*{metto in $x_0$ il risultato $\varphi_n(x)$}
+	\end{algorithm}
+\end{tcolorbox}
+
+Avendo l'interprete $I_W$ si può costruire un compilatore
+$$ \comp: \prog \rightarrow \wprog $$
+tale che 
+\begin{center}
+	\begin{tabular}{r|l|}
+		\cline{2-2}
+		$\comp (P \in \prog) \equiv$	& $x_2 := cod(P)$ \\
+			& $x_1 := \langle x_1, x_2 \rangle$ \\
+			& $I_W$ \\
+		\cline{2-2}
+	\end{tabular}
+\end{center}
+
+Ovvero, il compilatore non fa altro che cablare all'input $x$ il programma $\ram$ da interpretare e procede con l'esecuzione dell'interprete. Possiamo verificare le proprietà di un compilatore: 
+\begin{itemize}
+	\item \textbf{programmabile}: lo abbiamo appena fatto
+	\item \textbf{completo}: l'interprete riconosce ogni istruzione $\ram$ e riesce a codificarla
+	\item \textbf{corretto}: vale la relazione $P \in \prog \implies \comp (P) \in \wprog$, quindi
+	$$ \Psi_{\comp (P)} (x) = \Psi_{I_W} (\langle x,n \rangle) = \varphi_n (x) = \varphi_P (x) $$
+	rappresenta la sua semantica
+\end{itemize}
+
+Abbiamo dimostrato che
+$$ F(\ram) \subseteq F(\while) $$
+Ovvero l'inclusione opposta al risultato precedente.\\
+
+\subsubsection{Conseguenze}
+Visti i risultati ottenuti possiamo definire un teorema importante.\\
+
+\begin{theor}[Teorema di B\"ohm-Jacopini]
+	Per ogni programma con \texttt{GOTO} $\ram$ ne esiste uno equivalente in un linguaggio strutturato ($\while$).\\
+\end{theor}
+
+Permette di legare la programmazione a basso livello con quella ad alto livello. In breve, il \texttt{GOTO} può essere eliminato e la programmazione a basso livello può essere sostituita con quella ad alto livello.\\
+
+Inoltre abbiamo di conseguenza dimostrato che
+\begin{gather*}
+	F(\while) \subseteq F(\ram) \\
+	F (\ram) \subseteq F(\while) \\
+	\Downarrow \\
+	F(\ram) = F(\while) \\
+	\Downarrow \\
+	F(\ram) = F(\while) \sim \prog \sim \mathbb{N} \nsim \mathbb{N}^\mathbb{N}_\bot
+\end{gather*}
+
+Quindi, abbiamo dimostrato che i sistemi $\ram$ e $\while$ sono in grado di \textbf{calcolare le stesse cose}, oltre al fatto che \textbf{esistono funzioni non calcolabili}, ovvero la parte destra della catena. \\
+
+\subsection{Interprete Universale}
+Usando il compilatore da $\while$ a $\ram$
+$$ \comp: \wprog \rightarrow \prog $$
+sul programma $I_W$, otteniamo
+$$ \U = \comp(I_W) \in \prog $$
+E la sua semantica è 
+$$ \varphi_\U (\langle x,n \rangle) = \Psi_{I_W} (\langle x,n \rangle) = \varphi_n $$
+dove $n$ è la codifica del programma $\ram$ e $x$ il dato di input.\\
+
+Abbiamo mostrato che esiste un programma $\ram$ in grado di \textbf{simulare} tutti gli altri programmi $\ram$. Questo programma viene detto \textbf{interprete universale}.\\
+
+Un linguaggio verrà considerato "\textit{buono}" se ammette un interprete universale.\\
+
+\subsection{Concetto di Calcolabilità}
+
+Abbiamo visto come due sistemi di calcolo diversi abbiano la stessa potenza computazionale numerabile. Ma abbiamo visto anche che esistono funzioni non calcolabili. Il nostro obiettivo è quindi definire la regione delle funzioni calcolabili.\\
+
+Questa regione può essere definita a prescindere dalle macchine usate per calcolare? Bisognerà definire il concetto di "\textit{calcolabile}" in termini astratti, "lontani" dall'informatica, usando la matematica.\\
+
+\section{Chiusura}
+\subsection{Operazioni}
+Dato un insieme $U$, si definisce \textbf{operazione} su $U$ una qualunque funzione
+$$ \op: \underbracket{U \times \cdot \times U}_k \rightarrow U $$
+Il numero $k$ indica l'arietà (o arità) dell'operazione, ovvero la dimensione del dominio dell'operazione.\\
+
+\subsection{Proprietà di Chiusura}
+L'insieme $A \subseteq U$ si dice \textbf{chiuso} rispetto all'operazione $\op : U^k \rightarrow U$ se e solo se
+$$ \forall a_1, \dots, a_k \in A \;\;\; \op(a_1, \dots, a_k) \in A $$
+Ovvero, l'operazione applicata in $A$ restituisce valori $\in A$. In generale, se $\Omega$ è un insieme di operazioni su $U$, allora $A \subseteq U$ è chiuso rispetto a $\Omega$ se e solo se $A$ è chiuso per ogni operazione in $\Omega$.\\
+
+\subsection{Chiusura di un insieme}
+Siano $A \subseteq U$ un insieme e $\op: U^k \rightarrow U$ un'operazione su di esso. Vogliamo espandere l'insieme $A$ per trovare il più piccolo sottoinsieme di $U$ tale che
+\begin{itemize}
+	\item contiene $A$
+	\item chiuso rispetto a $\op$
+\end{itemize}
+Vogliamo espandere $A$ il meno possibile per garantire la chiusura rispetto a $\op$.\\
+
+Ci sono due risposte banali: 
+\begin{itemize}
+	\item Se $A$ è già chiuso rispetto a $\op$, allora $A$ stesso è l'insieme cercato
+	\item Sicuramente $U$ soddisfa le due richieste, ma non è detto sia il più piccolo
+\end{itemize}
+
+\begin{theor}
+	Siano $A \subseteq U$ insiemi e $\op$ un'operazione su di essi. Il più piccolo sottoinsieme di $U$ contenente $A$ e chiuso rispetto a $\op$ si ottiene calcolando la chiusura di $A$ rispetto a $\op$.\\
+\end{theor}
+Tale chiusura $A^{\op}$ si definisce induttivamente come:
+\begin{enumerate}
+	\item $\forall a \in A \implies a \in A^{\op}$
+	\item $\forall a_1, \dots, a_k \in A^{\op} \implies \op(a_1, \dots, a_k) \in A^{\op}$
+	\item Nient'altro in $A$
+\end{enumerate}
+
+Una definizione più \textit{operativa} di $A^{\op}$ può essere:
+\begin{enumerate}
+	\item inserisco in $A^{\op}$ tutti gli elementi di $A$
+	\item applico $\op$ a una $k$-upla di elementi in $A^{\op}$
+	\item se il risultato non è in $A^{\op}$ lo aggiungo
+	\item Ripetere i punti 2 e 3 finché $A^{\op}$ cresce
+\end{enumerate}
+
+Siano $\Omega = \{\op_1, \dots, \op_t\}$ un insieme di operazioni su $U$ di arietà rispettivamente $k_1, \dots, k_t$ e $A \subseteq U$ insieme. Definiamo \textbf{chiusura di $A$ rispetto a $\Omega$} il più piccolo sottoinsieme di $U$ contenente $A$ chiuso rispetto a $\Omega$, cioè l'insieme $A^\Omega$ definito come
+\begin{itemize}
+	\item $\forall a \in A \implies a \in A^\Omega$
+	\item $\forall i \in \{1, \dots, t\}$, $\forall a_1, \dots, a_{k_i} \in A^\Omega \implies op_i \left(a_1, \dots, a_{k_i}\right) \in A^\Omega$
+	\item Nient'altro in $A^\Omega$
+\end{itemize}
+
+
+\section{Calcolabilità}
+Per la definizione teorica di calcolabilità introdurremo gli insiemi: 
+\begin{itemize} 
+	\item \textbf{$\elem$}: insieme di tre funzioni che \textit{qualunque} idea di calcolabile proponibile deve considerare calcolabili. Non può esaurire il concetto di calcolabilità, quindi verrà espanso con altre funzioni
+	
+	\item $\Omega$: insieme di operazioni su funzioni che \textit{costruiscono nuove funzioni}. Le operazioni in $\Omega$ sono banalmente implementabili e, applicate a funzioni calcolabili, generano nuove funzioni calcolabili
+	
+	\item \textbf{$\elemo = \cp$}: la classe delle funzioni ricorsive parziali. L'idea astratta della classe delle funzioni calcolabili secondo Kleene
+\end{itemize}
+
+In seguito alla definizione di $\cp$ ci sarà da domandarci se questa idea di calcolabile coincida con le funzioni presenti in $F(\ram) = F(\while)$.\\
+
+\subsection{$\elem$}
+Definiamo $\elem$ con le seguenti funzioni
+\begin{center}
+	\begin{tabular}{r c r l c l}
+		$\elem = $ & $\{$ & successore: & $s(x) = x + 1$, & $x \in \mathbb{N}$ & \\
+		&& zero: & $0^n (x_1, \dots, x_n) = 0$, & $x_i \in \mathbb{N}$ & \\
+		&& proiettori: & $\pro_k^n (x_1, \dots, x_n) = x_k$, & $x_i \in \mathbb{N}$& $\}$ \\
+	\end{tabular}
+\end{center}
+
+Queste sono funzioni di partenza che qualsiasi idea teorica di calcolabilità non può non considerare come calcolabile. Ovviamente non rappresenta tutto ciò che è calcolabile, va quindi ampliato.\\
+
+\subsection{$\Omega$}
+Definiamo ora un insieme $\Omega$ di operazioni che permettano di ampliare le funzioni di $\elem$ fino a coprire tutte le funzioni calcolabili.\\
+
+\subsubsection{Composizione}
+Il primo operatore è quello di \textbf{composizione}. Siano
+\begin{itemize}
+	\item $h: \mathbb{N}^k \rightarrow \mathbb{N}$ funzione di composizione
+	\item $g_1, \dots, g_k: \mathbb{N}^n \rightarrow \mathbb{N}$ "funzioni intermedie"
+	\item $\underline{x} \in \mathbb{N}^n$ input
+\end{itemize}
+Allora definiamo 
+$$ \com (h, g_1, \dots, g_k): \mathbb{N}^n \rightarrow \mathbb{N} $$
+La funzione tale che
+$$ \com (h, g_1, \dots, g_k) (\underline{x}) = h(g_1(\underline{x}), \dots, g_k (\underline{x})) $$
+
+\begin{center}
+	\input{img/calc/comp_function}
+\end{center}
+
+La funzione $\com$ è \textit{intuitivamente} calcolabile partendo da funzioni calcolabili: prima eseguo le singole funzioni $g_1, \dots, g_k$, poi applico la funzione $h$ sui risultati.\\
+
+Calcoliamo ora la \textbf{chiusura} di $\elem$ rispetto a $\com$, ovvero l'insieme $\elem^\com$.\\
+
+La funzione $f(x) = x + 2$ appartiene a questo insieme perché:
+$$ \com(s,s)(x) = s(s(x)) = (x + 1) + 1 = x + 2 $$
+Di conseguenza tutte le funzioni lineari del tipo $f(x) = x + k$ con $k$ prefissato apparterranno all'insieme.\\
+
+Ma la funzione somma, senza valori prefissati, non appartiene all'insieme, quindi doppiamo ampliare $\elem^\com$ con altre operazioni.\\
+
+\subsubsection{Ricorsione Primitiva}
+Definiamo un'operazione che permetta di \textbf{iterare} sull'operatore di composizione, la \textbf{ricorsione primitiva}, usata per definire funzioni ricorsive. \\
+
+Siano 
+\begin{itemize}
+	\item $g: \mathbb{N}^n \rightarrow \mathbb{N}$ funzione \textbf{caso base}
+	\item $h: \mathbb{N}^{n+2} \rightarrow \mathbb{N}$ funzione \textbf{passo ricorsivo}
+	\item $\underline{x} \in \mathbb{N}^n$ \textbf{input}
+\end{itemize}
+
+Definiamo
+$$
+\rp (h,g) = f(\underline{x}, y) = \begin{cases}
+	g(\underline{x}) & \text{ se } y = 0 \\
+	h(f(\underline{x}, y-1), y-1, \underline{x}) & \text{ se } y > 0 \\
+\end{cases}
+$$
+Funzione che generalizza la definizione ricorsiva di funzioni.\\
+
+\textbf{Chiusura} di $\elem^\com$ rispetto a $\rp$ vuol dire calcolare l'insieme $\elem^{\{\com, \rp\}}$. Chiamiamo
+$$ \ricprim = \elem^{\{\com, \rp\}} $$
+l'insieme ottenuto dalla chiusura, cioè l'insieme delle funzioni ricorsive primitive.\\
+
+In questo insieme abbiamo la somma, infatti: 
+$$
+\somma(x,y) = \begin{cases}
+	x = \pro_1^2 (x,y) & \text{ se } y = 0 \\
+	s (\somma(x, y-1)) & \text{ se } y > 0 \\
+\end{cases}
+$$
+Altre funzioni in $\ricprim$ sono:
+$$ 
+\prodotto (x,y) = \begin{cases}
+	0 = 0^2 (x,y) & \text{ se } y = 0 \\
+	\somma(x, \prodotto(x, y-1)) & \text{ se } y > 0 \\
+\end{cases}
+$$
+$$
+\predecessore \, P(x) = \begin{cases}
+	0 & \text{ se } x = 0 \\
+	x-1 & \text{ se } x > 0
+\end{cases}
+\implies 
+x-y = \begin{cases}
+	x & \text{ se } y = 0 \\
+	P(x) - (y-1) & \text{ se y > 0}
+\end{cases}
+$$
+
+\subsubsection{$\ricprim$ vs $\while$}
+%p45
