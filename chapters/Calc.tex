@@ -1369,13 +1369,14 @@ $$
 	s (\somma(x, y-1)) & \text{ se } y > 0 \\
 \end{cases}
 $$
-Altre funzioni in $\ricprim$ sono:
+Altre funzioni in $\ricprim$:
 $$ 
 \prodotto (x,y) = \begin{cases}
 	0 = 0^2 (x,y) & \text{ se } y = 0 \\
 	\somma(x, \prodotto(x, y-1)) & \text{ se } y > 0 \\
 \end{cases}
 $$
+
 $$
 \predecessore \, P(x) = \begin{cases}
 	0 & \text{ se } x = 0 \\
@@ -1387,6 +1388,394 @@ x-y = \begin{cases}
 	P(x) - (y-1) & \text{ se y > 0}
 \end{cases}
 $$
+\\
 
 \subsubsection{$\ricprim$ vs $\while$}
-%p45
+L'insieme $\ricprim$ contiene \textit{molte funzioni}, ma dobbiamo capire se ha raggiunto l'insieme $F(\while)$.\\
+
+$\ricprim$ è definito come: 
+\begin{itemize}
+	\item $\forall f \in \elem \implies f \in \ricprim$
+	\item se $h, g_1, \dots, g_k \in \ricprim \implies \com(h, g_1, \dots, g_k) \in \ricprim$
+	\item se $g,h, \in \ricprim \implies \rp (g,h) \in \ricprim$
+	\item nient'altro sta in $\ricprim$ \\
+\end{itemize}
+
+
+
+\begin{theor}
+	$\ricprim \subseteq F(\while)$
+\end{theor}
+\begin{proof}
+	\textbf{Passo Base:} Le funzioni di $\elem$ sono ovviamente while-programmabili, mostrato in precedenza.\\
+	
+	\textbf{Passo Induttivo:} Per $\com$, assumiamo per ipotesi induttiva che $h,g_1, \dots, g_k \in \ricprim$ siano while-programmabili, allora esistono $H, G_1, \dots, G_K \in \wprog$ tali che $\Psi_H = h$, $\Psi_{G_1} = g_1, \dots$, $\Psi_{G_k} = g_k$.\\
+	Un programma $\while$ che calcola $\com$ è
+	
+	\begin{center}
+		\begin{minipage}{0.85\textwidth}
+			\begin{tcolorbox}[colback=white,sharp corners,boxrule=.3mm]
+				\begin{algorithm}[H]
+					\setstretch{1.2}
+					\SetArgSty{relax}
+					\SetAlgoNoEnd
+					\SetKwSty{texttt}
+					\tcp{Inizialmente in $x_1$ ho $x$}
+					input($x$) \\
+					\Begin{
+						$x_0 := G_1 (x_1)$; \\
+						$x_0 := [x_0, G_2 (x_1)]$; \\
+						$\dots$ \\
+						$x_0 := [x_0, G_k (x_1)]$; \\
+						$x_1 := H(x_0)$;\\
+					}
+					\texttt{end}
+				\end{algorithm}
+			\end{tcolorbox}
+		\end{minipage}
+	\end{center}
+	
+	Quindi abbiamo $\Psi_W (\underline{x}) = \com (h, g_1, \dots, g_k) (\underline{x})$.\\
+	
+	Per $\rp$, assumiamo che $h,g \in \ricprim$ siano while-programmabili, allora esistono $H,G \in \wprog$ tali che $\Psi_H = h$ e $\Psi_G = g$. Le funzioni ricorsive primitive le possiamo vedere come delle iterazioni che, partendo dal caso base $G$, mano a mano compongono con $H$ fino a quando non si raggiunge $y$ (escluso). Mostriamo un programma $\while$ che calcola
+	$$ 
+	\rp (h,g) = f(\underline{x}, y) = \begin{cases}
+		g(\underline{x}) & \text{ se } y = 0 \\
+		h(f(\underline{x}, y-1), y-1, \underline{x}) & \text{ se } y > 0
+	\end{cases}
+	$$
+	
+	\begin{center}
+		\begin{minipage}{0.85\textwidth}
+			\begin{tcolorbox}[colback=white,sharp corners,boxrule=.3mm]
+				\begin{algorithm}[H]
+					\setstretch{1.2}
+					\SetArgSty{relax}
+					\SetAlgoNoEnd
+					\SetKwSty{texttt}
+					\tcp{Inizialmente in $x_1$ ho $\langle x,y \rangle$}
+					input($x,y$) \\
+					\Begin{
+						$t:= G(x)$; \hfill \tcp{$t$ contiene $f(x,y)$} 
+						$k:= 1$; \\
+						\While{$k \leq y$}{
+							\Begin{
+								$t:= H(t, k-1, x)$; \\
+								$x := k + 1$;\\
+							}
+							\texttt{end}
+						}
+					}
+					\texttt{end}
+				\end{algorithm}
+			\end{tcolorbox}
+		\end{minipage}
+	\end{center}
+	
+	Quindi $\Psi_W (\langle x,y \rangle) = \rp (h,g) (\underline{x}, y)$.\\
+\end{proof}
+
+Abbiamo dimostrato che $\ricprim \subseteq F(\while)$ e possiamo anche dire che l'\textit{inclusione è propria}: nel linguaggio $\while$ si possono avere cicli infiniti mentre in $\ricprim$ no in quanto contiene solo funzioni totali (si dimostra per induzione strutturale) mentre $\while$ contiene anche delle funzioni parziali. Di conseguenza
+$$ \ricprim \subsetneq F(\while) $$
+
+\subsubsection{Sistema di calcolo $\for$}
+
+Per poter \textit{raggiungere} $F(\while)$ bisognerà ampliare $\ricprim$. Visto che le funzioni in $\ricprim$ sono tutte totali, ogni ciclo in $\ricprim$ ha un inizio e una fine ben definiti: il costrutto utilizzato per dimostrare $\rp \in F(\while)$ nella dimostrazione precedente permette di definire un nuovo tipo di ciclo, il \textbf{ciclo FOR}
+\begin{center}
+	\begin{minipage}{.85\textwidth}
+		\begin{tcolorbox}[colback=white,sharp corners,boxrule=.3mm]
+			\begin{algorithm}[H]
+				\setstretch{1.2}
+				\SetArgSty{relax}
+				\SetAlgoNoEnd
+				\SetKwSty{texttt}
+				input($x,y$) \\
+				\Begin{
+				$t:= G(x)$; \\
+				\For{$k:=1$ \texttt{to} $y$}{
+					$t:= H(t, k-1, x)$; \\
+					}
+				}
+				\texttt{end}
+			\end{algorithm}
+		\end{tcolorbox} 
+	\end{minipage}
+\end{center}
+
+Il $\for$ è un costrutto che si serve di una variabile di controllo che parte da un preciso valore e arriva a un valore limite, senza che la variabile di controllo venga toccata. \\
+
+Il $\for$ language è quindi un linguaggio $\while$ dove l'istruzione di loop è un \texttt{for}. Possiamo quindi dire che $\for = \ricprim$, quindi che $F(\for) \subset F(\while)$.\\
+
+Dato che $\while$ sembra "vincere" su $\ricprim$ solo per i loop infiniti, restringiamo $\while$ imponendo loop finiti. Creiamo
+$$ \tilde F (\while) = \{ \Psi_W: W \in \wprog \wedge \Psi_W \text{ è totale}\}$$
+
+Ma dove si posiziona questo insieme rispetto a $\ricprim$? L'inclusione è propria? La risposta è sì, ci sono funzioni in $\tilde F (\while)$ non riscrivibili come funzioni in $\ricprim$. Un esempio è la funzione di Ackermann
+$$ 
+\mathcal{A} (m,n) = \begin{cases}
+	n + 1 & \text{ se } m = 0 \\
+	\mathcal{A}(m-1, 1) & \text{ se } m > 0 \wedge n = 0 \\
+	\mathcal{A}(m-1, A(m, n-1)) & \text{ se } m > 0 \wedge n > 0
+\end{cases}
+$$
+
+La quale non appartiene a $\ricprim$, per causa della doppia ricorsione cresce troppo in fretta. \\
+
+Questo mostra che il sistema WHILE è più potente delle funzioni in $\ricprim$, anche escludendo le funzioni parziali.\\
+
+\subsection{Ampliamento di $\ricprim$}
+Siamo nella "\textit{direzione giusta}" non avendo cose che non avremmo catturato in $F(\ram)$, ma questo non basta: mancano da catturare le funzioni parziali.
+
+\begin{center}
+	\scalebox{0.8}{\input{img/calc/calcolabilita1.tex}}
+\end{center}
+
+\subsubsection{Minimalizzazione}
+
+Introduciamo un operatore per permettere la presenza di funzioni parziali: \textbf{minimalizzazione}. Sia $f: \mathbb{N}^{n+1} \rightarrow \mathbb{N}$ con $f(\underline{x}, y)$ e $\underline{x} \in \mathbb{N}^n$, allora: 
+$$
+\MIN (f) (\underline{x}) = g(\underline{x}) = \begin{cases}
+	y & \text{ se } f(\underline{x}, y) = 0 \wedge (\forall y' < y, f(\underline{x}, y') \downarrow \wedge f(\underline{x}, y') \neq 0) \\
+	\bot & \text{ altrimenti}
+\end{cases}
+$$
+
+Un'altra definizione di $\MIN$ è 
+$$ \mu_y (f(\underline{x}, y) = 0)$$
+
+Informalmente, restituisce il più piccolo valore di $y$ che azzera $f(\underline{x},y)$, ovunque precedentemente definita su $y'$.\\
+
+Alcuni esempi con $f: \mathbb{N}^2 \rightarrow \mathbb{N}$
+\begin{center}
+	\begin{tabular}{c|c}
+		$\bm{f(x,y)}$ & $\bm{\MIN(f)(x)=g(x)}$ \\ 
+		\hline
+		$x+y+1$ & $\bot$\\
+		$x \dotminus y$ & $x$\\
+		$y \dotminus x$ & $0$\\
+		$x \dotminus y^2$ & $\left\lceil\sqrt{x}\right\rceil$\\
+		$\left\lfloor\frac{x}{y}\right\rfloor$ & $\bot$\\
+	\end{tabular}
+\end{center}
+
+\subsection{Classe $\cp$}
+Ampliamo $\ricprim$ chiudendolo con l'operazione $\MIN$
+$$ \elem^{\{\com, \rp, \MIN\}} = \cp = \{\text{Funzioni Ricorsive Parziali}\}$$
+
+Abbiamo ottenuto la classe delle \textbf{funzioni ricorsive parziali}.\\
+
+\subsubsection{$\cp$ vs $\while$}
+
+Vogliamo ora analizzare come $\cp$ si pone rispetto a $F(\while)$, sapendo che \textit{sicuramente} amplia $\ricprim$.\\
+
+\begin{theor}
+	$\cp \subseteq F(\while)$.
+\end{theor}
+\begin{proof}
+	$\cp$ è definito per chiusura, ma si può anche definire induttivamente:
+	\begin{itemize}
+		\item le funzioni $\elem$ sono in $\cp$
+		\item se $h, g_1, \dots, g_k \in \cp$ allora $\com (h, g_1, \dots, g_k) \in \cp$
+		\item se $h,g \in \cp$ allora $\rp (h,g) \in \cp$
+		\item se $f \in \cp$ allora $\MIN(f) \in \cp$
+		\item nient'altro in $\cp$
+	\end{itemize}
+	
+	Di conseguenza, per induzione strutturale su $\cp$ dimostriamo:
+	\begin{itemize}
+		\item \textbf{Passo base:} le funzioni elementari sono while-programmabili, come già dimostrato
+		\item \textbf{Passi induttivi:}
+		\begin{itemize}
+			\item siano $h,g_1, \dots, g_k \in \cp$ while-programmabili per I.H., allora mostro che $\com (h, g_1, \dots, g_k)$ è while-programmabile; già fatto per $\ricprim$
+			\item siano $h,g \in \cp$ while-programmabili per I.H., mostro che $\rp(h,g)$ è while-programmabile; già fatto per $\ricprim$
+			\item sia $f \in \cp$ while-programmabile per I.H., mostro che $\MIN(f)$ è while-programmabile. Devo trovare un programma $\while$ che calcoli la minimizzazione:
+			\begin{center}
+				\begin{minipage}{.85\textwidth}
+					\begin{tcolorbox}[colback=white,sharp corners,boxrule=.3mm]
+						\begin{algorithm}[H]
+							\setstretch{1.2}
+							\SetArgSty{relax}
+							\SetAlgoNoEnd
+							\SetKwSty{texttt}
+							$P \equiv$ input($\underline{x}$) \\
+							\Begin{
+							$y:= 0$; \hfill \tcp{parte da 0}
+							\While{$f(\underline{x}, y) \neq 0$}{
+								$y := y + 1$; \hfill \tcp{aumenta di 1}
+								}
+							}
+							\texttt{end}
+						\end{algorithm}
+					\end{tcolorbox} 
+				\end{minipage}
+			\end{center}
+			Questo è un programma che calcola la minimizzazione: se non esiste $y$ che azzeri $f(\underline{x}, y)$ il programma va in loop (i.e., incrementa di 1 ad ogni iterazione e termina quando azzera la funzione), quindi la semantica di $P$ è $\bot$ secondo $\MIN$
+		\end{itemize}
+		
+		Concludiamo quindi che $\cp \subseteq F(\while)$.\\
+	\end{itemize}
+\end{proof}
+Viene naturale chiedersi se vale la relazione inversa.\\
+
+\begin{theor}
+	$F(\while) \subseteq \cp$.
+\end{theor}
+\begin{proof}
+	Sappiamo che
+	$$ F(\while) = \{\Psi_W: W \in \wprog\}$$
+	
+	Consideriamo $\Psi_W \in F(\while)$ e mostriamo che $\Psi_W \in \cp$, facendo vedere che può essere espressa come composizione, ricorsione primitiva e minimalizzazione a partire dalle funzioni in $\elem$.\\
+	
+	Le funzioni in $\wprog$ sono nella forma
+	$$ \Psi_W = \pro_0^{21} \left( \llbracket W \rrbracket (W\text{-in}(\underline{x})) \right) $$
+	
+	Dove: 
+	\begin{itemize}
+		\item $\llbracket C \rrbracket (\underline{x}) = \underline{y}$ la funzione che restituisce lo stato prossimo $\underline{y} \in \mathbb{N}^{21}$ a seguito dell'esecuzione del comando $C$ a partire dallo stato corrente $\underline{x} \in \mathbb{N}^{21}$
+		
+		\item La funzione $W\text{-in}(n)$ restituisce lo stato iniziale della macchina $\while$ su input $n$
+		
+		\item $\pro_0^{21}$ preleva l'output dal registro $x_0$
+	\end{itemize}
+	
+	Abbiamo definito $\Psi_W$ come composizione delle funzioni $\pro_0^{21}$ e $\llbracket W \rrbracket W \text{-in}(\underline{x})$, ma allora
+	\begin{enumerate}
+		\item $\pro_0^{21} \in \elem \implies \pro_0^{21} \in \cp$
+		\item $\cp$ è chiuso rispetto alla composizione
+	\end{enumerate}
+	Di conseguenza, se dimostro che la funzione di stato prossimo $\llbracket C \rrbracket$ è ricorsiva parziale $\in \cp$ allora anche $\Psi_W \in \cp$, per la definizione induttiva di $\cp$.\\
+	
+	La funzione di stato prossimo $\llbracket \rrbracket (): \mathbb{N}^{21} \rightarrow \mathbb{N}^{21}$ restituisce elementi in $\mathbb{N}^{21}$, mentre gli elementi in $\cp$ hanno codominio $\mathbb{N}$. \\
+	
+	Per risolvere il problema si definisce la \textbf{funzione $f_C$ numero prossimo} in cui viene applicato Cantor sull'array degli stati.
+	$$ \llbracket C \rrbracket \underline{x} = \underline{y} \quad \text{con }
+	\ \ \underline{x},\underline{y}\in \mathbb{N}^{21}$$
+	$$ f_C(x)=y \quad \text{con }
+	\ \ x=[\underline{x}]\ ,\ y=[\underline{y}]$$
+	
+	Si noti che per passare da $\llbracket C \rrbracket (\underline{x})$ a $f_C(x)$ 
+	si usano operazioni ricorsive parziali:
+	$$\begin{aligned}
+		f_C(x)&=y \\
+		{\color{red}\pro \in \cp}\quad &
+		\mathlarger{{\color{red}\downarrow}{\color{blue}\uparrow}}
+		\quad\color{blue}[\ ]\in \cp \\
+		\llbracket C \rrbracket (\pro(0,x),\dots,\pro(20,x))& =(\pro(0,y),\dots,\pro(20,y))
+	\end{aligned}$$
+	
+	Quindi si ha che $f_C$ si comporta come $\llbracket C \rrbracket (\underline{x})$ sullo stato prossimo. Basterà ora dimostrare che $f_C$ è effettivamente una funzione ricorsiva parziale:
+	$$ f_C\in \cp \ \ \Leftrightarrow \ \ \llbracket C \rrbracket (\underline{x}) \in \cp $$
+	
+	Dimostriamo, tramite induzione strutturale, sul comando while $C$:
+	\begin{itemize}
+		\item \textbf{Passo base}: azzeramento e incremento/decremento
+		\begin{itemize}
+			\renewcommand{\labelitemii}{\raisebox{5.2\height}{$-$}}
+			\item $\begin{aligned}
+				&C\equiv \boxed{x_k:=0} \\[.6em]
+				&\hspace{2em}f_C(x) = {\color{red}[}
+				{\color{red}\pro}(0,x),\dots,{\color{red}0},\dots,{\color{red}\pro}
+				(20,x){\color{red}]}\\
+				&\hspace{10.05em}\overset{\uparrow}{\text{posizione $k$}}\\
+				& \text{Viene usata una composizione di {\color{red}funzioni 
+						$\in\cp$}}
+				\ \Rightarrow \ f_{x_k:=0}\in\cp
+			\end{aligned}$
+			\renewcommand{\labelitemii}{\raisebox{5.2\height}{$-$}}
+			\item $\begin{aligned}
+				&C\equiv \boxed{x_k:=x_j+/\dotminus 1}\\[.6em]
+				&\hspace{2em}f_C(x) = {\color{red}[}
+				{\color{red}\pro}(0,x),\dots,
+				{\color{red}\pro}(j,x){\color{red}+/\dotminus 1}
+				,\dots,{\color{red}\pro}
+				(20,x){\color{red}]}\\
+				&\hspace{10.05em}\overset{\uparrow}{\text{posizione $k$}}\\
+				& \text{Viene usata una composizione di {\color{red}funzioni 
+						$\in\cp$}}
+				\ \Rightarrow \ f_{x_k:=x_j\pm1}\in\cp
+			\end{aligned}$
+		\end{itemize}
+		\item \textbf{Passi induttivi}: i comandi "complessi" $\while$ devono rientrare in $\cp$
+		\begin{itemize}
+			\renewcommand{\labelitemii}{\raisebox{2.1\height}{$-$}}
+			\item $\begin{aligned}
+				&C\equiv \boxed{
+					\text{\texttt{begin} } C_ 1; \ C_2; \ \dots; \ C_m; \text{\texttt{ end}}
+				}\\[.6em]
+				&\hspace{2em}f_C(x) = f_{C_m}(\dots f_{C_1}(x)\dots)\\
+			\end{aligned}$
+			\vspace{.7em}
+			
+			Viene usata una composizione di $f_{C_i}$ ognuna delle quali è $\in\cp$ per ipotesi induttiva $\ \Rightarrow \ f_{C} \in \cp $
+			
+			\renewcommand{\labelitemii}{\raisebox{2.1\height}{$-$}}
+			\item $\begin{aligned}
+				&C'\equiv \boxed{\text{\texttt{while} } x_k \neq 0 \text{ \texttt{do }} C}\\[.6em]
+				&\hspace{2em}f_{C'}(x) = f_C^{e(x)}(x)
+				\ \ \text{ con } \ e(x)=\mu_y(\pro(k,f_c^y(x)) = 0)\\
+			\end{aligned}$
+			
+			Sorge qui un problema: $e(x)$ non è costante; non basta quindi la composizione in quanto può essere applicata solo su un numero costante di funzioni. \\
+			
+			Si dovrà allora definire una funzione $T\in\cp$:
+			$$ T(x,y)=f_C^y(x) $$
+			
+			È facile farlo usando l'operatore di ricorsione primitiva $\rp$:
+			$$ T(x,y) = \begin{cases}
+				x & \text{ se } y=0 \\
+				f_C(T(x,y-1)) & \text{ se } y > 0
+			\end{cases} $$
+			
+			Siccome:
+			\begin{enumerate}
+				\item $f_C \in \cp$ per ipotesi induttiva
+				\item $\rp \in \cp$
+			\end{enumerate}
+			$$ \implies \ T(x,y)\in \cp$$
+			
+			L'ultima cosa da sistemare è $e(x)$:
+			$$ \begin{aligned}
+				e(x) & = \mu_y (\pro(k,f_c^y(x))=0) \\
+				& =\mu_y(\pro(k,T(x,y)) = 0)
+			\end{aligned} $$
+			la quale è una minimalizzazione di $T(x,y) \in \cp$, quindi $e(x)\in\cp$.\\
+			
+			In conclusione:
+			$$ f_{C'}(x) = f_C^{e(x)} (x) = {\color{red}T}(x,{\color{red}e}(x)) $$
+			$f_{C'}$ è formato da una composizione di funzioni $\in\cp$, $ \implies f_{C'} \in \cp$. \\
+		\end{itemize}
+	\end{itemize}
+\end{proof}
+
+Visti i risultati ottenuti dai due teoremi precedenti, possiamo concludere che: 
+$$ F(\while) = \cp $$
+
+La classe delle funzioni ricorsive parziali, ovvero l'idea di \textit{calcolabile} in termini matematici, coincide con l'idea di \textit{calcolabile} proveniente dall'insieme di problemi per i quali vediamo una macchina che li risolva.\\
+
+\subsection{Tesi di Church-Turing}
+Il risultato principale di questo studio è aver trovato due classi di funzioni importanti: 
+\begin{itemize}
+	\item $\cp$ insieme delle \textbf{funzioni ricorsive parziali}
+	\item $\mathcal{T}$ insieme delle \textbf{funzioni ricorsive totali}
+\end{itemize}
+
+Il primo insieme contiene anche tutte le funzioni del secondo, quindi
+$$ \mathcal{T} \subset \cp $$
+
+Inoltre abbiamo visto (ad esempio tramite la funzione di Ackermann) che
+$$ \ricprim \subset \mathcal{T} $$
+
+L'insieme $\cp$ cattura tutti i sistemi di calcolo esistenti: $\while$, $\ram$, Macchine di Turing, Lambda-calcolo di Church, \dots\\
+Tutti i modelli di calcolo proposti alla fine individuano sempre la classe delle funzioni ricorsive parziali. Visti questi risultati, Church e Turing decidono di enunciare un risultato molto importante.\\
+
+\paragraph{Tesi di Church-Turing:} La classe delle funzioni intuitivamente calcolabili coincide con la classe $\cp$ delle funzioni ricorsive parziali.\\
+
+Questa è una tesi e non un teorema in quanto non è possibile caratterizzare i modelli di calcolo ragionevoli che sono stati e saranno proposti in maniera completa (potrebbe non essere vera, ma per ora nessuno è riuscito a provarlo). Possiamo solo decidere se aderire o meno a questa tesi.\\
+
+Per noi un problema è \textit{calcolabile} quando esiste un modello di calcolo che riesce a risolverlo ragionevolmente. Se volessimo aderire alla tesi di Church-Turing, potremmo dire, in maniera più formale, che:
+\begin{itemize}
+	\item \textit{problema ricorsivo parziale} è sinonimo di calcolabile
+	\item \textit{problema ricorsivo totale} è sinonimo di calcolabile da un programma che si arresta su ogni input
+\end{itemize}
+
+\section{Sistemi di Programmazione}
+%p 53

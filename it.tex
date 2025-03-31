@@ -13,8 +13,6 @@
 \usepackage[parfill]{parskip}
 \MakeOuterQuote{"}
 
-\usepackage{./commands}
-
 \usepackage{dutchcal}
 \usepackage{tikz}
 \usetikzlibrary{shapes,arrows,positioning, intersections, calc}
@@ -29,6 +27,52 @@
 \usepackage[italiano,noline]{algorithm2e}
 \usepackage{tcolorbox}
 \usepackage{setspace}
+\usepackage{amsthm}
+\usepackage{mathabx}
+\usepackage{bm}
+
+\theoremstyle{plain}
+\newtheorem{theor}{Teorema}[section]
+
+\renewcommand{\proofname}{Dimostrazione}
+
+\DeclareMathOperator{\des}{des}
+\DeclareMathOperator{\op}{op}
+\DeclareMathOperator{\somma}{somma}
+\DeclareMathOperator{\prodotto}{prodotto}
+\DeclareMathOperator{\predecessore}{predecessore}
+\DeclareMathOperator{\MIN}{MIN}
+
+\newcommand{\ImSet}{\text{Im}}
+\newcommand{\Dom}{\text{Dom}}
+\newcommand{\tc}{\; \text{ t.c. } \;}
+\newcommand{\bat}{B^A_\bot}
+\newcommand{\dati}{\text{DATI}}
+\newcommand{\prog}{\text{PROG}}
+\newcommand{\ram}{\text{RAM}}
+\newcommand{\while}{\text{WHILE}}
+\newcommand{\for}{\text{FOR}}
+\newcommand{\stati}{\text{STATI}}
+\newcommand{\elem}{\text{ELEM}}
+\newcommand{\elemo}{\text{ELEM}^\Omega}
+\newcommand{\wstati}{W\text{-STATI}}
+\newcommand{\wcom}{W\text{-COM}}
+\newcommand{\wprog}{W\text{-PROG}}
+\newcommand{\comp}{\text{Comp}}
+\newcommand{\com}{\text{COMP}}
+\newcommand{\rp}{\text{RP}}
+\newcommand{\ricprim}{\text{RICPRIM}}
+\newcommand{\C}{\mathcal{C}}
+\newcommand{\U}{\mathcal{U}}
+\newcommand{\cp}{\mathcal{P}}
+\newcommand{\st}{\mathcal{S}}
+\newcommand{\cprog}[1]{\C_{#1}\text{-}\prog}
+\newcommand{\proj}{\text{Proj}}
+\newcommand{\pro}{\text{Pro}}
+\newcommand{\incr}{\text{incr}}
+\newcommand{\decr}{\text{decr}}
+
+\newcommand{\dotminus}{\dotdiv}
 
 \makeatletter
 \renewcommand{\@chapapp}{Capitolo}
