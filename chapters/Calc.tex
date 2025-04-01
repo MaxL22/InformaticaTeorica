@@ -41,9 +41,9 @@ $$ f^{-1} \circ f = i_A \wedge f \circ f^{-1} = i_B $$
 $$ \Dom_f = \left\{a \in A | f(a) \downarrow \right\} \subseteq A $$
 Quindi se $\Dom_f = A$ la funzione è totale, se $\Dom_f \subsetneq A$ allora è una funzione parziale.\\
 
-\paragraph{Totalizzazione:} Si può \textbf{totalizzare una funzione parziale} $f$ definendo una funzione a tratti $\overline{f}: A \rightarrow B \cup \{\bot\}$ tale che
+\paragraph{Totalizzazione:} Si può \textbf{totalizzare una funzione parziale} $f$ definendo una funzione a tratti $\bar{f}: A \rightarrow B \cup \{\bot\}$ tale che
 $$ 
-\overline{f} (a) = \begin{cases}
+\bar{f} (a) = \begin{cases}
 	f(a) & a \in \Dom_f(a) \\
 	\bot & \text{altrimenti}
 \end{cases}
@@ -280,7 +280,7 @@ $$ P(\mathbb{N}) = 2^{\mathbb{N}} = \{S | S \text{ è sottoinsieme di } \mathbb{
 	\end{array}
 	$$
 	Vogliamo quindi costruire un vettore che appartiene a $P(\mathbb{N})$ ma non presente nella lista precedente. Definiamo
-	$$ c = \overline{b_{00}} \, \overline{b_{11}} \, \overline{b_{22}} \dots $$
+	$$ c = \bar{b_{00}} \, \bar{b_{11}} \, \bar{b_{22}} \dots $$
 	ovvero il vettore che contiene in posizione $c_i$ il complemento di $b_{ii}$.\\
 	
 	Questo vettore appartiene a $P(\mathbb{N})$, in quanto sicuramente sottoinsieme di $\mathbb{N}$, ma non è presente nella lista precedente perché diverso da ogni elemento almeno di una cifra (quella sulla diagonale principale). \\
@@ -1769,7 +1769,7 @@ Tutti i modelli di calcolo proposti alla fine individuano sempre la classe delle
 
 \paragraph{Tesi di Church-Turing:} La classe delle funzioni intuitivamente calcolabili coincide con la classe $\cp$ delle funzioni ricorsive parziali.\\
 
-Questa è una tesi e non un teorema in quanto non è possibile caratterizzare i modelli di calcolo ragionevoli che sono stati e saranno proposti in maniera completa (potrebbe non essere vera, ma per ora nessuno è riuscito a provarlo). Possiamo solo decidere se aderire o meno a questa tesi.\\
+Questa è una tesi e non un teorema, si tratta di una \textit{congettura}, un'opinione, in quanto non è possibile caratterizzare i modelli di calcolo ragionevoli che sono stati e saranno proposti in maniera completa. Possiamo solo decidere se aderire o meno a questa tesi.\\
 
 Per noi un problema è \textit{calcolabile} quando esiste un modello di calcolo che riesce a risolverlo ragionevolmente. Se volessimo aderire alla tesi di Church-Turing, potremmo dire, in maniera più formale, che:
 \begin{itemize}
@@ -1777,5 +1777,183 @@ Per noi un problema è \textit{calcolabile} quando esiste un modello di calcolo 
 	\item \textit{problema ricorsivo totale} è sinonimo di calcolabile da un programma che si arresta su ogni input
 \end{itemize}
 
-\section{Sistemi di Programmazione}
-%p 53
+\section{Assiomatizzazione dei Sistemi di Calcolo}
+
+Per ora ci si è concentrati sull'analisi della \textit{potenza computazionale} dei sistemi di programmazione visti, affermando che ognuno di questi ha come potenza computazionale $\cp$ grazie alla tesi di Church-Turing. \\
+
+Vorremmo sapere altro sui sistemi di programmazione, vogliamo individuare alcune proprietà "buone" di un sistema di calcolo, dette \textbf{assiomi}. Tutti i sistemi di programmazione che rispettano questi assiomi si diranno sistemi di programmazione accettabili. In questo modo si potranno dimostrare proprietà non sul singolo sistema ma su tutti i sistemi accettabili.\\
+
+Per indicare un sistema di programmazione si usa 
+$$ \sisprog_{i \in \mathbb{N}}$$
+ovvero l'insieme delle semantiche (funzioni calcolabili) dal sistema. Il pedice indica i programmi codificati $i \in \mathbb{N}$ di quel sistema.\\
+
+\subsection{Assiomi di Rogers}
+
+Gli assiomi di Rogers vogliono essere quelle "buone" proprietà ricercate in un sistema di programmazione; in particolare si afferma che: un sistema di programmazione $\sisprog$ si dice \textbf{accettabile} (o \textbf{SPA}) se:
+\begin{enumerate}
+	\item Aderisce alla tesi di Church-Turing
+	\item Ammette interprete universale
+	\item Rispetta il teorema $S_n^m$
+\end{enumerate}
+Si vedranno ora gli assiomi nel dettaglio.\\
+
+\subsubsection{Potenza computazionale}
+Dato il sistema $\sisprog$ vogliamo che 
+$$ \sisprog = \cp $$
+ovvero, rispetta la tesi di Church-Turing. Come già dimostrato, il sistema $\ram$ rispetta il primo assioma
+$$ F(\ram) = \cp $$
+Non si vogliono considerare né sistemi troppo poco potenti (sotto $\cp$), né troppo potenti (oltre $\cp$).\\
+
+\subsubsection{Interprete universale} 
+$\sisprog$ rispetta il secondo assioma se esiste un interprete universale, ovvero un programma $\mu \in \mathbb{N}$ tale che
+$$ \forall x,n \in \mathbb{N} \quad \varphi_\mu (\langle x,n \rangle) = \varphi_n (x) $$
+ovvero, un programma scritto in un certo linguaggio che riesce ad interpretare ogni altro programma $n$ scritto nello stesso linguaggio su qualsiasi input $x$.\\
+
+La presenza di un interprete universale permette un'algebra sui programmi, quindi la trasformazione di quest'ultimi.\\
+
+\subsubsection{Teorema $S_n^m$}
+$\sisprog$ rispetta il terzo assioma se rispetta il teorema $S_n^m$. Si vedrà prima un teorema più specifico $S_1^1$.\\
+
+\begin{theor}[$S_1^1$]
+	Dato $\sisprog$ $\ram$ esiste una funzione $S_1^1 \in \mathcal{T}$ tale che 
+	$$ \forall n,x,y \in \mathbb{N} \quad \varphi_n(\langle x,y \rangle) = \varphi_{S_1^1 (n,y)} (x) $$
+\end{theor}
+
+In altre parole, è possibile costruire automaticamente programmi specifici da programmi più generali, ottenuti fissando alcuni input.\\
+
+\begin{proof}
+	In generale, il programma $S_1^1$ implementa la funzione
+	$$ S_1^1 (n,y) = \bar{n} \tc \varphi_{\bar{n}}(x) = \varphi_n (x,y) $$
+	dove: 
+	\begin{itemize}
+		\item $n$ è la codifica del programma $P$ a due variabili di input $x,y$
+		\item $\bar{n}$ è la codifica del programma $\bar{P}$ a una variabile, la cui semantica è identica a quella di $P$ a cui fisso a $y$ il secondo input
+	\end{itemize}
+	
+	Analizzando il sistema $\ram$ si prenda un programma $P$ a due variabili
+	$$ P \in \prog \;\; | \;\; \varphi_P (\langle x,y \rangle) = x + y $$
+	
+	\vspace{-1em}
+	\begin{minipage}{.4\textwidth}
+		\begin{align}
+			P \equiv\ & \texttt{// input $\langle x,y \rangle$ in $R_1$}   \notag\\
+			& R_2 \leftarrow \sin(R_1)                     \notag\\
+			& R_3 \leftarrow \des(R_1)                      \notag\\
+			& R_0 \leftarrow R_2+R_3                       \notag
+		\end{align}
+	\end{minipage}
+	\begin{minipage}{.4\textwidth}
+		$$ \varphi_P(\langle x,y \rangle) = x + y $$
+	\end{minipage}
+	
+	Si vuole produrre un programma $\bar{P}$ con un solo input $x$ che restituisca $x + 3$, partendo da $P$. Si fissa quindi la seconda variabile di $P$ a 3. La funzione $S_1^1$ dovrà restituire $\bar{P}$
+	
+	\begin{minipage}{.46\textwidth}
+		\begin{center}
+			\input{img/calc/s11.tex}
+		\end{center}
+	\end{minipage}
+	\begin{minipage}{.46\textwidth}
+		\begin{tabular}{r l l}
+			$\bar{P}\equiv$ & $\texttt{// input $x$ in $R_1$}$ & \\
+			& $R_0 \leftarrow R_0 + 1$ &  
+			\multirow{3}{*}{\hspace{-2em}
+				$\begin{rcases}
+					\phantom{}\\
+					\phantom{}\\
+				\end{rcases}$ fissa $y$ a 3
+			}\\
+			
+			& $R_0 \leftarrow R_0+1$ & \\
+			& $R_0 \leftarrow R_0+1$ & \\
+			
+			& $R_1 \leftarrow \langle R_1,R_0\rangle$ & 
+			\hspace{-2em}
+			$\begin{rcases}
+				\phantom{}
+			\end{rcases}$ input di $P$\\
+			
+			& $R_0 \leftarrow 0$  & 
+			\hspace{-2em}
+			$\begin{rcases}
+				\phantom{}
+			\end{rcases}$ pulisci $R_0$\\
+			
+			& $R_0 \leftarrow R_2+R_3$ & 
+			\hspace{-2em}
+			$\begin{rcases}
+				\phantom{}
+			\end{rcases}$ richiama $P$                         
+		\end{tabular}
+	\end{minipage}
+	
+	Si consideri il programma $\bar{P}$ nel caso generale, fissando la seconda variabile a un valore $y$:
+	\begin{center}
+		\begin{tabular}{r l l c c}
+			$\bar{P}\equiv$ & $\texttt{// input $x$ in $R_1$}$
+			&&codifica & \\
+			& $R_0 \leftarrow R_0+1$ &
+			\multirow{3}{*}{\hspace{-2em}
+				$\begin{rcases}
+					\phantom{}\\
+					\phantom{}\\
+					\phantom{}\\
+				\end{rcases} y$ volte
+			} & $\longmapsto$ & 0 \\
+			& $\hspace{2.6em}\vdots$ & & $\vdots$  & \\
+			& $R_0 \leftarrow R_0+1$ & & $\longmapsto$ & 0  \\
+			& $R_1 \leftarrow \langle R_1,R_0 \rangle$ & 
+			\hspace{-2em}
+			$\begin{rcases}
+				\phantom{}
+			\end{rcases}$ input di $P$ & $\longmapsto$ & s\\
+			& $R_0 \leftarrow 0$  & 
+			\hspace{-2em}
+			$\begin{rcases}
+				\phantom{}
+			\end{rcases}$ pulisci $R_0$ & $\longmapsto$ & t\\
+			& $R_0 \leftarrow R_2+R_3$ & 
+			\hspace{-2em}
+			$\begin{rcases}
+				\phantom{}
+			\end{rcases}$ richiama $P$ & $\longmapsto$ & n                
+		\end{tabular}
+	\end{center}
+	
+	La codifica del programma $\bar{P}$ è 
+	$$ cod(\bar{P}) = \bar{n} = \langle \underbrace{0,\dots,0}_{y\text{ volte}},s,t,n \rangle = S^1_1 $$
+	con $s$ codifica dell'istruzione che calcola la funzione coppia di Cantor e $t$ codifica dell'istruzione di azzeramento.\\
+	
+	Si può quindi notare che $S_1^1$ è 
+	\begin{enumerate}
+		\item Una funzione totale
+		\item Programmabile
+	\end{enumerate}
+	Di conseguenza
+	$$ S_1^1 \in \mathcal{T} $$
+\end{proof}
+
+In sintesi, per $\ram$, esiste una funzione $S_1^1$ ricorsiva totale che accetta come argomenti
+\begin{itemize}
+	\item il codice $n$ di un programma con 2 input
+	\item un valore $y$ a cui fissare il secondo input
+\end{itemize}
+e produce il codice $\bar{n} = S^1_1 (n,y)$ di un programma che si comporta come $n$ nel caso in cui il secondo input è fissato a $y$.\\
+
+Questo teorema ha anche una forma generale $S_n^m$ che riguarda i programmi a $m+n$ input in cui si prefissano $n$ input e si lasciano variare i primi $m$.\\
+
+\begin{theor}[$S_n^m$]
+	Dato $\sisprog$ $\ram$, esiste una funzione $S_n^m \in \mathcal{T}$ tale che
+	$$ \forall  \in \mathbb{N}, \underline{x} \in \mathbb{N}^m, \underline{y} \in \mathbb{N}^n \quad \varphi_k (\langle \underline{x}, \underline{y} \rangle) = \varphi_{S_n^m (k, \underline{y})} (\langle \underline{x} \rangle) $$
+\end{theor}
+
+Ovvero, per ogni programma $k \in \mathbb{N}$ e ogni input $\underline{x} \in \mathbb{N}^m, \underline{y} \in \mathbb{N}^n$ vale la proprietà specificata. Anche la dimostrazione è una semplice generalizzazione di quella di $S_1^1$.\\
+
+Le tre caratteristiche identificate formano gli \textbf{assiomi di Rogers} (1953). Questi caratterizzano i sistemi di programmazione su cui ci concentreremo, chiamati \textit{Sistemi di Programmazione Accettabili}. Questi assiomi non sono restrittivi: di fatto, tutti i modelli di calcolo ragionevoli sono SPA.\\
+
+\subsection{Compilatori tra SPA}
+
+%p55
+
+
+
