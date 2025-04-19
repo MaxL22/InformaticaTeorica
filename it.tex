@@ -30,9 +30,14 @@
 \usepackage{amsthm}
 \usepackage{mathabx}
 \usepackage{bm}
+\usepackage{minted}
+\usepackage{xcolor}
+\definecolor{bg}{rgb}{0.95,0.95,0.95}
+\setminted[python]{linenos, bgcolor=bg}
 
 \theoremstyle{plain}
 \newtheorem{theor}{Teorema}[section]
+\newtheorem{coroll}{Corollario}[section]
 
 \renewcommand{\proofname}{Dimostrazione}
 
@@ -66,6 +71,8 @@
 \newcommand{\U}{\mathcal{U}}
 \newcommand{\cp}{\mathcal{P}}
 \newcommand{\st}{\mathcal{S}}
+\newcommand{\T}{\mathcal{T}}
+\newcommand{\N}{\mathbb{N}}
 \newcommand{\cprog}[1]{\C_{#1}\text{-}\prog}
 \newcommand{\proj}{\text{Proj}}
 \newcommand{\pro}{\text{Pro}}

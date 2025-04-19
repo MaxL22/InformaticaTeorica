@@ -1755,14 +1755,14 @@ La classe delle funzioni ricorsive parziali, ovvero l'idea di \textit{calcolabil
 Il risultato principale di questo studio è aver trovato due classi di funzioni importanti: 
 \begin{itemize}
 	\item $\cp$ insieme delle \textbf{funzioni ricorsive parziali}
-	\item $\mathcal{T}$ insieme delle \textbf{funzioni ricorsive totali}
+	\item $\T$ insieme delle \textbf{funzioni ricorsive totali}
 \end{itemize}
 
 Il primo insieme contiene anche tutte le funzioni del secondo, quindi
-$$ \mathcal{T} \subset \cp $$
+$$ \T \subset \cp $$
 
 Inoltre abbiamo visto (ad esempio tramite la funzione di Ackermann) che
-$$ \ricprim \subset \mathcal{T} $$
+$$ \ricprim \subset \T $$
 
 L'insieme $\cp$ cattura tutti i sistemi di calcolo esistenti: $\while$, $\ram$, Macchine di Turing, Lambda-calcolo di Church, \dots\\
 Tutti i modelli di calcolo proposti alla fine individuano sempre la classe delle funzioni ricorsive parziali. Visti questi risultati, Church e Turing decidono di enunciare un risultato molto importante.\\
@@ -1815,7 +1815,7 @@ La presenza di un interprete universale permette un'algebra sui programmi, quind
 $\sisprog$ rispetta il terzo assioma se rispetta il teorema $S_n^m$. Si vedrà prima un teorema più specifico $S_1^1$.\\
 
 \begin{theor}[$S_1^1$]
-	Dato $\sisprog$ $\ram$ esiste una funzione $S_1^1 \in \mathcal{T}$ tale che 
+	Dato $\sisprog$ $\ram$ esiste una funzione $S_1^1 \in \T$ tale che 
 	$$ \forall n,x,y \in \mathbb{N} \quad \varphi_n(\langle x,y \rangle) = \varphi_{S_1^1 (n,y)} (x) $$
 \end{theor}
 
@@ -1930,7 +1930,7 @@ In altre parole, è possibile costruire automaticamente programmi specifici da p
 		\item Programmabile
 	\end{enumerate}
 	Di conseguenza
-	$$ S_1^1 \in \mathcal{T} $$
+	$$ S_1^1 \in \T $$
 \end{proof}
 
 In sintesi, per $\ram$, esiste una funzione $S_1^1$ ricorsiva totale che accetta come argomenti
@@ -1943,7 +1943,7 @@ e produce il codice $\bar{n} = S^1_1 (n,y)$ di un programma che si comporta come
 Questo teorema ha anche una forma generale $S_n^m$ che riguarda i programmi a $m+n$ input in cui si prefissano $n$ input e si lasciano variare i primi $m$.\\
 
 \begin{theor}[$S_n^m$]
-	Dato $\sisprog$ $\ram$, esiste una funzione $S_n^m \in \mathcal{T}$ tale che
+	Dato $\sisprog$ $\ram$, esiste una funzione $S_n^m \in \T$ tale che
 	$$ \forall  \in \mathbb{N}, \underline{x} \in \mathbb{N}^m, \underline{y} \in \mathbb{N}^n \quad \varphi_k (\langle \underline{x}, \underline{y} \rangle) = \varphi_{S_n^m (k, \underline{y})} (\langle \underline{x} \rangle) $$
 \end{theor}
 
@@ -1953,7 +1953,174 @@ Le tre caratteristiche identificate formano gli \textbf{assiomi di Rogers} (1953
 
 \subsection{Compilatori tra SPA}
 
-%p55
+Dati gli SPA $\{\varphi_i\}$ e $\{\Psi_i\}$, un compilatore dal primo al secondo è una funzione $t : \N \rightarrow \N$ che soddisfa le proprietà di
+\begin{enumerate}
+	\item \textbf{programmabilità}: esiste un programma che implementa $t$
+	\item \textbf{completezza}: $t$ compila ogni $i \in \N$
+	\item \textbf{correttezza}: $\forall i \in \N$ vale $\varphi_i = \Psi_{t(i)}$
+\end{enumerate}
 
+Visto quanto fatto fin'ora, si può dire che i primi due punti possono essere scritti come $t \in \T$.\\
+
+\begin{theor}
+	Dati due SPA, esiste sempre un compilatore tra essi.
+\end{theor}
+\begin{proof}
+	Consideriamo $\{\varphi_i\}$ e $\{\Psi_i\}$ due SPA; valgono i tre assiomi di Rogers: 
+	\begin{enumerate}
+		\item $\{\varphi_i\} = \cp$
+		\item $\exists u: \varphi_u (\langle x,y \rangle) = \varphi_n (x)$
+		\item $\exists S_1^1 \in \T: \varphi_n (\langle x,y \rangle ) = \varphi_{Ŝ^1_1 (e,i)} (x)$
+	\end{enumerate}
+	
+	Voglio trovare un compilatore $t \in \T$ che sia corretto. Ma allora
+	$$ \varphi_i (x) \stackrel{(2)}{=} \varphi_u (\langle x,y \rangle ) \stackrel{(1)}{=} \Psi_e (\langle x,i \rangle) \stackrel{(3)}{=} \Psi_{S_1^1(e,i)} (x) $$
+	
+	Ovvero, il compilatore cercato è la funzione $t(i) = S^1_1 (e,i)$ per ogni $i \in \N$. Infatti: 
+	\begin{itemize}
+		\item $t \in \T$ in quanto $S_1^1 \in \T$
+		\item $t$ corretto perché $\varphi_i = \Psi_{t(i)}$
+	\end{itemize}
+\end{proof}
+
+Da notare che questo teorema è molto generale, specifica solamente che il compilatore esiste, non determina quale sia.\\
+
+\begin{coroll}
+	Dati gli SPA $A,B,C$ esiste sempre un compilare da $A$ a $B$ scritto nel linguaggio $C$.
+\end{coroll}
+\begin{proof}
+	Per il teorema precedente esiste un compilatore $t \in \T$ da $A$ a $B$. $C$ è un SPA, quindi contiene programmi per tutte le funzioni ricorsive parziali, dunque ne contiene uno anche per $t$, che è una funzione ricorsiva totale.\\
+\end{proof}
+
+Nella pratica, vuol dire che per qualunque coppia di linguaggi, sarà sempre possibile scrivere un compilatore tra essi in un altro linguaggio arbitrario. Un risultato più forte del teorema precedente è invece dato dal \textbf{teorema di Rogers}.\\
+
+\begin{theor}[Teorema di isomorfismo tra SPA]
+	Dati due SPA $\{\varphi_i\}$ e $\{\Psi_i\}$, esiste $t: \N \rightarrow \N$ tale che: 
+	\begin{enumerate}
+		\item $t \in \T$
+		\item $\forall i \in \N$, $\varphi_i = \Psi_{t(i)}$
+		\item $t$ è invertibile, quindi $t^{-1}$ può essere visto come un decompilatore
+	\end{enumerate}
+\end{theor}
+
+I primi due punti sono uguali al teorema precedente e dicono che il compilatore $t$ è programmabile e completo (punto 1) e corretto (punto 2).\\
+
+\subsection{Teorema di Ricorsione}
+
+Il teorema di ricorsione è un risultato utile a rispondere ad alcuni quesiti sugli SPA. \\
+
+\begin{theor}
+	Dato un SPA $\varphi_i$, per ogni $t: \N \rightarrow \N$ ricorsiva totale vale
+	$$ \exists n \in \N | \varphi_n = \varphi_{t(n)} $$
+\end{theor}
+
+Per dare una chiave di lettura a questo teorema: 
+\begin{itemize}
+	\item consideriamo $t$ come un programma che prende in input un programma $n$ è lo trasforma in $t(n)$
+	\item il teorema dice che, qualsiasi sia la natura di $t$, esisterà sempre almeno un programma il cui significato non sarà stravolto da $t$
+\end{itemize}
+
+\begin{proof}
+	Considerando un SPA $\{\varphi_i\}$, valgono i tre assiomi di Rogers. Per semplicità, scriveremo $\varphi_n (x,y)$ al posto di $\varphi_n (\langle x,y \rangle)$. Dobbiamo esibire, data una funzione $t$, uno specifico valore di $n$.\\
+	
+	Partiamo mostrando che
+	$$ \varphi_{\varphi_i (i)} (x) \stackrel{(2)}{=} \varphi_{\varphi_u (i,i)} (x) \stackrel{(2)}{=} \varphi_u (x, \varphi_u (i,i)) \rightsquigarrow f(x,i) \in \cp $$
+	
+	Infatti, la funzione $f(x,i)$ è composizione di funzioni ricorsive parziali, quindi anch'essa lo è.\\
+	
+	Continuiamo affermando che
+	$$ f(x,i) \stackrel{(1)}{=} \varphi_e (x,i) \stackrel{(3)}{=} \varphi_{S_1^1 (e,i)} (x) $$
+	
+	Consideriamo ora la funzione $t\left(S_1^1 (e,i)\right)$: essa è ricorsiva totale in $i$ perché composizione di $t$ e di $S_1^1$ ricorsive totali, quindi
+	$$ \exists m \in \N \;\; | \;\; \varphi_m (i) = t\left(S_1^1 (e,i)\right) $$
+	
+	Abbiamo quindi mostrato che
+	\begin{align*}
+		(A) \quad \quad & \varphi_{\varphi_i (i)} (x) = \varphi_{S_1^1 (e,i)} (x) \\
+		(B) \quad \quad & \varphi_m (i) = t\left(S_1^1 (e,i) \right)
+	\end{align*}
+	
+	Fissiamo $n = S_1^1 (e,m)$ e mostriamo che vale $\varphi_n = \varphi_{t(n)}$, ovvero il teorema di ricorsione
+	$$ \varphi_n (x) \stackrel{\text{def}}{=} \varphi_{S__1^1 (e,m)} (x) \stackrel{(A)}{=} \varphi_{\varphi_m (m)} (x) $$
+	$$ \varphi_{t(n)} (x) \stackrel{\text{def}}{=} \varphi_{t\left(S_1^1 (e,m)\right)} (x) \stackrel{(B)}{=} \varphi_{\varphi_m (m)} (x)$$
+	
+	Ho ottenuto lo stesso risultato, quindi il teorema è verificato.\\
+\end{proof}
+
+\subsection{Due quesiti sugli SPA}
+
+Ci poniamo due quesiti riguardo agli SPA:
+\begin{enumerate}
+	\item \textbf{Programmi auto-replicanti}: dato un SPA, esiste all'interno di esso un programma che stampa se stesso (il proprio listato)? Ovviamente senza aprire il file che contiene il listato.\\
+	
+	Questi programmi sono detti \textbf{Quine}, in onore del filosofo e logico \href{https://it.wikipedia.org/wiki/Willard_Van_Orman_Quine}{\texttt{Willard Quine}} che li descrisse per la prima volta. La risposta è positiva per molti linguaggi; ad esempio, in Python, il programma
+	\begin{minted}{python}
+a='a=%r;print(a%%a)';print(a%a)
+	\end{minted}
+	stampa esattamente il proprio listato. \\
+	
+	Per rispondere rigorosamente ambientiamo la domanda nel sistema di programmazione $\ram$, che diventa: 
+	$$ \exists j \in \N \;\; | \;\; \varphi_j (x) = j \text{ per ogni input } x \in \N \text{?}$$
+	
+	\item \textbf{Compilatori completamente errati}: dati due SPA $\{\varphi_i\}$ e $\{\Psi_j\}$, esiste un compilatore completamente errato? \\
+	
+	Un compilatore dal primo al secondo SPA è una funzione $t: \N \rightarrow \N$ tale che
+	\begin{itemize}
+		\item $t \in \T$ programmabile e totale
+		\item $\forall i \in \N$, $\varphi_i = \Psi_{t(i)}$
+	\end{itemize}
+	
+	Invece, un \textbf{compilatore completamente errato} è una funzione $t: \N \rightarrow \N$ tale che
+	\begin{itemize}
+		\item $t \in \T$ programmabile e totale
+		\item $\forall i \in \N$, $\varphi_i \neq \Psi_{t(i)}$
+	\end{itemize}
+\end{enumerate}
+
+\subsubsection{Prima domanda: Quine}
+Consideriamo il programma $\ram$
+\begin{center}
+	\begin{tabular}{r|l|}
+		\cline{2-2}
+		$P \equiv$ & $R_0 \leftarrow R_0 + 1$ \\
+		& $R_0 \leftarrow R_0 + 1$ \\
+		& $\dots$ \\
+		& $R_0 \leftarrow R_0 + 1$ \\
+		\cline{2-2}
+	\end{tabular}
+\end{center}
+il quale ripete l'istruzione di incremento di $R_0$ un numero $j$ di volte. La semantica di questo programma è esattamente $j$: infatti dopo la sua esecuzione avremo $j$ nel registro di output $R_0$. \\
+
+Calcoliamo la codifica di $P$ come
+$$ cod(P) = \underbracket{\langle 0, \dots, 0 \rangle}_{j\text{-volte}} = Z (j) \in \T $$
+
+Questa funzione è ricorsiva totale in quanto programmabile e totale, visto che sfrutta solo la funzione di Cantor. Vale quindi:
+$$ \varphi_{Z(j)} (x) = j $$
+
+Per il teorema di ricorsione
+$$ \exists j \in \N \;\; | \;\; \varphi_j (x) = \varphi_{Z (j)} (x) = j $$
+
+Quindi effettivamente esiste un programma $j$ la cui semantica è proprio quella di stampare se stesso.\\
+
+La risposta alla prima domanda è \textit{sì} per $\ram$, am lo è in generale per tutti i SPA che ammettono una codifica per i propri programmi.\\
+
+\subsubsection{Seconda domanda: compilatori completamente errati}
+
+Supponendo di avere una funzione $t \in \T$ che "\textit{maltratta}" i programmi. La semantica del programma "\textit{maltrattato}" $t(i)$:
+$$ (\ast) \quad \quad \Psi_{t(i)} (x) \stackrel{(2)}{=} \Psi_u (x, t(i)) \stackrel{(1)}{=} \varphi_e (x, t(i)) \stackrel{(3)}{=} \varphi_{S_1^1 (e,t(i))} (x) $$
+
+Chiamiamo $g(i)$ la funzione $S_1^1 (e, t(i))$ che dipende solo da $i$, essendo $e$ un programma fissato. Notiamo come questa funzione sia composizione di funzioni ricorsive totali, ovvero $t(i)$ per ipotesi e $S^1_1$ per definizione, quindi anch'essa è ricorsiva totale. \\
+
+Per il teorema di ricorsione
+$$ (\ast \ast) \quad \quad \exists i \in \N \;\; | \;\; \varphi_i = \varphi_{g(i)} $$
+
+Unendo $(\ast)$ e $(\ast \ast)$ otteniamo 
+$$ \exists i \in \N \;\; | \;\; \Psi_{t(i)} \stackrel{(\ast)}{=} \varphi_{g(i)} \stackrel{(\ast \ast)}{=} \varphi_i \quad \forall t \in \T $$
+
+Di conseguenza, la risposta alla seconda domanda è \textit{no}.\\
+
+\subsection{Equazioni su SPA}
+\subsubsection{Strategia}
+%p58
 
 
