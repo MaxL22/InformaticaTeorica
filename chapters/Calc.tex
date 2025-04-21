@@ -1831,7 +1831,7 @@ In altre parole, è possibile costruire automaticamente programmi specifici da p
 	\end{itemize}
 	
 	Analizzando il sistema $\ram$ si prenda un programma $P$ a due variabili
-	$$ P \in \prog \;\; | \;\; \varphi_P (\langle x,y \rangle) = x + y $$
+	$$ P \in \prog \bbar \varphi_P (\langle x,y \rangle) = x + y $$
 	
 	\vspace{-1em}
 	\begin{minipage}{.4\textwidth}
@@ -2032,7 +2032,7 @@ Per dare una chiave di lettura a questo teorema:
 	$$ f(x,i) \stackrel{(1)}{=} \varphi_e (x,i) \stackrel{(3)}{=} \varphi_{S_1^1 (e,i)} (x) $$
 	
 	Consideriamo ora la funzione $t\left(S_1^1 (e,i)\right)$: essa è ricorsiva totale in $i$ perché composizione di $t$ e di $S_1^1$ ricorsive totali, quindi
-	$$ \exists m \in \N \;\; | \;\; \varphi_m (i) = t\left(S_1^1 (e,i)\right) $$
+	$$ \exists m \in \N \bbar \varphi_m (i) = t\left(S_1^1 (e,i)\right) $$
 	
 	Abbiamo quindi mostrato che
 	\begin{align*}
@@ -2060,7 +2060,7 @@ a='a=%r;print(a%%a)';print(a%a)
 	stampa esattamente il proprio listato. \\
 	
 	Per rispondere rigorosamente ambientiamo la domanda nel sistema di programmazione $\ram$, che diventa: 
-	$$ \exists j \in \N \;\; | \;\; \varphi_j (x) = j \text{ per ogni input } x \in \N \text{?}$$
+	$$ \exists j \in \N \bbar \varphi_j (x) = j \text{ per ogni input } x \in \N \text{?}$$
 	
 	\item \textbf{Compilatori completamente errati}: dati due SPA $\{\varphi_i\}$ e $\{\Psi_j\}$, esiste un compilatore completamente errato? \\
 	
@@ -2098,11 +2098,11 @@ Questa funzione è ricorsiva totale in quanto programmabile e totale, visto che 
 $$ \varphi_{Z(j)} (x) = j $$
 
 Per il teorema di ricorsione
-$$ \exists j \in \N \;\; | \;\; \varphi_j (x) = \varphi_{Z (j)} (x) = j $$
+$$ \exists j \in \N \bbar \varphi_j (x) = \varphi_{Z (j)} (x) = j $$
 
 Quindi effettivamente esiste un programma $j$ la cui semantica è proprio quella di stampare se stesso.\\
 
-La risposta alla prima domanda è \textit{sì} per $\ram$, am lo è in generale per tutti i SPA che ammettono una codifica per i propri programmi.\\
+La risposta alla prima domanda è \si\ per $\ram$, ma lo è in generale per tutti i SPA che ammettono una codifica per i propri programmi.\\
 
 \subsubsection{Seconda domanda: compilatori completamente errati}
 
@@ -2112,15 +2112,270 @@ $$ (\ast) \quad \quad \Psi_{t(i)} (x) \stackrel{(2)}{=} \Psi_u (x, t(i)) \stackr
 Chiamiamo $g(i)$ la funzione $S_1^1 (e, t(i))$ che dipende solo da $i$, essendo $e$ un programma fissato. Notiamo come questa funzione sia composizione di funzioni ricorsive totali, ovvero $t(i)$ per ipotesi e $S^1_1$ per definizione, quindi anch'essa è ricorsiva totale. \\
 
 Per il teorema di ricorsione
-$$ (\ast \ast) \quad \quad \exists i \in \N \;\; | \;\; \varphi_i = \varphi_{g(i)} $$
+$$ (\ast \ast) \quad \quad \exists i \in \N \bbar \varphi_i = \varphi_{g(i)} $$
 
 Unendo $(\ast)$ e $(\ast \ast)$ otteniamo 
-$$ \exists i \in \N \;\; | \;\; \Psi_{t(i)} \stackrel{(\ast)}{=} \varphi_{g(i)} \stackrel{(\ast \ast)}{=} \varphi_i \quad \forall t \in \T $$
+$$ \exists i \in \N \bbar \Psi_{t(i)} \stackrel{(\ast)}{=} \varphi_{g(i)} \stackrel{(\ast \ast)}{=} \varphi_i \quad \forall t \in \T $$
 
-Di conseguenza, la risposta alla seconda domanda è \textit{no}.\\
+Di conseguenza, la risposta alla seconda domanda è \no.\\
 
 \subsection{Equazioni su SPA}
 \subsubsection{Strategia}
-%p58
+
+La portata del teorema di ricorsione è molto ampia: permette di risolvere \textbf{equazioni su SPA} in cui si chiede l'esistenza di certi programmi in SPA.\\
+
+Ad esempio, dato un SPA $\{\varphi_i\}$ ci chiediamo se
+$$ \exists n \in \N \bbar \varphi_n (x) = \varphi_x \left(n + \varphi_{\varphi_n (0)} (x) \right) $$
+
+La strategia da seguire per risolvere questo tipo di richieste è analoga a quella seguita per la dimostrazione del teorema di ricorsione, riassumibile in: 
+\begin{enumerate}
+	\item Trasformare il membro di destra dell'equazione in una funzione $f(x,n)$
+	\item Mostrare che $f(x,n)$ è ricorsiva parziale e quindi che $f(x,n) = \varphi_e (x,n)$
+	\item L'equazione iniziale diventa $\varphi_n (x) = \varphi_e (x, n) = \varphi_{S^1_1 (e,n)} (x)$
+	\item So che $S^1_1 (e,n)$ è una funzione ricorsiva totale
+	\item La domanda iniziale è diventata $\exists n \in \N$ $|$ $\varphi_n (x) = \varphi_{S_1^1 (e,n)} (x)$? 
+	\item La risposta è \si, per il teorema di ricorsione
+\end{enumerate}
+
+Riprendendo l'esempio e cominciando con trasformare la parte di destra:
+\begin{align*}
+	\varphi_n (x) & \stackrel{(2)}{=} \varphi_x \left(n + \varphi_{\varphi_u (0,n)} (x)\right) \\
+	& \stackrel{(2)}{=} \varphi_x \left(n + \varphi_u \left(x, \varphi_u (0,n)\right)\right) \\
+	& \stackrel{(2)}{=} \varphi_u \left(n + \varphi_u \left(x, \varphi_u (0,n)\right), x\right) \\
+	& = f(x,n) \in \cp 
+\end{align*}
+
+L'ultimo passaggio è vero perché $\varphi_u \left(n + \varphi_u \left(x, \varphi_u (0,n)\right), x\right)$ compone solamente funzioni ricorsive parziali quali somma e interprete universale. Di conseguenza, esiste un programma $e$ che calcola la funzione $f(x,n)$.\\
+
+Continuando, l'equazione si può riscrivere come
+\begin{align*}
+	\varphi_n (x) & = f(x,n) \\
+	& \stackrel{(1)}{=} \varphi_e (x,n) \\
+	& \stackrel{(3)}{=} \varphi_{S_1^1 (e,n)} (x) 
+\end{align*}
+
+con $S_1^1 (e,n) \in \T$ per l'assioma 3.\\
+
+Per il teorema di ricorsione possiamo concludere che
+$$ \exists n \in \N \bbar \varphi_n (x) = \varphi_{S^1_1 (e,n)} (x) = \varphi_x \left(n + \varphi_{\varphi_u (0,n)} (x)\right) $$
+
+\subsubsection{Esercizi}
+
+In tutti gli esercizi viene dato un SPA $\{\varphi_i\}$
+
+$$ \exists n \in \N \bbar \varphi_n (x) = \varphi_x (n) + \varphi_{\varphi_x (n)} (n)? $$
+\begin{align*}
+	\varphi_n (x) & \stackrel{(2)}{=} \varphi_u (n,x) + \varphi_{\varphi_u (n,x)} (n) \\
+	& \stackrel{(2)}{=} \varphi_u (n,x) + \varphi_u (n, \varphi_u (n,x)) \\
+	& = f(x,n) \\
+	& \stackrel{(1)}{=} \varphi_e (x,n) \stackrel{(3)}{=} \varphi_{S^1_1 (e,n)} (x) \\
+	& \fin
+\end{align*}
+
+$$ \exists n \in \N \bbar \varphi_n (x) = n^x + \left(\varphi_x (x)\right)^2 ? $$
+\begin{align*}
+	\varphi_n (x) & \stackrel{(2)}{=} n^x + \left(\varphi_u (x,x)\right)^2 \\
+	& = f(x,n) \\
+	& \stackrel{(1)}{=} \varphi_e (x,n) \stackrel{(3)}{=} \varphi_{S^1_1 (e,n)} (x) \\
+	& \fin 
+\end{align*}
+
+$$ \exists n \in \N \bbar \varphi_n (x) = \varphi_x \left(\langle n, \varphi_x (1) \rangle \right) ?$$
+\begin{align*}
+	\varphi_n (x) & \stackrel{(2)}{=} \varphi_u \left(\langle n, \varphi_u (1, x) \rangle, x\right) \\
+	& = f(x,n) \\
+	& \stackrel{(1)}{=} \varphi_e (x,n) \stackrel{(3)}{=} \varphi_{S_1^1 (e,n)} (x) \\
+	& \fin 
+\end{align*}
+$$ \exists n \in \N \bbar \varphi_n (x) = \varphi_{\varphi_x (\sin (n))} (\des (n)) ? $$
+\begin{align*}
+	\varphi_n (x) & \stackrel{(2)}{=} \varphi_{\varphi_u (\sin (n), x)} (\des (n)) \\
+	& \stackrel{(2)}{=} \varphi_u (\des (n), \varphi_u (\sin (n), x)) \\
+	& = f(x,n) \\
+	& \stackrel{(1)}{=} \varphi_e (x,n) \stackrel{(3)}{=} \varphi_{S_1^1 (e,n)} (x) \\
+	& \fin 
+\end{align*}
+$$ \exists n \in \N \bbar \varphi_n (x) = n^x + \left(\varphi_x (x)\right)^2 ?$$
+\begin{align*}
+	\varphi_n (x) & \stackrel{(2)}{=} n^x + \left(\varphi_u (x,x)\right)^2 \\
+	& = f(x,n) \\
+	& \stackrel{(1)}{=} \varphi_e (x,n) \stackrel{(3)}{=} \varphi_{S_1^1 (e,n)} (x) \\
+	& \fin \\
+\end{align*}
+$$ \exists n \in \N \bbar \varphi_n (x) = \varphi_x (n + 2) + \left(\varphi_{\varphi_x (n)} (n+3)\right)^2 ? $$
+\begin{align*}
+	\varphi_n (x) & \stackrel{(2)}{=} \varphi_u (n + 2, x) + \left(\varphi_{\varphi_u (n, x)} (n + 3)\right)^2 \\
+	& \stackrel{(2)}{=} \varphi_u (n+2, x) + \left(\varphi_u \left(n + 3, \varphi_u (n,x)\right)\right)^2  \\
+	& = f(x,n) \\
+	& \stackrel{(1)}{=} \varphi_e (x,n) \stackrel{(3)}{=} \varphi_{S_1^1 (e,n)} (x) \\
+	& \fin 
+\end{align*}
+
+
+\section{Problemi di Decisione}
+
+Un \textbf{problema di decisione} è una domanda a cui rispondere \si\ o \no. Sono costituiti da tre elementi principali: 
+\begin{itemize}
+	\item \textbf{Nome}: del problema
+	\item \textbf{Istanza}: dominio degli oggetti che verranno considerati
+	\item \textbf{Domanda}: proprietà che gli oggetti del dominio possono soddisfare o meno. Dato un oggetto del dominio, la risposta sarà \si\ se soddisfa la proprietà, \no\ altrimenti. In altre parole, è la specifica del problema di decisione
+\end{itemize}
+
+Una definizione più formale: 
+\begin{itemize}
+	\item \textbf{Nome} $\Pi$
+	\item \textbf{Istanza} $x \in D$ input
+	\item \textbf{Domanda} $p(x)$ proprietà che $x \in D$ può soddisfare o meno
+\end{itemize}
+
+Non bisogna esibire una struttura come risultato (cosa che accade nei problemi di ricerca od ottimizzazione), ma solo una risposta \si/\no.\\
+
+\paragraph{Esempio:} Un esempio di problema di decisione è quello di stabilire se un grafo ammette un circuito hamiltoniano:
+\begin{itemize}
+	\item Nome: Circuito hamiltoniano
+	\item Istanza: grafo $G = (V,E)$
+	\item Domanda: $\exists \gamma$ circuito hamiltoniano nel grafo $G$?
+\end{itemize}
+
+\subsection{Decidibilità}
+
+Sia $\Pi$ problema di decisione con istanza $x \in D$ e domanda $p(x)$. $\Pi$ è \textbf{decidibile} se e solo se esiste un programma $P_\Pi$ tale che
+\begin{center}
+	\input{img/calc/decid}
+\end{center}
+
+Allo stesso modo, possiamo associare a $\Pi$ la sua \textbf{funzione soluzione}: 
+$$ \Phi_\Pi : D \rightarrow \{0,1\} \tc \Phi_\Pi (x) = \begin{cases}
+	1 & \text{ se } p(x) \\
+	0 & \text{ se } \neg p(x)
+\end{cases}$$
+
+Questa funzione deve essere programmabile e deve terminare sempre; ma allora $\Phi_\Pi \in \T$.\\
+
+I due approcci per \textbf{definire la decidibilità} sono equivalenti: 
+\begin{itemize}
+	\item il programma $P_\Pi$ calcola $\Phi_\Pi$, quindi $\Phi_\Pi \in \T$
+	\item se $\Phi_\Pi \in \T$, allora esiste un programma che la calcola e che ha il comportamento di $P_\Pi$
+\end{itemize}
+
+Quindi, definire la decidibilità partendo da un programma o da una funzione ricorsiva parziale è indifferente: una definizione implica l'altra.\\
+
+Si può sfruttare questo fatto per sviluppare due \textbf{tecniche di risoluzione} del problema di decidibilità: 
+\begin{itemize}
+	\item Esibire un \textbf{algoritmo di soluzione} $P_\Pi$ (anche inefficiente, basta che esista)
+	\item Mostrare che $\Phi_\Pi$ è \textbf{ricorsiva totale}
+\end{itemize}
+
+\paragraph{Esempio:} Sull'esempio precedente, dovendo visitare ogni nodo una e una sola volta, il circuito genera una permutazione dei vertici in $V$. L'algoritmo di soluzione deve: 
+\begin{enumerate}
+	\item generare l'insieme $P$ di tutte le permutazioni di $V$
+	\item data la permutazione $p_i \in P$, se è un c.h. rispondo \si
+	\item se nessuna permutazione $p_i \in P$ è un c.h. rispondo \no
+\end{enumerate}
+
+\subsection{Problemi indecidibili}
+
+Esistono dei \textbf{problemi indecidibili}? \si: se esistono programmi che non so come scrivere, allora esistono problemi per i quali non posso scrivere dei programmi che li risolvano.\\
+
+\subsubsection{Problema dell'arresto ristretto}
+
+Il \textbf{problema dell'arresto ristretto} per un programma $P$ è un esempio di problema indecidibile. Fissato un programma $P$, il problema è il seguente: 
+\begin{itemize}
+	\item Nome: $\arp$
+	\item Istanza: $x \in \N$
+	\item Domanda: $\varphi_P (x) \downarrow$?
+\end{itemize}
+
+In altre parole, ci chiediamo se $P$ termina su input $x$. La risposta dipende da $P$, che può essere decidibile o meno. Per alcuni programmi si può trovare risposta ed è quindi decidibile, tuttavia esistono dei programmi dove $\arp$ è indecidibile.\\
+
+Consideriamo ora il programma $\hat{P}$:
+\begin{align}
+	\hat{P} \equiv\ & \text{input($x$)}       \notag\\
+	& Z := U(x,x)                             \notag\\
+	& \text{output($Z$)}                      \notag
+\end{align}
+
+Dove $U$ è l'interprete universale tale che
+$$ \varphi_U (x,n) = \varphi_n (x) $$
+	
+E definiamo di conseguenza il problema $\arph$:
+$$ \varphi_{\hat{P}}(x) = \varphi_{U}(x,x) = \varphi_{x}(x) $$
+\begin{itemize}
+	\item Nome $\arph$
+	\item Istanza $ x \in \N$
+	\item Domanda: $\varphi_{\hat{P}}(x) = \varphi_x(x) \downarrow ?$
+\end{itemize}
+
+Abbiamo, quindi, un programma $x$ che lavora su un altro programma (\textit{se stesso} in questo caso). Nulla di strano: compilatori, debugger, interpreti sono programmi che lavorano su programmi. \\
+
+La domanda è se $\varphi_x$ su input $x$ termina. Il programma $P$ non è fissato e dipende dall'input, essendo $x$ sia input che programma.\\
+
+\begin{theor}[Indecidibilità di $\arph$]
+	$\arph$ è indecidibile.
+\end{theor}
+\begin{proof}
+	Per assurdo, assumiamo $\arph$ decidibile. Dunque esiste
+	$$
+	\Phi_{\arph} (x) = \begin{cases}
+		1 & \text{ se } \varphi_{\hat{P}} (x) = \varphi_x (x) \downarrow \\
+		0 & \text{ se } \varphi_{\hat{P}} (x) = \varphi_x (x) \uparrow \\
+	\end{cases}
+	\in \T 
+	$$
+	calcolabile da un programma che termina sempre. Visto che $\Phi_{\arph} \in \T$ anche la funzione
+	$$ 
+	f(x) = \begin{cases}
+		0 & \text{ se } \Phi_{\arph} (x) = 0 \equiv \varphi_x (x) \uparrow \\
+		\varphi_x (x) + 1 & \text{ se } \Phi_{\arph} (x) = 1 \equiv \varphi_x (x) \downarrow
+	\end{cases}
+	$$
+	è ricorsiva totale, si può avere un programma che calcola esattamente la funzione $f(x)$. \\
+	
+	Sia $\alpha \in \N$ la codifica del programma $A$, allora $\varphi_\alpha = f$. Valutiamo $\varphi_\alpha$ in $\alpha$:
+	$$ 
+	\varphi_\alpha (\alpha) = \begin{cases}
+		0 & \text{ se } \varphi_\alpha (\alpha) \uparrow \\
+		\varphi_\alpha (\alpha) + 1 & \text{ se } \varphi_\alpha(\alpha) \downarrow
+	\end{cases}
+	$$
+	
+	Tale funzione non può esistere, infatti: 
+	\begin{itemize}
+		\item nel primo caso ho $\varphi_\alpha (\alpha) = 0$ se non termina, ma è una contraddizione perché $A \in \T$
+		\item nel secondo caso ho $\varphi_\alpha (\alpha) = \varphi(\alpha) + 1$ se termina, ma è una contraddizione perché questa relazione non vale per nessun naturale
+	\end{itemize}
+	
+	Siamo a un assurdo, quindi $\arph$ è indecidibile.\\
+\end{proof}
+
+\subsubsection{Problema dell'arresto}
+
+La versione generale del problema dell'arresto ristretto è il \textbf{problema dell'arresto}, posto nel 1936 da Alan Turing.\\
+
+\begin{theor}[Indecidibilità di $\ar$]
+	Dati $x,y \in \N$ rispettivamente un dato e un programma, il problema dell'arresto $\ar$ con domanda $\varphi_y (x) \downarrow$ è indecidibile.
+\end{theor}
+\begin{proof}
+	Assumiamo per assurdo che $\ar$ sia decidibile, allora esiste una funzione soluzione
+	$$ 
+	\Phi_{\ar} (x,y) = \begin{cases}
+		0 & \text{ se } \varphi_y (x) \uparrow \\
+		1 & \text{ se } \varphi_y (x) \downarrow \\
+	\end{cases}
+	$$
+	
+	Valutando il caso in cui $x = y$
+	$$ 
+	\Phi_{\ar} (x,x) = \begin{cases}
+		0 & \text{ se } \varphi_x (x) \uparrow \\
+		1 & \text{ se } \varphi_x (x) \downarrow \\
+	\end{cases}
+	$$
+	
+	Possiamo notare che $\Phi_{\ar} (x,x) = \Phi_{\arph} (x,x)$, quindi nel caso $x = y$ il problema $\ar$ coincide con il $\arph$. Il risultato del teorema precedente dimostra che $\arph$ è indecidibile, quindi anche $\ar$ è indecidibile.\\
+\end{proof}
+
+\section{Riconoscibilità automatica di insiemi}
+%p67
 
 
