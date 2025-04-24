@@ -418,9 +418,9 @@ $$ \langle x,y \rangle = \langle x + y,0 \rangle + y $$
 	\input{img/calc/cantor_analitica.tex}
 \end{center}
 
-Intuitivamente, a partire da $\langle x + y, 0\rangle$ mi basta "salire" seguendo la diagonale fino a $\langle x,y$, ovvero $y$ posti, e per definizione della funzione, $y$ valori più in alto.\\
+Intuitivamente, a partire da $\langle x + y, 0\rangle$ mi basta "salire" seguendo la diagonale fino a $\langle x,y \rangle$, ovvero $y$ posti, e per definizione della funzione, $y$ valori più in alto.\\
 
-Il calcolo della funzione coppia si può quindi ridurre al calcolo di $\langle x + y, 0$. Chiamando $x + y = z$, si può notare come ogni cella 
+Il calcolo della funzione coppia si può quindi ridurre al calcolo di $\langle x + y, 0\rangle$. Chiamando $x + y = z$, si può notare come ogni cella 
 $$ \langle z,0 \rangle = z + \langle z - 1, 0 \rangle $$
 E di conseguenza
 \begin{align*}
@@ -431,12 +431,12 @@ E di conseguenza
 \end{align*}
 
 Mettendo insieme le due proprietà viste possiamo ottenere la formula analitica per la funzione coppia: 
-$$ \langle x,y \rangle = \langle x + y, 0 \rangle + y = \frac{(x + 1) (x + y + 1)}{2} + y + 1 $$
+$$ \langle x,y \rangle = \langle x + y, 0 \rangle + y = \frac{(x + y) (x + y + 1)}{2} + y + 1 $$
 
 \subsubsection{Forma analitica di $\sin$ e $\des$} 
 Vogliamo fare la stessa cosa per $\sin$ e $\des$, in modo da poter computare l'inversa della funzione coppia, dato $n$. Grazie alle osservazioni precedenti sappiamo che
 $$ \begin{array}{r c l}
-	\gamma = x + y & \implies & x = \gamma + y \\
+	\gamma = x + y & \implies & x = \gamma - y \\
 	n = y + \langle \gamma , 0 \rangle & \implies & y = n - \langle \gamma , 0 \rangle \\
 \end{array} $$
 
@@ -571,11 +571,11 @@ Dato un \textbf{programma} $P$, indichiamo con $|P|$ il numero di istruzioni che
 Le \textbf{istruzioni} nel linguaggio RAM sono: 
 \begin{itemize}
 	\item \textbf{incremento}: $R_k \leftarrow R_k + 1$
-	\item \textbf{decremento}: $R_k \leftarrow R_k - 1$
+	\item \textbf{decremento}: $R_k \leftarrow R_k \dotminus 1$
 	\item \textbf{salto condizionato}: \texttt{if $R_k = 0$ then goto $m$}, con $m \in \{1, \dots, |P|\}$
 \end{itemize}
 L'istruzione di decremento è tale che
-$$ x - y = \begin{cases}
+$$ x \dotminus y = \begin{cases}
 	x-y & \text{ se } x \geq y\\
 	0 & \text{ altrimenti }
 \end{cases}$$
@@ -728,15 +728,15 @@ $$
 Ar(I) = \begin{cases}
 	3k & \text{ se } I \equiv R_k \leftarrow R_k + 1 \\
 	3k + 1 & \text{ se } I \equiv R_k \leftarrow R_k \dotminus 1 \\
-	3k \langle k,m\rangle - 1 & \text{ se } I \equiv \text{ \texttt{if} } R_k = 0 \text{ \texttt{then goto} } m \\
+	3 \langle k,m\rangle - 1 & \text{ se } I \equiv \text{ \texttt{if} } R_k = 0 \text{ \texttt{then goto} } m \\
 \end{cases}
 $$
 Per l'inversa, in base al modulo tra $n$ e 3 ottengo una certa istruzione: 
 $$
 Ar^{-1} (n) = \begin{cases}
-	R_{\frac{n}{3}} \leftarrow R_{\frac{n}{3}} + 1 & \text{ se } n \mod 3 = 0 \\
-	R_{\frac{n-1}{3}} \leftarrow R_{\frac{n-1}{3}} \dotminus 1 & \text{ se } n \mod 3 = 1 \\
-	\text{\texttt{if} } R_{\sin\left(\frac{n+1}{3}\right)} = 0 \text{ \texttt{then goto} } \des\left(\frac{n+1}{3}\right) & \text{ se } n \mod 3 = 2 \\
+	R_{\frac{n}{3}} \leftarrow R_{\frac{n}{3}} + 1 & \text{ se } n \equiv 0 \mod 3 \\
+	R_{\frac{n-1}{3}} \leftarrow R_{\frac{n-1}{3}} \dotminus 1 & \text{ se } n \equiv 1 \mod 3 \\
+	\text{\texttt{if} } R_{\sin\left(\frac{n+1}{3}\right)} = 0 \text{ \texttt{then goto} } \des\left(\frac{n+1}{3}\right) & \text{ se } n \equiv 2 \mod 3 \\
 \end{cases}
 $$
 
@@ -760,7 +760,7 @@ L'insieme, grazie alla dimostrazione di $\prog \sim \mathbb{N}$, è numerabile.\
 
 Abbiamo dimostrato rigorosamente che 
 $$ F(\ram) \sim \mathbb{N} \nsim \mathbb{N}^{\mathbb{N}}_\bot $$
-Di conseguenza, anche nel sistema di calcolo $\ram$ esistono funzioni no calcolabili.\\
+Di conseguenza, anche nel sistema di calcolo $\ram$ esistono funzioni non calcolabili.\\
 
 La $\ram$ è troppo elementare affinché $F(\ram)$ rappresenti formalmente la "classe dei problemi risolubili automaticamente", quindi considerando un sistema di calcolo $\C$ più sofisticato, ma comunque trattabile rigorosamente come il sistema $\ram$, potremmo dare un'idea formale di "ciò che è calcolabile automaticamente".\\
 
@@ -795,13 +795,13 @@ Dove $C$ è detto \textbf{corpo} e può essere un assegnamento, un comando while
 Dove i vari $C_i$ sono, come prima, assegnamenti, comandi while o comandi composti.\\
 
 \paragraph{Programma $\while$:} Un programma $\while$ è un comando composto, e l'insieme di tutti i programmi $\while$ è l'insieme
-$$ W-\prog = \{\prog \text{ scritti in linguaggio } \while \} $$
+$$ \wprog = \{\prog \text{ scritti in linguaggio } \while \} $$
 
 Chiamiamo 
 $$ \Psi_W : \mathbb{N} \rightarrow \mathbb{N}_\bot $$
-la \textbf{semantica} del programma $W \in W-\prog$.\\
+la \textbf{semantica} del programma $W \in \wprog$.\\
 
-Per dimostrare una proprietà $P$ di un programma $W \in W-\prog$, data la definizione induttiva del linguaggio $\while$, è naturale procedere induttivamente: 
+Per dimostrare una proprietà $P$ di un programma $W \in \wprog$, data la definizione induttiva del linguaggio $\while$, è naturale procedere induttivamente: 
 \begin{enumerate}
 	\item dimostro $P$ vera sugli assegnamenti 
 	\item suppongo $P$ vera sul comando $C$ e la dimostro vera per \texttt{while $x_k \neq 0$ do $C$}
@@ -837,7 +837,7 @@ Come per i programmi $\ram$, serve una definizione formale per la semantica di u
 \end{itemize}
 
 \paragraph{Funzione stato prossimo:} Soffermandoci sull'ultimo punto, vogliamo trovare la funzione
-$$  \llbracket \rrbracket (): \wcom \times \wstati \rightarrow \wstati_\bot $$
+$$  \llbracket - \rrbracket (-): \wcom \times \wstati \rightarrow \wstati_\bot $$
 Che, dati un comando $C$ del linguaggio $\while$ e lo stato corrente $\underline{x}$, calcoli
 $$ \llbracket C \rrbracket (\underline{x}) = \underline{y} $$
 con $\underline{y}$ stato prossimo. Quest'ultimo dipende dal comando $C$, ma essendo $C$ induttivo, possiamo provare a dare una definizione induttiva della funzione.\\
@@ -879,10 +879,10 @@ Proseguiamo con il \textbf{passo induttivo}:
 Definita la semantica operazionale, manca solo da definire cos'è la \textbf{semantica del programma} $W$ su input $n$. Questa è la funzione 
 $$ \Psi_W: \mathbb{N} \rightarrow \mathbb{N}_\bot \; | \; \Psi_W (n) = \text{Proj}\left(0, \llbracket W \rrbracket (w\text{-}in(n))\right)$$
 
-Questo è valido in quanto $W$ programma $\while$ è un programma composto, e abbiamo definito come deve comportarsi la funzione $\llbracket \rrbracket ()$ sui comandi composti.\\
+Questo è valido in quanto $W$ programma $\while$ è un programma composto, e abbiamo definito come deve comportarsi la funzione $\llbracket - \rrbracket (-)$ sui comandi composti.\\
 
 \paragraph{Potenza Computazionale:} La potenza computazionale del sistema di calcolo $\while$ è l'insieme 
-$$ F(\while) = \left\{f \in \mathbb{N}^{\mathbb{N}}_\bot | \exists W \in \wprog | f = \Psi_W \right\} = \left\{\Psi_W : W \in \wprog \right\}$$
+$$ F(\while) = \left\{f \in \mathbb{N}^{\mathbb{N}}_\bot \mid \exists W \in \wprog | f = \Psi_W \right\} = \left\{\Psi_W : W \in \wprog \right\}$$
 
 Ovvero, l'insieme formato da tutte le funzioni che possono essere calcolate con un programma in $\wprog$.\\
 
@@ -2041,7 +2041,7 @@ Per dare una chiave di lettura a questo teorema:
 	\end{align*}
 	
 	Fissiamo $n = S_1^1 (e,m)$ e mostriamo che vale $\varphi_n = \varphi_{t(n)}$, ovvero il teorema di ricorsione
-	$$ \varphi_n (x) \stackrel{\text{def}}{=} \varphi_{S__1^1 (e,m)} (x) \stackrel{(A)}{=} \varphi_{\varphi_m (m)} (x) $$
+	$$ \varphi_n (x) \stackrel{\text{def}}{=} \varphi_{S_1^1 (e,m)} (x) \stackrel{(A)}{=} \varphi_{\varphi_m (m)} (x) $$
 	$$ \varphi_{t(n)} (x) \stackrel{\text{def}}{=} \varphi_{t\left(S_1^1 (e,m)\right)} (x) \stackrel{(B)}{=} \varphi_{\varphi_m (m)} (x)$$
 	
 	Ho ottenuto lo stesso risultato, quindi il teorema è verificato.\\
@@ -2378,4 +2378,4 @@ La versione generale del problema dell'arresto ristretto è il \textbf{problema 
 \section{Riconoscibilità automatica di insiemi}
 %p67
 
-
+% TODO: - nella definizione delle funzioni, cambiare tutti i | con \mid
