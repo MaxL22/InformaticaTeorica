@@ -38,7 +38,7 @@ $$ f^{-1} \circ f = i_A \wedge f \circ f^{-1} = i_B $$
 \paragraph{Funzioni Parziali:} Se una funzione $f: A \rightarrow B$ è definita per $a \in A$ si indica con $f(a) \downarrow$ e da questo proviene la categorizzazione: una funzione è \textbf{totale} se definita $\forall a \in A$, \textbf{parziale} altrimenti (definita solo per qualche elemento di $A$).\\
 
 \paragraph{Insieme Dominio:} Chiamiamo \textbf{dominio} (o campo di esistenza) di $f$ l'insieme
-$$ \Dom_f = \left\{a \in A | f(a) \downarrow \right\} \subseteq A $$
+$$ \Dom_f = \left\{a \in A \mid f(a) \downarrow \right\} \subseteq A $$
 Quindi se $\Dom_f = A$ la funzione è totale, se $\Dom_f \subsetneq A$ allora è una funzione parziale.\\
 
 \paragraph{Totalizzazione:} Si può \textbf{totalizzare una funzione parziale} $f$ definendo una funzione a tratti $\bar{f}: A \rightarrow B \cup \{\bot\}$ tale che
@@ -60,11 +60,11 @@ Le due definizioni coincidono, $B^A = B^A_\bot$, ma quest'ultima permette di met
 \subsection{Prodotto Cartesiano}
 
 Chiamiamo \textbf{prodotto cartesiano} l'insieme 
-$$ A \times B = \{(a,b) | a \in A \wedge b \in B \} $$
+$$ A \times B = \{(a,b) \mid a \in A \wedge b \in B \} $$
 Rappresenta l'insieme di tutte le coppie ordinate di valori in $A$ e $B$. In generale non è commutativo, a meno che $A=B$.\\
 
 Può essere esteso a $n$-uple di valori:
-$$ A_1 \times \dots \times A_n = \{(a_1, \dots, a_n) | a_i \in A_i\} $$
+$$ A_1 \times \dots \times A_n = \{(a_1, \dots, a_n) \mid a_i \in A_i\} $$
 Il prodotto di $n$ volte lo stesso insieme verrà, per comodità, indicato come
 $$ A \times \dots \times A = A^n $$
 
@@ -112,7 +112,7 @@ $$ \C (P, \_): \dati \rightarrow \dati $$
 la funzione che viene calcolata dal programma $P$ (semantica di $P$).\\
 
 La \textbf{potenza computazionale} di un calcolatore è definita come l'insieme di tutte le funzioni che quel sistema di calcolo è in grado di calcolare, ovvero
-$$ F(\C) = \{\C (P, \_) | P \in \prog\} \subseteq \dati_\bot^{\dati} $$
+$$ F(\C) = \{\C (P, \_) \mid P \in \prog\} \subseteq \dati_\bot^{\dati} $$
 
 Ovvero, l'insieme di tutte le possibili semantiche di funzioni calcolabili con il sistema $\C$. Stabilire il carattere di quest'ultima inclusione equivale a stabilire \textit{cosa può fare l'informatica}:
 \begin{itemize}
@@ -147,7 +147,7 @@ La relazione $R$ definita su $A^2$ \textit{induce} una partizione $\{A_1, A_2, \
 
 \subsection{Classi di equivalenza e Insieme quoziente}
 Dato un elemento $a \in A$, chiamiamo \textbf{classe di equivalenza} di $a$ l'insieme
-$$ [a]_R = \{b \in A | (a,b) \in R \} $$
+$$ [a]_R = \{b \in A \mid (a,b) \in R \} $$
 Ovvero, tutti gli elementi in relazione con $a$, chiamato \textbf{rappresentante} della classe. \\
 
 Si può dimostrare che
@@ -257,7 +257,7 @@ Gli insiemi continui hanno cardinalità $\aleph_1$.\\
 %Decidi se sub o subsub
 \subsubsection{Insieme delle Parti}
 L'\textbf{insieme delle parti} di $\mathbb{N}$ (anche detto \textit{power set}), è definito come
-$$ P(\mathbb{N}) = 2^{\mathbb{N}} = \{S | S \text{ è sottoinsieme di } \mathbb{N}\} $$
+$$ P(\mathbb{N}) = 2^{\mathbb{N}} = \{S \mid S \text{ è sottoinsieme di } \mathbb{N}\} $$
 
 \begin{theor}
 	$P(\mathbb{N}) \nsim \mathbb{N}$.\\
@@ -443,7 +443,7 @@ $$ \begin{array}{r c l}
 Trovando il valore di $\gamma$ possiamo trovare $x$ e $y$. \\
 
 Notiamo come $\gamma$ sia il più grande valore che, quando calcolato sulla prima colonna ($\langle \gamma, 0 \rangle$) non supera $n$, ovvero
-$$ \gamma = \max \{z \in \mathbb{N} | \langle z, 0 \rangle \leq n \} $$
+$$ \gamma = \max \{z \in \mathbb{N} \mid \langle z, 0 \rangle \leq n \} $$
 Intuitivamente, si tratta dell'inizio della diagonale che contiene $n$, è "l'inverso" dell'osservazione fatta in precedenza per la quale $ \langle x,y \rangle = \langle x + y,0 \rangle + y $.\\
 
 Risolviamo quindi la disequazione
@@ -707,7 +707,7 @@ $$
 $$
 
 La potenza computazionale del sistema $\ram$ è 
-$$ F(\ram) = \left\{f \in \mathbb{N}^{\mathbb{N}}_\bot | \exists P \in \prog | \varphi_P = f \right\} = \left\{\varphi_P | P \in \prog \right\} \subsetneq \mathbb{N}^{\mathbb{N}}_\bot $$
+$$ F(\ram) = \left\{f \in \mathbb{N}^{\mathbb{N}}_\bot \mid \exists P \in \prog \mid \varphi_P = f \right\} = \left\{\varphi_P \mid P \in \prog \right\} \subsetneq \mathbb{N}^{\mathbb{N}}_\bot $$
 L'insieme è formato da tutte le funzioni $f: \mathbb{N} \rightarrow \mathbb{N}_\bot$ che hanno un programma che le calcola in un sistema $\ram$.\\
 
 \subsection{Aritmetizzazione di un programma}
@@ -877,12 +877,12 @@ Proseguiamo con il \textbf{passo induttivo}:
 \end{itemize}
 
 Definita la semantica operazionale, manca solo da definire cos'è la \textbf{semantica del programma} $W$ su input $n$. Questa è la funzione 
-$$ \Psi_W: \mathbb{N} \rightarrow \mathbb{N}_\bot \; | \; \Psi_W (n) = \text{Proj}\left(0, \llbracket W \rrbracket (w\text{-}in(n))\right)$$
+$$ \Psi_W: \mathbb{N} \rightarrow \mathbb{N}_\bot \mid \Psi_W (n) = \text{Proj}\left(0, \llbracket W \rrbracket (w\text{-}in(n))\right)$$
 
 Questo è valido in quanto $W$ programma $\while$ è un programma composto, e abbiamo definito come deve comportarsi la funzione $\llbracket - \rrbracket (-)$ sui comandi composti.\\
 
 \paragraph{Potenza Computazionale:} La potenza computazionale del sistema di calcolo $\while$ è l'insieme 
-$$ F(\while) = \left\{f \in \mathbb{N}^{\mathbb{N}}_\bot \mid \exists W \in \wprog | f = \Psi_W \right\} = \left\{\Psi_W : W \in \wprog \right\}$$
+$$ F(\while) = \left\{f \in \mathbb{N}^{\mathbb{N}}_\bot \mid \exists W \in \wprog \mid f = \Psi_W \right\} = \left\{\Psi_W : W \in \wprog \right\}$$
 
 Ovvero, l'insieme formato da tutte le funzioni che possono essere calcolate con un programma in $\wprog$.\\
 
@@ -896,14 +896,14 @@ Viene naturale confrontare i due sistemi presentati per capire il "più potente"
 \end{itemize}
 
 \paragraph{Confronto tra sistemi di calcolo:} Ponendo di avere $\C_1$ e $\C_2$ sistemi di calcolo con programmi in $\cprog{1}$ e $\cprog{2}$ e le relative potenze computazionali
-$$ F(\C_1) = \left\{f: \mathbb{N} \rightarrow \mathbb{N}_\bot | \exists P_1 \in \cprog{1} | f = \Psi_{P_1} \right\} = \left\{\Psi_{P_1}: P_1 \in \cprog{1} \right\} $$
-$$ F(\C_2) = \left\{f: \mathbb{N} \rightarrow \mathbb{N}_\bot | \exists P_2 \in \cprog{2} | f = \Psi_{P_2} \right\} = \left\{\Psi_{P_2}: P_2 \in \cprog{2} \right\} $$
+$$ F(\C_1) = \left\{f: \mathbb{N} \rightarrow \mathbb{N}_\bot \mid \exists P_1 \in \cprog{1} \mid f = \Psi_{P_1} \right\} = \left\{\Psi_{P_1}: P_1 \in \cprog{1} \right\} $$
+$$ F(\C_2) = \left\{f: \mathbb{N} \rightarrow \mathbb{N}_\bot \mid \exists P_2 \in \cprog{2} \mid f = \Psi_{P_2} \right\} = \left\{\Psi_{P_2}: P_2 \in \cprog{2} \right\} $$
 
 Mostrare che il primo sistema non è più potente del secondo $F(\C_1) \subseteq F(\C_2)$ vuol dire dimostrare che ogni elemento nel primo insieme deve stare anche nel secondo
 $$ \forall f \in F(\C_1) \implies f \in F(C_2) $$
 
 \textit{Espandendo} la definizione di $f \in F(\C)$ la relazione diventa
-$$ \forall P_1 \in \cprog{1} | f = \Psi_{P_1} \implies \exists P_2 \in \cprog{2} | f = \Psi_{P_2} $$
+$$ \forall P_1 \in \cprog{1} \mid f = \Psi_{P_1} \implies \exists P_2 \in \cprog{2} \mid f = \Psi_{P_2} $$
 
 Per ogni programma calcolabile nel primo sistema di calcolo ne esiste uno con la stessa semantica nel secondo sistema. Vogliamo trovare un \textbf{compilatore} (o \textbf{traduttore}), ovvero una funzione che trasformi un programma del primo sistema in uno del secondo.\\
 
@@ -2011,7 +2011,7 @@ Il teorema di ricorsione è un risultato utile a rispondere ad alcuni quesiti su
 
 \begin{theor}
 	Dato un SPA $\varphi_i$, per ogni $t: \N \rightarrow \N$ ricorsiva totale vale
-	$$ \exists n \in \N | \varphi_n = \varphi_{t(n)} $$
+	$$ \exists n \in \N \mid \varphi_n = \varphi_{t(n)} $$
 \end{theor}
 
 Per dare una chiave di lettura a questo teorema: 
@@ -2133,7 +2133,7 @@ La strategia da seguire per risolvere questo tipo di richieste è analoga a quel
 	\item Mostrare che $f(x,n)$ è ricorsiva parziale e quindi che $f(x,n) = \varphi_e (x,n)$
 	\item L'equazione iniziale diventa $\varphi_n (x) = \varphi_e (x, n) = \varphi_{S^1_1 (e,n)} (x)$
 	\item So che $S^1_1 (e,n)$ è una funzione ricorsiva totale
-	\item La domanda iniziale è diventata $\exists n \in \N$ $|$ $\varphi_n (x) = \varphi_{S_1^1 (e,n)} (x)$? 
+	\item La domanda iniziale è diventata $\exists n \in \N \mid \varphi_n (x) = \varphi_{S_1^1 (e,n)} (x)$? 
 	\item La risposta è \si, per il teorema di ricorsione
 \end{enumerate}
 
@@ -2377,5 +2377,3 @@ La versione generale del problema dell'arresto ristretto è il \textbf{problema 
 
 \section{Riconoscibilità automatica di insiemi}
 %p67
-
-% TODO: - nella definizione delle funzioni, cambiare tutti i | con \mid
