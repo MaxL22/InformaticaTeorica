@@ -1608,7 +1608,7 @@ Vogliamo ora analizzare come $\cp$ si pone rispetto a $F(\while)$, sapendo che \
 					\end{tcolorbox} 
 				\end{minipage}
 			\end{center}
-			Questo è un programma che calcola la minimizzazione: se non esiste $y$ che azzeri $f(\underline{x}, y)$ il programma va in loop (i.e., incrementa di 1 ad ogni iterazione e termina quando azzera la funzione), quindi la semantica di $P$ è $\bot$ secondo $\MIN$
+			Questo è un programma che calcola la minimizzazione: se non esiste $y$ che azzeri $f(\underline{x}, y)$ il programma va in loop (i.e., incrementa di 1 a ogni iterazione e termina quando azzera la funzione), quindi la semantica di $P$ è $\bot$ secondo $\MIN$
 		\end{itemize}
 		
 		Concludiamo quindi che $\cp \subseteq F(\while)$.\\
@@ -1831,7 +1831,7 @@ In altre parole, è possibile costruire automaticamente programmi specifici da p
 	\end{itemize}
 	
 	Analizzando il sistema $\ram$ si prenda un programma $P$ a due variabili
-	$$ P \in \prog \bbar \varphi_P (\langle x,y \rangle) = x + y $$
+	$$ P \in \prog \mid \varphi_P (\langle x,y \rangle) = x + y $$
 	
 	\vspace{-1em}
 	\begin{minipage}{.4\textwidth}
@@ -2032,7 +2032,7 @@ Per dare una chiave di lettura a questo teorema:
 	$$ f(x,i) \stackrel{(1)}{=} \varphi_e (x,i) \stackrel{(3)}{=} \varphi_{S_1^1 (e,i)} (x) $$
 	
 	Consideriamo ora la funzione $t\left(S_1^1 (e,i)\right)$: essa è ricorsiva totale in $i$ perché composizione di $t$ e di $S_1^1$ ricorsive totali, quindi
-	$$ \exists m \in \N \bbar \varphi_m (i) = t\left(S_1^1 (e,i)\right) $$
+	$$ \exists m \in \N \mid \varphi_m (i) = t\left(S_1^1 (e,i)\right) $$
 	
 	Abbiamo quindi mostrato che
 	\begin{align*}
@@ -2060,7 +2060,7 @@ a='a=%r;print(a%%a)';print(a%a)
 	stampa esattamente il proprio listato. \\
 	
 	Per rispondere rigorosamente ambientiamo la domanda nel sistema di programmazione $\ram$, che diventa: 
-	$$ \exists j \in \N \bbar \varphi_j (x) = j \text{ per ogni input } x \in \N \text{?}$$
+	$$ \exists j \in \N \mid \varphi_j (x) = j \text{ per ogni input } x \in \N \text{?}$$
 	
 	\item \textbf{Compilatori completamente errati}: dati due SPA $\{\varphi_i\}$ e $\{\Psi_j\}$, esiste un compilatore completamente errato? \\
 	
@@ -2098,7 +2098,7 @@ Questa funzione è ricorsiva totale in quanto programmabile e totale, visto che 
 $$ \varphi_{Z(j)} (x) = j $$
 
 Per il teorema di ricorsione
-$$ \exists j \in \N \bbar \varphi_j (x) = \varphi_{Z (j)} (x) = j $$
+$$ \exists j \in \N \mid \varphi_j (x) = \varphi_{Z (j)} (x) = j $$
 
 Quindi effettivamente esiste un programma $j$ la cui semantica è proprio quella di stampare se stesso.\\
 
@@ -2112,10 +2112,10 @@ $$ (\ast) \quad \quad \Psi_{t(i)} (x) \stackrel{(2)}{=} \Psi_u (x, t(i)) \stackr
 Chiamiamo $g(i)$ la funzione $S_1^1 (e, t(i))$ che dipende solo da $i$, essendo $e$ un programma fissato. Notiamo come questa funzione sia composizione di funzioni ricorsive totali, ovvero $t(i)$ per ipotesi e $S^1_1$ per definizione, quindi anch'essa è ricorsiva totale. \\
 
 Per il teorema di ricorsione
-$$ (\ast \ast) \quad \quad \exists i \in \N \bbar \varphi_i = \varphi_{g(i)} $$
+$$ (\ast \ast) \quad \quad \exists i \in \N \mid \varphi_i = \varphi_{g(i)} $$
 
 Unendo $(\ast)$ e $(\ast \ast)$ otteniamo 
-$$ \exists i \in \N \bbar \Psi_{t(i)} \stackrel{(\ast)}{=} \varphi_{g(i)} \stackrel{(\ast \ast)}{=} \varphi_i \quad \forall t \in \T $$
+$$ \exists i \in \N \mid \Psi_{t(i)} \stackrel{(\ast)}{=} \varphi_{g(i)} \stackrel{(\ast \ast)}{=} \varphi_i \quad \forall t \in \T $$
 
 Di conseguenza, la risposta alla seconda domanda è \no.\\
 
@@ -2125,7 +2125,7 @@ Di conseguenza, la risposta alla seconda domanda è \no.\\
 La portata del teorema di ricorsione è molto ampia: permette di risolvere \textbf{equazioni su SPA} in cui si chiede l'esistenza di certi programmi in SPA.\\
 
 Ad esempio, dato un SPA $\{\varphi_i\}$ ci chiediamo se
-$$ \exists n \in \N \bbar \varphi_n (x) = \varphi_x \left(n + \varphi_{\varphi_n (0)} (x) \right) $$
+$$ \exists n \in \N \mid \varphi_n (x) = \varphi_x \left(n + \varphi_{\varphi_n (0)} (x) \right) $$
 
 La strategia da seguire per risolvere questo tipo di richieste è analoga a quella seguita per la dimostrazione del teorema di ricorsione, riassumibile in: 
 \begin{enumerate}
@@ -2157,13 +2157,13 @@ Continuando, l'equazione si può riscrivere come
 con $S_1^1 (e,n) \in \T$ per l'assioma 3.\\
 
 Per il teorema di ricorsione possiamo concludere che
-$$ \exists n \in \N \bbar \varphi_n (x) = \varphi_{S^1_1 (e,n)} (x) = \varphi_x \left(n + \varphi_{\varphi_u (0,n)} (x)\right) $$
+$$ \exists n \in \N \mid \varphi_n (x) = \varphi_{S^1_1 (e,n)} (x) = \varphi_x \left(n + \varphi_{\varphi_u (0,n)} (x)\right) $$
 
 \subsubsection{Esercizi}
 
 In tutti gli esercizi viene dato un SPA $\{\varphi_i\}$
 
-$$ \exists n \in \N \bbar \varphi_n (x) = \varphi_x (n) + \varphi_{\varphi_x (n)} (n)? $$
+$$ \exists n \in \N \mid \varphi_n (x) = \varphi_x (n) + \varphi_{\varphi_x (n)} (n)? $$
 \begin{align*}
 	\varphi_n (x) & \stackrel{(2)}{=} \varphi_u (n,x) + \varphi_{\varphi_u (n,x)} (n) \\
 	& \stackrel{(2)}{=} \varphi_u (n,x) + \varphi_u (n, \varphi_u (n,x)) \\
@@ -2172,7 +2172,7 @@ $$ \exists n \in \N \bbar \varphi_n (x) = \varphi_x (n) + \varphi_{\varphi_x (n)
 	& \fin
 \end{align*}
 
-$$ \exists n \in \N \bbar \varphi_n (x) = n^x + \left(\varphi_x (x)\right)^2 ? $$
+$$ \exists n \in \N \mid \varphi_n (x) = n^x + \left(\varphi_x (x)\right)^2 ? $$
 \begin{align*}
 	\varphi_n (x) & \stackrel{(2)}{=} n^x + \left(\varphi_u (x,x)\right)^2 \\
 	& = f(x,n) \\
@@ -2180,14 +2180,14 @@ $$ \exists n \in \N \bbar \varphi_n (x) = n^x + \left(\varphi_x (x)\right)^2 ? $
 	& \fin 
 \end{align*}
 
-$$ \exists n \in \N \bbar \varphi_n (x) = \varphi_x \left(\langle n, \varphi_x (1) \rangle \right) ?$$
+$$ \exists n \in \N \mid \varphi_n (x) = \varphi_x \left(\langle n, \varphi_x (1) \rangle \right) ?$$
 \begin{align*}
 	\varphi_n (x) & \stackrel{(2)}{=} \varphi_u \left(\langle n, \varphi_u (1, x) \rangle, x\right) \\
 	& = f(x,n) \\
 	& \stackrel{(1)}{=} \varphi_e (x,n) \stackrel{(3)}{=} \varphi_{S_1^1 (e,n)} (x) \\
 	& \fin 
 \end{align*}
-$$ \exists n \in \N \bbar \varphi_n (x) = \varphi_{\varphi_x (\sin (n))} (\des (n)) ? $$
+$$ \exists n \in \N \mid \varphi_n (x) = \varphi_{\varphi_x (\sin (n))} (\des (n)) ? $$
 \begin{align*}
 	\varphi_n (x) & \stackrel{(2)}{=} \varphi_{\varphi_u (\sin (n), x)} (\des (n)) \\
 	& \stackrel{(2)}{=} \varphi_u (\des (n), \varphi_u (\sin (n), x)) \\
@@ -2195,14 +2195,14 @@ $$ \exists n \in \N \bbar \varphi_n (x) = \varphi_{\varphi_x (\sin (n))} (\des (
 	& \stackrel{(1)}{=} \varphi_e (x,n) \stackrel{(3)}{=} \varphi_{S_1^1 (e,n)} (x) \\
 	& \fin 
 \end{align*}
-$$ \exists n \in \N \bbar \varphi_n (x) = n^x + \left(\varphi_x (x)\right)^2 ?$$
+$$ \exists n \in \N \mid \varphi_n (x) = n^x + \left(\varphi_x (x)\right)^2 ?$$
 \begin{align*}
 	\varphi_n (x) & \stackrel{(2)}{=} n^x + \left(\varphi_u (x,x)\right)^2 \\
 	& = f(x,n) \\
 	& \stackrel{(1)}{=} \varphi_e (x,n) \stackrel{(3)}{=} \varphi_{S_1^1 (e,n)} (x) \\
 	& \fin \\
 \end{align*}
-$$ \exists n \in \N \bbar \varphi_n (x) = \varphi_x (n + 2) + \left(\varphi_{\varphi_x (n)} (n+3)\right)^2 ? $$
+$$ \exists n \in \N \mid \varphi_n (x) = \varphi_x (n + 2) + \left(\varphi_{\varphi_x (n)} (n+3)\right)^2 ? $$
 \begin{align*}
 	\varphi_n (x) & \stackrel{(2)}{=} \varphi_u (n + 2, x) + \left(\varphi_{\varphi_u (n, x)} (n + 3)\right)^2 \\
 	& \stackrel{(2)}{=} \varphi_u (n+2, x) + \left(\varphi_u \left(n + 3, \varphi_u (n,x)\right)\right)^2  \\
@@ -2376,4 +2376,170 @@ La versione generale del problema dell'arresto ristretto è il \textbf{problema 
 \end{proof}
 
 \section{Riconoscibilità automatica di insiemi}
-%p67
+
+Vogliamo fornire un \textit{livello di risoluzione} dei problemi, stabilendo se un problema:
+\begin{itemize}
+	\item può essere risolto 
+	\item non può essere risolto completamente
+	\item non può essere risolto
+\end{itemize} 
+
+Costruiamo un programma che classifichi gli elementi di un insieme, per quindi dire se un certo numero naturale appartiene o meno all'insieme.\\
+
+Un insieme $A \subseteq \N$ è riconoscibile automaticamente se esiste un programma $P_A$ che classifica correttamente ogni elemento di $\N$ come appartenente o meno ad $A$, ovvero:
+$$
+x \in \N \rightsquigarrow P_A (x) = \begin{cases}
+	1 & \text{ se } x \in A \\
+	0 & \text{ se } x \notin A
+\end{cases}
+$$
+
+Il programma $P$ deve essere:
+\begin{itemize}
+	\item \textbf{corretto}: classifica correttamente gli elementi che riceve in input
+	\item \textbf{completo}: classifica  tutti gli elementi di $\N$, nessuno escluso
+\end{itemize}
+
+\textit{Tutti gli insiemi sono automaticamente riconoscibili? Quali insiemi sono automaticamente riconoscibili?} \\
+
+Sicuramente non tutti gli insiemi sono automaticamente riconoscibili, questo grazie al concetto di \textit{cardinalità}, infatti: 
+\begin{itemize}
+	\item i sottoinsiemi di $\N$ sono \textit{densi quanto} $\R$ 
+	\item non esistono $|\R|$ programmi
+\end{itemize}
+Di conseguenza devono esistere insiemi non automaticamente riconoscibili.\\
+
+\subsection{Insiemi Ricorsivi}
+
+Un insieme $A \subseteq \N$ è un \textbf{insieme ricorsivo} se esiste un programma $P_A$ che si arresta su ogni input classificando correttamente gli elementi di $\N$ in base alla loro appartenenza o meno ad $A$.\\
+
+Equivalentemente, ricordando che la funzione caratteristica di $A \subseteq \N$ è la funzione $ \mathcal{X}_A : \N \rightarrow \{0,1\} $ tale che
+$$
+\mathcal{X}_A (x) = \begin{cases}
+	1 & \text{ se } x \in A \\
+	0 & \text{ se } x \notin A
+\end{cases}
+$$
+
+Diciamo che l'insieme $A$ è ricorsivo se e solo se 
+$$ \mathcal{X}_A \in \T $$
+
+Che $\mathcal{X}_A$ sia \textbf{totale} è banale: tutte le funzioni caratteristiche devono essere definite su tutto $\N$. Il problema risiede nella \textbf{calcolabilità} di queste funzioni.\\
+
+Le due definizioni date sono equivalenti:
+\begin{itemize}
+	\item il programma $P_A$ implementa $\mathcal{X}_A$, quindi $\mathcal{X}_A \in \T$ perché esiste un programma che la calcola
+	\item $\mathcal{X}_A \in \T$ quindi esiste un programma $P_A$ che la implementa e soddisfa la definizione sopra
+\end{itemize}
+
+\subsubsection{Ricorsivo vs Decidibile}
+
+Spesso si dice che \textit{un insieme ricorsivo è un insieme decidibile}, ma è solo abuso di notazione. Questo è dovuto al fatto che a ogni insieme $A \subseteq \N$ possiamo associare il suo \textbf{problema di riconoscimento}, definito come:
+\begin{itemize}
+	\item Nome: $\ric_A$ 
+	\item Istanza: $x \in \N$
+	\item Domanda: $x \in A$?
+\end{itemize}
+
+La sua funzione soluzione
+$$ \Psi_{\ric_A} : \N \rightarrow \{0,1\} $$
+è tale che
+$$ 
+\Psi_{\ric_A} (x) = \begin{cases}
+	1 & \text{ se } x \in A\\
+	0 & \text{ se } x \notin A
+\end{cases}
+$$
+
+Si può notare che la semantica del problema è proprio la funzione caratteristica, quindi $\Psi_{\ric_A} = \mathcal{X}_A$. Se $A$ è ricorsivo, allora la sua funzione caratteristica è ricorsiva totale, ma lo sarà anche la funzione soluzione $\Psi$ e, di conseguenza, $\ric_A$ è decidibile.\\
+
+\subsubsection{Decidibile vs Ricorsivo}
+
+Simmetricamente, sempre con abuso di notazione, si dice che \textit{un problema di decisione è un problema ricorsivo}. Questo perché a ogni problema di decisione $\Pi$ possiamo associare $A_\Pi$ insieme delle sue \textbf{istanze con risposta positiva}.\\
+
+Dato il problema: 
+\begin{itemize}
+	\item Nome: $\Pi$
+	\item Istanza: $x \in D$
+	\item Domanda: $p(x)$?
+\end{itemize}
+
+Definiamo
+$$ A_\Pi = \left\{x \in D \mid \Psi_\Pi (x) = 1\right\} \text{ con } \Psi_\Pi (x) = 1 \equiv p(x) $$
+
+insieme delle istanze con risposta positiva di $\Pi$. Si può notare che, se $\Pi$ è decidibile, allora $\Psi_\Pi \in \T$, quindi esiste un programma che calcoli questa funzione. La funzione in questione è quella che riconosce automaticamente l'insieme $A_\Pi$, quindi $A_\Pi$ è ricorsivo.\\
+
+\subsection{Insiemi Non Ricorsivi}
+
+Per trovare degli insiemi non ricorsivi si può cercare nei problemi di decisione non decidibili. L'unico problema di decisione non decidibile visto fin'ora è il \textbf{problema dell'arresto ristretto} $\arph$. Definizione:
+\begin{itemize}
+	\item Nome: $\arph$
+	\item Istanza: $x \in \N$
+	\item Domanda: $\varphi_{\hat{P}} (x) = \varphi_x (x) \downarrow$?
+\end{itemize}
+
+Definiamo l'insieme delle istanze con risposta positiva di $\arph$:
+$$ A = \left\{x \in \N \mid \varphi_x (x) \downarrow \right\}$$
+
+Questo non può essere ricorsivo: se lo fosse, avrei un programma ricorsivo totale che mi classifica correttamente se $x$ appartiene o meno ad $A$, ma già dimostrato che il problema dell'arresto ristretto non è decidibile, quindi $A$ non è ricorsivo. \\
+
+\subsection{Relazioni Ricorsive}
+
+Una relazione $R \subseteq \N \times \N$ è una \textbf{relazione ricorsiva} se e solo se l'insieme $R$ è ricorsivo, ovvero:
+\begin{itemize}
+	\item la sua funzione caratteristica $\mathcal{X}_R$ è tale che $\mathcal{X}_R \in \T$, oppure
+	\item esiste un programma $P_R$ che, presi in ingresso $x,y \in \N$ restituisce 1 se $(xRy)$, 0 altrimenti
+\end{itemize}
+
+Un'importante relazione ricorsiva è 
+$$ R_P = \left\{(x,y) \in \N^2 \mid P \text{ su input } x \text{ termina in } y \text{ passi}\right\} $$
+
+Simile al problema dell'arresto, ma non chiede solo la terminazione, specifica un numero di passi $y$ in cui deve terminare. Questa relazione è ricorsiva e per dimostrarlo costruiamo un programma che classifica $R_P$ usando:
+\begin{itemize}
+	\item $U$ interprete universale
+	\item \textbf{clock} per contare i passi di interpretazione
+	\item \textbf{check del clock} per controllare l'arrivo alla quota $y$
+\end{itemize}
+
+Definiamo quindi il programma
+$$ \tilde U = U + \text{ clock } + \text{ check clock}$$
+tale che
+\begin{center}
+	\begin{minipage}{.85\textwidth}
+		\begin{tcolorbox}[colback=white,sharp corners,boxrule=.3mm]
+			\begin{algorithm}[H]
+				\setstretch{1.2}
+				\SetArgSty{relax}
+				\SetAlgoNoEnd
+				\SetKwSty{texttt}
+				$\tilde U \equiv$ input($x,y$) \\
+				$U(P,x) + $ clock \\
+				\ForAll{passi di $U(P,x)$}{
+					\If{clock $> y$}{
+					output$(0)$ \\
+					}
+					clock++ \\
+				}
+				output(clock==$y$) \\
+			\end{algorithm}
+		\end{tcolorbox} 
+	\end{minipage}
+\end{center}
+
+In breve: si aggiunge una variabile che conta i passi, se l'esecuzione supera $y$ restituisce 0, altrimenti 1.\\
+
+Nel sistema $\ram$, ad esempio, per capire se l'output è stato generato o meno osservo se il PC, contenuto nel registro $L$, è uguale a 0.\\
+
+Riprendendo il problema dell'arresto ristretto: \textit{come si può esprimere $A = \left\{x \in \N \mid \varphi_x (x) \downarrow\right\}$ attraverso la relazione ricorsiva $R_{\hat{P}}$?}\\
+
+Possiamo definire l'insieme
+$$ B = \left\{x \in \N \mid \exists y \in \N \mid \left(xR_{\hat{P}}y\right)\right\} $$
+
+Si può notare come $A = B$:
+\begin{itemize}
+	\item $A \subseteq B$: se $x \in A$ il programma codificato con $x$ su input $x$ termina in un certo numero di passi; chiamiamo $y$ il numero di passi; $\hat{P}(x)$ termina in $y$ passi, ma allora $xR_{\hat{P}} y$, quindi $x \in B$
+	\item $B \subseteq A$: se $x \in B$ esiste $y$ tale che $xR_{\hat{P}}y$, quindi $\hat{P}(x)$ termina in $y$ passi, ma allora il programma $\hat{P} = x$ su input $x$ termina, quindi $x \in A$
+\end{itemize}
+
+\subsection{Insiemi Ricorsivamente Numerabili}
+%p69 (nice)
