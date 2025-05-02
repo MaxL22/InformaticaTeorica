@@ -2542,4 +2542,206 @@ Si può notare come $A = B$:
 \end{itemize}
 
 \subsection{Insiemi Ricorsivamente Numerabili}
-%p69 (nice)
+
+Un insieme $A \subseteq \N$ è \textbf{ricorsivamente numerabile} se è \textbf{automaticamente listabile}: esiste una routine $F$ che, su input $i \in \N$, fornisce output $F(i)$ come l'$i$-esimo elemento di $A$. \\
+
+Programma $P$ che lista gli elementi di $A$:
+
+\vspace{1em}
+\hspace{2em}
+\begin{minipage}{.32\textwidth}
+	\begin{tcolorbox}[
+		colback=white,
+		sharp corners,
+		boxrule=.3mm,
+		left=20pt
+		]
+		\begin{algorithm}[H]
+			\setstretch{1.2}
+			\SetArgSty{relax}
+			\SetAlgoNoEnd
+			\SetKwProg{while}{\texttt{while}}{}{}
+			\SetKwSty{texttt}
+			$i:=0$ \\
+			\while{True}{
+				output($F(i)$) \\
+				$i:=i+1$ \\
+			}
+		\end{algorithm}
+	\end{tcolorbox}
+\end{minipage}
+\hspace{2em}
+\begin{minipage}{.6\textwidth}
+	Per alcuni insiemi non è possibile riconoscere tutti gli elementi che gli appartengono, ma può essere che si riesca a listarlo (non sempre).
+\end{minipage}
+
+Se il meglio che posso fare per avere l'insieme $A$ è listarlo con il programma $P$, \textit{come posso scrivere un algoritmo che "tenta di riconoscere" $A$?}
+
+\vspace{1em}
+\hspace{2em}
+\begin{minipage}{.32\textwidth}
+	\begin{tcolorbox}[
+		colback=white,
+		sharp corners,
+		boxrule=.3mm,
+		boxsep=0pt,
+		left=20pt
+		]
+		\begin{algorithm}[H]
+			\setstretch{1.2}
+			\SetArgSty{relax}
+			\SetAlgoNoEnd
+			\SetKwSty{texttt}
+			\SetKwProg{while}{\texttt{while}}{}{}
+			input($x$)\;
+			$i:=0$\;
+			\while{$F(i)\neq x$}{
+				$i:=i+1$\;
+			}
+			output(1)\;
+		\end{algorithm}
+	\end{tcolorbox}
+\end{minipage}
+\hspace{2em}
+\begin{minipage}{.49\textwidth}
+	Programma di \textbf{massimo riconoscimento}. Preso in input $x$, il programma restituisce 1 se $x\in A$ o va in loop se $x\notin A$.
+\end{minipage}\vspace{1em}
+
+Come viene riconosciuto $A$?
+$$ x \in \N \rightsquigarrow P(x) = \begin{cases}
+	1 & \text{ se } x \in A \\
+	\text{loop} & \text{ se } x \notin A
+\end{cases}$$
+
+Vista la natura di questa funzione, gli insiemi ricorsivamente numerabili sono anche detti \textbf{insiemi parzialmente decidibili/riconoscibili} o \textbf{semidecidibili}. \\
+
+Se avessi indicazioni sulla monotonia della routine $F$ si avrebbe sicuramente un insieme ricorsivo. In questo caso non assumiamo niente, quindi si rimane negli insiemi ricorsivamente numerabili.\\
+
+\subsubsection{Definizione Formale}
+L'insieme $A \subseteq \N$ è \textbf{ricorsivamente numerabile} se e solo se:
+\begin{itemize}
+	\item $A = \emptyset$ oppure
+	\item $A = \Im_f$, con $f: \N \rightarrow \N \in \T$, ovvero $A = \{f(0), f(1), \dots\}$
+\end{itemize}
+
+Visto che $f$ è ricorsiva totale esiste un programma/routine $F$ che la implementa e che usiamo per il parziale riconoscimento di $A$: questo programma, se $x \in A$ restituirà 1, altrimenti entrerà in loop.\\
+
+Si può comparare a un \textit{libro con infinite pagine}, su ognuna delle quali compare un elemento di $A$; il programma non fa altro che sfogliare le pagine.\\
+
+\subsubsection{Caratterizzazioni}
+
+\begin{theor}
+	Le seguenti definizioni sono equivalenti:
+	\begin{enumerate}
+		\item $A$ è ricorsivamente numerabile, con $A = \Im_f$ e $f \in \T$ funzione ricorsiva totale
+		\item $A = \Dom_f$ con $f \in \cp$ funzione ricorsiva parziale
+		\item Esiste una relazione $R \subseteq \N^2$ ricorsiva tale che $A \left\{x \in \N \mid \exists y \in \N \mid (x,y) \in R \right\}$
+	\end{enumerate}
+\end{theor}
+\begin{proof}
+	Per dimostrare questi teoremi dimostriamo che $1 \implies 2 \implies 3 \implies 1$, creando un'implicazione ciclica.\\
+	
+	$1 \implies 2$: Sappiamo che $A = \Im_f$, con $f \in \T$, è ricorsivamente numerabile, quindi esistono la sua routine di calcolo $f$ è il suo algoritmo parziale di riconoscimento $P$, definiti in precedenza. Vista la definizione di $P$, si ha che
+	$$ 
+	\varphi_P (x) = \begin{cases}
+		1 & \text{ se } x \in A \\
+		\bot \text{ se } x \notin A
+	\end{cases}
+	$$
+	ma allora $A = \Dom_{\varphi_P}$: il dominio è l'insieme dei valori dove la funzione è definita, in questo caso proprio l'insieme $A$. Inoltre $\varphi_P \in \cp$ perché abbiamo mostrato che esiste un programma $P$ che la calcola.\\
+	
+	$2 \implies 3$: Sappiamo che $A = \Dom_f$, con $f \in \cp$, quindi esiste un programma $P$ tale che $\varphi_P = f$. Considerando la relazione
+	$$ R_P = \left\{(x,y) \in \N^2 \mid P \text{ su input } x \text{ termina in } y \text{ passi}\right\}$$
+	che abbiamo dimostrato essere ricorsiva. Definiamo 
+	$$ B = \left\{x \in \N \mid \exists y \tc (x,y) \in \R_P \right\} $$
+	
+	Dimostriamo che $A=B$, infatti:
+	\begin{itemize}
+		\item $A \subseteq B$: se $x \in A$ allora su input $x$ il programma $P$ termina in un certo numero di passi $y$, visto che $x$ è nel "dominio" di tale programma. Vale allora $(x,y) \in R_P$ e quindi $x \in B$
+		\item $B \subseteq A$: se $x \in B$ allora per un certo $y$ ho $(x,y) \in R_P$, quindi $P$ su input $x$ termina in $y$ passi, ma visto che $\varphi_P (x) \downarrow$, allora $x$ rientra nel dominio di $f = \varphi_P$, quindi $x \in A$
+	\end{itemize}
+	
+	$3 \implies 1$: Sappiamo che $A = \left\{x \in \N \mid \tc (x,y) \in R\right\}$, con $R$ relazione ricorsiva. \\
+	
+	Assumiamo che $A \neq \emptyset$ e scegliamo $a \in A$, sfruttando l'assioma della scelta. Definiamo ora la funzione $t: \N \rightarrow \N$ come
+	$$ 
+	t(n) = \begin{cases}
+		\sin (n) & \text{ se } (\sin(n), \des(n)) \in R \\
+		a & \text{ altrimenti}
+	\end{cases}
+	$$
+	
+	Visto che $R$ è una relazione ricorsiva esiste un programma $P_R$ che categorizza ogni numero naturale, ma allora la funzione $t$ è ricorsiva totale. Infatti possiamo scrivere il programma
+	
+	\begin{center}
+		\begin{minipage}{.6\textwidth}
+			\begin{tcolorbox}[
+				colback=white,
+				sharp corners,
+				boxrule=.3mm,
+				left=20pt,
+				top=0pt,
+				bottom=0pt
+				]
+				\begin{algorithm}[H]
+					\setstretch{1.2}
+					\SetArgSty{relax}
+					\SetAlgoNoEnd
+					\SetKwProg{if}{if}{}{}
+					\SetKwProg{els}{else}{}{}
+					\SetKwSty{texttt}
+					input($n$)\;
+					$x:=\sin(n)$\;
+					$y:=\des(n)$\;
+					\if{$P_R(x,y)=1$}{
+						output(x)\;
+					}
+					\els{}{
+						output($a$)\;
+					}
+				\end{algorithm}
+			\end{tcolorbox}
+		\end{minipage}
+	\end{center}
+	
+	Il quale implementa la funzione $t$, quindi $\varphi_P = t$.\\
+	
+	Dimostriamo che $A = \Im_t$. Infatti:
+	\begin{itemize}
+		\item $A \subseteq \Im_t$: se $x \in A$ allora $(x,y) \in R$, ma allora $t (\langle x,y \rangle) = x$, quindi $x \in \Im_t$
+		\item $\Im_t \subseteq A$: se $x \in \Im_t$ allora
+		\begin{itemize}
+			\item se $x = a$ per l'assioma della scelta $a \in A$, quindi $x \in A$
+			\item se $x = \sin(n)$ con $n = \langle x,y \rangle$ per quale $y$ tale che $(x,y) \in R$ allora $x \in A$ per definizione di $A$
+		\end{itemize}
+	\end{itemize}
+	
+\end{proof}
+
+Grazie a questo teorema abbiamo tre caratterizzazioni per gli insiemi ricorsivamente numerabili e possiamo sfruttare la formulazione che risulta più comoda.\\
+
+Per usare il punto 2, in ordine: 
+\begin{enumerate}
+	\item scrivo un programma $P$ che restituisce 1 su input $x \in \N$, altrimenti va in loop se $x \notin A$
+	$$ 
+	P(x) = \begin{cases}
+		1 & \text{ se } x \in A \\
+		\bot & \text{ se } x \notin A
+	\end{cases}
+	$$
+	\item la semantica di $P$ è quindi tale che
+	$$ 
+	\varphi_P (x) = \begin{cases}
+		1 & \text{ se } x \in A \\
+		\bot & \text{ se } x \notin A
+	\end{cases}
+	$$
+	\item la funzione calcolata è tale che
+	$$ \varphi_P \in \cp $$
+	visto che il programma che la calcola è proprio $P$, mentre l'insieme $A$ è tale che
+	$$ A = \Dom_{\varphi_P}$$
+	\item $A$ è ricorsivamente numerabile per il punto 2.\\
+\end{enumerate}
+
+\subsection{Insiemi Ricorsivamente numerabili ma non ricorsivi}
+% p72
