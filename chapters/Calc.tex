@@ -2413,23 +2413,23 @@ Di conseguenza devono esistere insiemi non automaticamente riconoscibili.\\
 
 Un insieme $A \subseteq \N$ è un \textbf{insieme ricorsivo} se esiste un programma $P_A$ che si arresta su ogni input classificando correttamente gli elementi di $\N$ in base alla loro appartenenza o meno ad $A$.\\
 
-Equivalentemente, ricordando che la funzione caratteristica di $A \subseteq \N$ è la funzione $ \mathcal{X}_A : \N \rightarrow \{0,1\} $ tale che
+Equivalentemente, ricordando che la funzione caratteristica di $A \subseteq \N$ è la funzione $ \X_A : \N \rightarrow \{0,1\} $ tale che
 $$
-\mathcal{X}_A (x) = \begin{cases}
+\X_A (x) = \begin{cases}
 	1 & \text{ se } x \in A \\
 	0 & \text{ se } x \notin A
 \end{cases}
 $$
 
 Diciamo che l'insieme $A$ è ricorsivo se e solo se 
-$$ \mathcal{X}_A \in \T $$
+$$ \X_A \in \T $$
 
-Che $\mathcal{X}_A$ sia \textbf{totale} è banale: tutte le funzioni caratteristiche devono essere definite su tutto $\N$. Il problema risiede nella \textbf{calcolabilità} di queste funzioni.\\
+Che $\X_A$ sia \textbf{totale} è banale: tutte le funzioni caratteristiche devono essere definite su tutto $\N$. Il problema risiede nella \textbf{calcolabilità} di queste funzioni.\\
 
 Le due definizioni date sono equivalenti:
 \begin{itemize}
-	\item il programma $P_A$ implementa $\mathcal{X}_A$, quindi $\mathcal{X}_A \in \T$ perché esiste un programma che la calcola
-	\item $\mathcal{X}_A \in \T$ quindi esiste un programma $P_A$ che la implementa e soddisfa la definizione sopra
+	\item il programma $P_A$ implementa $\X_A$, quindi $\X_A \in \T$ perché esiste un programma che la calcola
+	\item $\X_A \in \T$ quindi esiste un programma $P_A$ che la implementa e soddisfa la definizione sopra
 \end{itemize}
 
 \subsubsection{Ricorsivo vs Decidibile}
@@ -2451,7 +2451,7 @@ $$
 \end{cases}
 $$
 
-Si può notare che la semantica del problema è proprio la funzione caratteristica, quindi $\Psi_{\ric_A} = \mathcal{X}_A$. Se $A$ è ricorsivo, allora la sua funzione caratteristica è ricorsiva totale, ma lo sarà anche la funzione soluzione $\Psi$ e, di conseguenza, $\ric_A$ è decidibile.\\
+Si può notare che la semantica del problema è proprio la funzione caratteristica, quindi $\Psi_{\ric_A} = \X_A$. Se $A$ è ricorsivo, allora la sua funzione caratteristica è ricorsiva totale, ma lo sarà anche la funzione soluzione $\Psi$ e, di conseguenza, $\ric_A$ è decidibile.\\
 
 \subsubsection{Decidibile vs Ricorsivo}
 
@@ -2487,7 +2487,7 @@ Questo non può essere ricorsivo: se lo fosse, avrei un programma ricorsivo tota
 
 Una relazione $R \subseteq \N \times \N$ è una \textbf{relazione ricorsiva} se e solo se l'insieme $R$ è ricorsivo, ovvero:
 \begin{itemize}
-	\item la sua funzione caratteristica $\mathcal{X}_R$ è tale che $\mathcal{X}_R \in \T$, oppure
+	\item la sua funzione caratteristica $\X_R$ è tale che $\X_R \in \T$, oppure
 	\item esiste un programma $P_R$ che, presi in ingresso $x,y \in \N$ restituisce 1 se $(xRy)$, 0 altrimenti
 \end{itemize}
 
@@ -2744,4 +2744,483 @@ Per usare il punto 2, in ordine:
 \end{enumerate}
 
 \subsection{Insiemi Ricorsivamente numerabili ma non ricorsivi}
-% p72
+
+Un esempio di insieme che non è ricorsivo, ma è ricorsivamente numerabile lo si può identificare dal problema dell'arresto ristretto. Infatti, l'insieme: 
+$$ A = \{x \in \N \mid \varphi_x (x) \downarrow\}$$
+non è ricorsivo, altrimenti il problema dell'arresto sarebbe decidibile. \\
+
+Tuttavia, questo insieme è ricorsivamente numerabile: infatti il programma $P$:
+
+\begin{center}
+	\vspace{1em}\hspace{5em}
+	\begin{minipage}{.3\textwidth}
+		\begin{tcolorbox}[
+			colback=white,
+			sharp corners,
+			boxrule=.3mm,
+			left=20pt,
+			top=0pt,
+			bottom=0pt,
+			%title=$P$,
+			colbacktitle=white,
+			coltitle=black
+			]
+			\begin{algorithm}[H]
+				\setstretch{1.2}
+				\SetArgSty{relax}
+				\SetAlgoNoEnd
+				\SetKwSty{texttt}
+				input($x$) \\
+				$U(x,x)$ \\
+				output(1)
+			\end{algorithm}
+		\end{tcolorbox}
+	\end{minipage}
+\end{center}
+decide parzialmente $A$. Come si può notare, se $x \in A$, allora $\varphi_x (x) \downarrow$, ovvero l'interprete universale $U$ termina, e il programma $P$ restituisce 1, altrimenti non termina.\\
+
+Di conseguenza:
+$$ 
+\varphi_P (x) = \begin{cases}
+	1 & \text{ se } \varphi_U (x,x) = \varphi_x (x) \downarrow \\
+	\bot & \text{ altrimenti}
+\end{cases}
+$$
+
+Dato che $A = \Dom_{\varphi_P \in \cp}$ si può applicare la seconda caratterizzazione fornita precedentemente per dimostrare che l'insieme $A$ è un insieme ricorsivamente numerabile. \\
+
+Alternativamente, possiamo dire che
+$$ A = \left\{x \in \N \mid \varphi_x (x) \downarrow \right\} \left\{x \in \N \mid \exists y \in \N \tc (x,y) \in R_{\hat{P}}\right\} $$
+con 
+$$ 
+R_{\hat{P}} = \left\{(x,y) \mid \hat{P} \text{ su input } x \text{ termina entro } y \text{ passi}\right\}
+$$
+relazione ricorsiva. Qui è possibile sfruttare la terza caratterizzazione degli insiemi ricorsivamente numerabili.\\
+
+\begin{theor}
+	Se $A \subseteq \N$ è ricorsivo, allora è ricorsivamente numerabile.
+\end{theor}
+\begin{proof}
+	Se $A$ ricorsivo, esiste un programma $P$ in grado di riconoscerlo, ovvero un programma che restituisce $1$ se $x \in A$, $0$ altrimenti.\\
+	
+	Il programma $P$ è del tipo
+	\begin{center}
+		\begin{minipage}{.4\textwidth}
+			\begin{tcolorbox}[
+				colback=white,
+				sharp corners,
+				boxrule=.3mm,
+				left=20pt,
+				top=0pt,
+				bottom=0pt,
+				title=$P$,
+				colbacktitle=white,
+				coltitle=black
+				]
+				\begin{algorithm}[H]
+					\setstretch{1.2}
+					\SetArgSty{relax}
+					\SetAlgoNoEnd
+					\SetKwProg{if}{if}{}{}
+					\SetKwProg{els}{else}{}{}
+					\SetKwSty{texttt}
+					input($x$) \\
+					\if{$P_A(x)=1$}{
+						output(1) \\
+					} \els{}{
+						\texttt{while}($1>0$) \\
+					}
+				\end{algorithm}
+			\end{tcolorbox}
+		\end{minipage}
+	\end{center}
+	
+	La semantica di questo programma è 
+	$$ \varphi_{P_A} (x) = \begin{cases}
+		1 & \text{ se } x \in A\\
+		\bot & \text{ se } x \notin A
+	\end{cases}$$
+	ma allora $A$ è il dominio di una funzione ricorsiva parziale, quindi $A$ è ricorsivamente numerabile per la seconda caratterizzazione.\\
+\end{proof}
+
+Poco fa abbiamo mostrato come $A = \left\{x \in \N \mid \varphi_x (x) \downarrow\right\}$ sia un insieme ricorsivamente numerabile ma non ricorsivo, ma allora vale che
+$$\text{Ricorsivi } \subset \text{ Ricorsivamente numerabili} $$
+
+\subsection{Chiusura degli insiemi ricorsivi}
+
+Cerchiamo di sfruttare l'operazione di complemento di insiemi sui ricorsivamente numerabili per vedere di che natura è l'insieme 
+$$ A^C = \left\{x \in \N \mid \varphi_x (x) \uparrow \right\}$$
+
+\begin{theor}
+	La classe degli insiemi ricorsivi è un'Algebra di Boole, ovvero è chiusa per complemento, intersezione e unione.
+\end{theor}
+\begin{proof}
+	Siano $A,B$ due insiemi ricorsivi. Allora esistono dei programmi $P_A, P_B$ che li riconoscono; equivalentemente, esistono $\X_A, \X_B \in \T$.\\
+	
+	Dimostrare che le operazioni di unione, intersezione e complemento sono implementabili da programmi che terminano sempre è facile. Di conseguenza
+	$$ A \cup B, A \cap B, A^C $$
+	sono ricorsive.\\
+	
+	Vediamo i tre programmi: 
+	\begin{itemize}
+		\item Complemento
+		\begin{center}
+			\begin{minipage}{.5\textwidth}
+				\begin{tcolorbox}[
+					colback=white,
+					sharp corners,
+					boxrule=.3mm,
+					left=20pt,
+					top=0pt,
+					bottom=0pt,
+					colbacktitle=white,
+					coltitle=black
+					]
+					\begin{algorithm}[H]
+						\setstretch{1.2}
+						\SetArgSty{relax}
+						\SetAlgoNoEnd
+						\SetKwProg{if}{if}{}{}
+						\SetKwProg{els}{else}{}{}
+						\SetKwSty{texttt}
+						input($x$) \\
+						output($1 \dotminus P_A(x)$)
+					\end{algorithm}
+				\end{tcolorbox}
+			\end{minipage}
+		\end{center}
+		
+		\item Intersezione
+		\begin{center}
+			\begin{minipage}{.5\textwidth}
+				\begin{tcolorbox}[
+					colback=white,
+					sharp corners,
+					boxrule=.3mm,
+					left=20pt,
+					top=0pt,
+					bottom=0pt,
+					colbacktitle=white,
+					coltitle=black
+					]
+					\begin{algorithm}[H]
+						\setstretch{1.2}
+						\SetArgSty{relax}
+						\SetAlgoNoEnd
+						\SetKwProg{if}{if}{}{}
+						\SetKwProg{els}{else}{}{}
+						\SetKwSty{texttt}
+						input($x$) \\
+						output($\min (P_A (x), P_B (x))$)
+					\end{algorithm}
+				\end{tcolorbox}
+			\end{minipage}
+		\end{center}
+	
+	\item Unione		
+	\begin{center}
+		\begin{minipage}{.5\textwidth}
+			\begin{tcolorbox}[
+				colback=white,
+				sharp corners,
+				boxrule=.3mm,
+				left=20pt,
+				top=0pt,
+				bottom=0pt,
+				colbacktitle=white,
+				coltitle=black
+				]
+				\begin{algorithm}[H]
+					\setstretch{1.2}
+					\SetArgSty{relax}
+					\SetAlgoNoEnd
+					\SetKwProg{if}{if}{}{}
+					\SetKwProg{els}{else}{}{}
+					\SetKwSty{texttt}
+					input($x$) \\
+					output($\max (P_A (x), P_B (x))$)
+				\end{algorithm}
+			\end{tcolorbox}
+		\end{minipage}
+	\end{center}
+	\end{itemize}
+	
+	Allo stesso modo si possono trovare le funzioni caratteristiche delle tre operazioni: 
+	\begin{itemize}
+		\item $\X_{A^C} (x) = 1 \dotminus \X_A (x)$
+		\item $\X_{A \cap B} = \X_A (x) \cdot \X_B (x)$
+		\item $\X_{A \cup B} = 1 \dotminus (1 \dotminus \X_A (x)) (1 \dotminus \X_B (x))$
+	\end{itemize}
+\end{proof}
+
+Ora un risultato importante riguardante il complemento dell'insieme dell'arresto $A^C$ definito prima.\\
+
+\begin{theor}
+	$A^C$ non è ricorsivo.
+\end{theor}
+\begin{proof}
+	Se $A^C$ fosse ricorsivo, per la proprietà di chiusura dimostrata nel teorema precedente, avremmo
+	$$ \left(A^C\right)^C = A $$
+	ricorsivo, il che è assurdo.\\
+\end{proof}
+
+Ricapitolando:
+\begin{itemize}
+	\item $A = \left\{x: \varphi_x (x) \downarrow\right\}$ ricorsivamente numerabile, ma non ricorsivo
+	\item $A^C = \left\{x: \varphi_x (x) \uparrow\right\}$ non ricorsivo 
+\end{itemize}
+\textit{Ma $A^C$ può essere ricorsivamente numerabile?}
+
+\begin{theor}
+	Se $A$ è ricorsivamente numerabile e $A^C$ è ricorsivamente numerabile, allora $A$ è ricorsivo.
+\end{theor}
+\begin{proof}
+	\textbf{Informale:} Con $A$ e $A^C$ ricorsivamente numerabili, esistono due libri con infinite pagine, su ognuna delle quali compare un elemento di $A$ (primo libro) e un elemento di $A^C$ (secondo libro).
+	
+	Per decidere l'appartenenza di $x$ ad $A$ possiamo usare il procedimento: 
+	\begin{enumerate}
+		\item input$(x)$
+		\item apriamo i due libri alla prima pagina:
+		\begin{itemize}
+			\item se $x$ compare nel libro di $A$, stampa $1$
+			\item se $x$ compare nel libro di $A^C$, stampa $0$
+			\item se $x$ non compare su nessuna delle due pagine, volta pagina e ricomincia
+		\end{itemize}
+	\end{enumerate}
+	
+	Questo algoritmo termina sempre dato che $x$ o sta in $A$ o sta in $A^C$, quindi prima o poi verrà trovato su uno dei due libri. Ma allora questo algoritmo riconosce $A$, quindi $A$ è ricorsivo.\\
+	
+	\textbf{Formale:} Con $A$ e $A^C$ ricorsivamente numerabili, esistono $f,g \in \T$ tali che $A = \Im_f \wedge A^C = \Im_g$. Sia $f$ implementata nel programma $F$ e $g$ dal programma $G$. Il seguente programma riconosce $A$:
+	\begin{center}
+		\begin{minipage}{.5\textwidth}
+			\begin{tcolorbox}[
+				colback=white,
+				sharp corners,
+				boxrule=.3mm,
+				left=20pt,
+				top=0pt,
+				bottom=0pt,
+				colbacktitle=white,
+				coltitle=black
+				]
+				\begin{algorithm}[H]
+					\setstretch{1.2}
+					\SetKwSty{texttt}
+					\SetKwProg{if}{if}{}{}
+					\SetKwProg{while}{while}{}{}
+					input($x$) \\
+					$i:=0$ \\
+					\while{True}{
+						\if{$F(i)=x$}{output(1)\\}
+						\if{$G(i)=x$}{output(1)\\}
+						$i:=i+1$
+					}
+				\end{algorithm}
+			\end{tcolorbox}
+		\end{minipage}
+	\end{center}
+	
+	Questo algoritmo termina per ogni input, in quanto $x \in A$ o $x \in A^C$. Possiamo concludere che l'insieme $A$ è ricorsivo.\\
+\end{proof}
+
+Si può concludere che $A^C$ \textbf{non} può essere ricorsivamente numerabile.\\
+
+In generale, questo teorema fornisce uno strumento che permette di studiare le caratteristiche della riconoscibilità di un insieme $A$: 
+\begin{itemize}
+	\item se $A$ non è ricorsivo, potrebbe essere ricorsivamente numerabile
+	\item se non riesco a mostrarlo, provo a studiare $A^C$
+	\item se $A^C$ è ricorsivamente numerabile, allora per il teorema possiamo concludere che $A$ non è ricorsivamente numerabile
+\end{itemize}
+
+\subsection{Chiusura degli insiemi ricorsivamente numerabili}
+
+\begin{theor}
+	La classe degli insiemi ricorsivamente numerabili è chiusa per unione e intersezione, ma non per complemento.
+\end{theor}
+\begin{proof}
+	Per complemento, abbiamo mostrato che $A=\{x: \varphi_x (x) \downarrow\}$ è ricorsivamente numerabile, mentre $A^C = \left\{x: \varphi_x (x) \uparrow\right\}$ non lo è.\\
+	
+	Siano $A,B$ insiemi ricorsivamente numerabili. Esistono quindi $f,g \in \T$ tali che $A = \Im_f \wedge B = \Im_g$. Sia $f$ implementata da $F$ e $g$ implementata da $G$. Siano
+	\begin{center}
+		\begin{minipage}{.45\textwidth}
+			\begin{tcolorbox}[
+				colback=white,
+				sharp corners,
+				boxrule=.3mm,
+				left=20pt,
+				top=0pt,
+				bottom=0pt,
+				title=$P_i$,
+				colbacktitle=white,
+				coltitle=black
+				]
+				\begin{algorithm}[H]
+					\setstretch{1.2}
+					\SetKwSty{texttt}
+					\SetKwProg{if}{if}{}{}
+					\SetKwProg{while}{while}{}{}
+					input($x$) \\
+					$i := 0$ \\
+					\While{$F(i) \neq x$}{$i++$ \\}
+					$i := 0$ \\
+					\While{$G(i) \neq x$}{$i++$ \\}
+					output(1)
+				\end{algorithm}
+			\end{tcolorbox}
+		\end{minipage}
+		\begin{minipage}{.45\textwidth}
+			\begin{tcolorbox}[
+				colback=white,
+				sharp corners,
+				boxrule=.3mm,
+				left=20pt,
+				top=0pt,
+				bottom=0pt,
+				title=$P_u$,
+				colbacktitle=white,
+				coltitle=black
+				]
+				\begin{algorithm}[H]
+					\setstretch{1.2}
+					\SetKwSty{texttt}
+					\SetKwProg{if}{if}{}{}
+					\SetKwProg{while}{while}{}{}
+					input($x$) \\
+					$i := 0$ \\
+					\While{$True$}{
+						\If{$F(i) = x$}{output(1) \\}
+						\If{$G(i) = x$}{output(1) \\}
+						$i++$ \\}
+				\end{algorithm}
+			\end{tcolorbox}
+		\end{minipage}
+	\end{center}
+	i due programmi che calcolano rispettivamente $A \cap B$ e $A \cup B$. Le loro semantiche sono
+	\begin{center}
+		\begin{minipage}{0.45\textwidth}
+			$$ \varphi_{P_i} = \begin{cases}
+				1 & \text{ se } x \in A \cap B \\
+				\bot & \text{ altrimenti}
+			\end{cases}$$
+		\end{minipage}
+		\begin{minipage}{0.45\textwidth}
+			$$ \varphi_{P_u} = \begin{cases}
+				1 & \text{ se } x \in A \cup B\\
+				\bot & \text{ altrimenti}
+			\end{cases}$$
+		\end{minipage}
+	\end{center}
+	da cui ricaviamo che
+	\begin{center}
+		\begin{minipage}{0.45\textwidth}
+			$$ A \cap B = \Dom_{\varphi_{P' \in \cp}}$$
+		\end{minipage}
+		\begin{minipage}{0.45\textwidth}
+			$$ A \cup B = \Dom_{\varphi_{P'' \in \cp}}$$
+		\end{minipage}
+	\end{center}
+	I due insiemi sono quindi ricorsivamente numerabili per la seconda caratterizzazione.\\
+\end{proof}
+
+\subsection{Teorema di Rice}
+
+Il \textbf{teorema di Rice} permette di mostrare che gli insiemi appartenenti a una certa classe non sono ricorsivi.\\
+
+Sia $\{\varphi_i\}$ un SPA. Un insieme (di programmi) $I \subseteq \N$ è un insieme che rispetta le funzioni se e solo se
+$$ \left(a \in I \wedge \varphi_a = \varphi_b \right) \implies b \in I $$
+
+In sostanza, $I$ rispetta le funzioni se e solo se, data una funzione calcolata da un programma in $I$, allora $I$ contiene tutti i programmi che calcolano quella funzione. Questi insiemi sono detti anche \textbf{chiusi per semantica}.\\
+
+Per esempio, l'insieme $I = \left\{x \in \N \mid \varphi_x (3) = 5 \right\}$ rispetta le funzioni, infatti: 
+$$ 
+\underbracket{a \in I}_{\varphi_a (3) = 5} \wedge \underbracket{\varphi_a = \varphi_b}_{\varphi_b(3) = 5} \implies b \in I
+$$
+
+\begin{theor}[Teorema di Rice]
+	Sia $I \subseteq \N$ un insieme che rispetta le funzioni. Allora $I$ è ricorsivo solo se $I = \emptyset$ oppure $I = \N$.
+\end{theor}
+Questo teorema dice che gli insiemi che rispettano le funzioni non sono mai ricorsivi, tolti i casi banali $\emptyset$ e $\N$.\\
+
+\begin{proof}
+	Sia $I$ insieme che rispetta le funzioni con $I \neq \emptyset$ e $I \neq \N$. Assumiamo, per assurdo, che $I$ sia ricorsivo.\\
+	
+	Dato che $I \neq \emptyset$, esiste almeno un elemento $a \in I$. Inoltre, dato che $I \neq \N$ esiste almeno un elemento $\bar{a} \notin I$.\\
+	
+	Definiamo la funzione $t: \N \rightarrow \N$ come
+	$$ 
+	t(n) = \begin{cases}
+		\bar{a} & \text{ se } n \in I \\
+		a & \text{ se } n \notin I
+	\end{cases}
+	$$
+	
+	Sappiamo che $t \in \T$ dato che è calcolabile dal programma $P$
+	\begin{center}
+		\begin{minipage}{.45\textwidth}
+			\begin{tcolorbox}[
+				colback=white,
+				sharp corners,
+				boxrule=.3mm,
+				left=20pt,
+				top=0pt,
+				bottom=0pt,
+				colbacktitle=white,
+				coltitle=black
+				]
+				\begin{algorithm}[H]
+					\setstretch{1.2}
+					\SetKwSty{texttt}
+					\SetKwProg{if}{if}{}{}
+					\SetKwProg{while}{while}{}{}
+					input($x$)\\
+					\If{$P_I (n) = 1$}{output($\bar{a}$) \\}
+					\Else{output($a$)}
+				\end{algorithm}
+			\end{tcolorbox}
+		\end{minipage}
+	\end{center}
+	Visto che $t \in \T$, il \textit{teorema di ricorsione} assicura che in un SPA $\{\varphi_i\}$ esiste $d \in \N$ tale che 
+	$$ \varphi_d = \varphi_{t(d)} $$
+
+	Per tale $d$ ci sono solo due possibilità rispetto a $I$:
+	\begin{itemize}
+		\item se $d \in I$, visto che $I$ rispetta le funzioni $\varphi_d = \varphi_{t(d)}$, allora $t(d) \in I$. Ma $t(d \in I) = \bar{a} \notin I$, quindi ho un assurdo
+		\item se $d \notin I$, allora $t(d) = a \in I$, ma $I$ rispetta le funzioni, quindi sapendo che $\varphi_d = \varphi_{t(d)}$ deve essere che $d \in I$, quindi ho un assurdo
+	\end{itemize}
+	Quindi $I$ non è ricorsivo.\\
+\end{proof}
+
+\subsubsection{Applicazione}
+
+Il teorema di Rice suggerisce un approccio per stabilire se un insieme $A \subseteq \N$ non è ricorsivo: 
+\begin{enumerate}
+	\item mostrare che $A$ rispetta le funzioni
+	\item mostrare che $A \neq \emptyset$ e $A \neq \N$
+	\item $A$ non è ricorsivo per Rice
+\end{enumerate}
+
+\subsubsection{Limiti alla verifica automatica del software}
+Definiamo le \textbf{specifiche}: descrizione di un problema e richiesta per i programmi che devono risolverlo automaticamente. Un programma è \textit{corretto} se risponde alle specifiche.\\
+
+\textbf{Problema}: posso scrivere un programma $V$ che testa automaticamente se un programma sia corretto o meno? Il programma che vogliamo scrivere ha semantica: 
+$$
+\varphi_V (P) = \begin{cases}
+	1 & \text{ se } P \text{ è corretto} \\
+	0 & \text{ se } P \text{ non è corretto}
+\end{cases}
+$$
+
+Definiamo 
+$$ \pc = \left\{P \mid P \text{ è corretto}\right\}$$
+Osserviamo che rispetta le funzioni, infatti: 
+$$ \underbracket{P \in \pc}_{P \text{ corretto}} \wedge \underbracket{\varphi_P = \varphi_Q}_{Q \text{ corretto}} \implies Q \in \pc $$
+
+Ma allora $\pc$ non è ricorsivo. Dato ciò, la correttezza dei programmai non può essere testata automaticamente. Esistono, però, dei casi limite in cui è possibile costruire dei test automatici: 
+\begin{itemize}
+	\item specifiche del tipo "\textit{nessun programma è corretto}" generano $\pc = \emptyset$
+	\item specifiche del tipo "\textit{tutti i programmi sono corretti}" generano $\pc = \N$
+\end{itemize}
+
+Entrambi gli insiemi $\pc$ sono ovviamente ricorsivi e quindi possono essere testati automaticamente.
+
+Questo risultato mostra che non è possibile verificare automaticamente le proprietà semantiche dei programmi (\textit{a meno di proprietà banali}).\\
