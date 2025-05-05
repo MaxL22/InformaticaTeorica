@@ -1,0 +1,103 @@
+% !TeX spellcheck = it_IT
+% !TeX root = ../it.tex
+
+\chapter{Teoria della Complessità}
+
+Dato un problema $P$, fino a ora la domanda è stata "\textit{esiste un programma per la sua soluzione automatica?}" E tramite questa domanda si può indagare la teoria della calcolabilità, il cui soggetto di studio è l'esistenza (o meno) di un programma per un dato problema.\\
+
+La prossima sezione riguarda la \textbf{teoria della complessità} in cui l'investigazione segue la domanda "\textit{come funzionano i programmi per $P$?}".\\
+
+Per rispondere a questa domanda, vogliamo sapere quante \textbf{risorse computazionali} vengono utilizzate durante la sua esecuzione. Vediamo altre domande a cui la teoria della complessità cerca di rispondere
+\begin{itemize}
+	\item dato un programma per il problema $P$, quanto tempo impiega nella sua soluzione? Quanto spazio di memoria occupa? 
+	\item dato un problema $P$, qual è il minimo tempo impiegato dai programmi per $P$? Quanto spazio in memoria al minimo posso occupare per programmi per $P$? 
+	\item in che senso possiamo dire che un programma è \textbf{efficiente} in termini di tempo e/o spazio? 
+	\item quali problemi possono essere efficientemente risolti per via automatica?
+\end{itemize}
+
+\section{Teoria dei linguaggi formali}
+
+Alcune definizioni:
+\begin{itemize}
+	\item Un \textbf{alfabeto} è un insieme finito di simboli $\Sigma = \{\sigma_1, \dots, \sigma_k\}$
+	\item Un \textbf{alfabeto binario} è un qualsiasi alfabeto composto da due soli simboli
+	\item Una \textbf{stringa} su $\Sigma$ è una sequenza di simboli appartenenti a $\Sigma$ nella forma $x = x_1 \dots x_n$, con $x_i \in \Sigma$
+	\item La \textbf{lunghezza} di una stringa $x$ indica il numero di simboli che la costituiscono e si indica con $|x|$
+	\item La \textbf{stringa nulla} è una stringa particolare, indicata con $\epsilon$, è tale che $|\epsilon| = 0$
+	\item Con $\Sigma^\ast$ si indica l'insieme delle stringhe che si possono costruire sull'alfabeto $\Sigma$ (chiusura di Kleene), compresa la stringa nulla. L'insieme delle stringhe formate da almeno un carattere è $\Sigma^+ = \Sigma^\ast \setminus \{\epsilon\}$
+	\item Un \textbf{linguaggio} $L$ su un alfabeto $\Sigma$ è un sottoinsieme $L \subseteq \Sigma^\ast$, che può essere finito o infinito
+\end{itemize}
+
+\section{Macchina di Turing Deterministica (DTM)}
+Il punto di partenza dello studio della teoria della complessità e la definizione rigorosa delle risorse di calcolo e di come possono essere misurate.\\
+
+Il modello di calcolo considerato è quello della \textbf{Macchina di Turing}, ideata da Alan Turing nel 1936. Si tratta di un modello teorico di calcolatore che consente di definire rigorosamente: 
+\begin{itemize}
+	\item i passi di computazione e la computazione stessa
+	\item tempo e spazio di calcolo dei programmi
+\end{itemize}
+
+\subsection{Struttura}
+Una \textbf{Macchina di Turing deterministica} è un dispositivo hardware fornito di: 
+\begin{itemize}
+	\item \textbf{nastro di lettura/scrittura}: un nastro infinito formato da celle, ognuna delle quali ha un proprio indice/indirizzo e può contenere un simbolo. Questo nastro viene usato come contenitore per l'input, ma anche come memoria durante l'esecuzione
+	\item \textbf{testina di lettura e scrittura two-way}: dispositivo che permette di leggere e scrivere dei simboli sul nastro a ogni passo
+	\item \textbf{controllo a stati finiti}: automa a stati finiti $Q = \{Q_0, \dots, Q_n\}$ che permette di far evolvere la computazione
+\end{itemize}
+
+Un passo di calcolo è una \textbf{mossa} che, dato lo stato corrente e il simbolo letto dalla testina, porta la DTM in un nuovo stato, scrivendo eventualmente un simbolo sul nastro e spostando eventualmente la testine. I risultati della mossa, quindi il nuovo stato, il simbolo da scrivere e il movimento della testina, vengono calcolati tramite una \textbf{funzione di transizione}, basata sui due input dati.\\
+
+\subsubsection{Definizione Informale}
+
+Il funzionamento di una DTM $M$ su input $x \in \Sigma^\ast$ passa per due fasi:
+\begin{enumerate}
+	\item \textbf{Inizializzazione}:
+	\begin{itemize}
+		\item la stringa $x$ viene posta, simbolo dopo simbolo, nelle celle del nastro dalla cella 1 fino alla cella $|x|$. Le celle dopo quelle che contengono $x$ contengono il simbolo \textit{blank}
+		\item la testina si posizione sulla prima cella
+		\item il controllo a stati finiti è posto nello stato iniziale
+	\end{itemize}
+	\item \textbf{Computazione}:
+	\begin{itemize}
+		\item sequenza di mosse dettata dalla funzione di transizione
+	\end{itemize}
+\end{enumerate}
+
+La computazione può andare in loop o arrestarsi se raggiunge una situazione in cui non è definita nessuna mossa per lo stato attuale. Si dice che $M$ accetta $x \in \Sigma^\ast$ se $M$ si arresta in uno stato tra quelli finali/accettanti, altrimenti la rifiuta.\\
+
+Definiamo $L_M = \{x \in \Sigma^\ast \mid M \text{ accetta } x \}$ il \textbf{linguaggio accettato} da $M$.\\
+
+\subsubsection{Definizione Formale}
+Una DTM è una quintupla $M = \left(Q, \Sigma, \Gamma, \delta, q_0, F\right)$, con:
+\begin{itemize}
+	\item $Q$: insieme finito di \textbf{stati} assumibili dal controllo a stati finiti
+	\item $q_0 \in Q$: \textbf{stato iniziale} da cui partono le computazioni di $M$
+	\item $F \subseteq Q$: insieme degli \textbf{stati finali/accettanti} dove $M$ si arresta accettando l'input
+	\item $\Sigma$: \textbf{alfabeto di input} su cui sono definite le stringhe di input
+	\item $\Gamma$: \textbf{alfabeto di lavoro} che contiene i simboli che possono essere letti/scritti dal/sul nastro. Vale $\Sigma \subset \Gamma$ perché $\Gamma$ contiene il simbolo \textit{blank}
+	\item $\delta: Q \times \Gamma \rightarrow Q \times (\Gamma \setminus \{blank\}) \times \{-1, 0, 1\}$: \textbf{funzione di transizione} che definisce le mosse. Si tratta di una funzione parziale: quando non è definita la macchina si arresta. Inoltre, $M$ non può scrivere il simbolo \textit{blank}, lo può solo leggere
+\end{itemize}
+
+Analizziamo nel dettaglio lo sviluppo di una DTM $M$ su input $x \in \Gamma^\ast$, visto solo informalmente: 
+\begin{enumerate}
+	\item \textbf{Inizializzazione}: 
+	\begin{itemize}
+		\item il nastro contiene la stringa $x = x_1 \dots x_n$
+		\item la testina è posizionata sul carattere $x_1$
+		\item il controllo a stati finiti parte dallo stato $q_0$
+	\end{itemize}
+	\item \textbf{Computazione}: sequenza di mosse definite dalla funzione di transizione $\delta$ che manda, a ogni passo, da $(q_i, \gamma_i)$ a $(q_{i+1}, \gamma_{i+1}, \{-1, 0, +1\})$
+\end{enumerate}
+
+Se $\delta(q, \gamma) = \bot$, la macchina $M$ si \textit{arresta}. Quando la testina rimbalza tra due celle o rimane fissa in una sola, si verifica un \textit{loop}. La macchina $M$ accetta $x \in \Sigma^\ast$ se e solo se la computazione si arresta in uno stato $q \in F$.\\
+
+Come prima, $L_M = \{x \in \Sigma^\ast \mid M \text{ accetta } x\}$ è il \textbf{linguaggio accettato} da $M$.\\
+
+Queste macchine sono molto simili agli automi a stati finiti, seppur con alcune differenze: 
+\begin{itemize}
+	\item le FSM di default non possono tornare indietro, non sono two-way, ma questa differenza non aumenta la potenza computazionale, serve solo per avere automi più succinti
+	\item le FSM hanno il nastro a sola lettura, mentre le DTM possono alterare il nastro a disposizione
+\end{itemize}
+
+\subsubsection{Configurazione di una DTM}
+%p83
