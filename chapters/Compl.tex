@@ -100,4 +100,346 @@ Queste macchine sono molto simili agli automi a stati finiti, seppur con alcune 
 \end{itemize}
 
 \subsubsection{Configurazione di una DTM}
-%p83
+
+Proviamo, similmente a come fatto per le macchine $\ram$, a dare l'idea di \textbf{configurazione} delle DTM; possiamo vederla come una foto che descrive completamente la macchina $M$ in un certo istante, in questo modo possiamo descrivere la computazione come usa serie di configurazioni/foto.\\
+
+Le cose da ricordare sono: 
+\begin{itemize}
+	\item in che stato si trova la macchina
+	\item in che posizione si trova la testina
+	\item il contenuto non-blank del nastro
+\end{itemize}
+
+Definiamo quindi $C = (q,k,w)$ una configurazione con
+\begin{itemize}
+	\item $q$: stato del controllo a stati finiti
+	\item $k \in \N^+$: posizione della testina nel nastro
+	\item $w \in \Gamma^+$: contenuto non-blank del nastro
+\end{itemize}
+
+All'inizio della computazione si ha la \textbf{configurazione iniziale} $C_0 = (q_0, 1, x)$.\\
+
+Una configurazione $C$ si dice \textbf{accettante} se $C = (q \in F, k, w)$, si dice invece \textbf{d'arresto} se $C = (q, k, w)$, con $\delta (q,w) = \bot$.\\
+
+\subsubsection{Definizione di computazione tramite configurazioni}
+
+La computazione di $M$ su $x \in \Sigma^\ast$ è la sequenza
+$$ C_0 \xrightarrow{\delta} C_1 \xrightarrow{\delta} \dots \xrightarrow{\delta} C_i \xrightarrow{\delta} C_{i+1} \xrightarrow{\delta} \dots $$
+dove $\forall i \geq 0$ vale che da $C_i$ si passa a $C_{i+1}$ grazie alla funzione $\delta$.\\
+
+La macchina $M$ accetta $x \in \Sigma^\ast$ se e solo se $C_= \xrightarrow{\ast}C_f$, con $C_f$ configurazione d'arresto e accettante. Il linguaggio accettato da $M$ ha la stessa definizione data prima.\\
+
+\subsection{Altre versioni delle macchine di Turing}
+\subsubsection{Versioni alternative}
+
+Il fatto che la macchina sia \textit{deterministica} implica che, data una configurazione $C_i$, quella successiva è univocamente determinata dalla funzione $\delta$. Quindi, data una configurazione $C_i$, esiste una sola configurazione $C_{i+1}$ successiva, a meno di arresti.\\
+
+Nelle \textbf{Macchine di Turing Non Deterministiche NDTM}, data una configurazione $C_i$, può non essere unica la configurazione successiva, non è determinata univocamente.\\
+
+Nelle \textbf{Macchine di Turing Probabilistiche PTM}, data una configurazione $C_i$, possono esistere più configurazioni nelle quali si può entrare, ognuna associata a una probabilità $p_i \in [0,1]$.\\
+
+Infine, nelle \textbf{Macchine di Turing Quantistiche QTM}, data una configurazione $C_i$, esistono una serie di configurazioni successive nelle quali possiamo entrare osservando le ampiezze delle transizioni $\alpha_i$. Queste ampiezze sono numeri complessi in $\mathbb{C}$ tali che
+\begin{itemize}
+	\item $|\alpha_i| \leq 1$
+	\item hanno probabilità $|\alpha_i|^2$
+	\item le probabilità sommano a 1
+\end{itemize}
+
+\subsubsection{Versione semplificata}
+Esibir, progettare e comprendere una DTM potrebbe risultare difficile, anche per casi semplici. Solitamente, nel descrivere una DTM viene utilizzato uno \textit{pseudocodice} che ne chiarisce la dinamica.
+
+Esistono una serie di teoremi che dimostrano che qualsiasi frammento di programma strutturato può essere tradotto in una DTM formale e viceversa.\\
+
+\subsubsection{Esempio: parità}
+Problema: 
+\begin{itemize}
+	\item Nome: parità
+	\item Istanza: $x \in \N$
+	\item Domanda: $x$ è pari?
+\end{itemize}
+
+Come codifica utilizziamo quella binaria, ovvero
+$$ cod: \N \rightarrow \{0,1\}^\ast $$
+
+Di conseguenza, il linguaggio da riconoscere è 
+$$ L_{\text{pari}} = \left\{x \in \{0,1\}^\ast \mid x_1 = 1 \wedge x_{|x|} = 0 \right\} \cup \{0\} $$
+
+Risolvere il problema \textit{parità} significa trovare una DTM $M$ che rappresenta un algoritmo deterministico che riconosce $L_{\text{pari}}$. \\
+
+Ricordando che $M = \left(Q, \Sigma, \Gamma, \delta, q_0, F\right)$, la seguente macchina riconosce $L_{\text{pari}}$:
+\begin{itemize}
+	\item $Q = \{p, z_1, \mu, z, r\}$ insieme degli stati
+	\item $\Sigma = \{0,1\}$ alfabeto 
+	\item $\Gamma = \{0,1, blank\}$ alfabeto di lavoro
+	\item $q_0 = p$ stato iniziale
+	\item $F = \{z_1, z\}$ insieme degli stati finali
+	\item $\delta : Q \times \Gamma \rightarrow Q \times \Sigma \times \{-1, 0, 1\}$ funzione di transizione così definita
+	\begin{center}
+		\renewcommand{\arraystretch}{1.5}
+		\begin{tabular}{| C{40000cm} | C{40000cm} | C{40000cm} | C{40000cm} |}
+			\hline
+			$\delta$ & \textit{blank} & 0 & 1 \\
+			\hline
+			$p$ & $\bot$ & $(z_1, 0, +1)$ & $(\mu, 1, +1)$ \\
+			\hline
+			$z_1$ & $\bot$ & $(r, 0, +1)$ & $(\mu, 1, +1)$ \\
+			\hline
+			$\mu$ & $\bot$ & $(z, 0, +1)$ & $(\mu, 1, +1)$ \\
+			\hline
+			$z$ & $\bot$ & $(z, 0, +1)$ & $(\mu, 1, +1)$ \\
+			\hline
+			$r$ & $\bot$ & $\bot$ & $\bot$ \\
+			\hline
+		\end{tabular}
+	\end{center}
+\end{itemize}
+
+Si può notare come, anche per un problema così semplice, si ha una funzione di transizione abbastanza complessa. Andiamo quindi a utilizzare uno pseudocodice:
+\begin{center}
+	\begin{minipage}{.7\textwidth}
+		\begin{tcolorbox}[
+			colback=white,
+			sharp corners,
+			boxrule=.3mm,
+			left=20pt,
+			top=0pt,
+			bottom=0pt,
+			title=Parità$(n)$,
+			colbacktitle=white,
+			coltitle=black
+			]
+			\LinesNumbered
+			\begin{algorithm}[H]
+				\setstretch{1.2}
+				\SetArgSty{relax}
+				\SetAlgoNoEnd
+				\SetKwProg{if}{if}{}{}
+				\SetKwProg{els}{else}{}{}
+				\SetKwProg{Do}{do}{}{}
+				\SetKwProg{While}{while}{}{}
+				\SetKwSty{texttt}
+				$i:=1$ \\
+				$f:=false$ \\
+				\Switch{$x[i]$}{
+					\Case{0}{
+						$i++$ \\
+						$f:= (x[i] == blank)$ \\
+						break\\
+					}
+					\Case{1}{
+						\Do{}{
+							$f:= (x[i] == 0)$ \\
+							$i++$ \\
+						}
+						\While{$(x[i] \neq blank)$}{}
+					}
+				}
+				\Return{$f$}
+			\end{algorithm}
+		\end{tcolorbox}
+	\end{minipage}
+\end{center}
+
+Alla fine dell'esecuzione avremo: 
+\begin{itemize}
+	\item \textit{True} se $x \in L_{\text{pari}}$
+	\item \textit{False} se $x \notin L_{\text{pari}}$
+\end{itemize}
+
+\section{Funzionalità di una DTM}
+
+\subsection{Insiemi riconosciuti}
+
+La principale funzionalità di una DTM è \textbf{riconoscere linguaggi}. Un linguaggio $L \subseteq \Sigma^\ast$ è \textbf{riconoscibile} da una DTM se e solo se esiste una DTM $M$ tale che $L = L_M$.\\
+
+Grazie alla possibilità di riconoscere linguaggi, una DTM può riconoscere anche insiemi: dato $A \subseteq \N$, \textit{come lo riconosco con una DTM?} La prima idea è quella di codificare ogni elemento $a \in A$ in un elemento di $\Sigma^\ast$, per poter passare dal riconoscimento di un insieme al riconoscimento di un linguaggio.
+$$
+\renewcommand{\arraystretch}{1.8}
+A \rightsquigarrow \begin{array}{|c|}
+	\hline
+	cod \\
+	\hline
+\end{array}
+\rightsquigarrow L_A = \{cod(a): a \in A\}
+$$
+
+Un insieme $A$ è riconoscibile da una DTM se e solo se esiste una DTM $M$ tale che $L_A = L_M$.\\
+
+Quando si fa riconoscere un insieme $A$ a una DTM $M$, possono risultare due situazioni, in funzione dell'input (codificato):
+\begin{enumerate}
+	\item se l'input appartiene ad $A$, allora $M$ si arresta
+	\item se l'input \textit{non} appartiene ad $A$, allora $M$ può 
+	\begin{itemize}
+		\item arrestarsi rifiutando l'input, ovvero finisce in uno stato $q \notin F$, ma allora $A$ è ricorsivo
+		\item andare in loop, ma allora $A$ è ricorsivamente numerabile
+	\end{itemize}
+\end{enumerate}
+
+\begin{theor}
+	La classe degli insiemi riconosciuti da una DTM coincide con la classe degli insiemi ricorsivamente numerabili.
+\end{theor}
+
+Un algoritmo deterministico per il riconoscimento di un insieme $A \subseteq \N$ è una DTM $M$ tale che $L_A = L_M$ e tale che $M$ si arresta su ogni input.\\
+
+\begin{theor}
+	La classe degli insiemi riconosciuti da algoritmi deterministici coincide con la classe degli insiemi ricorsivi.
+\end{theor}
+
+\subsection{Problemi di decisione}
+
+Una seconda funzionalità delle DTM è quella di risolvere \textbf{problemi di decisione}.\\
+
+Dato un problema $\Pi$, con istanza $x \in D$ e domanda $p(x)$, andiamo a codificare gli elementi di $D$ in elementi di $\Sigma^\ast$, ottenendo $L_\Pi = \{cod(x) \mid x \in D \wedge p(x) \}$ \textbf{insieme delle istanze (codificate) a risposta positiva di $\Pi$}.\\
+
+La DTM risolve $\Pi$ se e solo se $M$ è un algoritmo deterministico per $L_\Pi$, ovvero: 
+\begin{itemize}
+	\item se vale $p(x)$, allora $M$ accetta la codifica di $x$
+	\item se non vale $p(x)$, allora $M$ si arresta senza accettare
+\end{itemize}
+
+\subsection{Calcolo di funzioni}
+
+Oltre a ciò che è già stato detto, le DTM sono anche in grado di \textbf{calcolare funzioni}. Si tratta di un risultato molto importante, in quanto sappiamo che calcolare funzioni significa risolvere problemi del tutto generali, quindi non solo di decisione.\\
+
+Data una funzione $f: \Sigma^\ast \rightarrow \Gamma^\ast$, la DTM $M$ calcola $f$ se e solo se
+\begin{itemize}
+	\item se $f(x) \downarrow$ allora $M$ su input $x$ termina con $f(x)$ sul nastro
+	\item se $f(x) \uparrow$ allora $M$ su input $x$ va in loop
+\end{itemize}
+A tutti gli effetti le DTM sono \textit{sistemi di programmazione}.\\
+
+\subsection{Potenza computazionale}
+
+Si può dimostrare che le DTM calcolano tutte e sole le funzioni ricorsive parziali. Possiamo riscrivere la tesi di Church-Turing come: 
+\begin{center}
+	\textit{Una funzione è intuitivamente calcolabile se e solo se è calcolata da una DTM}
+\end{center}
+
+Inoltre, è possibile dimostrare che le DTM sono SPA, semplicemente mostrando che valgono i tre assiomi di Rogers: 
+\begin{enumerate}
+	\item le DTM calcolano tutte e sole le funzioni ricorsive parziali 
+	\item esiste una DTM universale che simula tutte le altre
+	\item vale il teorema $S^m_n$
+\end{enumerate}
+
+\section{Simboli di Landau}
+
+Nella teoria delle complessità la domanda è \textit{"quanto costa questo programma?"} Per capire il costo di un dato programma verranno valutate delle funzioni nella forma $f(n)$, dove $n$ indica la grandezza dell'input della DTM. Nel fare il confronto tra due algoritmi per uno stesso problema, bisogna tenere in considerazione che a fare la differenza (in termini di prestazioni) sono gli input di dimensione \textit{ragionevolmente grande}, dove con questa espressione intendiamo una dimensione significativa nel contesto d'applicazione del problema.\\
+
+Per esempio, siano $t_1$ e $t_2$ due funzioni tali che
+$$ t_1 (n) = 2n \quad \mid \quad t_2 (n) = \frac{1}{100} n^2 + \frac{1}{2}n + 1 $$
+
+Quale delle due è migliore? \textit{Dipende}, per $n$ abbastanza piccoli allora $t_2$ è migliore, mentre per $n$ sufficientemente grandi allora è migliore $t_1$.\\
+
+Date due funzioni, non vanno valutate per valori precisi di $n$, ma ne va valutato il loro \textbf{andamento asintotico}, ovvero quando $n$ tende a $+ \infty$.\\
+
+\subsection{Simboli di Landau principali}
+
+I \textbf{simboli di Landau} sono utili per stabilire degli \textbf{ordini di grandezza} tra le funzioni, in modo da poterle paragonare. I più utilizzati sono:
+\begin{enumerate}
+	\item $O$: date due funzioni $f,g: \N \rightarrow \N$ diciamo che 
+	$$ f(n) = O(g(n)) $$
+	se e solo se
+	$$ \exists c > 0 \quad \exists n_0 \in \N \mid \forall n \geq n_0 \quad f(n) \leq c \cdot g (n) $$
+	Fornisce un upper bound alla funzione $f$.
+	
+	\item $\Omega$: date due funzioni $f,g: \N \rightarrow \N$ diciamo che 
+	$$ f(n) = \Omega (g(n)) $$
+	se e solo se
+	$$ \exists c > 0 \quad \exists n_0 \in \N \mid \forall n \geq n_0 \quad f(n) \geq c \cdot g (n) $$
+	Fornisce un lower bound alla funzione $f$.
+	
+	\item $\Theta$: date due funzioni $f,g : \N \rightarrow \N$ diciamo che
+	$$ f(n) = \Theta (g(n)) $$
+	se e solo se
+	$$ \exists c_1, c_2 > 0 \quad \exists n_0 \in \N \mid \forall n \geq n_0 \quad c_1 \cdot g(n) \leq f(n) \leq c_2 \cdot g(n) $$
+\end{enumerate}
+
+Si può notare facilmente che valgono le proprietà
+$$ f(n) = O(g(n)) \Leftrightarrow g(n) = \Omega(f(n)) $$
+$$ f(n) = \Theta(g(n)) \Leftrightarrow f(n) = O (g(n)) \wedge f(n) = \Omega(g(n)) $$
+
+\section{Definizione della risorsa tempo}
+
+Per \textit{semplicità} usiamo una DTM e non una macchina $\ram$ per dare una definizione rigorosa di tempo. \\
+
+Le $\ram$, per quanto semplici, lavorano con banchi di memoria che possono contenere dati di grandezza arbitraria ai quali si accede in tempo $O(1)$, cosa che invece non si può fare con le DTM perché il nastro contiene l'input diviso su più celle.\\
+
+\subsection{Definizione}
+
+Consideriamo la DTM $M = (Q, \Sigma, \Gamma, \delta, q_0, F)$ e definiamo
+\begin{itemize}
+	\item $T(x)$ il \textbf{tempo di calcolo} di $M$ su input $x \in \Sigma^\ast$ come il valore
+	\begin{center}
+		$T(x) = $ \# mosse della computazione di $M$ su input $x$ (anche $\infty$)
+	\end{center}
+	\item $t(n)$ la \textbf{complessità in tempo} di $M$ (worst case) come la funzione
+	$$ t: \N \rightarrow \N \mid t(n) = \max \{T(x) \mid x \in \Sigma^\ast \wedge |x| = n \} $$
+\end{itemize}
+
+L'attributo \textbf{worst case} indica il fatto che $t(n)$ rappresenta il tempo peggiore di calcolo su tutti gli input di lunghezza $n$. Si tratta della metrica più utilizzata anche perché la più "manovrabile matematicamente, permette di usare delle funzioni più facilmente trattabili dal punto di vista algebrico. Ad esempio, nella situazione \textit{average case} avremo una stima probabilmente migliore, ma richiede anche una distribuzione di probabilità, non sempre facile da ottenere.\\
+
+Diciamo che il linguaggio $L \subseteq \Sigma^\ast$ è riconoscibile in \textbf{tempo deterministico} $f(n)$ se e solo se esiste una DTM $M$ tale che
+\begin{enumerate}
+	\item $L= L_M$
+	\item $t(n) \leq f(n)$
+\end{enumerate}
+
+L'ultima condiziona indica che a noi "basta" $f(n)$, ma che possiamo accettare anche situazioni migliori.\\
+
+Si può estendere questa definizione anche agli insiemi o ai problemi di decisione:
+\begin{itemize}
+	\item \textbf l'{insieme} $A \subseteq \N$ è riconosciuto in tempo $f(n)$ se e solo se lo è il linguaggio
+	$$ L_A = \{cod (A) \mid a \in A \} $$
+	\item il \textbf{problema di decisione} $\Pi$ è risolto in tempo $f(n)$ se e solo se lo è il linguaggio 
+	$$ L_\Pi = \{cod(x) \mid p(x) \} $$
+\end{itemize}
+
+Da qui in avanti, quando parleremo di linguaggio intenderemo indirettamente insiemi o problemi di decisione, vista la stretta analogia tra questi concetti.\\
+
+\subsection{Classi di complessità}
+
+\subsubsection{Classificazione di funzioni}
+
+Tramite i simboli di Landau è possibile classificare le funzioni in una serie di classi.\\
+
+Per quanto riguarda il tempo, data una funzione $t: \N \rightarrow \N$ possiamo avere: 
+\begin{center}
+	\centering
+	\renewcommand{\arraystretch}{1.8}
+	\begin{tabular}{| C{100000000000em} | C{100000000000000000em} |}
+		\hline
+		\textbf{Funzione} & \textbf{Definizione formale} \\
+		\hline
+		\textbf{Costante} & $f(n) = O(1)$ \\
+		\hline
+		\textbf{Logaritmica} & $f(n) = O(\log n)$ \\
+		\hline
+		\textbf{Lineare} & $f(n) = O(n)$ \\
+		\hline
+		\textbf{Quadratica} & $f(n) = O(n^2)$ \\
+		\hline
+		\textbf{Polinomiale} & $f(n) = O(n^k)$ \\
+		\hline
+		\textbf{Esponenziale} & $f(n)$ super polinomiale \\
+		\hline
+	\end{tabular}
+\end{center}
+
+L'ultima rappresenta una classe con costo "\textit{troppo elevato}", ovvero una classe in cui non si vorrebbe mai capitare. Dentro questa rientrano tutte le funzioni super polinomiali, dette anche \textbf{inefficienti}.\\
+
+Altrimenti, convenzionalmente, un algoritmo si dice \textbf{efficiente} se la sua complessità temporale è \textbf{polinomiale}.\\
+
+\subsubsection{Definizione di classi di complessità}
+
+Vogliamo utilizzare il concetto di \textit{classi di equivalenza} per definire delle classi che racchiudano tutti i problemi che hanno bisogno della stessa quantità di risorse computazionali per essere risolti correttamente.\\
+
+Una \textbf{classe di complessità} è un insieme dei problemi che vengono risolti entro gli stessi limiti di risorse computazionali.\\
+
+\subsubsection{Classi di complessità principali}
+
+Proviamo a definire alcune classi di complessità in funzione della risorsa tempo.\\
+
+%p90
+
+
