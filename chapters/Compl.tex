@@ -377,7 +377,7 @@ Consideriamo la DTM $M = (Q, \Sigma, \Gamma, \delta, q_0, F)$ e definiamo
 	$$ t: \N \rightarrow \N \mid t(n) = \max \{T(x) \mid x \in \Sigma^\ast \wedge |x| = n \} $$
 \end{itemize}
 
-L'attributo \textbf{worst case} indica il fatto che $t(n)$ rappresenta il tempo peggiore di calcolo su tutti gli input di lunghezza $n$. Si tratta della metrica più utilizzata anche perché la più "manovrabile matematicamente, permette di usare delle funzioni più facilmente trattabili dal punto di vista algebrico. Ad esempio, nella situazione \textit{average case} avremo una stima probabilmente migliore, ma richiede anche una distribuzione di probabilità, non sempre facile da ottenere.\\
+L'attributo \textbf{worst case} indica il fatto che $t(n)$ rappresenta il tempo peggiore di calcolo su tutti gli input di lunghezza $n$. Si tratta della metrica più utilizzata anche perché la più "manovrabile matematicamente", permette di usare delle funzioni più facilmente trattabili dal punto di vista algebrico. Ad esempio, nella situazione \textit{average case} avremo una stima probabilmente migliore, ma richiede anche una distribuzione di probabilità, non sempre facile da ottenere.\\
 
 Diciamo che il linguaggio $L \subseteq \Sigma^\ast$ è riconoscibile in \textbf{tempo deterministico} $f(n)$ se e solo se esiste una DTM $M$ tale che
 \begin{enumerate}
@@ -440,6 +440,403 @@ Una \textbf{classe di complessità} è un insieme dei problemi che vengono risol
 
 Proviamo a definire alcune classi di complessità in funzione della risorsa tempo.\\
 
-%p90
+La prima è la classe 
+$$ \dtime(f(n)) $$
+definita come l'insieme dei problemi risolti da una DTM in tempo deterministico $t(n) = O(f(n))$. Sappiamo in realtà che la definizione corretta dovrebbe riguardare i \textit{linguaggi accettati}, ma è stato già visto come si ha un'analogia tra questi concetti.\\
+
+Le DTM possono anche calcolare funzioni, quindi si può propagare questa definizione di $\dtime$ anche alle funzioni stesse, ovvero si possono definire classi di complessità anche per le funzioni.\\
+
+Ma cosa si intende con "\textit{complessità in tempo per una funzione}?"\\
+
+La funzione $f: \Sigma^\ast \rightarrow \Gamma^\ast$ è calcolata con \textbf{complessità in tempo} $t(n)$ dalla DTM $M$ se e solo se su ogni input $x$ di lunghezza $n$ la computazione di $M$ su $x$ si arresta entro $t(n)$ passi, avendo $f(x)$ sul nastro.\\
+
+Detto ciò, si può introdurre la classe
+$$ \ftime (f(n)) $$
+Definita come l'insieme delle funzioni risolte da una DTM in tempo deterministico $t(n) = O(f(n))$.\\
+
+Grazie a quanto detto possiamo definire due classi di complessità storicamente importanti: 
+$$ P = \bigcup_{k \geq 0} \dtime \left(n^k\right) $$
+classe dei \textbf{problemi risolti da una DTM in tempo polinomiale} e 
+$$ FP = \bigcup_{k \geq 0} \ftime \left(n^k\right)$$
+classe delle \textbf{funzioni calcolate da una DTM in tempo polinomiale}.\\
+
+Questi sono universalmente riconosciuti come i problemi efficientemente risolvibili in tempo.\\
+
+\textit{Ma perché \textbf{polinomiale} è sinonimo di efficiente in tempo?} Si possono dare tre motivazioni: 
+\begin{itemize}
+	\item \textbf{pratica}: la differenza tra algoritmi polinomiali ed esponenziali, anche per input "piccoli" è enorme: il tempo di risoluzione per il primo caso è frazioni di secondo, si può invece parlare di anni o secoli per il caso esponenziale
+	\item "\textbf{composizionale}": programmi efficienti che richiamo routine efficienti rimangono efficienti, concatenare algoritmi genera un tempo pari alla somma delle complessità dei due algoritmi, rimanendo polinomiale
+	\item "\textbf{robustezza}": le classi $P$ e $FP$ rimangono invariate a prescindere dai molti modelli di calcolo utilizzati per circoscrivere i problemi efficientemente risolti
+\end{itemize}
+
+Per l'ultimo motivo si può dimostrare che $P$ e $FP$ non dipendono dal modello scelto, che questo sia $\ram$, $\while$, \dots
+
+\subsection{Tesi di Church-Turing estesa (tempo)}
+
+La \textbf{tesi di Church-Turing estesa} afferma che la classe dei problemi \textbf{efficientemente risolubili in tempo} coincide con la classe dei problemi risolti in tempo polinomiale su DTM.\\
+
+La si può vedere come la \textit{versione quantitativa} della tesi di Church-Turing.\\
+
+\subsection{Chiusura di $P$}
+
+\begin{theor}
+	La classe $P$ è un'algebra di Boole, ovvero è chiusa rispetto alle operazioni di unione, intersezione e complemento.
+\end{theor}
+\begin{proof}
+	
+	\textbf{Unione:} Date due istanze $A,B \in P$, siano $M_A$ e $M_B$ due DTM con tempo rispettivamente $p(n)$ e $q(n)$. Allora il seguente programma
+	\begin{center}
+		\begin{minipage}{.33\textwidth}
+			\begin{tcolorbox}[
+				colback=white,
+				sharp corners,
+				boxrule=.3mm,
+				left=20pt,
+				top=0pt,
+				bottom=0pt,
+				colbacktitle=white,
+				coltitle=black
+				]
+				\begin{algorithm}[H]
+					\setstretch{1.2}
+					\SetArgSty{relax}
+					\SetAlgoNoEnd
+					\SetKwProg{if}{if}{}{}
+					\SetKwProg{els}{else}{}{}
+					\SetKwProg{While}{while}{}{}
+					\SetKwSty{texttt}
+					input$(n)$\\
+					$y := M_A (x)$\\
+					$z := M_B (x)$ \\
+					output$(y \wedge z)$
+				\end{algorithm}
+			\end{tcolorbox}
+		\end{minipage}
+	\end{center}
+	permette il calcolo dell'unione di $A$ e $B$ in tempo $t(n) = p(n) + q(n)$.\\
+	
+	\textbf{Intersezione:} Date due istanze $A,B \in P$, siano $M_A$ e $M_B$ due DTM con tempo rispettivamente $p(n)$ e $q(n)$. Allora il seguente programma
+	\begin{center}
+		\begin{minipage}{.33\textwidth}
+			\begin{tcolorbox}[
+				colback=white,
+				sharp corners,
+				boxrule=.3mm,
+				left=20pt,
+				top=0pt,
+				bottom=0pt,
+				colbacktitle=white,
+				coltitle=black
+				]
+				\begin{algorithm}[H]
+					\setstretch{1.2}
+					\SetArgSty{relax}
+					\SetAlgoNoEnd
+					\SetKwProg{if}{if}{}{}
+					\SetKwProg{els}{else}{}{}
+					\SetKwProg{While}{while}{}{}
+					\SetKwSty{texttt}
+					input$(n)$\\
+					$y := M_A (x)$\\
+					$z := M_B (x)$ \\
+					output$(y \vee z)$
+				\end{algorithm}
+			\end{tcolorbox}
+		\end{minipage}
+	\end{center}
+	permette il calcolo dell'intersezione di $A$ e $B$ in tempo $t(n) = p(n) + q(n)$.\\
+	
+	\textbf{Complemento:} Data l'istanza $A \in P$, sia $M_A$ una DTM con tempo $p(n)$. Allora il seguente programma
+	\begin{center}
+		\begin{minipage}{.33\textwidth}
+			\begin{tcolorbox}[
+				colback=white,
+				sharp corners,
+				boxrule=.3mm,
+				left=20pt,
+				top=0pt,
+				bottom=0pt,
+				colbacktitle=white,
+				coltitle=black
+				]
+				\begin{algorithm}[H]
+					\setstretch{1.2}
+					\SetArgSty{relax}
+					\SetAlgoNoEnd
+					\SetKwProg{if}{if}{}{}
+					\SetKwProg{els}{else}{}{}
+					\SetKwProg{While}{while}{}{}
+					\SetKwSty{texttt}
+					input$(n)$\\
+					$y := M_A (x)$\\
+					output$(\neg y)$
+				\end{algorithm}
+			\end{tcolorbox}
+		\end{minipage}
+	\end{center}
+	permette il calcolo del complemento di $A$ in tempo $t(n) = p(n)$.\\
+\end{proof}
+
+La classe $P$, inoltre, è anche chiusa rispetto all'operazione di \textbf{composizione}: si possono comporre tra loro DTM come se fossero procedure black box. Esempio con due DTM:
+$$ 
+\renewcommand{\arraystretch}{1.4}
+x \rightsquigarrow \begin{array}{|c|}
+	\hline
+	M_1 \\
+	\hline
+\end{array} \rightsquigarrow x' \rightsquigarrow \begin{array}{|c|}
+\hline
+M_2 \\
+\hline
+\end{array} \rightsquigarrow y $$
+
+Supponiamo che le macchine $M_1$ e $M_2$ abbiano tempo rispettivamente $p(n)$ e $q(n)$, allora il tempo totale è 
+$$ t(n) \leq p(n) + q(p(n)) $$
+
+Usiamo $q(p(n))$ perché eseguendo $M_1$ in $p(n)$ passi il massimo output scrivibile è grande $p(n)$.\\
+
+\subsection{Problemi difficili}
+
+Esistono moltissimi problemi pratici e importanti per i quali ancora non sono stati trovati algoritmi efficienti e non è nemmeno stato provato che tali algoritmi non possano per natura esistere.\\
+
+In altre parole, non sappiamo se tutti i problemi sono in realtà efficientemente risolubili o se ne esistono alcuni il cui miglior algoritmo di risoluzione abbia una complessità esponenziale.\\
+
+\section{Spazio di memoria}
+
+Vediamo ora la formalizzazione dell'altra importante risorsa di calcolo, ovvero lo \textbf{spazio di memoria}, inteso come quantità di memoria occupata durante la computazione.\\
+
+\subsection{Complessità in spazio}
+Data la DTM $M = (Q, \Sigma, \Gamma, \delta, q_0, F)$ e una stringa $x \in \Sigma^\ast$, chiamiamo $S(x)$ il numero di celle del nastro occupate durante la computazione di $M$ su $x$. Questo numero potrebbe anche essere infinito. La \textbf{complessità in spazio} di $M$ (worst case) è la funzione $s: \N \rightarrow \N$ definita come
+$$s(n) = \max \left\{S(x) \mid x \in \Sigma^\ast \wedge |x| = n \right\}$$
+
+Da questa definizione è chiaro che, in ogni DTM, $s(n) \geq n$ in quanto dovrò sempre occupare almeno spazio $n$ lineare per mantenere l'input sul nastro, ma è molto probabile che le celle effettivamente \textit{sporcate} sono meno delle celle occupate dall'input.\\
+
+\textit{Come non considerare l'interferenza dovuta all'input?}\\
+
+Per avere complessità anche sublineari, si potrebbe leggermente modificare la macchina e separare le operazioni del nastro, ovvero utilizzare due nastri diversi per la lettura e per la computazion : 
+\begin{itemize}
+	\item il \textbf{nastro di lettura} è read-only con testina two-way read-only
+	\item il \textbf{nastro di lavoro} è invece read-write con testina two-way
+\end{itemize}
+
+La stringa in input è delimitata dai caratteri $\cent$ e $\$$ tali che $\cent, \$ \notin \Sigma$.\\
+
+La definizione formale di questa macchina è 
+$$ M = \left(Q, \Sigma \cup \left\{\cent, \$\right\}, \Gamma, \delta, q_0, F \right) $$
+in cui tutto è analogo alle macchine di Turing viste fin'ora, tranne per la funzione di transizione $\delta$, ora definita come
+$$ \delta: Q \times \left(\Sigma \cup \left\{\cent, \$ \right\}\right) \times \Gamma \rightarrow Q \times \left(\Gamma \setminus \left\{blank\right\}\right) \times \left\{-1, 0, 1\right\}^2 $$
+
+con la quale $M$:
+\begin{enumerate}
+	\item legge un simbolo sia dal nastro di input che dal nastro di lavoro
+	\item calcola lo stato prossimo dati i simboli letti e lo stato attuale
+	\item modifica il nastro di lavoro 
+	\item comanda il moto delle due testine
+\end{enumerate}
+
+Anche la definizione di configurazione va leggermente modificata: ora una \textbf{configurazione} di $M$ è una quadrupla
+$$ C = \langle q, i, j, w \rangle $$
+
+in cui:
+\begin{itemize}
+	\item $q$ è lo stato corrente
+	\item $i$ e $j$ sono le posizioni della testina di input e della testina di lavoro 
+	\item $w$ è il contenuto non blank del nastro di lavoro
+\end{itemize}
+
+Non serve più salvare l'input perché non cambia mai, dato il nastro read-only.\\
+
+Gli altri concetti (\textit{computazione, accettazione, linguaggio accettato, complessità in tempo, \dots}) rimangono inalterati.\\
+
+A questo punto possiamo ridefinire la complessità in spazio per queste nuove macchine di Turing.\\
+
+Per ogni stringa $x \in \Sigma^\ast$, il valore $S(x)$ è ora dato dal numero di celle \textit{del solo nastro di lavoro} visitate da $M$ durante la computazione di $x$. Dunque, la \textbf{complessità in spazio deterministica} $s(n)$ di $M$ è da intendersi come il massimo numero di celle visitate nel nastro di lavoro durante la computazione di stringhe di lunghezza $n$, quindi come prima: 
+$$ s(n) = \max \left\{S(x) \mid x \in \Sigma^\ast \wedge |x| = n \right\} $$
+
+In questo modo misuriamo \textit{solo lo spazio di lavoro}, che quindi può essere \textbf{anche sublineare}. \\
+
+\subsection{Linguaggi e Funzioni}
+
+Il linguaggio $L \subseteq \Sigma^\ast$ è riconosciuto in \textbf{spazio deterministico} $f(n)$ se e solo se esiste una DTM $M$ tale che
+\begin{enumerate}
+	\item $L = L_M$
+	\item $s(n) \leq f(n)$
+\end{enumerate}
+
+Per il caso specifico del \textbf{calcolo di funzioni}, solitamente si considera una terza macchina di Turing, in cui è presente un \textit{terzo nastro} dedicato alla sola scrittura dell'output della funzione da calcolare. Questa aggiunta ci permette di conteggiare effettivamente lo spazio per l'output e di non interferire con il nastro di lavoro.\\
+
+Una funzione $f: \Sigma^\ast \rightarrow \Gamma^\ast$ viene calcolata con \textbf{complessità in spazio} $s(n)$ dalla DTM $M$ se e solo se \textit{su ogni input $x$ di lunghezza $n$} la computazione di $M$ occupa non più di $s(n)$ celle dal nastro di lavoro.\\
+
+Sfruttando queste definizioni, possiamo definire la complessità in spazio per il riconoscimento di insiemi e per la funzione soluzione di problemi di decisione.\\
+
+\subsection{Classi di complessità}
+
+Per ogni funzione $f: \N \rightarrow \N$ definiamo 
+$$ \dspace (f(n)) $$
+la \textbf{classe dei linguaggi accettati da DTM in spazio deterministico} $O(f(n))$. Chiamiamo invece
+$$ \fspace (f(n)) $$
+la \textbf{classe delle funzioni calcolate da DTM in spazio deterministico} $O(f(n))$.\\
+
+Notiamo che le classi $\dspace$ e $\fspace$ \textbf{non} cambiamo se aggiungiamo alle DTM un numero \textit{costante di nastri di lavoro}. Se può essere comodo possiamo quindi utilizzare DTM con $k$ nastri di lavoro aggiuntivi, separando anche il nastro di input da quello di output.\\
+
+In generale, gli algoritmi permettono di ottimizzare una sola delle due risorse a disposizione (tempo e spazio). Un algoritmo che migliora una risorsa porta (spesso, ma non sempre) al peggioramento di un'altra.\\
+
+\subsection{Efficienza in termini di spazio}
+
+Definiamo 
+\begin{itemize}
+	\item $L = \dspace (\log (n))$ la classe dei \textbf{linguaggi accettati in spazio deterministico} $O(\log n)$
+	\item $FL = \fspace (\log (n))$ la classe delle \textbf{funzioni calcolate in spazio deterministico} $O(\log (n))$
+\end{itemize}
+
+$L$ e $FL$ sono universalmente considerati i \textbf{problemi risolti efficientemente in termini di spazio}.\\
+
+Finora, abbiamo stabilito due sinonimie:
+\begin{itemize}
+	\item efficiente \textit{in tempo} se e solo se il tempo è \textit{polinomiale}
+	\item efficiente \textit{in spazio} se e solo se lo spazio è \textit{logaritmico}
+\end{itemize}
+
+Entrambe le affermazioni trovano ragioni di carattere pratico, composizionale e di robustezza, come visto per il tempo.\\
+
+Per lo spazio, le motivazioni sono le seguenti:
+\begin{itemize}
+	\item \textbf{pratico}: operare in spazio logaritmico (sublineare) significa saper gestire grandi moli di dati senza doverle copiare totalmente in memoria centrale; i dati diventano grandi facilmente, si vogliono algoritmi che usano poca memoria
+	\item \textbf{composizionale}: i programmi efficienti in spazio che richiamano routine efficienti in spazio, rimangono efficienti
+	\item \textbf{robustezza}: le classi $L$ e $FL$ rimangono invariate, a prescindere dai modelli di calcolo utilizzati, ad esempio DTM multi-nastro, $\ram$, $\while$; \dots
+\end{itemize}
+
+\subsection{Tesi di Church-Turing estesa (spazio)}
+
+Come per il tempo, la \textbf{tesi di Church-Turing estesa per lo spazio} afferma che la classe dei problemi efficientemente risolubili in spazio coincide con la classe dei problemi risolti in spazio logaritmico su DTM.
+
+\section{Tempo vs Spazio}
+
+Spesso promuovere l'ottimizzazione di una risorsa va a discapito dell'altra: \textit{essere veloci} vuol dire (tipicamente) \textit{occupare tanto spazio}, e viceversa.\\
+
+Viene quindi naturale porsi le domande: 
+\begin{itemize}
+	\item \textit{i limiti in tempo implicano dei limiti in spazio?}
+	\item \textit{i limiti in spazio implicano dei limiti in tempo?}
+\end{itemize}
+
+\subsection{$\dtime$ vs $\dspace$}
+
+Per rispondere a queste domande confrontiamo le classi $\dtime (f(n))$ e $\dspace (f(n))$.\\
+
+\begin{theor}
+	Tutti i linguaggi accettati in tempo $f(n)$ sono anche accettati in spazio $f(n)$. Formalmente
+	$$ \dtime (f(n)) \subseteq \dspace (f(n)) $$
+\end{theor}
+\begin{proof}
+	Se $L \in \dtime(f(n))$ allora esiste una DTM $M$ che riconosce $L$ in tempo $t(n) = O(f(n))$, quindi su input $x$ di lunghezza $n$ la macchina $M$ compie $O(f(n))$ passi.\\
+	
+	In tale computazione possono essere occupate al massimo $O(f(n))$ celle, ovvero una per ogni passo. Quindi $M$ ha complessità in spazio $s(n) = O(f(n))$, ma allora $L \in \dspace (f(n))$.\\
+\end{proof}
+
+\begin{theor}
+	Tutte le funzioni accettate in tempo $f(n)$, sono anche accettate in spazio $f(n)$. Formalmente
+	$$ \ftime (f(n)) \subseteq \fspace (f(n)) $$
+\end{theor}
+
+Si può notare come l'efficienza in tempo \textit{non} porta immediatamente all'efficienza in spazio.\\
+
+Un limite in tempo implica, in qualche modo, un limite in spazio, \textit{vale il contrario? Possiamo dimostrare che $\dspace (f(n)) \subseteq \dtime(f(n))$?} \\
+
+Avendo un numero di celle prestabilito, è possibile iterare il loro utilizzo (anche all'infinito, ad esempio entrando in un loop), di conseguenza limitare lo spazio non implica necessariamente una limitazione di tempo.\\
+
+Notiamo che, in una DTM $M$, un loop si verifica quando viene visitata una configurazione già vista in passato. Sfruttando questo fatto è possibile trovare una limitazione al tempo, trovando dopo quanto tempo vengono visitate tutte le configurazioni possibili.\\
+
+\begin{theor}
+	Tutti i linguaggi accettati in spazio $f(n)$ vengono accettati in tempo $n \cdot \alpha^{O(f(n))}$.
+\end{theor}
+\begin{proof}
+	Dato $L \in \dspace (f(n))$ e una DTM $M$ esistono una serie di configurazioni per $M$ tali che
+	$$ C_0 \xrightarrow{\delta} C_1 \xrightarrow{\delta} \dots \xrightarrow{\delta} C_m $$
+	in cui $C_m$ + uno stato accettante per $L$.\\
+	
+	Sappiamo che $\dtime$ è calcolabile dal numero di volte che viene utilizzata la funzione di transizione $\delta$. Date $C_i$ e $C_j$ con $i \neq j$, vale $C_i \neq C_j$: infatti, se fossero uguali saremmo entrati in un loop. Di conseguenza, calcolando la cardinalità dell'insieme contenente tutte le configurazioni possibili, troviamo anche un upper bound per la risorsa tempo.\\
+	
+	Ricordando che la configurazione è una quadrupla $\langle q, i, j, w \rangle$ formata da
+	\begin{itemize}
+		\item $q$ stato della macchina
+		\item $i,j$ posizioni delle due testine
+		\item $w$ valore sul nastro di lavoro
+	\end{itemize}
+	
+	Analizziamo quanti valori possono assumere ognuno di questi elementi:
+	\begin{itemize}
+		\item $q$: è una costante e vale $|Q|$
+		\item $i$: contando i due limitatori il numero massimo è $n+2$
+		\item $j$: stiamo lavorando in $\dspace (f(n))$, quindi questo indice vale $O(f(n))$, più semplicemente scrivibile come $\alpha f(n)$
+		\item $w$: è una stringa sull'alfabeto $\Gamma^{O(f(n))}$, che ha cardinalità $|\Gamma|^{O(f(n))}$, anche in questo caso scrivibile come $|\Gamma|^{\alpha f(n)}$
+	\end{itemize}
+	
+	Moltiplicando tutti questi valori troviamo il seguente upper bound: 
+	\begin{align*}
+		|C| & \leq O(1) \cdot (n + 2) \cdot \alpha f (n) \cdot |\Gamma|^{\alpha f (n)} \\
+		& \leq O(1) \cdot (n + 2) \cdot |\Gamma|^{\alpha f(n)} \cdot |\Gamma|^{\alpha f(n)} \\
+		& = O(1) \cdot (n + 2) \cdot |\Gamma|^{2 \alpha f (n)} \\
+		& = O(1) \cdot (n + 2) \cdot 2^{\log_2 \left(|\Gamma|^{2 \alpha f(n)}\right)} \\
+		& = O(1) \cdot (n + 2) \cdot 2^{2 \alpha f(n) \cdot \log_2 \left(|\Gamma|\right)} \\
+		& = O \left(n \cdot 2^{O(f(n))}\right)
+	\end{align*}
+	Quindi, $M$ sa se accettare o meno $x \in \Sigma^\ast$ in al massimo $O\left(n \cdot 2^{O(f(n))}\right)$ passi.\\
+	
+	Ora, data una DTM $M$ che accetta $L$ con $s(n) \leq \alpha f(n)$, costruiamo una DTM $M'$ che su input $x \in \Sigma^\ast$, con $|x| = n$ si comporta nel seguente modo:
+	\begin{enumerate}
+		\item scrive in unario su un nastro dedicato un time-out $t$ tale che $t \sim O\left(n \cdot 2^{O(f(n))}\right)$
+		\item simula $M$ e a ogni mossa cancella un simbolo di time-out dal nastro dedicato
+		\item se $M$ accetta o rifiuta prima della fine del time-out, allora $M'$ accetta o rifiuta allo stesso modo di $M$
+		\item se allo scadere del time-out $M$ non ha ancora scelto, $M'$ rifiuta perché sa di essere entrata in un loop
+	\end{enumerate} 
+	
+	In questo modo, $M'$ accetta il linguaggio $L$ in tempo
+	$$ t(n) = O \left(n \cdot 2^{O(f(n))}\right) $$
+	e quindi 
+	$$ \dspace(f(n)) \subseteq \dtime \left(n \cdot 2^{O(f(n))}\right) $$
+\end{proof}
+
+Come per il tempo, il teorema dimostrato vale anche per gli insiemi $\fspace$ e $\ftime$.\\
+
+\begin{theor}
+	Tutte le funzioni calcolate in spazio $f(n)$ vengono calcolate in tempo $n \cdot \alpha^{O(f(n))}$
+	$$ \fspace (f(n)) \subseteq \ftime \left(n \cdot \alpha^{O(f(n))}\right)$$
+\end{theor}
+
+\subsection{$P$ vs $L$ (primo round)}
+
+Ottenuti questi risultati, vogliamo studiare le relazioni tra efficienza in termini di spazio (classe $L$) e l'efficienza in termini di tempo (classe $P$).\\
+
+\begin{theor}
+	Valgono le seguenti relazioni per efficienza in spazio e efficienza in tempo:
+	$$ L \subseteq P $$
+	$$ FL \subseteq FP $$
+\end{theor}
+\begin{proof}
+	\begin{align*}
+		L = \dspace (\log (n)) & \subseteq \dtime \left(n \cdot \alpha^{O(\log n)}\right) \\
+		& = \dtime \left(n \cdot \alpha^{\frac{\log_\alpha (n)}{\log_\alpha (2)}}\right) \\
+		& = \dtime \left(n \cdot \left(\alpha^{\log_\alpha (n)}\right)^{\frac{1}{\log_\alpha (2)}}\right) \\
+		& = \dtime \left(n \cdot n^{\frac{1}{\log_\alpha (2)}}\right) \\
+		& = \dtime \left(n \cdot n^\beta \right) \\
+		& = \dtime \left(n^{\beta + 1}\right) = \dtime\left(n^k\right) = P
+	\end{align*}
+	
+	Allo stesso modo è ottenibile l'inclusione per $FL$ e $FP$.\\
+\end{proof}
+
+Grazie a questo teorema sappiamo che:
+\begin{itemize}
+	\item \textbf{in teoria}, algoritmi efficienti in spazio portano immediatamente ad algoritmi efficienti in tempo. Non è detto il contrario: la domanda "\textit{esiste un problema in $P$ che non sta in $L$?}" è ancora un problema aperto
+	\item \textbf{in pratica}, il grado del polinomio ottenuto da algoritmi efficienti in spazio è molto alto, e solitamente gli algoritmi efficienti in tempo vengono progettati separatamente
+\end{itemize}
+
+\section{La "zona grigia"}
+%p 102
+
+
+
+
 
 
