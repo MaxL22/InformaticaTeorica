@@ -833,10 +833,211 @@ Grazie a questo teorema sappiamo che:
 \end{itemize}
 
 \section{La "zona grigia"}
-%p 102
 
+Chiamiamo "\textit{zona grigia}" quella nuvola di problemi di decisione importanti e con molte applicazioni per i quali non si conoscono ancora algoritmi efficienti in tempo, ma per i quali nessuna ha mai dimostrato che tali algoritmi non possano esistere. Infatti, dato un problema $\Pi$, se a oggi non esiste un algoritmo efficiente per la sua soluzione, questo non implica che non esista del tutto.\\
 
+I problemi di decisione in questa zona hanno una particolarità: sono \textbf{efficientemente verificabili}. Data un'istanza particolare, è facile capire se per quel problema e quell'istanza bisogna rispondere \textit{Sì} o  \textit{No}.\\
 
+\subsection{Esempi}
 
+\subsubsection{CNF-SAT}
 
+Il problema \textbf{CNF-SAT} ha come obiettivo quello di stabilire se esiste un assegnamento di variabili booleane che soddisfi un predicato logico in forma normale congiunta. Le formule sono indicate con $\varphi (x_1, \dots, x_n)$ e sono formate da congiunzioni $C_1 \wedge \dots \wedge C_k$, ognuna delle quali contiene almeno una variabile booleana $x_i$.\\
 
+Formalmente, data una CNF $\varphi(x_1, \dots, x_n)$, vogliamo rispondere alla domanda
+$$ \exists \underline{x} \in \{0,1\}^n \mid \varphi(\underline{x}) = 1 ?$$
+
+Un possibile algoritmo di risoluzione è quello esaustivo, ma le possibili permutazioni con ripetizione sono $2^n$, mentre la verifica della soddisfacibilità è fattibile in tempo polinomiale $n^k$. Di conseguenza, questo algoritmo risulta \textit{inefficiente}, esplorare tutto l'albero dei possibili assegnamenti richiederebbe tempo esponenziale.\\
+
+\subsubsection{Circuiti hamiltoniani}
+
+Dato $G = (V,E)$ grafo non direzionato, vogliamo sapere se $G$ contiene un circuito hamiltoniano o meno (circuito in cui tutti i vertici di $G$ vengono visitati una e una sola volta).\\
+
+Un algoritmo per risolverlo è generare tutte le permutazioni possibili di vertici che iniziano e finiscono con lo stesso vertice, per poi verificare efficientemente se siano un circuito hamiltoniano.
+
+La complessità temporale di questo algoritmo dipende da: 
+\begin{itemize}
+	\item numero di permutazioni possibili: quindi il numero di volte che viene eseguita la verifica, sono $n!$
+	\item il controllo sulla permutazione può essere implementato efficientemente (tempo polinomiale)
+\end{itemize}
+
+\subsubsection{Circuiti euleriani}
+
+Dato $G = (V,E)$ un grafo non direzionato, vogliamo sapere se $G$ contiene un circuito euleriano o meno (circuito in cui ogni arco viene visitato una e una sola volta),\\
+
+\begin{theor}[Teorema di Eulero]
+	Un grafo $G$ contiene un circuito euleriano se e solo se ogni suo vertice ha grado pari, ovvero
+	$$ \forall v \in V \quad d(v) = 2k \mid k \in \N $$
+\end{theor}
+
+Dimostrato da Eulero nel 1736, grazie a questo teorema è possibile risolvere il problema in tempo lineare, quindi efficiente.
+
+\subsection{Classe $\exptime$}
+
+Definiamo ora la classe
+$$ \exptime = \bigcup_{k \geq 0} \dtime \left(2^{n^k}\right)$$
+dei problemi con complessità temporale \textbf{esponenziale}. Ovviamente vale
+$$ P \subseteq \exptime $$
+in quanto ogni polinomio è "\textit{maggiorabile}" da un esponenziale. Per diagonalizzazione (absolute GOAT) si è dimostrato in realtà che
+$$ P \subset \exptime $$
+sfruttando una NDTM (Non-Deterministic Turing Machine) con timeout.
+
+\section{Macchine di Turing non deterministiche (NDTM)}
+
+\subsection{Algoritmi non deterministici}
+
+Abbiamo visto come esistano problemi molto utili di cui non si conoscono ancora algoritmi deterministici efficienti in tempo.\\
+
+Tuttavia, è possibile costruire degli \textbf{algoritmi non deterministici} che li risolvano, sfruttando il fatto che possono valutare velocemente la funzione obiettivo del problemas.\\
+
+\subsubsection{Dinamica dell'algoritmo}
+
+In generale, in un algoritmo non deterministico, la computazione non è univoca, ma si scinde in tante computazioni, una per ogni struttura generata.\\
+
+Sono formati da due fasi principali: 
+\begin{itemize}
+	\item \textbf{fase congetturale}: viene generata "magicamente" una struttura/un assegnamento/una configurazione/una congettura che aiuta a dare una risposta \textit{Sì} o \textit{No}
+	\item \textbf{fase di verifica}: viene usata la struttura generata per decidere se vale la proprietà che caratterizza il problema di decisione
+\end{itemize}
+
+Le varie computazioni delle fasi di verifica sono tutte deterministiche, è la fase congetturale a essere non deterministica (in particolare nella creazione della struttura "magica").\\
+
+Dato un problema $\Pi$, un'istanza $x \in D$ e una proprietà $p(x)$, un algoritmo non deterministico risolve $\Pi$ se e solo se
+\begin{enumerate}
+	\item su ogni $x$ con risposta \textit{positiva} (quindi $\forall x: p(x) = 1$), esiste \textbf{almeno una computazione} $k$ che accetta la coppia $(x, s_k)$
+	\item su ogni $x$ con risposta \textit{negativa} (quindi $\forall x: p(x) = 0$), non esiste \textbf{alcuna computazione} che accetti la coppia $(x, s_k)$ per qualche $s_k$. Tutte le computazioni rifiutano o vanno in loop
+\end{enumerate}
+
+\subsubsection{Esempi}
+
+Vediamo un algoritmo non deterministico per la soluzione di CNF-SAT:
+\begin{center}
+	\begin{minipage}{.55\textwidth}
+		\begin{tcolorbox}[
+			colback=white,
+			sharp corners,
+			boxrule=.3mm,
+			left=20pt,
+			top=0pt,
+			bottom=0pt,
+			colbacktitle=white,
+			coltitle=black
+			]
+			\begin{algorithm}[H]
+				\setstretch{1.2}
+				\SetArgSty{relax}
+				\SetAlgoNoEnd
+				\SetKwProg{if}{if}{}{}
+				\SetKwProg{els}{else}{}{}
+				\SetKwProg{While}{while}{}{}
+				\SetKwSty{texttt}
+				input$(\varphi (x_1, \dots, x_n))$\\
+				genera ass. $x \in \{0,1\}^n$\\
+				\If{$(\varphi(x_1, \dots, x_n) == 1)$}{
+					\Return{1}
+				}
+				\Return{0}
+			\end{algorithm}
+		\end{tcolorbox}
+	\end{minipage}
+\end{center}
+
+Ammettendo un modello di calcolo come quello descritto, questo è un algoritmo non deterministico, formato da fase congetturale e fase di verifica.\\
+
+Vediamo invece un algoritmo non deterministico per trovare, se esiste, un circuito hamiltoniano in un grafo $G$
+\begin{center}
+	\begin{minipage}{.7\textwidth}
+		\begin{tcolorbox}[
+			colback=white,
+			sharp corners,
+			boxrule=.3mm,
+			left=20pt,
+			top=0pt,
+			bottom=0pt,
+			colbacktitle=white,
+			coltitle=black
+			]
+			\begin{algorithm}[H]
+				\setstretch{1.2}
+				\SetArgSty{relax}
+				\SetAlgoNoEnd
+				\SetKwProg{if}{if}{}{}
+				\SetKwProg{els}{else}{}{}
+				\SetKwProg{While}{while}{}{}
+				\SetKwSty{texttt}
+				input$(G = (V,E))$\\
+				genera perm. $\pi (v_1, \dots, v_n)$\\
+				\If{$(\pi(v_1, \dots, v_n))$ è un C.H. in $G$}{
+					\Return{1}
+				}
+				\Return{0}
+			\end{algorithm}
+		\end{tcolorbox}
+	\end{minipage}
+\end{center}
+
+Si può notare come abbia la stessa struttura del programma precedente.\\
+
+\subsection{Tempo di calcolo}
+
+Dato che è cambiato il modello di calcolo, bisogna rivedere la definizione di tempo di calcolo.\\
+
+Consideriamo il tempo di calcolo $T(x)$ per un'istanza $x$ con risposta positiva (negativa) come il miglior tempo di calcolo delle fasi di verifica con risposta positiva (negativa). Per convenzione, la fase congetturale non impiega tempo. Da ricordare che questo è un modello teorico, nella realtà verrà sperso tempo anche per la generazione delle strutture usate nelle verifiche.\\
+
+\textit{Come formalizzare questo tipo di algoritmi?} \\
+
+\subsection{Definizione di NDTM}
+
+Consideriamo una DTM $M$ come già descritta e apportiamo delle modifiche: 
+\begin{itemize}
+	\item allunghiamo il nastro, ora infinito anche verso sinistra
+	\item aggiungiamo un \textit{modulo congetturale}, che scriva sulla parte sinistra del nastro la struttura generata
+\end{itemize}
+
+Quindi il nastro conterrà sia l'input $x$ del problema, sia la struttura $\gamma$ generata dalla fase congetturale e la fase di verifica non lavorerà più solo su $x$, ma utilizzerà la coppia $(\gamma, x)$. Allora 
+\begin{itemize}
+	\item $x$ viene accettato $\Leftrightarrow \exists \gamma \in \Gamma^\ast: (\gamma, x)$ viene deterministicamente accettata
+	\item non viene accettato altrimenti 
+\end{itemize}
+
+Il linguaggio accettato da $M$ è 
+$$ L_M = \left\{x \in \Sigma^\ast: M \text{ accetta } x\right\} $$
+
+Un linguaggio $L \subseteq \Sigma^\ast$ è accettato da un algoritmo non deterministico se e solo se esiste una NDTM $M = (Q, \Sigma, \Gamma, \delta, q_0, F)$ tale che $L = L_M$.\\
+
+Ricordiamo che, dato un problema $(\Pi, x \in D, p(x))$, il linguaggio riconosciuto dal problema è
+$$ L_\Pi = \left\{cod(x): x \in D \wedge p(x) \right\} $$
+dove $cod: D \rightarrow \Sigma^\ast$ è la funzione di codifica delle istanze del problema.\\
+
+Un algoritmo non deterministico per la soluzione di $\Pi$ è una NDTM $M$ tale che
+$$ L_\Pi = L_M $$
+
+Ovviamente, mediante opportuna codifica, possiamo definire NDTM che accettano insiemi o funzioni.\\
+
+\subsection{Complessità in tempo}
+
+La complessità di un algoritmo non deterministico corrisponde alla miglior complessità in tempo per quell'istanza. Allo stesso modo, possiamo definire la complessità in tempo per le NDTM.\\
+
+Una NDTM $M = (Q, \Sigma, \Gamma, \delta, q_0, F)$ ha \textbf{complessità in tempo} $t: \N \rightarrow \N$ se e solo se per ogni input $x \in L_M$ con $|x| = n$ esiste almeno una computazione accettante di $M$ che impiega $t(n)$ passi.\\
+
+Un linguaggio è accettato con \textbf{complessità in tempo non deterministico} $t(n)$ se e solo se esiste una NDTM $M$ con complessità in tempo $t(n)$ che lo accetta.\\
+
+In questo modo abbiamo mappato tutti i concetti chiave visti nella DTM per il non determinismo.\\
+
+\subsection{Classi di complessità non deterministiche}
+
+Si possono definire delle classi per i linguaggi accettati, allo stesso modo di come fatto per le DTM. Chiamiamo
+$$ \ntime (f(n)) $$
+l'insieme dei linguaggi accettati con complessità non deterministica $O(f(n))$.
+
+Vogliamo caratterizzare il concetto di "\textit{efficienza}" anche per il non determinismo.
+
+Sappiamo che \textit{efficiente risolubilità} si traduce nella classe 
+$$ P = \bigcup_{k \geq 0} \dtime \left(n^k\right) $$
+
+Definiamo ora l'\textbf{efficiente verificabilità} come la classe
+$$ NP = \bigcup_{k \geq 0} \ntime \left(n^k\right) $$
+che corrisponde all'insieme dei problemi di decisione che ammettono algoritmi non deterministici polinomiali.\\
+
+\section{$P$ vs $NP$}
+%p 107
