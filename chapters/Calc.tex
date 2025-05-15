@@ -122,7 +122,7 @@ Ovvero, l'insieme di tutte le possibili semantiche di funzioni calcolabili con i
 
 Calcolare funzioni vuol dire risolvere problemi \textit{in generale}, a ogni problema è possibile associare una funzione soluzione che permette di risolverlo automaticamente.\\
 
-Un possibile approccio per risolvere l'inclusione è tramite la \textbf{cardinalità} (funzione che associa ogni insieme al numero di elementi che contiene) dei due insiemi. Potrebbe però presentare dei problemi: è efficace solo quando si parla di insiemi finiti. Ad esempio, l'insieme dei numeri naturali contiene l'insieme dei numeri pari $\mathbb{P} \subsetneq \mathbb{N}$, ma $|\mathbb{N}| = |\mathbb{P}| = \infty$.\\
+Un possibile approccio per risolvere l'inclusione è tramite la \textbf{cardinalità} (funzione che associa ogni insieme al numero di elementi che contiene) dei due insiemi. Potrebbe però presentare dei problemi: è efficace solo quando si parla di insiemi finiti. Ad esempio, l'insieme dei numeri naturali contiene l'insieme dei numeri pari $\mathbb{P} \subsetneq \N$, ma $|\N| = |\mathbb{P}| = \infty$.\\
 Serve una diversa definizione di cardinalità che considera l'esistenza di infiniti \textit{più densi di altri}.\\
 
 \section{Relazioni di Equivalenza}
@@ -138,9 +138,9 @@ Una classe importante di relazioni è quella delle \textbf{relazioni di equivale
 \subsection{Partizione indotta dalla relazione di equivalenza}
 A ogni relazione di equivalenza $R \subseteq A^2$ si può associare una \textbf{partizione}, ovvero un insieme di sottoinsiemi $A_i \subseteq A$ tali che
 \begin{itemize}
-	\item $\forall i \in \mathbb{N}^+$, $A_i \neq \emptyset$
-	\item $\forall i,j \in \mathbb{N}^+$, se $i \neq j$ allora $A_i \cap A_j = \emptyset$
-	\item $\bigcup_{i \in \mathbb{N}^+} A_i = A$
+	\item $\forall i \in \N^+$, $A_i \neq \emptyset$
+	\item $\forall i,j \in \N^+$, se $i \neq j$ allora $A_i \cap A_j = \emptyset$
+	\item $\bigcup_{i \in \N^+} A_i = A$
 \end{itemize}
 
 La relazione $R$ definita su $A^2$ \textit{induce} una partizione $\{A_1, A_2, \dots\}$ su $A$.\\
@@ -182,32 +182,32 @@ $$ J_n = \begin{cases}
 	\emptyset & \text{ se } n = 0 \\
 	\{1, \dots , n\} & \text{ se } n > 0 \\
 \end{cases}$$
-Un insieme $A$ ha \textbf{cardinalità finita} sse $A \sim J_n$ per qualche $n \in \mathbb{N}$; in tal caso possiamo scrivere $|A| = n$. La classe di equivalenza $[J_n]_{\sim}$ identifica tutti gli insiemi di $\U$ contenenti $n$ elementi.\\
+Un insieme $A$ ha \textbf{cardinalità finita} sse $A \sim J_n$ per qualche $n \in \N$; in tal caso possiamo scrivere $|A| = n$. La classe di equivalenza $[J_n]_{\sim}$ identifica tutti gli insiemi di $\U$ contenenti $n$ elementi.\\
 
 \subsection{Cardinalità infinita}
 L'altra classe di cardinalità è quella delle \textbf{cardinalità infinite}, ovvero gli insiemi non in relazione con $J_n$. Si possono dividere in \textbf{numerabili} e \textbf{non numerabili}.
 
 \subsubsection{Insiemi numerabili}
-Un insieme $A$ è numerabile sse $A \sim \mathbb{N}$, ovvero $A \in [\mathbb{N}]_\sim$. Vengono anche detti \textbf{listabili}, in quanto è possibile elencare tutti gli elementi dell'insieme $A$ tramite una funzione $f$ biettiva tra $\mathbb{N}$ e $A$; grazie ad $f$ possiamo elencare gli elementi di $A$, formando l'insieme 
+Un insieme $A$ è numerabile sse $A \sim \N$, ovvero $A \in [\N]_\sim$. Vengono anche detti \textbf{listabili}, in quanto è possibile elencare tutti gli elementi dell'insieme $A$ tramite una funzione $f$ biettiva tra $\N$ e $A$; grazie ad $f$ possiamo elencare gli elementi di $A$, formando l'insieme 
 $$ A = \{f(0), f(1). \dots \} $$
 Ed è esaustivo, in quanto elenca tutti gli elementi di $A$.\\
 
 Questi insiemi hanno cardinalità $\aleph_0$ (\textit{aleph}).\\
 
 \subsubsection{Insiemi non numerabili}
-Gli insiemi non numerabili sono insiemi a cardinalità infinita ma non listabili, sono "più fitti" di $\mathbb{N}$; ogni lista generata non può essere esaustiva.\\
+Gli insiemi non numerabili sono insiemi a cardinalità infinita ma non listabili, sono "più fitti" di $\N$; ogni lista generata non può essere esaustiva.\\
 
 Il più noto tra gli insiemi non numerabili è l'insieme $\mathbb{R}$ dei numeri reali.\\
 
 \begin{theor}
-	L'insieme $\mathbb{R}$ non è numerabile ($\mathbb{R} \nsim \mathbb{N}$)
+	L'insieme $\mathbb{R}$ non è numerabile ($\mathbb{R} \nsim \N$)
 \end{theor}
 \begin{proof}
 	Suddividiamo la dimostrazione in 3 punti: 
 	\begin{enumerate}
 		\item dimostriamo che $\mathbb{R} \sim (0,1)$
-		\item dimostriamo che $\mathbb{N} \nsim (0,1)$
-		\item dimostriamo che $\mathbb{R} \nsim \mathbb{N}$
+		\item dimostriamo che $\N \nsim (0,1)$
+		\item dimostriamo che $\mathbb{R} \nsim \N$
 	\end{enumerate}
 	
 	Per dimostrare che $\mathbb{R} \sim (0,1)$ serve trovare una biezione tra $\mathbb{R}$ e $(0,1)$. Usiamo una rappresentazione grafica: 
@@ -224,7 +224,7 @@ Il più noto tra gli insiemi non numerabili è l'insieme $\mathbb{R}$ dei numeri
 	
 	Questo approccio permette di dire che $\mathbb{R}$ è isomorfo a qualsiasi segmento di lunghezza maggiore di $0$. La stessa biezione vale anche sull'intervallo chiuso $[0,1]$ (e di conseguenza qualsiasi intervallo chiuso), usando la "compattificazione" $\mathbb{R} = \mathbb{R} \cup \{\pm \infty\}$ e mappando $0$ su $-\infty$ e 1 su $+ \infty$.\\
 	
-	Continuiamo dimostrando che $\mathbb{N} \nsim (0,1)$: serve dimostrare che l'intervallo $(0,1)$ non è listabile, quindi che ogni lista manca di almeno un elemento. Proviamo a "costruire" un elemento che andrà a mancare. Per assurdo, sia $\mathbb{N} \sim (0,1)$, allora possiamo listare gli elementi di $(0,1)$ come 
+	Continuiamo dimostrando che $\N \nsim (0,1)$: serve dimostrare che l'intervallo $(0,1)$ non è listabile, quindi che ogni lista manca di almeno un elemento. Proviamo a "costruire" un elemento che andrà a mancare. Per assurdo, sia $\N \sim (0,1)$, allora possiamo listare gli elementi di $(0,1)$ come 
 	$$ 
 	\begin{array}{c c c c c}
 		0. & a_{00} & a_{01} & a_{02} & \dots \\
@@ -241,9 +241,9 @@ Il più noto tra gli insiemi non numerabili è l'insieme $\mathbb{R}$ dei numeri
 		3 & \text{ se } a_{ii} = 2 \\
 	\end{cases}$$
 	
-	Viene costruito "guardando" le cifre sulla diagonale principale, apparterrà sicuramente a $(0,1)$ ma differirà per almeno una posizione (quella sulla diagonale principale) da ogni numero presente all'interno della lista. Questo è assurdo sotto l'assunzione che $(0,1)$ è numerabile, quindi abbiamo provato che $\mathbb{N} \nsim (0,1)$.\\
+	Viene costruito "guardando" le cifre sulla diagonale principale, apparterrà sicuramente a $(0,1)$ ma differirà per almeno una posizione (quella sulla diagonale principale) da ogni numero presente all'interno della lista. Questo è assurdo sotto l'assunzione che $(0,1)$ è numerabile, quindi abbiamo provato che $\N \nsim (0,1)$.\\
 	
-	Il terzo punto $\mathbb{R} \nsim \mathbb{N}$ si dimostra per transitività.\\
+	Il terzo punto $\mathbb{R} \nsim \N$ si dimostra per transitività.\\
 	
 	Più in generale, non si riesce a listare nessun segmento di lunghezza maggiore di 0.\\
 \end{proof}
@@ -256,22 +256,22 @@ Gli insiemi continui hanno cardinalità $\aleph_1$.\\
 
 %Decidi se sub o subsub
 \subsubsection{Insieme delle Parti}
-L'\textbf{insieme delle parti} di $\mathbb{N}$ (anche detto \textit{power set}), è definito come
-$$ P(\mathbb{N}) = 2^{\mathbb{N}} = \{S \mid S \text{ è sottoinsieme di } \mathbb{N}\} $$
+L'\textbf{insieme delle parti} di $\N$ (anche detto \textit{power set}), è definito come
+$$ P(\N) = 2^{\N} = \{S \mid S \text{ è sottoinsieme di } \N\} $$
 
 \begin{theor}
-	$P(\mathbb{N}) \nsim \mathbb{N}$.\\
+	$P(\N) \nsim \N$.\\
 \end{theor}
 \begin{proof}
 	Possiamo dimostrare questo teorema tramite diagonalizzazione. Il vettore caratteristico di un sottoinsieme è un vettore che nella posizione $p_i$ ha 1 se $i \in A$, 0 altrimenti (tipo vettore di incidenza).\\
 	
-	Rappresentiamo $A \subseteq \mathbb{N}$ sfruttando il suo vettore caratteristico
+	Rappresentiamo $A \subseteq \N$ sfruttando il suo vettore caratteristico
 	$$ \begin{array}{c c c c c c c c c}
-		\mathbb{N}: & 0 & 1 & 2 & 3 & 4 & 5 & 6 & \dots \\
+		\N: & 0 & 1 & 2 & 3 & 4 & 5 & 6 & \dots \\
 		A: & 0 & 1 & 1 & 0 & 1 & 1 & 0 & \dots \\
 	\end{array}$$
 	
-	Supponiamo, per assurdo, che $P (\mathbb{N})$ sia numerabile. Vista questa proprietà, possiamo listare tutti i vettori caratteristiche che appartengono a $P(\mathbb{N})$ come
+	Supponiamo, per assurdo, che $P (\N)$ sia numerabile. Vista questa proprietà, possiamo listare tutti i vettori caratteristiche che appartengono a $P(\N)$ come
 	$$ 
 	\begin{array}{c c c c c c}
 		b_0 & = & b_{00} & b_{01} & b_{02} & \dots \\
@@ -279,29 +279,29 @@ $$ P(\mathbb{N}) = 2^{\mathbb{N}} = \{S \mid S \text{ è sottoinsieme di } \math
 		b_2 & = & b_{20} & b_{21} & b_{22} & \dots \\
 	\end{array}
 	$$
-	Vogliamo quindi costruire un vettore che appartiene a $P(\mathbb{N})$ ma non presente nella lista precedente. Definiamo
+	Vogliamo quindi costruire un vettore che appartiene a $P(\N)$ ma non presente nella lista precedente. Definiamo
 	$$ c = \bar{b_{00}} \, \bar{b_{11}} \, \bar{b_{22}} \dots $$
 	ovvero il vettore che contiene in posizione $c_i$ il complemento di $b_{ii}$.\\
 	
-	Questo vettore appartiene a $P(\mathbb{N})$, in quanto sicuramente sottoinsieme di $\mathbb{N}$, ma non è presente nella lista precedente perché diverso da ogni elemento almeno di una cifra (quella sulla diagonale principale). \\
+	Questo vettore appartiene a $P(\N)$, in quanto sicuramente sottoinsieme di $\N$, ma non è presente nella lista precedente perché diverso da ogni elemento almeno di una cifra (quella sulla diagonale principale). \\
 	
-	Questo è assurdo per l'assunzione che $P(\mathbb{N})$ è numerabile, quindi $P(\mathbb{N}) \nsim \mathbb{N}$.\\
+	Questo è assurdo per l'assunzione che $P(\N)$ è numerabile, quindi $P(\N) \nsim \N$.\\
 \end{proof}
 
 \subsubsection{Insieme delle funzioni}
-L'\textbf{insieme delle funzioni} da $\mathbb{N}$ a $\mathbb{N}$ è definito come
-$$ \mathbb{N}^{\mathbb{N}}_\bot = \{f: \mathbb{N} \rightarrow \mathbb{N} \} $$
+L'\textbf{insieme delle funzioni} da $\N$ a $\N$ è definito come
+$$ \N^{\N}_\bot = \{f: \N \rightarrow \N \} $$
 
 \begin{theor}
-	$\mathbb{N}_\bot^{\mathbb{N}} \nsim \mathbb{N}$.\\
+	$\N_\bot^{\N} \nsim \N$.\\
 \end{theor}
 \begin{proof}
-	Diagonalizzazione strikes again. Assumiamo, per assurdo, che $\mathbb{N}_\bot^{\mathbb{N}}$ sia numerabile. Possiamo quindi listare $\mathbb{N}_\bot^{\mathbb{N}}$ come $\{f_0, f_1, f_2, \dots\}$
+	Diagonalizzazione strikes again. Assumiamo, per assurdo, che $\N_\bot^{\N}$ sia numerabile. Possiamo quindi listare $\N_\bot^{\N}$ come $\{f_0, f_1, f_2, \dots\}$
 	$$
 	\renewcommand{\arraystretch}{2}
 	\begin{array}{|m{1cm}|m{1cm}|m{1cm}|m{1cm}|m{1cm}|m{1cm}|m{1cm}|}
 		\hline
-		& $0$ & $1$ & $2$ & $3$ & $\dots$ & $\mathbb{N}$ \\
+		& $0$ & $1$ & $2$ & $3$ & $\dots$ & $\N$ \\
 		\hline
 		$f_0$ & $f_0 (0)$ & $f_0 (1)$ & $f_0 (2)$ & $f_0 (3)$ & $\dots$ & $\dots$ \\
 		\hline
@@ -314,7 +314,7 @@ $$ \mathbb{N}^{\mathbb{N}}_\bot = \{f: \mathbb{N} \rightarrow \mathbb{N} \} $$
 	\end{array}
 	$$
 	
-	Costruiamo una funzione $\varphi: \mathbb{N} \rightarrow \mathbb{N}_\bot$ per dimostrare l'assurdo. Un'idea potrebbe essere $\varphi(n) = f_n(n) + 1$, "spostando" la diagonale, ma non tiene in considerazione il caso $f_n (n) = \bot$ in quanto non sapremmo dare un valore a $\varphi (n) = \bot +1$. Definiamo quindi
+	Costruiamo una funzione $\varphi: \N \rightarrow \N_\bot$ per dimostrare l'assurdo. Un'idea potrebbe essere $\varphi(n) = f_n(n) + 1$, "spostando" la diagonale, ma non tiene in considerazione il caso $f_n (n) = \bot$ in quanto non sapremmo dare un valore a $\varphi (n) = \bot +1$. Definiamo quindi
 	$$ 
 	\varphi(n) = \begin{cases}
 		1 & \text{ se } f_n (n) = \bot \\
@@ -322,7 +322,7 @@ $$ \mathbb{N}^{\mathbb{N}}_\bot = \{f: \mathbb{N} \rightarrow \mathbb{N} \} $$
 	\end{cases}
 	$$
 	
-	Questa funzione appartiene a $\mathbb{N}_\bot^{\mathbb{N}}$, ma non è presente nella lista precedente, infatti $\forall k \in \mathbb{N}$ si ottiene 
+	Questa funzione appartiene a $\N_\bot^{\N}$, ma non è presente nella lista precedente, infatti $\forall k \in \N$ si ottiene 
 	$$ 
 	\varphi(k) = \begin{cases}
 		1 \neq f_k (k) = \bot & \text{ se } f_k (k) = \bot \\
@@ -331,7 +331,7 @@ $$ \mathbb{N}^{\mathbb{N}}_\bot = \{f: \mathbb{N} \rightarrow \mathbb{N} \} $$
 	$$
 	
 	%TODO Check?
-	Questo è assurdo sotto l'assunzione che $\mathbb{N}_\bot^{\mathbb{N}}$ è numerabile, quindi $\mathbb{N}_\bot^{\mathbb{N}} \nsim \mathbb{N}$.\\
+	Questo è assurdo sotto l'assunzione che $\N_\bot^{\N}$ è numerabile, quindi $\N_\bot^{\N} \nsim \N$.\\
 \end{proof}
 
 \section{Potenza Computazionale di un sistema di calcolo}
@@ -342,18 +342,18 @@ $$ F(\C) \subseteq \dati_\bot^{\dati} $$
 
 Due intuizioni, da dimostrare, sono: 
 \begin{itemize}
-	\item $\prog \sim \mathbb{N}$: ogni programma può essere identificato con un numero, come la sua codifica in binario
-	\item $\dati \sim \mathbb{N}$: anche ogni dato può essere identificato tramite la sua codifica in binario
+	\item $\prog \sim \N$: ogni programma può essere identificato con un numero, come la sua codifica in binario
+	\item $\dati \sim \N$: anche ogni dato può essere identificato tramite la sua codifica in binario
 \end{itemize}
 
 Da questo possiamo dire che
-$$ F(\C) \sim \prog \sim \mathbb{N} \nsim \mathbb{N}_\bot^{\mathbb{N}} \sim \dati_\bot^{\dati} $$
+$$ F(\C) \sim \prog \sim \N \nsim \N_\bot^{\N} \sim \dati_\bot^{\dati} $$
 
 Questo dimostra che \textbf{esistono funzioni non calcolabili}, ci sono troppe funzioni e troppi pochi programmi.\\
 
-Dobbiamo dimostrare le due assunzioni $\prog \sim \mathbb{N}$ e $\dati \sim \mathbb{N}$. Si può fare tramite tecniche di aritmetizzazione (o godelizzazione) di strutture, tecniche che rappresentano delle strutture tramite un numero.
+Dobbiamo dimostrare le due assunzioni $\prog \sim \N$ e $\dati \sim \N$. Si può fare tramite tecniche di aritmetizzazione (o godelizzazione) di strutture, tecniche che rappresentano delle strutture tramite un numero.
 
-\section{$\dati \sim \mathbb{N}$}
+\section{$\dati \sim \N$}
 Serve trovare una legge che
 \begin{enumerate}
 	\item Associ biunivocamente dati a numeri e viceversa
@@ -363,12 +363,12 @@ Serve trovare una legge che
 
 \subsection{Funzione Coppia di Cantor}
 La \textbf{funzione coppia di Cantor} è la funzione
-$$ \langle , \rangle: \mathbb{N} \times \mathbb{N} \rightarrow \mathbb{N}^+ $$
+$$ \langle , \rangle: \N \times \N \rightarrow \N^+ $$
 E sfrutta le due "sotto-funzioni" 
 $$
 \begin{array}{r c}
-	\sin: & \mathbb{N}^+ \rightarrow \mathbb{N} \\
-	\des: & \mathbb{N}^+ \rightarrow \mathbb{N}
+	\sin: & \N^+ \rightarrow \N \\
+	\des: & \N^+ \rightarrow \N
 \end{array}
 $$
 Tali che 
@@ -406,7 +406,7 @@ Il valore $\langle x,y \rangle$ rappresenta l'incrocio tra la $x$-esima riga e l
 La funzione deve essere: 
 \begin{itemize}
 	\item iniettiva: non ci possono essere celle con lo stesso numero
-	\item suriettiva: ogni numero in $\mathbb{N}^+$ deve comparire
+	\item suriettiva: ogni numero in $\N^+$ deve comparire
 \end{itemize}
 Entrambe le proprietà sono soddisfatte, in quanto la numerazione avviene in maniera incrementale, quindi ogni numero prima o poi compare in una cella e di conseguenza ho una coppia che lo genera.\\
 
@@ -443,7 +443,7 @@ $$ \begin{array}{r c l}
 Trovando il valore di $\gamma$ possiamo trovare $x$ e $y$. \\
 
 Notiamo come $\gamma$ sia il più grande valore che, quando calcolato sulla prima colonna ($\langle \gamma, 0 \rangle$) non supera $n$, ovvero
-$$ \gamma = \max \{z \in \mathbb{N} \mid \langle z, 0 \rangle \leq n \} $$
+$$ \gamma = \max \{z \in \N \mid \langle z, 0 \rangle \leq n \} $$
 Intuitivamente, si tratta dell'inizio della diagonale che contiene $n$, è "l'inverso" dell'osservazione fatta in precedenza per la quale $ \langle x,y \rangle = \langle x + y,0 \rangle + y $.\\
 
 Risolviamo quindi la disequazione
@@ -466,26 +466,26 @@ $$
 $$
 
 \begin{theor}
-	$\mathbb{N} \times \mathbb{N} \sim \mathbb{N}^+$
+	$\N \times \N \sim \N^+$
 \end{theor}
 \begin{proof}
-	La funzione di Cantor è una funzione biettiva tra l'insieme $\mathbb{N} \times \mathbb{N}$ e l'insieme $\mathbb{N}^+$, quindi i due insiemi sono isomorfi.\\
+	La funzione di Cantor è una funzione biettiva tra l'insieme $\N \times \N$ e l'insieme $\N^+$, quindi i due insiemi sono isomorfi.\\
 \end{proof}
 
-Possiamo estendere il risultato all'interno dell'insieme $\mathbb{N}$, ovvero:
+Possiamo estendere il risultato all'interno dell'insieme $\N$, ovvero:
 
 \begin{theor}
-	$\mathbb{N} \times \mathbb{N} \sim \mathbb{N}$
+	$\N \times \N \sim \N$
 \end{theor}
 \begin{proof}
 	Definiamo la funzione 
-	$$ [,]: \mathbb{N} \times \mathbb{N} \rightarrow \mathbb{N} $$
+	$$ [,]: \N \times \N \rightarrow \N $$
 	tale che
 	$$ [x,y] = \langle x,y \rangle - 1$$
 	Questa funzione è anch'essa biettiva, quindi i due insiemi sono isomorfi.\\
 \end{proof}
 
-Grazie a questo è possibile dimostrare anche che $\mathbb{Q} \sim \mathbb{N}$, infatti i numeri razionali si possono rappresentare come coppie (num, den) e, in generale, tutte le tuple sono isomorfe e $\mathbb{N}$, basta iterare in qualche modo la funzione coppia di Cantor.\\
+Grazie a questo è possibile dimostrare anche che $\mathbb{Q} \sim \N$, infatti i numeri razionali si possono rappresentare come coppie (num, den) e, in generale, tutte le tuple sono isomorfe e $\N$, basta iterare in qualche modo la funzione coppia di Cantor.\\
 
 \subsection{Applicazione alle strutture dati}
 
@@ -519,15 +519,15 @@ Quindi è possibile codificare liste e, di conseguenza, \textbf{qualsiasi tipo d
 \end{itemize}
 
 Abbiamo visto come i dati possano essere sostituiti da delle codifiche numeriche; di conseguenza possiamo sostituire tutte le funzioni 
-$$ f: \dati \rightarrow \dati \;\; \text{ con funzioni } \;\; f': \mathbb{N} \rightarrow \mathbb{N}_\bot $$
+$$ f: \dati \rightarrow \dati \;\; \text{ con funzioni } \;\; f': \N \rightarrow \N_\bot $$
 
-In altre parole, l'universo dei problemi per i quali cerchiamo una soluzione automatica è rappresentabile da $\mathbb{N}_\bot^{\mathbb{N}}$ e di conseguenza $\dati \sim \mathbb{N}$.\\
+In altre parole, l'universo dei problemi per i quali cerchiamo una soluzione automatica è rappresentabile da $\N_\bot^{\N}$ e di conseguenza $\dati \sim \N$.\\
 
-\section{$\prog \sim \mathbb{N}$}
+\section{$\prog \sim \N$}
 Adesso lavoriamo sulla parte della relazione che afferma 
-$$ F(\C) \sim \prog \sim \mathbb{N} $$
+$$ F(\C) \sim \prog \sim \N $$
 
-Ovvero, la potenza computazionale (l'insieme dei programmi che un sistema di calcolo $\C$ riesce a calcolare, $F(\C)$) è isomorfa all'insieme di tutti i programmi, a loro volta isomorfi a $\mathbb{N}$.\\
+Ovvero, la potenza computazionale (l'insieme dei programmi che un sistema di calcolo $\C$ riesce a calcolare, $F(\C)$) è isomorfa all'insieme di tutti i programmi, a loro volta isomorfi a $\N$.\\
 
 Vogliamo arrivare a ricavare un numero dato un programmo e viceversa. Per farlo servirà vedere l'insieme $\prog$ come l'insieme dei programmi scritti in un certo linguaggio di programmazione.\\
 
@@ -541,7 +541,7 @@ Il sistema RAM può apparentemente sembrare "troppo semplice", quindi il sistema
 
 Ci sono due possibili soluzioni: 
 \begin{itemize}
-	\item $F(\ram \neq F(\while)$: la computabilità \textit{dipende dal sistema usato}
+	\item $F(\ram) \neq F(\while)$: la computabilità \textit{dipende dal sistema usato}
 	\item $F(\ram) = F(\while)$: la computabilità è \textit{intrinseca nei problemi} e, di conseguenza, tutti i sistemi sono equivalenti (Tesi di Church-Turing)
 \end{itemize}
 
@@ -550,7 +550,7 @@ Il secondo caso è più promettente e, in quel caso, l'obiettivo diventerebbe tr
 \subsection{Sistema di calcolo $\ram$}
 Il sistema di calcolo $\ram$ è un sistema semplice che permette di definire rigorosamente: 
 \begin{itemize}
-	\item $\prog \sim \mathbb{N}$
+	\item $\prog \sim \N$
 	\item la \textbf{semantica} dei programmi eseguibili, ovvero $\C(P,\_)$, con $\C = \ram$, ottenendo $\ram (P,\_)$
 	\item la \textbf{potenza computazionale}, ovvero calcolare $F(\C)$ con $\C = \ram$, ottenendo $F(\ram)$
 \end{itemize}
@@ -605,7 +605,7 @@ L'esecuzione di un programma su una macchina RAM segue i passi:
 	\end{cases}
 	$$
 \end{enumerate}
-Con $\varphi_P: \mathbb{N} \rightarrow \mathbb{N}_\bot$ indichiamo la semantica del programma $P$.\\
+Con $\varphi_P: \N \rightarrow \N_\bot$ indichiamo la semantica del programma $P$.\\
 
 Con $\C(P,\_)$ indicavamo la semantica di $P$ nel sistema di calcolo $\C$, quindi con $\ram(P,\_) = \varphi_P$ indichiamo la semantica di $P$ nel sistema di calcolo RAM.\\
 
@@ -621,7 +621,7 @@ Uno stato deve descrivere completamente la situazione della macchina in un certo
 
 La \textbf{computazione} del programma $P$ è una sequenza di stati $\st_i$, ognuno generato dall'esecuzione di un'istruzione del programma; $P$ induce una sequenza di stati $\st_i$, se questa è formata da un numero infinito di stati, allora il programma è andato in loop; in caso contrario, nel registro $R_0$ si trova il risultato $y$ della computazione di $P$.
 $$ 
-\varphi_P: \mathbb{N} \rightarrow \mathbb{N}_\bot \tc \varphi_P(n) = \begin{cases}
+\varphi_P: \N \rightarrow \N_\bot \tc \varphi_P(n) = \begin{cases}
 	y & \text{ se } \exists \st_{fin} \\
 	\bot & \text{ altrimenti}
 \end{cases}
@@ -630,15 +630,15 @@ $$
 Per definire come passare da uno stato all'altro, definiamo formalmente: 
 \begin{itemize}
 	\item \textbf{Stato}: istantanea di tutte le componenti della macchina, è una funzione 
-	$$ \st: \{L, R_i\} \rightarrow \mathbb{N} $$
+	$$ \st: \{L, R_i\} \rightarrow \N $$
 	tale che $\st (R_k)$ restituisce il contenuto del registro $R_k$ quando la macchina si trova nello stato $\st$. Gli stati possibili di una macchina appartengono all'insieme 
-	$$ \stati = \{f: \{L, R_i\} \rightarrow \mathbb{N}\} = \mathbb{N}^{\{L,R_i\}} $$
+	$$ \stati = \{f: \{L, R_i\} \rightarrow \N\} = \N^{\{L,R_i\}} $$
 	%Questa rappresentazione permette un numero di registri potenzialmente infinito. Se così non fosse, avremmo tuple per indicare tutti i possibili registri al posto dell'insieme $\{L,R_i\}$
 	
 	\item \textbf{Stato Finale}: uno stato finale $\st_{fin}$ è un qualsiasi stato $\st$ tale che $\st (L) = 0$
-	\item \textbf{Dati}: già dimostrato come $\dati \sim \mathbb{N}$
+	\item \textbf{Dati}: già dimostrato come $\dati \sim \N$
 	\item \textbf{Inizializzazione}: serve una funzione che, preso l'input, restituisca lo stato iniziale della macchina: 
-	$$ \text{in}: \mathbb{N} \rightarrow \stati \tc \text{in}(n) = \st_{init}$$
+	$$ \text{in}: \N \rightarrow \stati \tc \text{in}(n) = \st_{init}$$
 	Lo stato iniziale $\st_{init}$ è tale che 
 	$$ 
 	\st_{init} (R) = \begin{cases}
@@ -687,7 +687,7 @@ La funzione $\delta (\st, P) = \st'$ è tale che
 	\end{itemize}
 \end{itemize}
 
-L'esecuzione di un programma $P \in \prog$ su input $n \in \mathbb{N}$ genera una sequenza di stati 
+L'esecuzione di un programma $P \in \prog$ su input $n \in \N$ genera una sequenza di stati 
 $$ \st_0, \st_1, \dots, \st_i, \st_{i+1}, \dots $$
 tali che 
 $$
@@ -707,12 +707,12 @@ $$
 $$
 
 La potenza computazionale del sistema $\ram$ è 
-$$ F(\ram) = \left\{f \in \mathbb{N}^{\mathbb{N}}_\bot \mid \exists P \in \prog \mid \varphi_P = f \right\} = \left\{\varphi_P \mid P \in \prog \right\} \subsetneq \mathbb{N}^{\mathbb{N}}_\bot $$
-L'insieme è formato da tutte le funzioni $f: \mathbb{N} \rightarrow \mathbb{N}_\bot$ che hanno un programma che le calcola in un sistema $\ram$.\\
+$$ F(\ram) = \left\{f \in \N^{\N}_\bot \mid \exists P \in \prog \mid \varphi_P = f \right\} = \left\{\varphi_P \mid P \in \prog \right\} \subsetneq \N^{\N}_\bot $$
+L'insieme è formato da tutte le funzioni $f: \N \rightarrow \N_\bot$ che hanno un programma che le calcola in un sistema $\ram$.\\
 
 \subsection{Aritmetizzazione di un programma}
 
-Per verificare che $\prog \sim \mathbb{N}$ basterebbe trovare una funzione che permetta di codificare i programmi in numeri in modo biunivoco. Data una lista di istruzioni semplici $P \equiv \text{Istr}_1, \dots, \text{Istr}_m$ se questa fosse codificata come una lista di interi potremmo sfruttare la funzione coppia di Cantor per ottenere un numero associato al programma $P$.\\
+Per verificare che $\prog \sim \N$ basterebbe trovare una funzione che permetta di codificare i programmi in numeri in modo biunivoco. Data una lista di istruzioni semplici $P \equiv \text{Istr}_1, \dots, \text{Istr}_m$ se questa fosse codificata come una lista di interi potremmo sfruttare la funzione coppia di Cantor per ottenere un numero associato al programma $P$.\\
 
 Quindi vogliamo trovare una funzione $Ar$ che associ a ogni istruzione $I_k$ la sua codifica numerica $c_k$. Se la funzione trovata è anche biunivoca siamo sicuri di poter trovare anche la sua inversa, ovvero la funzione che ci permette di ricavare $I_k$ da $c_k$.\\
 
@@ -743,7 +743,7 @@ $$
 Per tornare indietro devo prima invertire la funzione coppia di Cantor e poi invertire la funzione $Ar$.\\
 La lunghezza del programma $P$, indicata con $|P|$, si calcola come $len(cod(P))$.\\
 
-Abbiamo quindi dimostrato che $\prog \sim \mathbb{N}$.\\
+Abbiamo quindi dimostrato che $\prog \sim \N$.\\
 
 \subsubsection{Osservazioni}
 Avendo $n = cod(P)$ si può scrivere
@@ -755,11 +755,11 @@ I numeri diventano un \textit{linguaggio di programmazione}.\\
 Si può scrivere l'insieme 
 $$ F(\ram) = \{\varphi_P: P \in \prog \}$$
 come 
-$$ F(\ram) = \{\varphi_i\}_{i \in \mathbb{N}} $$
-L'insieme, grazie alla dimostrazione di $\prog \sim \mathbb{N}$, è numerabile.\\
+$$ F(\ram) = \{\varphi_i\}_{i \in \N} $$
+L'insieme, grazie alla dimostrazione di $\prog \sim \N$, è numerabile.\\
 
 Abbiamo dimostrato rigorosamente che 
-$$ F(\ram) \sim \mathbb{N} \nsim \mathbb{N}^{\mathbb{N}}_\bot $$
+$$ F(\ram) \sim \N \nsim \N^{\N}_\bot $$
 Di conseguenza, anche nel sistema di calcolo $\ram$ esistono funzioni non calcolabili.\\
 
 La $\ram$ è troppo elementare affinché $F(\ram)$ rappresenti formalmente la "classe dei problemi risolubili automaticamente", quindi considerando un sistema di calcolo $\C$ più sofisticato, ma comunque trattabile rigorosamente come il sistema $\ram$, potremmo dare un'idea formale di "ciò che è calcolabile automaticamente".\\
@@ -798,7 +798,7 @@ Dove i vari $C_i$ sono, come prima, assegnamenti, comandi while o comandi compos
 $$ \wprog = \{\prog \text{ scritti in linguaggio } \while \} $$
 
 Chiamiamo 
-$$ \Psi_W : \mathbb{N} \rightarrow \mathbb{N}_\bot $$
+$$ \Psi_W : \N \rightarrow \N_\bot $$
 la \textbf{semantica} del programma $W \in \wprog$.\\
 
 Per dimostrare una proprietà $P$ di un programma $W \in \wprog$, data la definizione induttiva del linguaggio $\while$, è naturale procedere induttivamente: 
@@ -829,8 +829,8 @@ L'esecuzione di un programma $\while$ $W$ è composta dalle seguenti fasi:
 Come per i programmi $\ram$, serve una definizione formale per la semantica di un programma $\while$, per la quale servono una serie di elementi
 \begin{itemize}
 	\item \textbf{Stato}: una tupla grande quanto il numero di variabili, dove quindi $\underline{x} = (c_0, \dots, c_{20})$ rappresenta uno stato, con $c_i$ rappresentante il contenuto della variabile $i$
-	\item \textbf{$\wstati$}: Insieme di tutti gli stati possibili, contenuto in $\mathbb{N}^{21}$ vista la definizione degli stati 
-	\item \textbf{Dati}: già visto che $\dati \sim \mathbb{N}$
+	\item \textbf{$\wstati$}: Insieme di tutti gli stati possibili, contenuto in $\N^{21}$ vista la definizione degli stati 
+	\item \textbf{Dati}: già visto che $\dati \sim \N$
 	\item \textbf{Inizializzazione}: Lo stato iniziale è descritto dalla funzione 
 	$$ w\text{-}in(n) = (0, n, 0, \dots, 0) $$
 	\item \textbf{Semantica operazionale}: Vogliamo trovare una funzione che, presi comando da eseguire e stato corrente, restituisce lo stato successivo
@@ -877,12 +877,12 @@ Proseguiamo con il \textbf{passo induttivo}:
 \end{itemize}
 
 Definita la semantica operazionale, manca solo da definire cos'è la \textbf{semantica del programma} $W$ su input $n$. Questa è la funzione 
-$$ \Psi_W: \mathbb{N} \rightarrow \mathbb{N}_\bot \mid \Psi_W (n) = \text{Proj}\left(0, \llbracket W \rrbracket (w\text{-}in(n))\right)$$
+$$ \Psi_W: \N \rightarrow \N_\bot \mid \Psi_W (n) = \text{Proj}\left(0, \llbracket W \rrbracket (w\text{-}in(n))\right)$$
 
 Questo è valido in quanto $W$ programma $\while$ è un programma composto, e abbiamo definito come deve comportarsi la funzione $\llbracket - \rrbracket (-)$ sui comandi composti.\\
 
 \paragraph{Potenza Computazionale:} La potenza computazionale del sistema di calcolo $\while$ è l'insieme 
-$$ F(\while) = \left\{f \in \mathbb{N}^{\mathbb{N}}_\bot \mid \exists W \in \wprog \mid f = \Psi_W \right\} = \left\{\Psi_W : W \in \wprog \right\}$$
+$$ F(\while) = \left\{f \in \N^{\N}_\bot \mid \exists W \in \wprog \mid f = \Psi_W \right\} = \left\{\Psi_W : W \in \wprog \right\}$$
 
 Ovvero, l'insieme formato da tutte le funzioni che possono essere calcolate con un programma in $\wprog$.\\
 
@@ -896,8 +896,8 @@ Viene naturale confrontare i due sistemi presentati per capire il "più potente"
 \end{itemize}
 
 \paragraph{Confronto tra sistemi di calcolo:} Ponendo di avere $\C_1$ e $\C_2$ sistemi di calcolo con programmi in $\cprog{1}$ e $\cprog{2}$ e le relative potenze computazionali
-$$ F(\C_1) = \left\{f: \mathbb{N} \rightarrow \mathbb{N}_\bot \mid \exists P_1 \in \cprog{1} \mid f = \Psi_{P_1} \right\} = \left\{\Psi_{P_1}: P_1 \in \cprog{1} \right\} $$
-$$ F(\C_2) = \left\{f: \mathbb{N} \rightarrow \mathbb{N}_\bot \mid \exists P_2 \in \cprog{2} \mid f = \Psi_{P_2} \right\} = \left\{\Psi_{P_2}: P_2 \in \cprog{2} \right\} $$
+$$ F(\C_1) = \left\{f: \N \rightarrow \N_\bot \mid \exists P_1 \in \cprog{1} \mid f = \Psi_{P_1} \right\} = \left\{\Psi_{P_1}: P_1 \in \cprog{1} \right\} $$
+$$ F(\C_2) = \left\{f: \N \rightarrow \N_\bot \mid \exists P_2 \in \cprog{2} \mid f = \Psi_{P_2} \right\} = \left\{\Psi_{P_2}: P_2 \in \cprog{2} \right\} $$
 
 Mostrare che il primo sistema non è più potente del secondo $F(\C_1) \subseteq F(\C_2)$ vuol dire dimostrare che ogni elemento nel primo insieme deve stare anche nel secondo
 $$ \forall f \in F(\C_1) \implies f \in F(C_2) $$
@@ -1072,7 +1072,7 @@ Abbiamo mostrato che una macchina $\while$ non è più potente di una macchina $
 
 Introduciamo il concetto di \textbf{interprete}. Chiamiamo $I_W$ l'interprete scritto in linguaggio $\while$ per programmi scritti in linguaggio $\ram$.\\
 
-$I_W$ prende in input un programma $P \in \prog$ e un dato $x \in \mathbb{N}$ e restituisce "\textit{l'esecuzione}" di $P$ sull'input $x$. Più formalmente, restituisce la semantica di $P$ su $x$, quindi $\varphi_P (x)$.
+$I_W$ prende in input un programma $P \in \prog$ e un dato $x \in \N$ e restituisce "\textit{l'esecuzione}" di $P$ sull'input $x$. Più formalmente, restituisce la semantica di $P$ su $x$, quindi $\varphi_P (x)$.
 
 \begin{center}
 	\input{img/calc/interprete1}
@@ -1082,7 +1082,7 @@ Notiamo come l'interprete non crei dei prodotti intermedi, ma si limita a esegui
 
 Due problemi principali: 
 \begin{enumerate}
-	\item Il primo riguarda il tipo di input della macchina $\while$ in quanto questa non sa leggere il programma $P$ (listato di istruzioni $\ram$), sa leggere solo numeri. Dobbiamo modificare $I_W$ in modo che non passi più $P$ ma la sua codifica $cod(P) = n \in \mathbb{N}$. Questo restituisce la semantica del programma codificato con $n$, che è $P$, quindi $\varphi_n (x) ) \varphi_P (x)$
+	\item Il primo riguarda il tipo di input della macchina $\while$ in quanto questa non sa leggere il programma $P$ (listato di istruzioni $\ram$), sa leggere solo numeri. Dobbiamo modificare $I_W$ in modo che non passi più $P$ ma la sua codifica $cod(P) = n \in \N$. Questo restituisce la semantica del programma codificato con $n$, che è $P$, quindi $\varphi_n (x) ) \varphi_P (x)$
 	\item Il secondo problema riguarda la quantità di dati in input alla macchina $\while$: questa legge l'input da un singolo registro, mentre qui ne stiamo passando due. Bisogna modificare $I_W$, condensando l'input tramite la funzione coppia di Cantor, che diventa $\langle x,n \rangle$
 \end{enumerate}
 Quindi
@@ -1091,7 +1091,7 @@ Quindi
 \end{center}
 
 La semantica di $I_W$ diventa
-$$ \forall x,n \in \mathbb{N} \;\;\;\; \Psi_{I_W} \left(\langle x,n \rangle \right) = \varphi_n (x) = \varphi_P (x) $$
+$$ \forall x,n \in \N \;\;\;\; \Psi_{I_W} \left(\langle x,n \rangle \right) = \varphi_n (x) = \varphi_P (x) $$
 
 Similmente a prima, useremo per comodità il linguaggio \textbf{macro-$\while$}, che include alcune macro comode nella scrittura di $I_W$. Viene modificata solo la sintassi e di conseguenza non la potenza del linguaggio.\\
 
@@ -1211,7 +1211,7 @@ Inoltre abbiamo di conseguenza dimostrato che
 	\Downarrow \\
 	F(\ram) = F(\while) \\
 	\Downarrow \\
-	F(\ram) = F(\while) \sim \prog \sim \mathbb{N} \nsim \mathbb{N}^\mathbb{N}_\bot
+	F(\ram) = F(\while) \sim \prog \sim \N \nsim \N^\N_\bot
 \end{gather*}
 
 Quindi, abbiamo dimostrato che i sistemi $\ram$ e $\while$ sono in grado di \textbf{calcolare le stesse cose}, oltre al fatto che \textbf{esistono funzioni non calcolabili}, ovvero la parte destra della catena. \\
@@ -1222,7 +1222,7 @@ $$ \comp: \wprog \rightarrow \prog $$
 sul programma $I_W$, otteniamo
 $$ \U = \comp(I_W) \in \prog $$
 E la sua semantica è 
-$$ \varphi_\U (\langle x,n \rangle) = \Psi_{I_W} (\langle x,n \rangle) = \varphi_n $$
+$$ \varphi_\U (\langle x,n \rangle) = \Psi_{I_W} (\langle x,n \rangle) = \varphi_n (x) $$
 dove $n$ è la codifica del programma $\ram$ e $x$ il dato di input.\\
 
 Abbiamo mostrato che esiste un programma $\ram$ in grado di \textbf{simulare} tutti gli altri programmi $\ram$. Questo programma viene detto \textbf{interprete universale}.\\
@@ -1302,9 +1302,9 @@ In seguito alla definizione di $\cp$ ci sarà da domandarci se questa idea di ca
 Definiamo $\elem$ con le seguenti funzioni
 \begin{center}
 	\begin{tabular}{r c r l c l}
-		$\elem = $ & $\{$ & successore: & $s(x) = x + 1$, & $x \in \mathbb{N}$ & \\
-		&& zero: & $0^n (x_1, \dots, x_n) = 0$, & $x_i \in \mathbb{N}$ & \\
-		&& proiettori: & $\pro_k^n (x_1, \dots, x_n) = x_k$, & $x_i \in \mathbb{N}$& $\}$ \\
+		$\elem = $ & $\{$ & successore: & $s(x) = x + 1$, & $x \in \N$ & \\
+		&& zero: & $0^n (x_1, \dots, x_n) = 0$, & $x_i \in \N$ & \\
+		&& proiettori: & $\pro_k^n (x_1, \dots, x_n) = x_k$, & $x_i \in \N$& $\}$ \\
 	\end{tabular}
 \end{center}
 
@@ -1316,12 +1316,12 @@ Definiamo ora un insieme $\Omega$ di operazioni che permettano di ampliare le fu
 \subsubsection{Composizione}
 Il primo operatore è quello di \textbf{composizione}. Siano
 \begin{itemize}
-	\item $h: \mathbb{N}^k \rightarrow \mathbb{N}$ funzione di composizione
-	\item $g_1, \dots, g_k: \mathbb{N}^n \rightarrow \mathbb{N}$ "funzioni intermedie"
-	\item $\underline{x} \in \mathbb{N}^n$ input
+	\item $h: \N^k \rightarrow \N$ funzione di composizione
+	\item $g_1, \dots, g_k: \N^k \rightarrow \N$ "funzioni intermedie"
+	\item $\underline{x} \in \N^k$ input
 \end{itemize}
 Allora definiamo 
-$$ \com (h, g_1, \dots, g_k): \mathbb{N}^n \rightarrow \mathbb{N} $$
+$$ \com (h, g_1, \dots, g_k): \N^k \rightarrow \N $$
 La funzione tale che
 $$ \com (h, g_1, \dots, g_k) (\underline{x}) = h(g_1(\underline{x}), \dots, g_k (\underline{x})) $$
 
@@ -1344,9 +1344,9 @@ Definiamo un'operazione che permetta di \textbf{iterare} sull'operatore di compo
 
 Siano 
 \begin{itemize}
-	\item $g: \mathbb{N}^n \rightarrow \mathbb{N}$ funzione \textbf{caso base}
-	\item $h: \mathbb{N}^{n+2} \rightarrow \mathbb{N}$ funzione \textbf{passo ricorsivo}
-	\item $\underline{x} \in \mathbb{N}^n$ \textbf{input}
+	\item $g: \N^n \rightarrow \N$ funzione \textbf{caso base}
+	\item $h: \N^{n+2} \rightarrow \N$ funzione \textbf{passo ricorsivo}
+	\item $\underline{x} \in \N^n$ \textbf{input}
 \end{itemize}
 
 Definiamo
@@ -1531,7 +1531,7 @@ Siamo nella "\textit{direzione giusta}" non avendo cose che non avremmo catturat
 
 \subsubsection{Minimalizzazione}
 
-Introduciamo un operatore per permettere la presenza di funzioni parziali: \textbf{minimalizzazione}. Sia $f: \mathbb{N}^{n+1} \rightarrow \mathbb{N}$ con $f(\underline{x}, y)$ e $\underline{x} \in \mathbb{N}^n$, allora: 
+Introduciamo un operatore per permettere la presenza di funzioni parziali: \textbf{minimalizzazione}. Sia $f: \N^{n+1} \rightarrow \N$ con $f(\underline{x}, y)$ e $\underline{x} \in \N^n$, allora: 
 $$
 \MIN (f) (\underline{x}) = g(\underline{x}) = \begin{cases}
 	y & \text{ se } f(\underline{x}, y) = 0 \wedge (\forall y' < y, f(\underline{x}, y') \downarrow \wedge f(\underline{x}, y') \neq 0) \\
@@ -1544,7 +1544,7 @@ $$ \mu_y (f(\underline{x}, y) = 0)$$
 
 Informalmente, restituisce il più piccolo valore di $y$ che azzera $f(\underline{x},y)$, ovunque precedentemente definita su $y'$.\\
 
-Alcuni esempi con $f: \mathbb{N}^2 \rightarrow \mathbb{N}$
+Alcuni esempi con $f: \N^2 \rightarrow \N$
 \begin{center}
 	\begin{tabular}{c|c}
 		$\bm{f(x,y)}$ & $\bm{\MIN(f)(x)=g(x)}$ \\ 
@@ -1630,7 +1630,7 @@ Viene naturale chiedersi se vale la relazione inversa.\\
 	
 	Dove: 
 	\begin{itemize}
-		\item $\llbracket C \rrbracket (\underline{x}) = \underline{y}$ la funzione che restituisce lo stato prossimo $\underline{y} \in \mathbb{N}^{21}$ a seguito dell'esecuzione del comando $C$ a partire dallo stato corrente $\underline{x} \in \mathbb{N}^{21}$
+		\item $\llbracket C \rrbracket (\underline{x}) = \underline{y}$ la funzione che restituisce lo stato prossimo $\underline{y} \in \N^{21}$ a seguito dell'esecuzione del comando $C$ a partire dallo stato corrente $\underline{x} \in \N^{21}$
 		
 		\item La funzione $W\text{-in}(n)$ restituisce lo stato iniziale della macchina $\while$ su input $n$
 		
@@ -1644,11 +1644,11 @@ Viene naturale chiedersi se vale la relazione inversa.\\
 	\end{enumerate}
 	Di conseguenza, se dimostro che la funzione di stato prossimo $\llbracket C \rrbracket$ è ricorsiva parziale $\in \cp$ allora anche $\Psi_W \in \cp$, per la definizione induttiva di $\cp$.\\
 	
-	La funzione di stato prossimo $\llbracket \rrbracket (): \mathbb{N}^{21} \rightarrow \mathbb{N}^{21}$ restituisce elementi in $\mathbb{N}^{21}$, mentre gli elementi in $\cp$ hanno codominio $\mathbb{N}$. \\
+	La funzione di stato prossimo $\llbracket \rrbracket (): \N^{21} \rightarrow \N^{21}$ restituisce elementi in $\N^{21}$, mentre gli elementi in $\cp$ hanno codominio $\N$. \\
 	
 	Per risolvere il problema si definisce la \textbf{funzione $f_C$ numero prossimo} in cui viene applicato Cantor sull'array degli stati.
 	$$ \llbracket C \rrbracket \underline{x} = \underline{y} \quad \text{con }
-	\ \ \underline{x},\underline{y}\in \mathbb{N}^{21}$$
+	\ \ \underline{x},\underline{y}\in \N^{21}$$
 	$$ f_C(x)=y \quad \text{con }
 	\ \ x=[\underline{x}]\ ,\ y=[\underline{y}]$$
 	
@@ -1784,8 +1784,8 @@ Per ora ci si è concentrati sull'analisi della \textit{potenza computazionale} 
 Vorremmo sapere altro sui sistemi di programmazione, vogliamo individuare alcune proprietà "buone" di un sistema di calcolo, dette \textbf{assiomi}. Tutti i sistemi di programmazione che rispettano questi assiomi si diranno sistemi di programmazione accettabili. In questo modo si potranno dimostrare proprietà non sul singolo sistema ma su tutti i sistemi accettabili.\\
 
 Per indicare un sistema di programmazione si usa 
-$$ \sisprog_{i \in \mathbb{N}}$$
-ovvero l'insieme delle semantiche (funzioni calcolabili) dal sistema. Il pedice indica i programmi codificati $i \in \mathbb{N}$ di quel sistema.\\
+$$ \sisprog_{i \in \N}$$
+ovvero l'insieme delle semantiche (funzioni calcolabili) dal sistema. Il pedice indica i programmi codificati $i \in \N$ di quel sistema.\\
 
 \subsection{Assiomi di Rogers}
 
@@ -1805,8 +1805,8 @@ $$ F(\ram) = \cp $$
 Non si vogliono considerare né sistemi troppo poco potenti (sotto $\cp$), né troppo potenti (oltre $\cp$).\\
 
 \subsubsection{Interprete universale} 
-$\sisprog$ rispetta il secondo assioma se esiste un interprete universale, ovvero un programma $\mu \in \mathbb{N}$ tale che
-$$ \forall x,n \in \mathbb{N} \quad \varphi_\mu (\langle x,n \rangle) = \varphi_n (x) $$
+$\sisprog$ rispetta il secondo assioma se esiste un interprete universale, ovvero un programma $\mu \in \N$ tale che
+$$ \forall x,n \in \N \quad \varphi_\mu (\langle x,n \rangle) = \varphi_n (x) $$
 ovvero, un programma scritto in un certo linguaggio che riesce ad interpretare ogni altro programma $n$ scritto nello stesso linguaggio su qualsiasi input $x$.\\
 
 La presenza di un interprete universale permette un'algebra sui programmi, quindi la trasformazione di quest'ultimi.\\
@@ -1816,7 +1816,7 @@ $\sisprog$ rispetta il terzo assioma se rispetta il teorema $S_n^m$. Si vedrà p
 
 \begin{theor}[$S_1^1$]
 	Dato $\sisprog$ $\ram$ esiste una funzione $S_1^1 \in \T$ tale che 
-	$$ \forall n,x,y \in \mathbb{N} \quad \varphi_n(\langle x,y \rangle) = \varphi_{S_1^1 (n,y)} (x) $$
+	$$ \forall n,x,y \in \N \quad \varphi_n(\langle x,y \rangle) = \varphi_{S_1^1 (n,y)} (x) $$
 \end{theor}
 
 In altre parole, è possibile costruire automaticamente programmi specifici da programmi più generali, ottenuti fissando alcuni input.\\
@@ -1944,10 +1944,10 @@ Questo teorema ha anche una forma generale $S_n^m$ che riguarda i programmi a $m
 
 \begin{theor}[$S_n^m$]
 	Dato $\sisprog$ $\ram$, esiste una funzione $S_n^m \in \T$ tale che
-	$$ \forall  \in \mathbb{N}, \underline{x} \in \mathbb{N}^m, \underline{y} \in \mathbb{N}^n \quad \varphi_k (\langle \underline{x}, \underline{y} \rangle) = \varphi_{S_n^m (k, \underline{y})} (\langle \underline{x} \rangle) $$
+	$$ \forall  \in \N, \underline{x} \in \N^m, \underline{y} \in \N^n \quad \varphi_k (\langle \underline{x}, \underline{y} \rangle) = \varphi_{S_n^m (k, \underline{y})} (\langle \underline{x} \rangle) $$
 \end{theor}
 
-Ovvero, per ogni programma $k \in \mathbb{N}$ e ogni input $\underline{x} \in \mathbb{N}^m, \underline{y} \in \mathbb{N}^n$ vale la proprietà specificata. Anche la dimostrazione è una semplice generalizzazione di quella di $S_1^1$.\\
+Ovvero, per ogni programma $k \in \N$ e ogni input $\underline{x} \in \N^m, \underline{y} \in \N^n$ vale la proprietà specificata. Anche la dimostrazione è una semplice generalizzazione di quella di $S_1^1$.\\
 
 Le tre caratteristiche identificate formano gli \textbf{assiomi di Rogers} (1953). Questi caratterizzano i sistemi di programmazione su cui ci concentreremo, chiamati \textit{Sistemi di Programmazione Accettabili}. Questi assiomi non sono restrittivi: di fatto, tutti i modelli di calcolo ragionevoli sono SPA.\\
 
