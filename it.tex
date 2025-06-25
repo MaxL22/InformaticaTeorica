@@ -1,14 +1,16 @@
 % !TeX spellcheck = it_IT
 \title{Informatica Teorica}
-\author{Massimo Perego}
+\author{Massimo Perego, Omar Masri}
 \date{}
 
 \documentclass[11pt]{report}
+\usepackage[paperwidth=330mm, paperheight=297mm, left=2cm, top=2cm, bottom=2cm, right=14cm, marginparsep=1cm, marginparwidth=12cm]{geometry}
 \usepackage{graphicx} 
 \usepackage{amsmath}
 \usepackage{amssymb}
 \usepackage{amsfonts}
 \usepackage[hidelinks]{hyperref}
+\usepackage[american]{babel}
 \usepackage[autostyle, english = american]{csquotes}
 \usepackage[parfill]{parskip}
 \MakeOuterQuote{"}
@@ -30,9 +32,14 @@
 \usepackage{amsthm}
 \usepackage{mathabx}
 \usepackage{bm}
+\usepackage{minted}
+\usepackage{xcolor}
+\definecolor{bg}{rgb}{0.95,0.95,0.95}
+\setminted[python]{linenos, bgcolor=bg}
 
 \theoremstyle{plain}
 \newtheorem{theor}{Teorema}[section]
+\newtheorem{coroll}{Corollario}[section]
 
 \renewcommand{\proofname}{Dimostrazione}
 
@@ -43,12 +50,23 @@
 \DeclareMathOperator{\predecessore}{predecessore}
 \DeclareMathOperator{\MIN}{MIN}
 
+\usepackage{marginnote}
+\newcommand{\lcomment}[1]{\marginnote{$\leftarrow$ (#1)}}
+\usepackage[noend]{algpseudocode}
+
+\renewcommand{\Im}{\text{Im}}
 \newcommand{\ImSet}{\text{Im}}
 \newcommand{\Dom}{\text{Dom}}
 \newcommand{\tc}{\; \text{ t.c. } \;}
 \newcommand{\bat}{B^A_\bot}
 \newcommand{\dati}{\text{DATI}}
 \newcommand{\prog}{\text{PROG}}
+\newcommand{\dtime}{\text{DTIME}}
+\newcommand{\ftime}{\text{FTIME}}
+\newcommand{\dspace}{\text{DSPACE}}
+\newcommand{\fspace}{\text{FSPACE}}
+\newcommand{\exptime}{\text{EXPTIME}}
+\newcommand{\ntime}{\text{NTIME}}
 \newcommand{\ram}{\text{RAM}}
 \newcommand{\while}{\text{WHILE}}
 \newcommand{\for}{\text{FOR}}
@@ -61,17 +79,31 @@
 \newcommand{\comp}{\text{Comp}}
 \newcommand{\com}{\text{COMP}}
 \newcommand{\rp}{\text{RP}}
+\newcommand{\pc}{\text{PC}}
 \newcommand{\ricprim}{\text{RICPRIM}}
+\newcommand{\ric}{\text{RIC}}
 \newcommand{\C}{\mathcal{C}}
 \newcommand{\U}{\mathcal{U}}
 \newcommand{\cp}{\mathcal{P}}
 \newcommand{\st}{\mathcal{S}}
+\newcommand{\T}{\mathcal{T}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\X}{\mathcal{X}}
 \newcommand{\cprog}[1]{\C_{#1}\text{-}\prog}
 \newcommand{\proj}{\text{Proj}}
 \newcommand{\pro}{\text{Pro}}
 \newcommand{\incr}{\text{incr}}
 \newcommand{\decr}{\text{decr}}
 \newcommand{\sisprog}{\ensuremath{\{\varphi_i\}}}
+\newcommand{\fin}{\stackrel{\text{TR}}{=} \text{OK}}
+\newcommand{\ar}{\text{AR}}
+\newcommand{\arp}{\text{AR}_P}
+\newcommand{\arph}{\text{AR}_{\hat{P}}}
+\newcommand{\cent}{\text{\textcent}}
+
+\newcommand{\si}{\textit{Sì}}
+\newcommand{\no}{\textit{No}}
 
 \newcommand{\dotminus}{\dotdiv}
 
@@ -91,5 +123,7 @@
 	\include{chapters/Intro}
 	
 	\include{chapters/Calc}
+
+    \include{chapters/Compl}
 
 \end{document}
