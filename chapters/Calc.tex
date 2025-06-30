@@ -9,14 +9,17 @@
 
 \paragraph{Funzione:} Una funzione $f$ dall'insieme $A$ all'insieme $B$ è una LEGGE che spiega come associare a ogni elemento di $A$ un elemento di $B$. Si scrive
 $$ f: A \rightarrow B $$
-chiamiamo $A$ dominio e $B$ codominio. Per dire come agisce su un elemento si usa $f(a) = b$, $b$ è l'immagine di $a$ secondo $f$ (di conseguenza $a$ è la controimmagine).\\
-Per definizione di funzione, è possibile che elementi del codominio siano raggiungibili da più elementi del dominio, ma non il contrario. Possiamo classificare le funzioni in base a questa caratteristica:
+chiamiamo $A$ dominio e $B$ codominio. 
+
+Per dire come agisce su un elemento si usa $f(a) = b$, $b$ è l'immagine di $a$ secondo $f$ (di conseguenza $a$ è la controimmagine). Per definizione di funzione, è possibile che elementi del codominio siano raggiungibili da più elementi del dominio, ma non il contrario. Possiamo classificare le funzioni in base a questa caratteristica:
 \begin{itemize}
-	\item \textbf{Iniettiva:} $f: A \rightarrow B$ è iniettiva sse $\forall a,b \in A$, $a \neq b \implies f(a) \neq f(b)$
-	\item \textbf{Suriettiva:} $f: A \rightarrow B$ è suriettiva sse $\forall b \in B$, $\exists a \in A: f(a) = b$: un altro modo per definirla è tramite l'insieme immagine di $f$, definito come
+	\item \textbf{Iniettiva:} $f: A \rightarrow B$ è iniettiva se e solo se $\forall a,b \in A$, $a \neq b \implies f(a) \neq f(b)$
+	
+    \item \textbf{Suriettiva:} $f: A \rightarrow B$ è suriettiva se e solo se $\forall b \in B$, $\exists a \in A: f(a) = b$: un altro modo per definirla è tramite l'insieme immagine di $f$, definito come
 	$$ \ImSet_f = \{b \in B: \exists a, f(a) = b \} = \{f(a): a \in A \} $$
-	Solitamente $\text{Im}_f \subseteq B$, ma $f$ è suriettiva sse $ \ImSet_f = B$;
-	\item \textbf{Biettiva:} $f: A \rightarrow B$ è biettiva sse è sia iniettiva che suriettiva, ovvero
+	Solitamente $\text{Im}_f \subseteq B$, ma $f$ è suriettiva se e solo se $ \ImSet_f = B$;
+	
+    \item \textbf{Biettiva:} $f: A \rightarrow B$ è biettiva se e solo se è sia iniettiva che suriettiva, ovvero
 	$$
 	\begin{array}{c l}
 		\forall a, b \in A, a \neq b: & f(a) \neq f(b) \\
@@ -35,11 +38,13 @@ Per definizione di funzione, è possibile che elementi del codominio siano raggi
 Un'altra possibile definizione per funzione inversa diventa:
 $$ f^{-1} \circ f = i_A \wedge f \circ f^{-1} = i_B $$
 
-\paragraph{Funzioni Parziali:} Se una funzione $f: A \rightarrow B$ è definita per $a \in A$ si indica con $f(a) \downarrow$ \lcomment{$f(a) \downarrow$ significa che $\exists b$ tale che $f(a) = b$} e da questo proviene la categorizzazione: una funzione è \textbf{totale} se definita $\forall a \in A$, \textbf{parziale} altrimenti (definita solo per qualche elemento di $A$).
+\paragraph{Funzioni Parziali:} Se una funzione $f: A \rightarrow B$ è definita per $a \in A$ si indica con $f(a) \downarrow$ e da questo proviene la categorizzazione: una funzione è \textbf{totale} se definita $\forall a \in A$, \textbf{parziale} altrimenti (definita solo per qualche elemento di $A$).
+
+$f(a) \downarrow$ significa che $\exists b$ tale che $f(a) = b$.
 
 \paragraph{Insieme Dominio:} Chiamiamo \textbf{dominio} (o campo di esistenza) di $f$ l'insieme
 $$ \Dom_f = \left\{a \in A | f(a) \downarrow \right\} \subseteq A $$
-Quindi se $\Dom_f = A$ la funzione è totale, se $\Dom_f \subsetneq A$ allora è una funzione parziale.
+Quindi se $\Dom_f = A$ la funzione è totale, se $\Dom_f \subsetneq A$ allora è una funzione parziale. L'insieme di valori per cui la funzione è definita.
 
 \paragraph{Totalizzazione:} Si può \textbf{totalizzare una funzione parziale} $f$ definendo una funzione a tratti $\bar{f}: A \rightarrow B \cup \{\bot\}$ tale che
 $$ 
@@ -52,7 +57,8 @@ Dove $\bot$ è il \textbf{simbolo di indefinito}, per tutti i valori per cui la 
 
 \paragraph{Insieme delle funzioni:} L'insieme di tutte le funzioni che vanno da $A$ a $B$ si denota con
 $$ B^A = \{f: A \rightarrow B \} $$
-La notazione viene usata in quanto la cardinalità di $B^A$ è esattamente $|B|^{|A|}$, con $A$ e $B$ insiemi finiti.\\
+La notazione viene usata in quanto la cardinalità di $B^A$ è esattamente $|B|^{|A|}$, con $A$ e $B$ insiemi finiti.
+
 Volendo includere anche tutte le funzioni parziali: 
 $$ B^A_\bot = \{f: A \rightarrow B_\bot \} $$
 
@@ -60,15 +66,18 @@ Ovviamente $B^{A} \subset B^{A}_{\bot}$
 
 \subsection{Prodotto Cartesiano}
 
-Chiamiamo \textbf{prodotto cartesiano} l'insieme 
+Chiamiamo \textbf{prodotto cartesiano} l'insieme
 $$ A \times B = \{(a,b) | a \in A \wedge b \in B \} $$
-Rappresenta l'insieme di tutte le coppie ordinate di valori in $A$ e $B$. In generale non è commutativo, a meno che $A=B$. Può essere esteso a $n$-uple di valori:
+
+Rappresenta l'insieme di tutte le coppie ordinate di valori in $A$ e $B$. In generale non è commutativo, a meno che $A = B$. Può essere esteso a $n$-uple di valori:
 $$ A_1 \times \dots \times A_n = \{(a_1, \dots, a_n) | a_i \in A_i\} $$
+
 Il prodotto di $n$ volte lo stesso insieme verrà, per comodità, indicato come
 $$ A \times \dots \times A = A^n $$
 
 \paragraph{Proiettore:} Operazione "opposta", il proiettore $i$-esimo è una funzione che estrae l'$i$-esimo elemento di una tupla, quindi è una funzione
 $$ \pi_i: A_1 \times \dots \times A_n \rightarrow A_i \tc \pi_i (a_1, \dots, a_n) = a_i $$
+
 La proiezione sull'asse in cui sono presenti i valori dell'insieme $a_i$.
 
 \subsection{Funzione di Valutazione}
@@ -77,7 +86,8 @@ $$ \omega: \bat \times A \rightarrow B \tc \omega (f,a) = f(a) $$
 Prende una funzione $f$ e la valuta su un elemento $a$ del dominio. Si possono fare due tipi di analisi su questa funzione: 
 \begin{itemize}
 	\item Fisso $a$ e provo tutte le $f$, ottenendo un \textit{benchmark} di tutte le funzioni su $a$
-	\item Fisso $f$ e provo tutte le $a$ del dominio, ottenendo il \textit{grafico} di $f$
+	
+    \item Fisso $f$ e provo tutte le $a$ del dominio, ottenendo il \textit{grafico} di $f$
 \end{itemize}
 
 \section{Sistemi di Calcolo}
@@ -93,57 +103,89 @@ $$ \C: \prog \times \dati \rightarrow \dati_\bot $$
 Possiamo vedere un sistema di calcolo come una funzione di valutazione:
 \begin{itemize}
 	\item i dati $x$ corrispondono all'input $a$
-	\item il programma $P$ corrisponde alla funzione $f$
+	
+    \item il programma $P$ corrisponde alla funzione $f$
 \end{itemize}
 
 Formalmente, un programma $P \in \prog$ è una sequenza di regole che trasformano un dato input in uno di output, ovvero l'espressione di una funzione secondo una sintassi 
 $$ P: \dati \rightarrow \dati_\bot $$
 e di conseguenza $P \in \dati^{\dati}_\bot$. In questo modo abbiamo mappato l'insieme $\prog$ sull'insieme delle funzioni, il che ci permette di definire il sistema di calcolo come la funzione
 $$ \C: \dati^{\dati}_\bot \times \dati \rightarrow \dati_{\bot} $$
+
 Analoga alla funzione di valutazione. Con $\C(P,x)$ indichiamo la funzione calcolata da $P$ su $x$ dal sistema di calcolo $\C$, che viene detta \textbf{semantica} di $P$, ovvero il suo "significato" su input $x$.
 
 Il modello solitamente considerato quando si parla di calcolatori è quello di \textbf{Von Neumann}.
 
-\marginnote{
-	\includegraphics[width=0.7\textwidth]{img/img1.png}
-  }[-4cm]
+Un esempio: calcolo della semantica (significato) di un programma:
 
-\vspace{-0.25cm}
+\begin{minipage}{0.45\textwidth}
+    Programma:
+    \begin{center}
+        \begin{tabular}{r|l|}
+            \cline{2-2}
+            $\text{P } \equiv$	& $\text{input}(x)$ \\
+            & $\text{\texttt{if }} \langle x \rangle_2 == 0$ \\
+            & $\quad \text{\texttt{return } x}$ \\
+            & $\text{\texttt{else}}$ \\
+            & $\quad \text{\texttt{while} (1 < 2)}$\\
+            & $\quad \text{\texttt{return } 1}$ \\
+            \cline{2-2}
+        \end{tabular}
+    \end{center}
+\end{minipage}
+\hfill 
+\begin{minipage}{0.45\textwidth}
+    Semantica:
+    $$ \C (P, \_): \N \rightarrow \N_\bot $$
+    $$ \C (P, n) = \begin{cases}
+        n & \text{ se } n \text{ pari} \\
+        \bot & \text{ altrimenti}
+    \end{cases}$$
+\end{minipage}
 
 \section{Potenza Computazionale}
+
 Indicando con 
 $$ \C (P, \_): \dati \rightarrow \dati_{\bot} $$
 la funzione che viene calcolata dal programma $P$ (semantica di $P$).
 
-La \textbf{potenza computazionale} di un calcolatore è definita come l'insieme di tutte le funzioni che quel sistema di calcolo è in grado di calcolare, ovvero
+La \textbf{potenza computazionale} di un calcolatore è definita come l'insieme di \textbf{tutte le funzioni che quel sistema di calcolo è in grado di calcolare}, ovvero
 $$ F(\C) = \{\C (P, \_) | P \in \prog\} \subseteq \dati_\bot^{\dati} $$
+
 Ovvero, l'insieme di tutte le possibili semantiche di funzioni calcolabili con il sistema $\C$. Stabilire il carattere di quest'ultima inclusione equivale a stabilire \textit{cosa può fare l'informatica}:
 \begin{itemize}
 	\item se $F(\C) \subsetneq \dati_\bot^{\dati}$ allora esistono compiti \textbf{non automatizzabili}
-	\item se $F(\C) = \dati_\bot^{\dati}$ allora l'informatica \textit{può fare tutto}
+	
+    \item se $F(\C) = \dati_\bot^{\dati}$ allora l'informatica \textit{può fare tutto}
 \end{itemize}
 
 Calcolare funzioni vuol dire risolvere problemi \textit{in generale}, a ogni problema è possibile associare una funzione soluzione programmando la quale posso risolvere automaticamente il problema
 
-Un possibile approccio per risolvere l'inclusione è tramite la \textbf{cardinalità} (funzione che associa ogni insieme al numero di elementi che contiene) dei due insiemi. Potrebbe però presentare dei problemi: è efficace solo quando si parla di insiemi finiti. Ad esempio $|\mathbb{N}| = |\mathbb{R}| = \infty$. \lcomment{kinda capisci costa sta provando a dire dai} \\
+Un possibile approccio per risolvere l'inclusione è tramite la \textbf{cardinalità} (funzione che associa ogni insieme al numero di elementi che contiene) dei due insiemi. Potrebbe però presentare dei problemi: è efficace solo quando si parla di insiemi finiti. Ad esempio $|\mathbb{N}| = |\mathbb{R}| = \infty$.
+
 Serve una diversa definizione di cardinalità che considera l'esistenza di infiniti \textit{più densi di altri}.
 
 \section{Relazioni di Equivalenza}
-Dati due insiemi $A,B$, una \textit{relazione binaria} $R$ è un sottoinsieme $R \subseteq A \times B$ di coppie ordinate. Due elementi sono in relazione sse $(a,b) \in R$. Indichiamo la relazione tra due elementi anche con la notazione infissa $aRb$.
+Dati due insiemi $A,B$, una \textit{relazione binaria} $R$ è un sottoinsieme $R \subseteq A \times B$ di coppie ordinate. Due elementi sono in relazione se e solo se $(a,b) \in R$. Indichiamo la relazione tra due elementi anche con la notazione infissa $aRb$.
 
-Una classe importante di relazioni è quella delle \textbf{relazioni di equivalenza}: una relazione $R \subseteq A^2$ è una relazione di equivalenza sse rispetta le proprietà di
+Una classe importante di relazioni è quella delle \textbf{relazioni di equivalenza}: una relazione $R \subseteq A^2$ è una relazione di equivalenza se e solo se rispetta le proprietà di
 \begin{itemize}
-	\item Riflessività: $\forall a \in A$, $(a,a) \in R$
-	\item Simmetria: $\forall a,b \in A$, $(a,b) \in R \Leftrightarrow (b,a) \in R$
-	\item Transitività: $\forall a,b,c \in A$, $(a,b) \in R \wedge (b,c) \in R \implies (a,c) \in R$
+	\item \textbf{Riflessività}: $\forall a \in A$, $(a,a) \in R$
+	
+    \item \textbf{Simmetria}: $\forall a,b \in A$, $(a,b) \in R \Leftrightarrow (b,a) \in R$
+	
+    \item \textbf{Transitività}: $\forall a,b,c \in A$, $(a,b) \in R \wedge (b,c) \in R \implies (a,c) \in R$
 \end{itemize}
 
 \subsection{Partizione indotta dalla relazione di equivalenza}
+
 A ogni relazione di equivalenza $R \subseteq A^2$ si può associare una \textbf{partizione}, ovvero un insieme di sottoinsiemi $A_{1}, A_{2}, \ldots, A_i, \ldots \subseteq A$ tali che
 \begin{itemize}
 	\item $A_i \neq \emptyset$
-	\item Se $i \neq j$ allora $A_i \cap A_j = \emptyset$
-	\item $\bigcup_{i \geq 1} A_i = A$
+	
+    \item Se $i \neq j$ allora $A_i \cap A_j = \emptyset$
+	
+    \item $\bigcup_{i \geq 1} A_i = A$
 \end{itemize}
 
 La relazione $R$ definita su $A^2$ \textit{induce} una partizione $\{A_1, A_2, \dots\}$ su $A$.
@@ -151,6 +193,7 @@ La relazione $R$ definita su $A^2$ \textit{induce} una partizione $\{A_1, A_2, \
 \subsection{Classi di equivalenza e Insieme quoziente}
 Dato un elemento $a \in A$, chiamiamo \textbf{classe di equivalenza} di $a$ l'insieme
 $$ [a]_R = \{b \in A | (a,b) \in R \} $$
+
 Ovvero, tutti gli elementi in relazione con $a$, chiamato \textbf{rappresentante} della classe.
 
 Si può dimostrare facilmente che
@@ -166,13 +209,17 @@ L'insieme delle classi di equivalenza, per definizione, è una partizione indott
 
 \subsection{Isomorfismi}
 
-Due insiemi $A$ e $B$ sono \textbf{isomorfi} (\textit{equi-numerosi}) se esiste una biezione tra essi, denotato come $A \sim B$. Chiamando $\U$ l'insieme di tutti gli insiemi, la relazione $\sim$ è $\sim \subseteq \U^2 \marginnote{$\leftarrow$ (tecnicamente $\U$ non è un insieme per ZFC ma una classe propria)}$.
+Due insiemi $A$ e $B$ sono \textbf{isomorfi} (\textit{equi-numerosi}) se esiste una biezione tra essi, denotato come $A \sim B$. 
+
+Chiamando $\U$ l'insieme di tutti gli insiemi, la relazione $\sim$ è $\sim \subseteq \U^2$ (tecnicamente $\U$ non è un insieme per ZFC ma una classe propria).
 
 Dimostriamo che $\sim$ è una relazione di equivalenza: 
 \begin{itemize}
 	\item Riflessività: $A \sim A$, la biezione è data dalla funzione identità $i_A$
-	\item Simmetria: $A \sim B \Leftrightarrow B \sim A$, la biezione è data dalla funzione inversa
-	\item Transitività: $A \sim B \wedge B \sim C \implies A \sim C$, la biezione è data dalla composizione delle funzioni usate per $A \sim B$ e $B \sim C$
+	
+    \item Simmetria: $A \sim B \Leftrightarrow B \sim A$, la biezione è data dalla funzione inversa
+	
+    \item Transitività: $A \sim B \wedge B \sim C \implies A \sim C$, la biezione è data dalla composizione delle funzioni usate per $A \sim B$ e $B \sim C$
 \end{itemize}
 
 Dato che $\sim$ è una relazione di equivalenza, permette di partizionare l'insieme $\U$, risultando in classi di equivalenza contenenti insiemi isomorfi, ovvero con la stessa cardinalità. Possiamo quindi definire la \textbf{cardinalità} come l'insieme quoziente di $\U$ rispetto alla relazione $\sim$.
@@ -185,18 +232,21 @@ $$ J_n = \begin{cases}
 	\emptyset & \text{ se } n = 0 \\
 	\{1, \dots , n\} & \text{ se } n > 0 \\
 \end{cases}$$
-Un insieme $A$ ha \textbf{cardinalità finita} sse $A \sim J_n$ per qualche $n \in \mathbb{N}$; in tal caso possiamo scrivere $|A| = n$. La classe di equivalenza $[J_n]_{\sim}$ identifica tutti gli insiemi di $\U$ contenenti $n$ elementi.
+
+Un insieme $A$ ha \textbf{cardinalità finita} se e solo se $A \sim J_n$ per qualche $n \in \mathbb{N}$; in tal caso possiamo scrivere $|A| = n$. La classe di equivalenza $[J_n]_{\sim}$ identifica tutti gli insiemi di $\U$ contenenti $n$ elementi.
 
 \subsection{Cardinalità infinita}
 L'altra classe di cardinalità è quella delle \textbf{cardinalità infinite}, ovvero gli insiemi non in relazione con $J_n$. Si possono dividere in \textbf{numerabili} e \textbf{non numerabili}.
 
 \subsubsection{Insiemi numerabili}
-Un insieme $A$ è numerabile sse $A \sim \mathbb{N}$, ovvero $A \in [\mathbb{N}]_\sim$. Vengono anche detti \textbf{listabili}, in quanto è possibile elencare tutti gli elementi dell'insieme $A$ tramite una funzione $f$ biettiva tra $\mathbb{N}$ e $A$; grazie ad $f$ possiamo elencare gli elementi di $A$, formando l'insieme 
-$$ A = \{f(0), f(1). \dots \} $$
+Un insieme $A$ è numerabile se e solo se $A \sim \mathbb{N}$, ovvero $A \in [\mathbb{N}]_\sim$. Vengono anche detti \textbf{listabili}, in quanto è possibile elencare tutti gli elementi dell'insieme $A$ tramite una funzione $f$ biettiva tra $\mathbb{N}$ e $A$; grazie ad $f$ possiamo elencare gli elementi di $A$, formando l'insieme
+$$ A = \{f(0), f(1), \dots \} $$
+
 Ed è esaustivo, in quanto elenca tutti gli elementi di $A$. Questi insiemi hanno cardinalità $\aleph_0$ (\textit{aleph}).
 
 \subsubsection{Insiemi non numerabili}
-Gli insiemi non numerabili sono insiemi a cardinalità infinita ma non listabili, sono "più fitti" di $\mathbb{N}$; ogni lista generata non può essere esaustiva. Il più noto tra gli insiemi non numerabili è l'insieme $\mathbb{R}$ dei numeri reali. \\
+
+Gli insiemi non numerabili sono insiemi a cardinalità infinita ma non listabili, sono "\textit{più fitti}" di $\mathbb{N}$; ogni lista generata non può essere esaustiva. Il più noto tra gli insiemi non numerabili è l'insieme $\mathbb{R}$ dei numeri reali. \\
 
 \begin{theor}
 	L'insieme $\mathbb{R}$ non è numerabile $(\mathbb{R} \nsim \mathbb{N})$
@@ -205,27 +255,36 @@ Gli insiemi non numerabili sono insiemi a cardinalità infinita ma non listabili
 	Suddividiamo la dimostrazione in 3 punti: 
 	\begin{enumerate}
 		\item dimostriamo che $\mathbb{R} \sim (0,1)$
-		\item dimostriamo che $\mathbb{N} \nsim (0,1)$
-		\item $\mathbb{N} \nsim (0,1) \sim \mathbb{R} \implies \mathbb{N} \nsim \mathbb{R}$ (per transitività di $\sim$)
+		
+        \item dimostriamo che $\mathbb{N} \nsim (0,1)$
+		
+        \item $\mathbb{N} \nsim (0,1) \sim \mathbb{R} \implies \mathbb{N} \nsim \mathbb{R}$ (per transitività di $\sim$)
 	\end{enumerate}
 	
-	Per dimostrare 1. che $\mathbb{R} \sim (0,1)$ serve trovare una biezione tra $\mathbb{R}$ e $(0,1)$. Usiamo una rappresentazione grafica:
+	Per dimostrare che $\mathbb{R} \sim (0,1)$ serve trovare una biezione tra $\mathbb{R}$ e $(0,1)$. 
+    
+    Usiamo una rappresentazione grafica:
 	\begin{itemize}
 		\item disegnare una semicirconferenza di raggio $1/2$, centrata in $1/2$, quindi con diametro $1$
-		\item disegnare la perpendicolare al punto da mappare che interseca la circonferenza
-		\item disegnare la semiretta passante per il centro $C$ e l'intersezione precedente
+	
+    	\item disegnare la perpendicolare al punto da mappare che interseca la circonferenza
+	
+    	\item disegnare la semiretta passante per il centro $C$ e l'intersezione precedente
 	\end{itemize}
 	L'intersezione tra asse reale (parallela al diametro) e semiretta finale è il punto mappato. 
 	
 	\begin{center}
 		\input{img/calc/proof_card.tex}
 	  \end{center}
-
-	\vspace{-2.5cm}
+    
+    % Soluzione a cui non avevo pensato
+	\vspace{-2.8cm}
 	
 	Questo approccio permette di dire che $\mathbb{R}$ è isomorfo a qualsiasi segmento di lunghezza maggiore di $0$. La stessa biezione vale anche sull'intervallo chiuso $[0,1]$ (e di conseguenza qualsiasi intervallo chiuso), usando la "compattificazione" $\mathbb{R} = \mathbb{R} \cup \{\pm \infty\}$ e mappando $0$ su $-\infty$ e 1 su $+ \infty$.
 	
-	Continuiamo dimostrando 2. che $\mathbb{N} \nsim (0,1)$: serve dimostrare che l'intervallo $(0,1)$ non è listabile, quindi che ogni lista manca di almeno un elemento. Proviamo a "costruire" un elemento che andrà a mancare. Per assurdo, sia $\mathbb{N} \sim (0,1)$, allora possiamo listare gli elementi di $(0,1)$ come
+	Continuiamo dimostrando che $\mathbb{N} \nsim (0,1)$: serve dimostrare che l'intervallo $(0,1)$ non è listabile, quindi che ogni lista manca di almeno un elemento. Proviamo a "costruire" un elemento che andrà a mancare. 
+    
+    Per assurdo, sia $\mathbb{N} \sim (0,1)$, allora possiamo listare gli elementi di $(0,1)$ come
 	$$ 
 	\begin{array}{c c c c c}
 		0. & a_{00} & a_{01} & a_{02} & \dots \\
@@ -242,16 +301,16 @@ Gli insiemi non numerabili sono insiemi a cardinalità infinita ma non listabili
 		3 & \text{ se } a_{ii} = 2 \\
 	\end{cases}$$
 	
-	Viene costruito "guardando" le cifre sulla diagonale principale, apparterrà sicuramente a $(0,1)$ ma differirà per almeno una posizione (quella sulla diagonale principale) da ogni numero presente all'interno della lista. Questo è assurdo sotto l'assunzione che $(0,1)$ è numerabile, quindi abbiamo provato che $\mathbb{N} \nsim (0,1)$.\\
+	Viene costruito "guardando" le cifre sulla diagonale principale, apparterrà sicuramente a $(0,1)$ ma differirà per almeno una posizione (quella sulla diagonale principale) da ogni numero presente all'interno della lista. Questo è assurdo sotto l'assunzione che $(0,1)$ è numerabile, quindi abbiamo provato che $\mathbb{N} \nsim (0,1)$.
 	
-	Il terzo punto $\mathbb{R} \nsim \mathbb{N}$ si dimostra per transitività. Più in generale, non si riesce a listare nessun segmento di lunghezza maggiore di 0.\\
+	Il terzo punto $\mathbb{R} \nsim \mathbb{N}$ si dimostra per transitività. Più in generale, non si riesce a listare nessun segmento di lunghezza maggiore di 0. \\
 \end{proof}
 
-Questa dimostrazione (punto 2 in particolare) è detta \textbf{dimostrazione per diagonalizzazione}. L'insieme $\mathbb{R}$ viene detto \textbf{insieme continuo} e tutti gli insiemi isomorfi a $\mathbb{R}$ si dicono continui a loro volta. Gli insiemi continui hanno cardinalità $\aleph_1$.
+Questa dimostrazione (punto 2 in particolare) è detta \textbf{dimostrazione per diagonalizzazione}. L'insieme $\mathbb{R}$ viene detto \textbf{insieme continuo} e tutti gli insiemi isomorfi a $\mathbb{R}$ si dicono continui a loro volta.
 
 \subsection{Insieme delle Parti}
 L'\textbf{insieme delle parti} di $\mathbb{N}$ (anche detto \textit{power set}), è definito come
-$$ P(\mathbb{N}) = 2^{\mathbb{N}} = \{S | S \text{ è sottoinsieme di } \mathbb{N}\} $$
+$$ P(\mathbb{N}) = 2^{\mathbb{N}} = \{S \mid S \text{ è sottoinsieme di } \mathbb{N}\} $$
 
 \begin{theor}
 	$P(\mathbb{N}) \nsim \mathbb{N}$.
@@ -273,14 +332,18 @@ $$ P(\mathbb{N}) = 2^{\mathbb{N}} = \{S | S \text{ è sottoinsieme di } \mathbb{
 		b_2 & = & b_{20} & b_{21} & b_{22} & \dots \\
 	\end{array}
 	$$
+    
 	Vogliamo quindi costruire un vettore che appartiene a $P(\mathbb{N})$ ma non presente nella lista precedente. Definiamo
 	$$ c = \bar{b_{00}} \, \bar{b_{11}} \, \bar{b_{22}} \dots $$
 	ovvero il vettore che contiene in posizione $c_i$ il complemento di $b_{ii}$.
 
-	Questo vettore appartiene a $P(\mathbb{N})$, in quanto sicuramente sottoinsieme di $\mathbb{N}$, ma non è presente nella lista precedente perché diverso da ogni elemento almeno di una cifra (quella sulla diagonale principale). Questo è assurdo per l'assunzione che $P(\mathbb{N})$ è numerabile, quindi $P(\mathbb{N}) \nsim \mathbb{N}$.\\
+	Questo vettore appartiene a $P(\mathbb{N})$, in quanto sicuramente sottoinsieme di $\mathbb{N}$, ma non è presente nella lista precedente perché diverso da ogni elemento almeno di una cifra (quella sulla diagonale principale). 
+    
+    Questo è assurdo per l'assunzione che $P(\mathbb{N})$ è numerabile, quindi $P(\mathbb{N}) \nsim \mathbb{N}$.\\
 \end{proof}
 
 \subsubsection{Insieme delle funzioni}
+
 L'\textbf{insieme delle funzioni} da $\mathbb{N}$ a $\mathbb{N}$ è definito come
 $$ \mathbb{N}^{\mathbb{N}}_\bot = \{f: \mathbb{N} \rightarrow \mathbb{N}_{\bot} \} $$
 
@@ -306,14 +369,17 @@ $$ \mathbb{N}^{\mathbb{N}}_\bot = \{f: \mathbb{N} \rightarrow \mathbb{N}_{\bot} 
 	\end{array}
 	$$
 	
-	Costruiamo una funzione $\varphi: \mathbb{N} \rightarrow \mathbb{N}_\bot$ per dimostrare l'assurdo. Un'idea potrebbe essere $\varphi(n) = f_n(n) + 1$, "spostando" la diagonale, ma non tiene in considerazione il caso $f_n (n) = \bot$ in quanto non sapremmo dare un valore a $\varphi (n) = \bot +1$. Definiamo quindi
+	Costruiamo una funzione $\varphi: \mathbb{N} \rightarrow \mathbb{N}_\bot$ per dimostrare l'assurdo. Un'idea potrebbe essere $\varphi(n) = f_n(n) + 1$, "spostando" la diagonale, ma non tiene in considerazione il caso $f_n (n) = \bot$ in quanto non sapremmo dare un valore a $\varphi (n) = \bot +1$. 
+    
+    Definiamo quindi
 	$$ 
 	\varphi(n) = \begin{cases}
 		1 & \text{ se } f_n (n) = \bot \\
 		f_n (n) + 1 & \text{ se } f_n (n) \downarrow 
 	\end{cases}
 	$$
-	
+	(la stessa cosa, ma gestendo il caso di $f_n(n) = \bot$).
+    
 	Questa funzione appartiene a $\mathbb{N}_\bot^{\mathbb{N}}$, ma non è presente nella lista precedente, infatti $\forall k \in \mathbb{N}$ si ottiene 
 	$$ 
 	\varphi(k) = \begin{cases}
@@ -325,32 +391,43 @@ $$ \mathbb{N}^{\mathbb{N}}_\bot = \{f: \mathbb{N} \rightarrow \mathbb{N}_{\bot} 
 \end{proof}
 
 \section{Potenza Computazionale di un sistema di calcolo}
+
 \subsection{Validità dell'inclusione $F(\C) \subseteq \dati_\bot^{\dati}$}
 
 Dopo aver dato una più robusta definizione di cardinalità, possiamo studiare la natura dell'inclusione
 $$ F(\C) \subseteq \dati_\bot^{\dati} $$
+
 Due intuizioni, da dimostrare, sono: 
 \begin{itemize}
 	\item $\prog \sim \mathbb{N}$: ogni programma può essere identificato con un numero, come la sua codifica in binario
-	\item $\dati \sim \mathbb{N}$: anche ogni dato può essere identificato tramite la sua codifica in binario
+	
+    \item $\dati \sim \mathbb{N}$: anche ogni dato può essere identificato tramite la sua codifica in binario
 \end{itemize}
 
 Da questo possiamo dire che
-$$ F(\C) \sim \prog \sim \mathbb{N} \nsim \mathbb{N}_\bot^{\mathbb{N}} \sim \dati_\bot^{\dati} \lcomment{non e' banale, assumiamo che F(C) sia infinito numerabile}$$
+$$ F(\C) \sim \prog \sim \mathbb{N} \nsim \mathbb{N}_\bot^{\mathbb{N}} \sim \dati_\bot^{\dati} $$
+(non banale, assumiamo che $F(\C)$ sia infinito numerabile).
 
-Questo dimostra che \textbf{esistono funzioni non calcolabili}, ci sono troppe funzioni e troppi pochi programmi. Dobbiamo dimostrare le due assunzioni $\prog \sim \mathbb{N}$ e $\dati \sim \mathbb{N}$. Si può fare tramite tecniche di aritmetizzazione (o godelizzazione) di strutture, tecniche che rappresentano delle strutture tramite un numero.
+Questo dimostra che \textbf{esistono funzioni non calcolabili}, ci sono troppe funzioni e troppi pochi programmi. 
+
+Dobbiamo dimostrare le due assunzioni $\prog \sim \mathbb{N}$ e $\dati \sim \mathbb{N}$. Si può fare tramite tecniche di aritmetizzazione (o godelizzazione) di strutture, tecniche che rappresentano delle strutture tramite un numero.
 
 \section{$\dati \sim \mathbb{N}$}
+
 Serve trovare una legge che
 \begin{enumerate}
 	\item Associ biunivocamente dati a numeri e viceversa
-	\item Consenta di operare direttamente sui numeri per operare sui corrispondenti dati, ovvero abbia delle primitive che permettano di lavorare sul numero che "riflettano" il risultato sul dato, senza passare dal dato stesso
-	\item Consenta di dire, senza perdita di generalità, che i programmi lavorano su numeri
+	
+    \item Consenta di operare direttamente sui numeri per operare sui corrispondenti dati, ovvero abbia delle primitive che permettano di lavorare sul numero che "riflettano" il risultato sul dato, senza passare dal dato stesso
+	
+    \item Consenta di dire, senza perdita di generalità, che i programmi lavorano su numeri
 \end{enumerate}
 
 \subsection{Funzione Coppia di Cantor}
+
 La \textbf{funzione coppia di Cantor} è la funzione
-$$ \langle , \rangle: \mathbb{N} \times \mathbb{N} \rightarrow \mathbb{N}^+ $$
+$$ \langle \_ , \_ \rangle: \mathbb{N} \times \mathbb{N} \rightarrow \mathbb{N}^+ $$
+
 E sfrutta le due "sotto-funzioni" 
 $$
 \begin{array}{r c}
@@ -358,6 +435,7 @@ $$
 	\des: & \mathbb{N}^+ \rightarrow \mathbb{N}
 \end{array}
 $$
+
 Tali che 
 $$ \langle x,y \rangle = n \implies \begin{array}{r c}
 	\sin (n) & = \ x \\
@@ -386,8 +464,10 @@ Si può rappresentare graficamente come
 Il valore $\langle x,y \rangle$ rappresenta l'incrocio tra la $x$-esima riga e la $y$-esima colonna. Per costruirla:
 \begin{enumerate}
 	\item $x = 0$
+    
 	\item si parte dalla cella $(x,0)$ e si enumerano le celle della diagonale identificata da $(x,0)$ e $(0,x)$
-	\item si incrementa $x$ di $1$ e si ripete dal punto precedente
+	
+    \item si incrementa $x$ di $1$ e si ripete dal punto precedente
 \end{enumerate}
 
 La funzione e' ovviamente:
@@ -420,15 +500,19 @@ E di conseguenza
 Mettendo insieme le due proprietà viste possiamo ottenere la formula analitica per la funzione coppia: 
 $$ \langle x,y \rangle = \langle x + y, 0 \rangle + y = \frac{(x + y) (x + y + 1)}{2} + y + 1 $$
 
-\subsubsection{Forma analitica di $\sin$ e $\des$} 
-Vogliamo fare la stessa cosa per $\sin$ e $\des$, in modo da poter computare l'inversa della funzione coppia, dato $n$. Grazie alle osservazioni precedenti sappiamo che
+\subsubsection{Forma analitica di $\sin$ e $\des$}
+
+Vogliamo fare la stessa cosa per $\sin$ e $\des$, in modo da poter computare l'inversa della funzione coppia, dato $n$.
+
+Grazie alle osservazioni precedenti sappiamo che
 $$ \begin{array}{r c l}
 	\gamma = x + y & \implies & x = \gamma + y \\
 	n = y + \langle \gamma , 0 \rangle & \implies & y = n - \langle \gamma , 0 \rangle \\
 \end{array} $$
 
 Trovando il valore di $\gamma$ possiamo trovare $x$ e $y$. Notiamo come $\gamma$ sia il più grande valore che, quando calcolato sulla prima colonna ($\langle \gamma, 0 \rangle$) non supera $n$, ovvero
-$$ \gamma = \max \{z \in \mathbb{N} | \langle z, 0 \rangle \leq n \} $$
+$$ \gamma = \max \{z \in \mathbb{N} \mid \langle z, 0 \rangle \leq n \} $$
+
 Intuitivamente, si tratta dell'inizio della diagonale che contiene $n$, è "l'inverso" dell'osservazione fatta in precedenza per la quale $ \langle x,y \rangle = \langle x + y,0 \rangle + y $.
 
 Risolviamo quindi la disequazione
@@ -454,20 +538,20 @@ $$
 	$\mathbb{N} \times \mathbb{N} \sim \mathbb{N}^+$
 \end{theor}
 \begin{proof}
-	La funzione di Cantor è una funzione biettiva tra l'insieme $\mathbb{N} \times \mathbb{N}$ e l'insieme $\mathbb{N}^+$, quindi i due insiemi sono isomorfi.
+	La funzione di Cantor è una funzione biettiva tra l'insieme $\mathbb{N} \times \mathbb{N}$ e l'insieme $\mathbb{N}^+$, quindi i due insiemi sono isomorfi. \\
 \end{proof}
 
-Possiamo estendere il risultato all'interno dell'insieme $\mathbb{N}$, ovvero: \\
+Possiamo estendere il risultato all'interno dell'insieme $\mathbb{N}$, ovvero:
 
 \begin{theor}
 	$\mathbb{N} \times \mathbb{N} \sim \mathbb{N}$
 \end{theor}
 \begin{proof}
 	Definiamo la funzione 
-	$$ [,]: \mathbb{N} \times \mathbb{N} \rightarrow \mathbb{N} $$
+	$$ [\_ , \_]: \mathbb{N} \times \mathbb{N} \rightarrow \mathbb{N} $$
 	tale che
 	$$ [x,y] = \langle x,y \rangle - 1$$
-	Questa funzione è anch'essa biettiva, quindi i due insiemi sono isomorfi.
+	Questa funzione è anch'essa biettiva, quindi i due insiemi sono isomorfi. \\
 \end{proof}
 
 Grazie a questo è possibile dimostrare anche che $\mathbb{Q} \sim \mathbb{N}$, infatti i numeri razionali si possono rappresentare come coppie (num, den) e, in generale, tutte le tuple finite sono isomorfe a $\mathbb{N}$, basta iterare in qualche modo la funzione coppia di Cantor.
@@ -476,85 +560,112 @@ Grazie a questo è possibile dimostrare anche che $\mathbb{Q} \sim \mathbb{N}$, 
 
 I risultati ottenuti fin'ora rendono intuibile come ogni dato possa essere trasformato in un numero, soggetto a trasformazioni matematiche. La dimostrazione \textit{formale} non verrà fatta, anche se verranno fatti esempi di alcune strutture dati che possono essere trasformate in un numero tramite la funzione coppia di Cantor. Ogni struttura dati può essere manipolata e trasformata in una coppia $(x,y)$.
 
-Le \textbf{liste} sono le strutture dati più utilizzate nei programmi. In generale non ne è nota la grandezza, di conseguenza è necessario trovare un modo, soprattutto durante l'applicazione di $\sin$ e $\des$, per capire quando abbiamo esaurito gli elementi della lista.
+Le \textbf{liste} sono le strutture dati più utilizzate nei programmi. In generale non ne è nota la grandezza, di conseguenza è necessario trovare un modo, soprattutto durante l'applicazione di $\sin$ e $\des$, per capire quando sono finiti gli elementi della lista.
 
 Estendiamo la funzione coppia a una lista di interi $x_1, \dots, x_n$:
 $$ \langle x_1, \dots, x_n \rangle \rightarrow \langle x_1, \langle x_2 \langle \dots \langle x_n, 0 \rangle \dots \rangle \rangle \rangle $$
 
-Lo $0$ rappresenta il fine lista e non è necessario nel caso in cui il numero di elementi è noto.
+Lo $0$ rappresenta il fine lista e non è necessario nel caso in cui il numero di elementi è noto (array).
 
 La decodifica è il processo inverso, partendo dal numero finale si applicano le funzioni $\sin$ e $\des$ ottenendo a ogni iterazione: 
 \begin{itemize}
 	\item da $\des$ la somma parziale, su cui riapplicare la funzione per ottenere il valore successivo
-	\item da $\sin$ il valore presente all'interno della lista
+	
+    \item da $\sin$ il valore presente all'interno della lista
 \end{itemize} 
+
 Termina quando il risultato di $\des$ è zero, ovvero l'elemento di fine lista che abbiamo inserito ($x_n$ nel caso di array).
 \begin{center}
 	\input{img/calc/cantor_decodifica.tex}
 \end{center}
-Se è presente uno 0 all'interno della lista non è un problema in quanto lo 0 compare come risultato di $\des$ e' SOLO quello del FINE LISTA.
 
+Se è presente uno 0 all'interno della lista non è un problema in quanto lo 0 compare come risultato di $\des$ solo a fine lista.
+
+%TODO Commento
 \lcomment{Qui guarda la lista (ci sono anche degli esercizi qui nelle slide guarda 5:7 in poi)}[-0.15cm]
 
-Quindi è possibile codificare liste e, di conseguenza, \textbf{qualsiasi tipo di dato}, basta convertirlo in una lista di numeri. Per esempio:
+Quindi è possibile codificare liste e, di conseguenza, \textbf{qualsiasi tipo di dato}, basta convertirlo in una lista di numeri. 
+
+Ad esempio:
 \begin{itemize}
 	\item una matrice può essere vista come array di array
-	\item un grafo può essere rappresentato tramite la sua matrice di adiacenza
-	\item i testi sono liste di caratteri
-	\item i suoni si possono campionare per ottenere una lista di valori
-	\item le immagini sono una ``matrice'' di pixel, ognuno dei quali ha un colore come valore
+	
+    \item un grafo può essere rappresentato tramite la sua matrice di adiacenza
+	
+    \item i testi sono liste di caratteri
+	
+    \item i suoni si possono campionare per ottenere una lista di valori
+	
+    \item le immagini sono una "matrice" di pixel, ognuno dei quali ha un colore come valore
 \end{itemize}
 
-Abbiamo visto come i dati possano essere sostituiti da delle codifiche numeriche; di conseguenza possiamo sostituire tutte le funzioni 
+Abbiamo visto come i dati possano essere sostituiti da delle codifiche numeriche; di conseguenza possiamo sostituire tutte le funzioni
 $$ f: \dati \rightarrow \dati_{\bot} \;\; \text{ con funzioni } \;\; f': \mathbb{N} \rightarrow \mathbb{N}_\bot $$
 
 In altre parole, l'universo dei problemi per i quali cerchiamo una soluzione automatica è rappresentabile da $\mathbb{N}_\bot^{\mathbb{N}}$.
 
 \section{$\prog \sim \mathbb{N}$}
+
 Adesso lavoriamo sulla parte della relazione che afferma 
-$$ F(\C) \sim \prog \sim \mathbb{N} \marginnote{$\leftarrow$ (la prima parte e' piu' complicata di quanto non sembri in verita' una funzione puo' avere piu' programmi assocati ma entrambi gli insiemi sono infiniti contabili quindi in principio esiste una biezione)}$$
-Ovvero, la potenza computazionale (l'insieme dei programmi che un sistema di calcolo $\C$ riesce a calcolare, $F(\C)$) è isomorfa all'insieme di tutti i programmi, a loro volta isomorfi a $\mathbb{N}$. Vogliamo arrivare a ricavare un numero dato un programma e viceversa. Per farlo servirà vedere l'insieme $\prog$ come l'insieme dei programmi scritti in un certo linguaggio di programmazione.
+$$ F(\C) \sim \prog \sim \mathbb{N} $$
+
+Da notare che la prima parte è più complicata di quanto non sembri, in verità una funzione può avere più programmi associati ma entrambi gli insiemi sono infiniti numerabili, quindi in principio esiste una biezione.
+
+Vogliamo affermare che la potenza computazionale (l'insieme dei programmi che un sistema di calcolo $\C$ riesce a calcolare, $F(\C)$) è isomorfa all'insieme di tutti i programmi, a loro volta isomorfi a $\mathbb{N}$. 
+
+Vogliamo arrivare a ricavare un numero dato un programma e viceversa. Per farlo servirà vedere l'insieme $\prog$ come l'insieme dei programmi scritti in un certo linguaggio di programmazione.
 
 I sistemi analizzati saranno: 
 \begin{itemize}
 	\item sistema di calcolo $\ram$
+    
 	\item sistema di calcolo $\while$
 \end{itemize}
 
-Il sistema RAM può apparentemente sembrare "troppo semplice", quindi il sistema WHILE verrà usato per avere un confronto tra le potenze computazionali. Un sistema più sofisticato porta a poter risolvere più problemi?
+Il sistema $\ram$ può apparentemente sembrare "troppo semplice", quindi il sistema $\while$ verrà usato per avere un confronto tra le potenze computazionali. \textit{Un sistema più sofisticato porta a poter risolvere più problemi?}
 
 Ci sono due possibili soluzioni: 
 \begin{itemize}
 	\item $F(\ram) \neq F(\while)$: la computabilità \textit{dipende dal sistema usato}
+    
 	\item $F(\ram) = F(\while)$: la computabilità è \textit{intrinseca nei problemi} e, di conseguenza, tutti i sistemi sono equivalenti (Tesi di Church-Turing)
 \end{itemize}
 
 Il secondo caso è più promettente e, in quel caso, l'obiettivo diventerebbe trovare una \textit{caratterizzazione teorica}, ovvero un "confine" per i problemi calcolabili.
 
 \subsection{Sistema di calcolo $\ram$}
+
 Il sistema di calcolo $\ram$ è un sistema semplice che permette di definire rigorosamente: 
 \begin{itemize}
 	\item $\prog \sim \mathbb{N}$
+
 	\item la \textbf{semantica} dei programmi eseguibili, ovvero $\C(P,\_)$, con $\C = \ram$, ottenendo $\ram (P,\_)$
+
 	\item la \textbf{potenza computazionale}, ovvero calcolare $F(\C)$ con $\C = \ram$, ottenendo $F(\ram)$
 \end{itemize}
 
 \subsubsection{Struttura}
+
 Una macchina $\ram$ è formata da un processore e da una memoria teoricamente infinita, divisa in \textbf{celle/registri} contenenti numeri naturali (dati aritmetizzati).
 
 Indichiamo i \textbf{registri} con $R_k$, con $k \geq 0$. Tra questi 
 \begin{itemize}
 	\item $R_0$ contiene l'output
+    
 	\item $R_1$ contiene l'input
 \end{itemize}
 
-Inoltre è presente un registro $L$, anche detto \textbf{program counter} $PC$ che indica l'indirizzo dell'istruzione successiva. Un \textbf{programma} $P$ e' un insieme ordinato di istruzioni, indichiamo con $|P|$ il numero di istruzioni che il programma contiene.
+Inoltre è presente un registro $L$, anche detto \textbf{program counter} $PC$ che indica l'indirizzo dell'istruzione successiva. 
+
+Un \textbf{programma} $P$ è un insieme ordinato di istruzioni, indichiamo con $|P|$ il numero di istruzioni che il programma contiene.
 
 Le \textbf{istruzioni} nel linguaggio RAM sono: 
 \begin{itemize}
 	\item \textbf{incremento}: $R_k \leftarrow R_k + 1$
-	\item \textbf{decremento}: $R_k \leftarrow R_k \dotminus 1$
-	\item \textbf{salto condizionato}: \texttt{if $R_k = 0$ then goto $m$}, con $m \in \{1, \dots, |P|\}$
+	
+    \item \textbf{decremento}: $R_k \leftarrow R_k \dotminus 1$
+	
+    \item \textbf{salto condizionato}: \texttt{if $R_k = 0$ then goto $m$}, con $m \in \{1, \dots, |P|\}$
 \end{itemize}
 L'istruzione di decremento è tale che
 $$ x \dotminus y = \begin{cases}
@@ -573,13 +684,19 @@ L'esecuzione di un programma su una macchina RAM segue i passi:
 	\item \textbf{Inizializzazione}:
 	\begin{itemize}
 		\item viene caricato il programma $P \equiv \text{Istr}_1, \dots \text{Istr}_n$ in memoria
-		\item il PC viene posto a 1 per indicare di eseguire la prima istruzione del programma
-		\item viene caricato l'input in $R_1$
-		\item ogni altro registro è azzerato
+		
+        \item il PC viene posto a 1 per indicare di eseguire la prima istruzione del programma
+		
+        \item viene caricato l'input in $R_1$
+		
+        \item ogni altro registro è azzerato
 	\end{itemize}
-	\item \textbf{Esecuzione}: le istruzioni vengono eseguite una dopo l'altra, a ogni iterazione passa da $L$ a $L+1$ (escluse operazioni di salto). Essendo il linguaggio RAM \textit{non strutturato} richiede un PC per sapere l'operazione da eseguire al passo successivo.
-	\item \textbf{Terminazione}: per convenzione, si usa $L=0$ per indicare che l'esecuzione del programma è terminata o andata in loop. Nel caso in cui il programma termini, è detto \textbf{segnale di halt} e arresta la macchina
-	\item \textbf{Output}: il contenuto di $R_0$, in caso di halt, contiene il risultato dell'esecuzione del programma $P$. Si indica con $\varphi_P(n)$ il contenuto del registro $R_0$ in caso di halt, oppure $\bot$ in caso di loop
+	
+    \item \textbf{Esecuzione}: le istruzioni vengono eseguite una dopo l'altra, a ogni iterazione passa da $L$ a $L+1$ (escluse operazioni di salto). Essendo il linguaggio RAM \textit{non strutturato} richiede un PC per sapere l'operazione da eseguire al passo successivo.
+	
+    \item \textbf{Terminazione}: per convenzione, si usa $L = 0$ per indicare che l'esecuzione del programma è terminata o andata in loop. Nel caso in cui il programma termini, è detto \textbf{segnale di halt} e arresta la macchina
+	
+    \item \textbf{Output}: il contenuto di $R_0$, in caso di halt, contiene il risultato dell'esecuzione del programma $P$. Si indica con $\varphi_P(n)$ il contenuto del registro $R_0$ in caso di halt, oppure $\bot$ in caso di loop
 	$$ 
 	\varphi_P (n) = \begin{cases}
 		cont(R_0) & \text{ se halt} \\
@@ -587,18 +704,23 @@ L'esecuzione di un programma su una macchina RAM segue i passi:
 	\end{cases}
 	$$
 \end{enumerate}
-Con $\varphi_P: \mathbb{N} \rightarrow \mathbb{N}_\bot$ indichiamo la semantica del programma $P$. Con $\C(P,\_)$ indicavamo la semantica di $P$ nel sistema di calcolo $\C$, quindi con $\ram(P,\_) = \varphi_P$ indichiamo la semantica di $P$ nel sistema di calcolo RAM.
+
+Con $\varphi_P: \mathbb{N} \rightarrow \mathbb{N}_\bot$ indichiamo la semantica del programma $P$. Con $\C(P,\_)$ indicavamo la semantica di $P$ nel sistema di calcolo $\C$, quindi con $\ram(P,\_) = \varphi_P$ indichiamo la semantica di $P$ nel sistema di calcolo $\ram$.
 
 \subsubsection{Semantica Operazionale}
 
-Per dare una definizione formale della semantica di un programma RAM va specificato il significato di ogni istruzione (\textbf{semantica operazionale}), esplicitando l'effetto che quell'istruzione ha sui registri della macchina.
+Per dare una definizione formale della semantica di un programma $\ram$ va specificato il significato di ogni istruzione (\textbf{semantica operazionale}), esplicitando l'effetto che quell'istruzione ha sui registri della macchina.
 
 Ogni istruzione fa passare la macchina da uno stato all'altro e la \textbf{semantica operazionale} di un'istruzione è la \textbf{coppia} formata dagli \textbf{stati} della macchina \textbf{prima e dopo l'istruzione}.
 $$ \text{STATO}_1 \rightarrow \boxed{\text{Istr}_i} \rightarrow \text{STATO}_2 $$
-La \textbf{semantica operazionale} di un’istruzione $\text{Istr}_i$ è quindi una \textbf{relazione sui possibili stati}:
+
+La \textbf{semantica operazionale} di un'istruzione $\text{Istr}_i$ è quindi una \textbf{relazione sui possibili stati}:
 $$
-\text{Istr}_i \subseteq \text{Stati} \times \text{Stati} \marginnote{$\leftarrow$ (puo' essere visto come funzione parziale o relazione (ricorda coq))}
+\text{Istr}_i \subseteq \text{Stati} \times \text{Stati}
 $$
+
+Questa può essere vista come funzione parziale o relazione.
+
 Uno stato deve descrivere completamente la situazione della macchina in un certo istante. Il programma rimane uguale, quindi l'informazione da salvare è la situazione globale dei registri $R_k$ e il registro $L$.
 
 La \textbf{computazione} del programma $P$ è una sequenza di stati $\st_i$, ognuno generato dall'esecuzione di un'istruzione del programma; $P$ induce una sequenza di stati $\st_i$, se questa è formata da un numero infinito di stati, allora il programma è andato in loop; in caso contrario, nel registro $R_0$ si trova il risultato $y$ della computazione di $P$.
@@ -608,20 +730,25 @@ $$
 	\bot & \text{ altrimenti}
 \end{cases}
 $$
+
+Quindi, se il programma finisce, la semantica di quest'ultimo è il risultato del programma stesso, ovvero il valore posto nel registro $R_0$ al termine della computazione, $\bot$ altrimenti.
+
 Per definire come passare da uno stato all'altro, definiamo formalmente: 
 \begin{itemize}
 	\item \textbf{Stato}: istantanea di tutte le componenti della macchina, è una funzione 
 	$$ \st: \{L, R_i\} \rightarrow \mathbb{N} $$
 	tale che $\st (R_k)$ restituisce il contenuto del registro $R_k$ quando la macchina si trova nello stato $\st$. Gli stati possibili di una macchina appartengono all'insieme 
-		$$ \stati = \{f: \{L, R_i\} \rightarrow \mathbb{N}\} = \mathbb{N}^{\{L,R_i\}} $$
-		\lcomment{Questa rappresentazione permette un numero di registri potenzialmente infinito. Se così non fosse, avremmo tuple per indicare tutti i possibili registri al posto dell'insieme $\{L,R_i\}$}[-0.5cm]
-
-	\vspace{-0.5cm}
+	$$ \stati = \{f: \{L, R_i\} \rightarrow \mathbb{N}\} = \mathbb{N}^{\{L,R_i\}} $$
 	
+    Questa rappresentazione permette un numero di registri potenzialmente infinito; se così non fosse, avremmo tuple per indicare tutti i possibili registri al posto dell'insieme $\{L,R_i\}$
+
 	\item \textbf{Stato Finale}: uno stato finale $\st_{fin}$ è un qualsiasi stato $\st$ tale che $\st (L) = 0$
-	\item \textbf{Dati}: già dimostrato come $\dati \sim \mathbb{N}$
-	\item \textbf{Inizializzazione}: serve una funzione che, preso l'input, restituisca lo stato iniziale della macchina: 
+	
+    \item \textbf{Dati}: già dimostrato come $\dati \sim \mathbb{N}$
+	
+    \item \textbf{Inizializzazione}: serve una funzione che, preso l'input, restituisca lo stato iniziale della macchina: 
 	$$ \text{in}: \mathbb{N} \rightarrow \stati \tc \text{in}(n) = \st_{init}$$
+    
 	Lo stato iniziale $\st_{init}$ è tale che
 	$$ 
 	\st_{init} (R) = \begin{cases}
@@ -630,7 +757,10 @@ Per definire come passare da uno stato all'altro, definiamo formalmente:
 		0 & \text{ altrimenti}
 	\end{cases}
 	$$
-	\item \textbf{Programmi}: $\prog$ è definito come l'insieme dei programmi $\ram$
+    
+    Lo stato iniziale è quindi composto da 1 nel $PC$, l'input $n$ in $R_1$, 0 in tutti gli altri registri
+	
+    \item \textbf{Programmi}: $\prog$ è definito come l'insieme dei programmi $\ram$
 \end{itemize}
 
 Manca da definire la \textit{parte dinamica} del programma, ovvero l'esecuzione. Per farlo, definiamo la \textbf{funzione di stato prossimo}: 
@@ -642,14 +772,16 @@ dove $\st$ rappresenta lo stato attuale e $\st'$ rappresenta lo stato prossimo d
 La funzione $\delta (\st, P) = \st'$ è tale che
 \begin{itemize}
 	\item se $\st(L) = 0$ ho halt, ovvero deve terminare la computazione. Poniamo lo stato come indefinito, ovvero $\st' = \bot$
-	\item Se $\st(L)>|P|$ vuol dire che $P$ non contiene istruzioni che bloccano esplicitamente l'esecuzione del programma. Lo stato $\st'$ è tale che 
+	
+    \item Se $\st(L)>|P|$ vuol dire che $P$ non contiene istruzioni che bloccano esplicitamente l'esecuzione del programma. Lo stato $\st'$ è tale che 
 	$$ 
 	\st'(R) = \begin{cases}
 		0 & \text{ se } R = L \\
-		\st(R_i) &\text{ se } R = R_i \forall i
+		\st(R_i) &\text{ se } R = R_i, \forall i
 	\end{cases}
 	$$
-	\item Se $1 \leq \st(L) \leq |P|$ considero l'istruzione $\st(L)$-esima:
+	
+    \item Se $1 \leq \st(L) \leq |P|$ considero l'istruzione $\st(L)$-esima:
 	\begin{itemize}
 		\item se ho un incremento/decremento sul registro $R_k$ definisco $\st'$ tale che 
 		$$ 
@@ -659,18 +791,19 @@ La funzione $\delta (\st, P) = \st'$ è tale che
 			\st'(R_i) & = \st (R_i) \; \text{ per } \; i \neq k \\
 		\end{cases}
 		$$
-		\item Se ho \verb|IF| $R_k = 0$ \verb|THEN GOTO| $m$, definisco $\st'$ tale che
+	
+    	\item Se ho \verb|IF| $R_k = 0$ \verb|THEN GOTO| $m$, definisco $\st'$ tale che
 		$$ 
 		\st' (L) = \begin{cases}
 			m & \text{ se } \st (R_k) = 0 \\
 			\st (L) + 1 & \text{ altrimenti}
 		\end{cases}
 		$$
-		$$ \st' (R_i) = \st (R_i) \; \forall i $$
+		$$ \st' (R_i) = \st (R_i), \; \forall i $$
 	\end{itemize}
 \end{itemize}
 
-L'esecuzione di un programma $P \in \prog$ su input $n \in \mathbb{N}$ genera una sequenza di stati 
+L'esecuzione di un programma $P \in \prog$ su input $n \in \mathbb{N}$ genera una sequenza di stati
 $$ \st_0, \st_1, \dots, \st_i, \st_{i+1}, \dots $$
 tali che:
 $$
@@ -679,9 +812,10 @@ $$
 	\forall i & \st_{i+1} & = & \delta (\st_i,P) 
 \end{array}
 $$
+
 La sequenza è infinita quando $P$ va in loop, mentre se termina raggiunge uno stato $\st_m$ tale che $\st_m (L) = 0$, ovvero ha ricevuto il segnale di halt.
 
-La semantica di $P$ è 
+La semantica di $P$ è
 $$ 
 \varphi_P (n) = \begin{cases}
 	y & \text{ se } P \text{ termina in } \st_m, \text{ con } \st_m (L) = 0 \text{ e } \st_m(R_0) = y \\
@@ -691,7 +825,7 @@ $$
 
 La potenza computazionale del sistema $\ram$ è 
 $$ F(\ram) = \left\{f \in \mathbb{N}^{\mathbb{N}}_\bot \ | \ \exists P \in \prog \text{ s.t. } \varphi_P = f \right\} = \left\{\varphi_P \ | \ P \in \prog \right\} \subsetneq \mathbb{N}^{\mathbb{N}}_\bot $$
-L'insieme è formato da tutte le funzioni $f: \mathbb{N} \rightarrow \mathbb{N}_\bot$ che hanno un programma che le calcola in un sistema $\ram$. \lcomment{Guarda slide per esempi esercizi 6:10 in poi}
+L'insieme è formato da tutte le funzioni $f: \mathbb{N} \rightarrow \mathbb{N}_\bot$ che hanno un programma che le calcola in un sistema $\ram$. \lcomment{Guarda slide per esempi esercizi 6:10 in poi} % TODO Commento
 
 \subsection{Aritmetizzazione di un programma}
 
@@ -701,9 +835,11 @@ Riassumendo, vogliamo trasformare la lista di istruzioni un una lista di numeri 
 \begin{center}
 	\input{img/calc/ram_codifica}
 \end{center} 
+
 L'associazione biunivoca di un numero a una struttura si dice aritmetizzazione o G\"odelizzazione.
 
 \subsubsection{Applicazione ai programmi RAM}
+
 Dovendo codificare tre istruzioni nel linguaggio $\ram$, definiamo la funzione $Ar$ tale che
 $$ 
 Ar(I) = \begin{cases}
@@ -712,6 +848,7 @@ Ar(I) = \begin{cases}
 	3 \langle k,m\rangle - 1 & \text{ se } I \equiv \text{ \texttt{if} } R_k = 0 \text{ \texttt{then goto} } m \\
 \end{cases}
 $$
+
 Per l'inversa, in base al modulo tra $n$ e 3 ottengo una certa istruzione: 
 $$
 Ar^{-1} (n) = \begin{cases}
@@ -722,7 +859,7 @@ Ar^{-1} (n) = \begin{cases}
 $$
 
 Per tornare indietro devo prima invertire la funzione coppia di Cantor e poi invertire la funzione $Ar$.
-La lunghezza del programma $P$, indicata con $|P|$, si calcola come $len(cod(P))$. Abbiamo quindi dimostrato che $\prog \sim \mathbb{N}$. \lcomment{Guarda le prime slide fino a 7:5 per esempi}
+La lunghezza del programma $P$, indicata con $|P|$, si calcola come $len(cod(P))$. Abbiamo quindi dimostrato che $\prog \sim \mathbb{N}$. \lcomment{Guarda le prime slide fino a 7:5 per esempi} % TODO Commento
 
 \subsubsection{Osservazioni}
 Avendo $n = cod(P)$ si può scrivere
@@ -737,78 +874,102 @@ L'insieme, grazie alla dimostrazione di $\prog \sim \mathbb{N}$, è numerabile. 
 $$ F(\ram) \sim \mathbb{N} \nsim \mathbb{N}^{\mathbb{N}}_\bot $$
 Di conseguenza, anche nel sistema di calcolo $\ram$ esistono funzioni non calcolabili.
 
-La $\ram$ è troppo elementare affinché $F(\ram)$ rappresenti formalmente la "classe dei problemi risolubili automaticamente", quindi considerando un sistema di calcolo $\C$ più sofisticato, ma comunque trattabile rigorosamente come il sistema $\ram$, potremmo dare un'idea formale di "ciò che è calcolabile automaticamente". Se riesco a dimostrare che $F(\ram) = F(\C)$ allora cambiare la tecnologia non cambia ciò che è calcolabile, ovvero la calcolabilità è intrinseca ai problemi, quindi la si può caratterizzare matematicamente.
+La $\ram$ è troppo elementare affinché $F(\ram)$ rappresenti formalmente la "classe dei problemi risolubili automaticamente", quindi considerando un sistema di calcolo $\C$ più sofisticato, ma comunque trattabile rigorosamente come il sistema $\ram$, potremmo dare un'idea formale di "ciò che è calcolabile automaticamente". 
+
+Riuscendo a dimostrare che $F(\ram) = F(\C)$ allora cambiare la tecnologia non cambia ciò che è calcolabile, la calcolabilità è intrinseca ai problemi e la si può caratterizzare matematicamente.
 
 \subsection{Sistema di calcolo $\while$}
+
 Introduciamo quindi il sistema di calcolo $\while$ per vedere se riusciamo a "catturare" più o meno funzioni calcolabili dalla macchina $\ram$.
 
 \subsubsection{Struttura}
-La macchina $\while$ ha anch'essa, come la macchina $\ram$, una serie di registri, ma al posto di essere \textit{potenzialmente infiniti} sono esattamente 21. Il registro $R_0$ è il \textbf{registro di output}, mentre $R_1$ è il \textbf{registro di input}. Non esiste il Program Counter in quanto il linguaggio è \textbf{strutturato} e ogni istruzione in questo linguaggio va eseguita in ordine.
+
+La macchina $\while$ ha anch'essa, come la macchina $\ram$, una serie di registri, ma al posto di essere \textit{potenzialmente infiniti} sono esattamente 21. 
+
+Il registro $R_0$ è il \textbf{registro di output}, mentre $R_1$ è il \textbf{registro di input}. Non esiste il Program Counter in quanto il linguaggio è \textbf{strutturato} e ogni istruzione in questo linguaggio va eseguita in ordine.
 
 Il linguaggio $\while$ prevede una \textbf{definizione induttiva}: vengono definiti alcuni comandi base e i comandi più complessi sono una concatenazione dei comandi base.
 
-\paragraph{Assegnamento:} Comando di base, ne esistono di tre tipi: 
+\paragraph{Assegnamento:} Comando di base, ne esistono di tre tipi:
 \begin{align*}
 	x_k & := 0, \\
 	x_k & := x_j + 1 \\
 	x_k & := x_j \dotminus 1
 \end{align*}
-Queste istruzioni sono più complete rispetto alle istruzioni $\ram$, in una sola istruzione possiamo azzerare il valore di una variabile o assegnare a una variabile il valore di un'altra aumentato/diminuito di 1.
+
+Queste istruzioni sono più complete rispetto alle istruzioni $\ram$, in una sola istruzione si può azzerare il valore di una variabile o assegnare a una variabile il valore di un'altra aumentato/diminuito di 1.
 
 \paragraph{While:} Primo comando "induttivo". Si tratta di un comando della forma: 
 \begin{center}
 	\texttt{while} $x_k \neq 0$ \texttt{do} $C$
 \end{center}
+
 Dove $C$ è detto \textbf{corpo} e può essere un assegnamento, un comando while o un comando composto.
 
 \paragraph{Composto:} Altro comando induttivo. Si tratta di un comando nella forma
 \begin{center}
 	\texttt{begin} $C_1; \dots; C_n$ \texttt{end}
 \end{center}
+
 Dove i vari $C_i$ sono, come prima, assegnamenti, comandi while o comandi composti.
 
 \paragraph{Programma $\while$:} Un programma $\while$ è un comando composto, e l'insieme di tutti i programmi $\while$ è l'insieme
 $$ W\text{-}\prog = \{\prog \text{ scritti in linguaggio } \while \} \lcomment{Guarda le slide ci sono degli esempi} $$
-Chiamiamo 
+
+Chiamiamo
 $$ \Psi_W : \mathbb{N} \rightarrow \mathbb{N}_\bot $$
 la \textbf{semantica} del programma $W \in W-\prog$.
 
-Per dimostrare una proprietà $P$ di un programma $W \in W\text{-}\prog$, data la definizione induttiva del linguaggio $\while$, è naturale procedere induttivamente:
+Per dimostrare una proprietà $P$ di un programma $W \in \wprog$, data la definizione induttiva del linguaggio $\while$, è naturale procedere induttivamente:
 \begin{enumerate}
 	\item dimostro $P$ vera sugli assegnamenti 
-	\item suppongo $P$ vera sul comando $C$ e la dimostro vera per \texttt{while $x_k \neq 0$ do $C$}
-	\item suppongo $P$ vera sui comandi $C_1, \dots, C_n$ e la dimostro vera per \texttt{begin $C_1; \dots; C_n$ end}
+	
+    \item suppongo $P$ vera sul comando $C$ e la dimostro vera per \texttt{while $x_k \neq 0$ do $C$}
+	
+    \item suppongo $P$ vera sui comandi $C_1, \dots, C_n$ e la dimostro vera per \texttt{begin $C_1; \dots; C_n$ end}
 \end{enumerate}
 
 \subsubsection{Esecuzione di un programma $\while$}
+
 L'esecuzione di un programma $\while$ $W$ è composta dalle seguenti fasi: 
 \begin{enumerate}
 	\item \textbf{Inizializzazione}: ogni registro $x_i$ viene posto a $0$, tranne $x_1$, che contiene l'input $n$
+    
 	\item \textbf{Esecuzione}: essendo $\while$ un linguaggio con strutture di controllo, non serve un Program Counter, poiché le istruzioni di $W$ vengono eseguite l'una dopo l'altra
-	\item \textbf{Terminazione}: l'esecuzione di $W$ può 
+	
+    \item \textbf{Terminazione}: l'esecuzione di $W$ può 
 	\begin{itemize}
 		\item \textit{arrestarsi}: se arriva al termine delle istruzioni
-		\item \textit{non arrestarsi}: se entra in un loop
+	
+    	\item \textit{non arrestarsi}: se entra in un loop
 	\end{itemize}
-	\item \textbf{Output}: Se il programma va in halt, l'output è contenuto nel registro $x_0$. Possiamo scrivere
+	
+    \item \textbf{Output}: Se il programma va in halt, l'output è contenuto nel registro $x_0$. Possiamo scrivere
 	$$ \Psi_W (n) = \begin{cases}
 		cont(x_0) & \text{ se halt} \\
 		\bot & \text{ se loop}
 	\end{cases}$$
+    La semantica del programma, ancora una volta, coincide con il valore di output, questa volta contenuto all'interno di $x_0$, $\bot$ se non termina
 \end{enumerate}
 
 \subsubsection{Definizione formale per l'esecuzione}
+
 Come per i programmi $\ram$, serve una definizione formale per la semantica di un programma $\while$, per la quale servono una serie di elementi
 \begin{itemize}
 	\item \textbf{Stato}: una tupla grande quanto il numero di variabili, dove quindi $\underline{x} = (c_0, \dots, c_{20})$ rappresenta uno stato, con $c_i$ rappresentante il contenuto della variabile $i$
-	\item \textbf{$\wstati$}: Insieme di tutti gli stati possibili, contenuto in $\mathbb{N}^{21}$ vista la definizione degli stati 
-	\item \textbf{Dati}: già visto che $\dati \sim \mathbb{N}$
-	\item \textbf{Inizializzazione}: Lo stato iniziale è descritto dalla funzione 
+	
+    \item \textbf{$\wstati$}: Insieme di tutti gli stati possibili, contenuto in $\mathbb{N}^{21}$ vista la definizione degli stati 
+	
+    \item \textbf{Dati}: già visto che $\dati \sim \mathbb{N}$
+	
+    \item \textbf{Inizializzazione}: Lo stato iniziale è descritto dalla funzione 
 	$$ w\text{-}in(n) = (0, n, 0, \dots, 0) $$
-	\item \textbf{Semantica operazionale}: Vogliamo trovare una funzione che, presi comando da eseguire e stato corrente, restituisce lo stato successivo
+	
+    \item \textbf{Semantica operazionale}: Vogliamo trovare una funzione che, presi comando da eseguire e stato corrente, restituisce lo stato successivo
 \end{itemize}
+
 \paragraph{Funzione stato prossimo:} Soffermandoci sull'ultimo punto, vogliamo trovare la funzione
-$$  \llbracket \ \rrbracket ( \ ): \wcom \times \wstati \rightarrow \wstati_\bot $$
+$$  \llbracket \_ \rrbracket ( \_ ): \wcom \times \wstati \rightarrow \wstati_\bot $$
 Che, dati un comando $C$ del linguaggio $\while$ e lo stato corrente $\underline{x}$, calcoli:
 $$ \llbracket C \rrbracket (\underline{x}) = \underline{y} $$
 con $\underline{y}$ stato prossimo. Quest'ultimo dipende dal comando $C$, ma essendo $C$ induttivo, possiamo provare a dare una definizione induttiva della funzione.
@@ -831,61 +992,76 @@ Proseguiamo con il \textbf{passo induttivo}:
 \begin{itemize}
 	\item \textbf{Comando composto}: vogliamo calcolare
 	$$ \llbracket \text{\texttt{begin }} C_1; \dots; C_n \text{\texttt{ end}} \rrbracket (\underline{x}) $$
-	Conoscendo ogni $\llbracket C_i \rrbracket$ per ipotesi induttiva, calcoliamo la funzione
+	
+    Conoscendo ogni $\llbracket C_i \rrbracket$ per ipotesi induttiva, calcoliamo la funzione
 	$$ \llbracket C_n \rrbracket \left(\dots \left(\llbracket C_2 \rrbracket \left(\llbracket C_1 \rrbracket (\underline{x})\right)\right) \dots \right) = \left(\llbracket C_n \rrbracket \circ \dots \circ \llbracket C_1 \rrbracket \right) (\underline{x}) $$
-	Ovvero, applichiamo in ordine i comandi $C_i$ presenti nel comando composto $C$
+	
+    Ovvero, applichiamo in ordine i comandi $C_i$ presenti nel comando composto $C$
 	
 	\item \textbf{Comando while}: vogliamo calcolare
 	$$ \llbracket \text{\texttt{while }} x_k \neq 0 \text{ \texttt{do} } C \rrbracket (\underline{x}) $$
-	Conoscendo $\llbracket C \rrbracket$ per ipotesi induttiva, calcoliamo la funzione
+	
+    Conoscendo $\llbracket C \rrbracket$ per ipotesi induttiva, calcoliamo la funzione
 	$$ \llbracket C \rrbracket \left(\dots \left(\llbracket C \rrbracket (\underline{x})\right) \dots \right) $$
-	Bisogna capire quante volte eseguire il ciclo: dato $\llbracket C \rrbracket^e$ (comando $C$ eseguito $e$ volte) vorremmo trovare il valore di $e$. Questo è il numero minimo di iterazioni che portano in uno stato in cui $x_k = 0$, ovvero il comando \texttt{while} diventa
+	
+    Bisogna capire quante volte eseguire il ciclo: dato $\llbracket C \rrbracket^e$ (comando $C$ eseguito $e$ volte) vorremmo trovare il valore di $e$. Questo è il numero minimo di iterazioni che portano in uno stato in cui $x_k = 0$, ovvero il comando \texttt{while} diventa
 	$$ \llbracket \text{\texttt{while} } x_k \neq 0 \text{ \texttt{do} } C \rrbracket (\underline{x}) = \begin{cases}
-		\llbracket C \rrbracket^e (\underline{x}) & \text{ se } \exists e \text{ minimum such that } \llbracket C \rrbracket^e (\underline{x})[k] = 0 \\
+		\llbracket C \rrbracket^e (\underline{x}) & \text{ se } \exists e \text{ minimo tale che } \llbracket C \rrbracket^e (\underline{x})[k] = 0 \\
 		\bot & \text{ altrimenti}
 	\end{cases}$$
 \end{itemize}
 
-Definita la semantica operazionale, manca solo da definire cos'è la \textbf{semantica del programma} $W$ su input $n$. Questa è la funzione 
-$$ \Psi_W: \mathbb{N} \rightarrow \mathbb{N}_\bot \; | \; \Psi_W (n) = \text{Pro}\left(0, \llbracket W \rrbracket (w\text{-}in(n))\right) \lcomment{bisognerebbe fare funzione a tratti contando anche il caso $\bot$}$$
-Questo è valido in quanto $W$ programma $\while$ è un programma composto, e abbiamo definito come deve comportarsi la funzione $\llbracket \rrbracket ()$ sui comandi composti.
+Definita la semantica operazionale, manca solo da definire cos'è la \textbf{semantica del programma} $W$ su input $n$. Questa è la funzione
+$$ \Psi_W: \N \rightarrow \mathbb{N}_\bot \mid \Psi_W (n) = \text{Pro}\left(0, \llbracket W \rrbracket (w\text{-}in(n))\right) \lcomment{bisognerebbe fare funzione a tratti contando anche il caso $\bot$} $$
+
+Questo è valido in quanto $W$ programma $\while$ è un programma composto, e abbiamo definito come deve comportarsi la funzione $\llbracket \_ \rrbracket (\_)$ sui comandi composti.
+
+Stiamo praticamente dicendo che la semantica del programma $W$, visto come comando composto, è il risultato, ovvero il contenuto del registro $x_0$, dell'applicazione del comando $W$ allo stato iniziale.
 
 \paragraph{Potenza Computazionale:} La potenza computazionale del sistema di calcolo $\while$ è l'insieme 
-$$ F(\while) = \left\{f \in \mathbb{N}^{\mathbb{N}}_\bot \ | \ \exists W \in \wprog , f = \Psi_W \right\} = \left\{\Psi_W : W \in \wprog \right\}$$
+$$ F(\while) = \left\{f \in \mathbb{N}^{\mathbb{N}}_\bot \mid  \exists W \in \wprog , f = \Psi_W \right\} = \left\{\Psi_W : W \in \wprog \right\}$$
+
 Ovvero, l'insieme formato da tutte le funzioni che possono essere calcolate con un programma in $\wprog$.
 
 \subsection{Confronto tra macchina $\ram$ e $\while$}
-Viene naturale confrontare i due sistemi presentati per capire il "più potente", sempre che ce ne sia uno. Le possibilità sono: 
+
+Viene naturale confrontare i due sistemi presentati per capire il "\textit{più potente}", sempre che ce ne sia uno. Le possibilità sono: 
 \begin{itemize}
 	\item $F(\ram) \subsetneq F(\while)$, sarebbe anche comprensibile data l'estrema semplicità del sistema $\ram$
-	\item $F(\ram) \cap F(\while) = \emptyset$, avere insiemi disgiunti significherebbe che il concetto di calcolabile dipende dalla macchina considerata
-	\item $F(\while) \subseteq F(\ram)$, che sarebbe sorprendente vista l'apparente maggiore sofisticatezza del sistema $\while$
-	\item $F(\while) = F(\ram)$, ovvero il concetto di calcolabile non dipende dalla tecnologia utilizzata ma è intrinseco nei problemi
+	
+    \item $F(\ram) \cap F(\while) = \emptyset$, avere insiemi disgiunti significherebbe che il concetto di calcolabile dipende dalla macchina considerata
+	
+    \item $F(\while) \subseteq F(\ram)$, che sarebbe sorprendente vista l'apparente maggiore sofisticatezza del sistema $\while$
+	
+    \item $F(\while) = F(\ram)$, ovvero il concetto di calcolabile non dipende dalla tecnologia utilizzata ma è intrinseco nei problemi
 \end{itemize}
 
 \paragraph{Confronto tra sistemi di calcolo:} Ponendo di avere $\C_1$ e $\C_2$ sistemi di calcolo con programmi in $\cprog{1}$ e $\cprog{2}$ e le relative potenze computazionali
-$$ F(\C_1) = \left\{f: \mathbb{N} \rightarrow \mathbb{N}_\bot \ | \ \exists P_1 \in \cprog{1} | f = \Psi_{P_1} \right\} = \left\{\Psi_{P_1}: P_1 \in \cprog{1} \right\} $$
-$$ F(\C_2) = \left\{f: \mathbb{N} \rightarrow \mathbb{N}_\bot \ | \ \exists P_2 \in \cprog{2} | f = \varphi_{P_2} \right\} = \left\{\varphi_{P_2}: P_2 \in \cprog{2} \right\} $$
+$$ F(\C_1) = \left\{f: \mathbb{N} \rightarrow \mathbb{N}_\bot \mid \exists P_1 \in \cprog{1} \mid f = \Psi_{P_1} \right\} = \left\{\Psi_{P_1}: P_1 \in \cprog{1} \right\} $$
+$$ F(\C_2) = \left\{f: \mathbb{N} \rightarrow \mathbb{N}_\bot \mid \exists P_2 \in \cprog{2} \mid f = \varphi_{P_2} \right\} = \left\{\varphi_{P_2}: P_2 \in \cprog{2} \right\} $$
 
 Mostrare che il primo sistema non è più potente del secondo $F(\C_1) \subseteq F(\C_2)$ vuol dire dimostrare che ogni elemento nel primo insieme deve stare anche nel secondo
 $$ \forall f \in F(\C_1) \implies f \in F(C_2) $$
 
 \textit{Espandendo} la definizione di $f \in F(\C)$ la relazione diventa
-$$ \forall P_1 \in \cprog{1} | f = \Psi_{P_1} \implies \exists P_2 \in \cprog{2} | f = \varphi_{P_2} $$
+$$ \forall P_1 \in \cprog{1} \mid f = \Psi_{P_1} \implies \exists P_2 \in \cprog{2} \mid f = \varphi_{P_2} $$
+
 Per ogni programma calcolabile nel primo sistema di calcolo ne esiste uno con la stessa semantica nel secondo sistema. Vogliamo trovare un \textbf{compilatore} (o \textbf{traduttore}), ovvero una funzione che trasformi un programma del primo sistema in uno del secondo.
 
 \subsubsection{Traduzioni}
 Dati $\C_1$ e $\C_2$ due sistemi di calcolo, definiamo \textbf{traduzione} da $\C_1$ a $\C_2$ una funzione
 $$ T: \cprog{1} \rightarrow \cprog{2} $$
+
 Con le seguenti proprietà:
 \begin{itemize}
 	\item \textbf{programmabile}: esiste un modo per programmarla effettivamente
+
 	\item \textbf{completa}: deve saper tradurre \textit{ogni} programma in $\cprog{1}$ in un programma in $\cprog{2}$
+
 	\item \textbf{corretta}: mantiene la semantica dei programmi di partenza, ovvero
-	$$ \forall P \in \cprog{1} \;\; \Psi_P = \varphi_{T(P)}$$
+	$$ \forall P \in \cprog{1}, \;\; \Psi_P = \varphi_{T(P)}$$
 	dove $\Psi$ rappresenta la semantica dei programmi in $\cprog{1}$ e $\varphi$ rappresenta la semantica dei programmi in $\cprog{2}$ \\
 \end{itemize}
-
 
 \begin{theor}
 	Se esiste $T: \cprog{1} \rightarrow \cprog{2}$ allora $F(\C_1) \subseteq F(\C_2)$
@@ -897,7 +1073,9 @@ Con le seguenti proprietà:
 	Ho trovato un programma $P_2 \in \cprog{2}$ la cui semantica è $f$, allora $F(\C_1) \subseteq F(\C_2)$.\\
 \end{proof}
 
-Mostreremo che $F(\while) \subseteq F(\ram)$, ovvero che il sistema $\while$ non è più potente del sistema $\ram$. Costruiremo un compilatore
+Mostreremo che $F(\while) \subseteq F(\ram)$, ovvero che il sistema $\while$ non è più potente del sistema $\ram$.
+
+Costruiremo un compilatore
 $$ \comp: \wprog \rightarrow \prog $$
 che rispetti le caratteristiche di programmabilità, completezza e correttezza.
 
@@ -910,10 +1088,12 @@ Per comodità, introduciamo un linguaggio $\ram$ \textit{etichettato}: aggiunge 
 Essendo $\wprog$ un insieme definito induttivamente, possiamo definire induttivamente anche il compilatore:
 \begin{itemize}
 	\item \textbf{Passo base}: come compilare gli assegnamenti
-	\item \textbf{Passo induttivo}:
+	
+    \item \textbf{Passo induttivo}:
 	\begin{enumerate}
 		\item Per I.H., assumo di sapere $\comp(C_1), \dots, \comp(C_m)$ e mostro come compilare il comando composto \texttt{begin $C_1; \dots; C:n$ end}
-		\item Per I.H., assumo di sapere $\comp(C)$ e mostro come compilare il comando \texttt{while $x_k \neq 0$ do $C$}
+	
+    	\item Per I.H., assumo di sapere $\comp(C)$ e mostro come compilare il comando \texttt{while $x_k \neq 0$ do $C$}
 	\end{enumerate}
 \end{itemize}
 
@@ -1012,7 +1192,7 @@ Per I.H. sappiamo come compilare $C$. Possiamo calcolare la compilazione del com
 		$\comp(\text{\texttt{while }} x_k \neq 0 \texttt{ do } C) = $ & \texttt{LOOP:} & \texttt{IF $R_k = 0$ THEN GOTO EXIT} \\
 		&& $\comp(C)$ \\
 		&& \texttt{IF $R_{21} = 0$ THEN GOTO LOOP} \\
-		& \texttt{EXIT:} & $R_k \leftarrow R_k \dotminus 1$ \lcomment{Questa istruzione e' un po come un \texttt{pass} in quanto $R_{k}$ e' sicuramente 0} \\
+		& \texttt{EXIT:} & $R_k \leftarrow R_k \dotminus 1$ \lcomment{Questa istruzione e' un po come un \texttt{pass}/\texttt{nop} in quanto $R_{k}$ è sicuramente 0} \\
 		\cline{2-3}
 	\end{tabular}
 \end{center}
@@ -1022,12 +1202,32 @@ $$ \comp: \wprog \rightarrow \prog $$
 appena costruita soddisfa le tre proprietà desiderate in quanto:
 \begin{itemize}
 	\item Facilmente programmabile
-	\item Compila ogni Sorgente $W$-Prog
-	\item Mantiene la semantica ovvero $\Psi_P = \varphi_{\comp(P)}$
+    
+	\item Compila ogni Sorgente $\wprog$
+	
+    \item Mantiene la semantica ovvero $\Psi_P = \varphi_{\comp(P)}$
 \end{itemize}
 
 Di conseguenza
 $$ F(\while) \subseteq F (\ram) $$
+
+\paragraph{TL;DR:} Vogliamo definire induttivamente un compilatore, definendo prima come compilare gli assegnamenti, poi i comandi composti: 
+\begin{itemize}
+    \item Per mappare $x_k := 0$, usiamo un loop per decrementare di 1 $R_k$ finché non raggiunge 0 (usando $R_{21}$, sempre posto a 0, per saltare alla condizione iniziale)
+    
+    \item Per mappare $x_k := x_j \pm 1$
+    \begin{itemize}
+        \item Se $k = j$ uso banalmente l'incremento/decremento $\ram$
+        
+        \item Se $k \neq j$, salvo $R_j$ in $R_{22}$ (decrementando uno e incrementando l'altro finché $R_j \neq 0$), azzero $R_k$ (loop che decrementa), rigenero $R_j$ e $R_k$ da $R_{22}$, prima di uscire incremento/decremento di 1 $R_k$
+    \end{itemize}
+    
+    \item Il comando composto è una composizione, che sappiamo essere compilabile per I.H.
+    
+    \item Il comando \texttt{while} lo possiamo modellare come un loop sulla compilazione del comando all'interno, compilabile per I.H.
+\end{itemize}
+
+In questo modo abbiamo una funzione, programmabile, completa e corretta, dimostrando che $F(\while) \subseteq F(\ram)$.
 
 \subsection{$F(\ram) \subseteq F(\while)$}
 
@@ -1048,8 +1248,10 @@ Notiamo come l'interprete non crei dei prodotti intermedi, ma si limita a esegui
 Due problemi principali: 
 \begin{enumerate}
 	\item Il primo riguarda il tipo di input della macchina $\while$ in quanto questa non sa leggere il programma $P$ (listato di istruzioni $\ram$), sa leggere solo numeri. Dobbiamo modificare $I_W$ in modo che non passi più $P$ ma la sua codifica $cod(P) = n \in \mathbb{N}$. Questo restituisce la semantica del programma codificato con $n$, che è $P$, quindi $\varphi_n (x) = \varphi_P (x)$
-	\item Il secondo problema riguarda la quantità di dati in input alla macchina $\while$: questa legge l'input da un singolo registro, mentre qui ne stiamo passando due. Bisogna modificare $I_W$, condensando l'input tramite la funzione coppia di Cantor, che diventa $\langle x,n \rangle$
+	
+    \item Il secondo problema riguarda la quantità di dati in input alla macchina $\while$: questa legge l'input da un singolo registro, mentre qui ne stiamo passando due. Bisogna modificare $I_W$, condensando l'input tramite la funzione coppia di Cantor, che diventa $\langle x,n \rangle$
 \end{enumerate}
+
 Quindi
 \begin{center}
 	\input{img/calc/interprete2}
@@ -1063,38 +1265,50 @@ Similmente a prima, useremo per comodità il linguaggio \textbf{macro-$\while$},
 Le \textbf{macro} utilizzate sono: 
 \begin{itemize}
 	\item $x_k := x_j + x_s$
-	\item $x_k := \langle x_j, x_s \rangle$
-	\item $x_k := \langle x_1, \dots, x_n \rangle$
-	\item $x_k := \proj(x_j, x_s)$, proiezione, estrae l'elemento $x_j$-esimo dalla lista codificata in $x_s$
-	\item $x_k := \incr (x_j, x_s)$, ritorno codifica della lista $x_s$ con l'elemento in posizione $x_j$ aumentato di 1
-	\item $x_k := \decr(x_j, x_s)$, ritorno codifica della lista $x_s$ con l'elemento in posizione $x_j$ diminuito di 1
-	\item $x_k := \sin (x_j)$
-	\item $x_k := \des (x_j)$
-	\item Costrutto \texttt{If} \dots \texttt{then} \dots \texttt{else}
+	
+    \item $x_k := \langle x_j, x_s \rangle$
+	
+    \item $x_k := \langle x_1, \dots, x_n \rangle$
+	
+    \item $x_k := \proj(x_j, x_s)$, proiezione, estrae l'elemento $x_j$-esimo dalla lista codificata in $x_s$
+	
+    \item $x_k := \incr (x_j, x_s)$, ritorno codifica della lista $x_s$ con l'elemento in posizione $x_j$ aumentato di 1
+	
+    \item $x_k := \decr(x_j, x_s)$, ritorno codifica della lista $x_s$ con l'elemento in posizione $x_j$ diminuito di 1
+	
+    \item $x_k := \sin (x_j)$
+	
+    \item $x_k := \des (x_j)$
+	
+    \item Costrutto \texttt{If} \dots \texttt{then} \dots \texttt{else}
 \end{itemize}
 
-Ognuna di queste macro puo' essere sostituita da un frammento $W$-prog Puro quindi $F(MACRO\text{-}WHILE) = F(W\text{-}WHILE)$ ma la versione con le macro è decisamente piu' comoda
+Ognuna di queste macro può essere sostituita da un frammento $\wprog$ puro quindi $F(\text{MACRO-}\while) = F(\while)$ ma la versione con le macro è decisamente più comoda.
 
 \subsubsection{Stato della macchina $\ram$ nell'interprete}
 
-Risolto il problema dell'input di un interprete scritto in linguaggio $\while$ per i programmi $\ram$, ora vogliamo scrivere questo interprete. In sintesi, l'interprete esegue una dopo l'altra le istruzioni $\ram$ del programma $P$ e restituisce il risultato $\varphi_P (x)$ (da notare che restituisce il risultato, non un eseguibile).
+Risolto il problema dell'input di un interprete scritto in linguaggio $\while$ per i programmi $\ram$, ora vogliamo scrivere questo interprete. In sintesi, l'interprete esegue una dopo l'altra le istruzioni $\ram$ del programma $P$ e restituisce il risultato $\varphi_P (x)$ (da notare che restituisce il risultato, non un eseguibile, letteralmente come interpreti e compilatori per i linguaggi di programmazione classici).
 
 L'interprete ricostruisce virtualmente tutto ciò che gli serve per gestire il programma. Nel caso di $I_W$ deve ricostruire l'ambiente di una macchina $\ram$. Quello che faremo sarà ricreare il programma $P$, il Program Counter $L$ e i registri $R_0, R_1, \dots$, dentro le variabili messe a disposizione dalla macchina $\while$.
 
 \textbf{Primo problema}: i programmi $\ram$ possono utilizzare infiniti registri, mentre i programmi $\while$ ne hanno solo 21. \textit{Ma $P$ usa veramente un numero infinito di registri?}
 
-In realtà no; se $cod(P) = n$ allora $P$ non userà mai registri $R_j$ con $j > n$. Il programma $P$ userà sempre un numero finito di registri il cui contenuto può essere racchiuso in una lista $a_0, \dots, a_n$. La soluzione consiste nel raggruppare tutti i valori dei registri tramite Cantor $\langle a_0, \dots, a_n \rangle$ e salvarne la codifica in un unica variabile. Useremo due registri in più per comodità (possono essere utili, you never know).
+In realtà no: se $cod(P) = n$ allora $P$ non userà mai registri $R_j$ con $j > n$. Il programma $P$ userà sempre un numero finito di registri il cui contenuto può essere racchiuso in una lista $a_0, \dots, a_n$. La soluzione consiste nel raggruppare tutti i valori dei registri tramite Cantor $\langle a_0, \dots, a_n \rangle$ e salvarne la codifica in un unica variabile. Useremo due registri in più per comodità (possono essere utili, you never know).
 
 L'interprete $I_W$ salva lo stato della macchina $\ram$ nel seguente modo (con $I_W (\langle x,n\rangle) = \varphi_n (x)$)
 \begin{itemize}
 	\item $x_0 \leftarrow \langle R_0, \dots, R_{n+2} \rangle$: stato della memoria della macchina $\ram$
-	\item $x_1 \leftarrow L$: Program Counter
-	\item $x_2 \leftarrow x$: dato su cui lavora $P$
-	\item $x_3 \leftarrow n$: "listato" del programma $P$
-	\item $x_4$: codice dell'istruzione da eseguire, prelevata da $x_3$ grazie a $x_1$
+	
+    \item $x_1 \leftarrow L$: Program Counter
+	
+    \item $x_2 \leftarrow x$: dato su cui lavora $P$
+	
+    \item $x_3 \leftarrow n$: "listato" del programma $P$
+	
+    \item $x_4$: codice dell'istruzione da eseguire, prelevata da $x_3$ grazie a $x_1$
 \end{itemize}
 
-Ricordiamo che inizialmente $I_{w}$ trova il suo input $\langle x, n \rangle$ nella variabile $x_1$
+Ricordiamo che inizialmente $I_{w}$ trova il suo input $\langle x, n \rangle$ nella variabile $x_1$.
 
 \newpage
 
@@ -1156,8 +1370,10 @@ tale che
 Ovvero, il compilatore non fa altro che cablare all'input $x$ il programma $\ram$ da interpretare e procede con l'esecuzione dell'interprete. Possiamo verificare le proprietà di un compilatore: 
 \begin{itemize}
 	\item \textbf{programmabile}: lo abbiamo appena fatto
-	\item \textbf{completo}: l'interprete riconosce ogni istruzione $\ram$ e riesce a codificarla
-	\item \textbf{corretto}: vale la relazione $P \in \prog \implies \comp (P) \in \wprog$, quindi
+	
+    \item \textbf{completo}: l'interprete riconosce ogni istruzione $\ram$ e riesce a codificarla
+	
+    \item \textbf{corretto}: vale la relazione $P \in \prog \implies \comp (P) \in \wprog$, quindi
 	$$ \Psi_{\comp (P)} (x) = \Psi_{I_W} (\langle x,n \rangle) = \varphi_n (x) = \varphi_P (x) $$
 	rappresenta la sua semantica
 \end{itemize}
@@ -1167,6 +1383,7 @@ $$ F(\ram) \subseteq F(\while) $$
 Ovvero l'inclusione opposta al risultato precedente.
 
 \subsubsection{Conseguenze}
+
 Visti i risultati ottenuti possiamo definire un teorema importante.\\
 
 \begin{theor}[Teorema di B\"ohm-Jacopini]
@@ -1188,13 +1405,14 @@ Inoltre abbiamo di conseguenza dimostrato che
 Quindi, abbiamo dimostrato che i sistemi $\ram$ e $\while$ sono in grado di \textbf{calcolare le stesse cose}, oltre al fatto che \textbf{esistono funzioni non calcolabili}, ovvero la parte destra della catena.
 
 \subsection{Interprete Universale}
+
 Usando il compilatore da $\while$ a $\ram$
 $$ \comp: \wprog \rightarrow \prog $$
 sul programma $I_W$, otteniamo
 $$ \U = \comp(I_W) \in \prog $$
 E la sua semantica è 
 $$ \varphi_\U (\langle x,n \rangle) = \Psi_{I_W} (\langle x,n \rangle) = \varphi_n(x) $$
-dove $n$ è la codifica del programma $\ram$ e $x$ il dato di input.\\
+dove $n$ è la codifica del programma $\ram$ e $x$ il dato di input.
 
 Abbiamo mostrato che esiste un programma $\ram$ in grado di \textbf{simulare} tutti gli altri programmi $\ram$. Questo programma viene detto \textbf{interprete universale}.
 
@@ -1207,60 +1425,79 @@ Abbiamo visto come due sistemi di calcolo diversi abbiano la stessa potenza comp
 Questa regione può essere definita a prescindere dalle macchine usate per calcolare? Bisognerà definire il concetto di "\textit{calcolabile}" in termini astratti, "lontani" dall'informatica, usando la matematica.
 
 \section{Chiusura}
+
 \subsection{Operazioni}
+
 Dato un insieme $U$, si definisce \textbf{operazione} su $U$ una qualunque funzione
 $$ \op: \underbracket{U \times \cdots \times U}_k \rightarrow U $$
+
 Il numero $k$ indica l'arità dell'operazione, ovvero la dimensione del dominio dell'operazione.
 
 \subsection{Proprietà di Chiusura}
+
 L'insieme $A \subseteq U$ si dice \textbf{chiuso} rispetto all'operazione $\op : U^k \rightarrow U$ se e solo se
 $$ \forall a_1, \dots, a_k \in A \;\;\; \op(a_1, \dots, a_k) \in A $$
+
 Ovvero, l'operazione applicata in $A$ restituisce valori $\in A$. In generale, se $\Omega$ è un insieme di operazioni su $U$, allora $A \subseteq U$ è chiuso rispetto a $\Omega$ se e solo se $A$ è chiuso per ogni operazione in $\Omega$.
 
 \subsection{Chiusura di un insieme}
+
 Siano $A \subseteq U$ un insieme e $\op: U^k \rightarrow U$ un'operazione su di esso. Vogliamo espandere l'insieme $A$ per trovare il più piccolo sottoinsieme di $U$ tale che
 \begin{itemize}
 	\item contiene $A$
+    
 	\item chiuso rispetto a $\op$
 \end{itemize}
+
 Vogliamo espandere $A$ il meno possibile per garantire la chiusura rispetto a $\op$.
 
 Ci sono due risposte banali: 
 \begin{itemize}
 	\item Se $A$ è già chiuso rispetto a $\op$, allora $A$ stesso è l'insieme cercato
+    
 	\item Sicuramente $U$ soddisfa le due richieste, ma non è detto sia il più piccolo \\
 \end{itemize}
 
 \begin{theor}
-	Siano $A \subseteq U$ insiemi e $\op$ un'operazione su di essi. Il più piccolo sottoinsieme di $U$ contenente $A$ e chiuso rispetto a $\op$ si ottiene calcolando la chiusura di $A$ rispetto a $\op$, e cioe' l'insieme $A^{\op}$ definito induttivamente come segue:
+	Siano $A \subseteq U$ insiemi e $\op$ un'operazione su di essi. Il più piccolo sottoinsieme di $U$ contenente $A$ e chiuso rispetto a $\op$ si ottiene calcolando la chiusura di $A$ rispetto a $\op$, cioè l'insieme $A^{\op}$ definito induttivamente come segue:
 \begin{enumerate}
 	\item $\forall a \in A \implies a \in A^{\op}$
+    
 	\item $\forall a_1, \dots, a_k \in A^{\op} \implies \op(a_1, \dots, a_k) \in A^{\op}$
+    
 	\item Nient'altro in $A$
 \end{enumerate}
 \end{theor}
 
 Una definizione più \textit{operativa} di $A^{\op}$ può essere:
 \begin{enumerate}
-	\item inserisco in $A^{\op}$ tutti gli elementi di $A$
-	\item applico $\op$ a una $k$-upla di elementi in $A^{\op}$
-	\item se il risultato non è in $A^{\op}$ lo aggiungo
-  	\item Ripetere i punti 2 e 3 finché $A^{\op}$ cresce
-	\item Output $A^{\op}$
+	\item Inserisco in $A^{\op}$ tutti gli elementi di $A$
+	
+    \item Applico $\op$ a una $k$-upla di elementi in $A^{\op}$
+	
+    \item Se il risultato non è in $A^{\op}$ lo aggiungo
+  	
+    \item Ripetere i punti 2 e 3 finché $A^{\op}$ cresce
+	
+    \item Output $A^{\op}$
 \end{enumerate}
 
-Siano $\Omega = \{\op_1, \dots, \op_t\}$ un insieme di operazioni su $U$ di arità rispettivamente $k_1, \dots, k_t$ e $A \subseteq U$ insieme. Definiamo \textbf{chiusura di $A$ rispetto a $\Omega$} il più piccolo sottoinsieme di $U$ contenente $A$ chiuso rispetto a $\Omega$, cioè l'insieme $A^\Omega$ definito come:
+Siano $\Omega = \{\op_1, \dots, \op_t\}$ un insieme di operazioni su $U$ di arità rispettivamente $k_1, \dots, k_t$ e $A \subseteq U$ insieme. 
 
-\newpage
+Definiamo \textbf{chiusura di $A$ rispetto a $\Omega$} il più piccolo sottoinsieme di $U$ contenente $A$ chiuso rispetto a $\Omega$, cioè l'insieme $A^\Omega$ definito come:
 
 \begin{itemize}
 	\item $\forall a \in A \implies a \in A^\Omega$
-	\item $\forall i \in \{1, \dots, t\}$, $\forall a_1, \dots, a_{k_i} \in A^\Omega \implies op_i \left(a_1, \dots, a_{k_i}\right) \in A^\Omega$
-	\item Nient'altro in $A^\Omega$
+	
+    \item $\forall i \in \{1, \dots, t\}$, $\forall a_1, \dots, a_{k_i} \in A^\Omega \implies op_i \left(a_1, \dots, a_{k_i}\right) \in A^\Omega$
+	
+    \item Nient'altro in $A^\Omega$
 \end{itemize}
 
+In breve, la chiusura dell'insieme rispetto a ogni operazione.
+
 \section{Calcolabilità}
-Vogliamo una definizione che astrae da qualunche connotato ``Informatico'', per la definizione teorica di calcolabilità introdurremo gli insiemi:
+Vogliamo una definizione che astrae da qualunque connotato "informatico", per la definizione teorica di calcolabilità introdurremo gli insiemi:
 \begin{itemize} 
 	\item \textbf{$\elem$}: insieme di tre funzioni che \textit{qualunque} idea di calcolabile proponibile deve considerare calcolabili. Non può esaurire il concetto di calcolabilità, quindi verrà espanso con altre funzioni
 	
@@ -1272,6 +1509,7 @@ Vogliamo una definizione che astrae da qualunche connotato ``Informatico'', per 
 In seguito alla definizione di $\cp$ ci sarà da domandarci se questa idea di calcolabile coincida con le funzioni presenti in $F(\ram) = F(\while)$.
 
 \subsection{$\elem$}
+
 Definiamo $\elem$ con le seguenti funzioni
 \begin{center}
 	\begin{tabular}{r c r l c l}
@@ -1281,20 +1519,26 @@ Definiamo $\elem$ con le seguenti funzioni
 	\end{tabular}
 \end{center}
 
-Queste sono funzioni di partenza che qualsiasi idea teorica di calcolabilità non può non considerare come calcolabile. Ovviamente non rappresenta tutto ciò che è calcolabile, va quindi ampliato. \lcomment{Per esempio vogliamo che $f(x) = x+2$ sia calcolabile}
+Queste sono funzioni di partenza che qualsiasi idea teorica di calcolabilità non può non considerare come calcolabile. Ovviamente non rappresenta tutto ciò che è calcolabile, va quindi ampliato. Per esempio, vogliamo che $f(x) = x+2$ sia calcolabile.
 
 \subsection{$\Omega$}
+
 Definiamo ora un insieme $\Omega$ di operazioni che permettano di ampliare le funzioni di $\elem$ fino a coprire tutte le funzioni calcolabili.
 
 \subsubsection{Composizione}
+
 Il primo operatore è quello di \textbf{composizione}. Siano
 \begin{itemize}
 	\item $h: \mathbb{N}^k \rightarrow \mathbb{N}$ funzione di composizione
+
 	\item $g_1, \dots, g_k: \mathbb{N}^n \rightarrow \mathbb{N}$ "funzioni intermedie"
+
 	\item $\underline{x} \in \mathbb{N}^n$ input
 \end{itemize}
+
 Allora definiamo 
 $$ \com (h, g_1, \dots, g_k): \mathbb{N}^n \rightarrow \mathbb{N} $$
+
 La funzione tale che
 $$ \com (h, g_1, \dots, g_k) (\underline{x}) = h(g_1(\underline{x}), \dots, g_k (\underline{x})) $$
 
@@ -1306,15 +1550,21 @@ La funzione $\com$ è \textit{intuitivamente} calcolabile partendo da funzioni c
 
 Calcoliamo ora la \textbf{chiusura} di $\elem$ rispetto a $\com$, ovvero l'insieme $\elem^\com$. La funzione $f(x) = x + 2$ appartiene a questo insieme perché:
 $$ \com(s,s)(x) = s(s(x)) = (x + 1) + 1 = x + 2 $$
-Di conseguenza tutte le funzioni lineari del tipo $f(x) = x + k$ con $k$ prefissato apparterranno all'insieme. Ma la funzione somma $\text{somma}(x,y) = x+y$, senza valori prefissati, non appartiene all'insieme, quindi doppiamo ampliare $\elem^\com$ con altre operazioni.
+
+Di conseguenza tutte le funzioni lineari del tipo $f(x) = x + k$ con $k$ prefissato apparterranno all'insieme. 
+
+Ma la funzione somma $\text{somma}(x,y) = x+y$, senza valori prefissati, non appartiene all'insieme, quindi doppiamo ampliare $\elem^\com$ con altre operazioni.
 
 \subsubsection{Ricorsione Primitiva}
+
 Definiamo un'operazione che permetta di \textbf{iterare} sull'operatore di composizione, la \textbf{ricorsione primitiva}, usata per definire funzioni ricorsive.
 
 Siano:
 \begin{itemize}
 	\item $g: \mathbb{N}^n \rightarrow \mathbb{N}$ funzione \textbf{caso base}
+
 	\item $h: \mathbb{N}^{n+2} \rightarrow \mathbb{N}$ funzione \textbf{passo ricorsivo}
+
 	\item $\underline{x} \in \mathbb{N}^n$ \textbf{input}
 \end{itemize}
 
@@ -1325,7 +1575,8 @@ $$
 	h(f(\underline{x}, y-1), y-1, \underline{x}) & \text{ se } y > 0 \\
 \end{cases}
 $$
-Funzione che generalizza la definizione ricorsiva di funzioni, e senza starci troppo e' facilmente implementabile.
+
+Funzione che generalizza la definizione ricorsiva di funzioni, e senza starci troppo è facilmente implementabile.
 
 \textbf{Chiusura} di $\elem^\com$ rispetto a $\rp$ vuol dire calcolare l'insieme $\elem^{\{\com, \rp\}}$. Chiamiamo
 $$ \ricprim = \elem^{\{\com, \rp\}} $$
@@ -1359,15 +1610,23 @@ x \dotminus y = \begin{cases}
 $$
 
 \subsubsection{$\ricprim$ vs $\while$}
+
 L'insieme $\ricprim$ contiene \textit{molte funzioni}, ma dobbiamo capire se ha raggiunto l'insieme $F(\while)$.
 
 $\ricprim$ è definito come: 
 \begin{itemize}
 	\item $\forall f \in \elem \implies f \in \ricprim$ \hfill BASE
-	\item se $h, g_1, \dots, g_k \in \ricprim \implies \com(h, g_1, \dots, g_k) \in \ricprim$ \hfill PASSI
-	\item se $g,h \in \ricprim \implies \rp (g,h) \in \ricprim$ \hfill PASSI
-	\item nient'altro sta in $\ricprim$ \\
+	
+    \item Se $h, g_1, \dots, g_k \in \ricprim \implies \com(h, g_1, \dots, g_k) \in \ricprim$ \hfill PASSI
+	
+    \item Se $g,h \in \ricprim \implies \rp (g,h) \in \ricprim$ \hfill PASSI
+	
+    \item Nient'altro sta in $\ricprim$ \\
 \end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% TODO From Here
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{theor}
 	$\ricprim \subseteq F(\while)$
