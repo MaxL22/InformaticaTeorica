@@ -43,7 +43,7 @@ $$ f^{-1} \circ f = i_A \wedge f \circ f^{-1} = i_B $$
 $f(a) \downarrow$ significa che $\exists b$ tale che $f(a) = b$.
 
 \paragraph{Insieme Dominio:} Chiamiamo \textbf{dominio} (o campo di esistenza) di $f$ l'insieme
-$$ \Dom_f = \left\{a \in A | f(a) \downarrow \right\} \subseteq A $$
+$$ \Dom_f = \left\{a \in A \mid f(a) \downarrow \right\} \subseteq A $$
 Quindi se $\Dom_f = A$ la funzione è totale, se $\Dom_f \subsetneq A$ allora è una funzione parziale. L'insieme di valori per cui la funzione è definita.
 
 \paragraph{Totalizzazione:} Si può \textbf{totalizzare una funzione parziale} $f$ definendo una funzione a tratti $\bar{f}: A \rightarrow B \cup \{\bot\}$ tale che
@@ -67,10 +67,10 @@ Ovviamente $B^{A} \subset B^{A}_{\bot}$
 \subsection{Prodotto Cartesiano}
 
 Chiamiamo \textbf{prodotto cartesiano} l'insieme
-$$ A \times B = \{(a,b) | a \in A \wedge b \in B \} $$
+$$ A \times B = \{(a,b) \mid a \in A \wedge b \in B \} $$
 
 Rappresenta l'insieme di tutte le coppie ordinate di valori in $A$ e $B$. In generale non è commutativo, a meno che $A = B$. Può essere esteso a $n$-uple di valori:
-$$ A_1 \times \dots \times A_n = \{(a_1, \dots, a_n) | a_i \in A_i\} $$
+$$ A_1 \times \dots \times A_n = \{(a_1, \dots, a_n) \mid a_i \in A_i\} $$
 
 Il prodotto di $n$ volte lo stesso insieme verrà, per comodità, indicato come
 $$ A \times \dots \times A = A^n $$
@@ -150,7 +150,7 @@ $$ \C (P, \_): \dati \rightarrow \dati_{\bot} $$
 la funzione che viene calcolata dal programma $P$ (semantica di $P$).
 
 La \textbf{potenza computazionale} di un calcolatore è definita come l'insieme di \textbf{tutte le funzioni che quel sistema di calcolo è in grado di calcolare}, ovvero
-$$ F(\C) = \{\C (P, \_) | P \in \prog\} \subseteq \dati_\bot^{\dati} $$
+$$ F(\C) = \{\C (P, \_) \mid P \in \prog\} \subseteq \dati_\bot^{\dati} $$
 
 Ovvero, l'insieme di tutte le possibili semantiche di funzioni calcolabili con il sistema $\C$. Stabilire il carattere di quest'ultima inclusione equivale a stabilire \textit{cosa può fare l'informatica}:
 \begin{itemize}
@@ -161,7 +161,7 @@ Ovvero, l'insieme di tutte le possibili semantiche di funzioni calcolabili con i
 
 Calcolare funzioni vuol dire risolvere problemi \textit{in generale}, a ogni problema è possibile associare una funzione soluzione programmando la quale posso risolvere automaticamente il problema
 
-Un possibile approccio per risolvere l'inclusione è tramite la \textbf{cardinalità} (funzione che associa ogni insieme al numero di elementi che contiene) dei due insiemi. Potrebbe però presentare dei problemi: è efficace solo quando si parla di insiemi finiti. Ad esempio $|\mathbb{N}| = |\mathbb{R}| = \infty$.
+Un possibile approccio per risolvere l'inclusione è tramite la \textbf{cardinalità} (funzione che associa ogni insieme al numero di elementi che contiene) dei due insiemi. Potrebbe però presentare dei problemi: è efficace solo quando si parla di insiemi finiti. Ad esempio $|\N| = |\mathbb{R}| = \infty$.
 
 Serve una diversa definizione di cardinalità che considera l'esistenza di infiniti \textit{più densi di altri}.
 
@@ -192,7 +192,7 @@ La relazione $R$ definita su $A^2$ \textit{induce} una partizione $\{A_1, A_2, \
 
 \subsection{Classi di equivalenza e Insieme quoziente}
 Dato un elemento $a \in A$, chiamiamo \textbf{classe di equivalenza} di $a$ l'insieme
-$$ [a]_R = \{b \in A | (a,b) \in R \} $$
+$$ [a]_R = \{b \in A \mid (a,b) \in R \} $$
 
 Ovvero, tutti gli elementi in relazione con $a$, chiamato \textbf{rappresentante} della classe.
 
@@ -233,32 +233,32 @@ $$ J_n = \begin{cases}
 	\{1, \dots , n\} & \text{ se } n > 0 \\
 \end{cases}$$
 
-Un insieme $A$ ha \textbf{cardinalità finita} se e solo se $A \sim J_n$ per qualche $n \in \mathbb{N}$; in tal caso possiamo scrivere $|A| = n$. La classe di equivalenza $[J_n]_{\sim}$ identifica tutti gli insiemi di $\U$ contenenti $n$ elementi.
+Un insieme $A$ ha \textbf{cardinalità finita} se e solo se $A \sim J_n$ per qualche $n \in \N$; in tal caso possiamo scrivere $|A| = n$. La classe di equivalenza $[J_n]_{\sim}$ identifica tutti gli insiemi di $\U$ contenenti $n$ elementi.
 
 \subsection{Cardinalità infinita}
 L'altra classe di cardinalità è quella delle \textbf{cardinalità infinite}, ovvero gli insiemi non in relazione con $J_n$. Si possono dividere in \textbf{numerabili} e \textbf{non numerabili}.
 
 \subsubsection{Insiemi numerabili}
-Un insieme $A$ è numerabile se e solo se $A \sim \mathbb{N}$, ovvero $A \in [\mathbb{N}]_\sim$. Vengono anche detti \textbf{listabili}, in quanto è possibile elencare tutti gli elementi dell'insieme $A$ tramite una funzione $f$ biettiva tra $\mathbb{N}$ e $A$; grazie ad $f$ possiamo elencare gli elementi di $A$, formando l'insieme
+Un insieme $A$ è numerabile se e solo se $A \sim \N$, ovvero $A \in [\N]_\sim$. Vengono anche detti \textbf{listabili}, in quanto è possibile elencare tutti gli elementi dell'insieme $A$ tramite una funzione $f$ biettiva tra $\N$ e $A$; grazie ad $f$ possiamo elencare gli elementi di $A$, formando l'insieme
 $$ A = \{f(0), f(1), \dots \} $$
 
 Ed è esaustivo, in quanto elenca tutti gli elementi di $A$. Questi insiemi hanno cardinalità $\aleph_0$ (\textit{aleph}).
 
 \subsubsection{Insiemi non numerabili}
 
-Gli insiemi non numerabili sono insiemi a cardinalità infinita ma non listabili, sono "\textit{più fitti}" di $\mathbb{N}$; ogni lista generata non può essere esaustiva. Il più noto tra gli insiemi non numerabili è l'insieme $\mathbb{R}$ dei numeri reali. \\
+Gli insiemi non numerabili sono insiemi a cardinalità infinita ma non listabili, sono "\textit{più fitti}" di $\N$; ogni lista generata non può essere esaustiva. Il più noto tra gli insiemi non numerabili è l'insieme $\mathbb{R}$ dei numeri reali. \\
 
 \begin{theor}
-	L'insieme $\mathbb{R}$ non è numerabile $(\mathbb{R} \nsim \mathbb{N})$
+	L'insieme $\mathbb{R}$ non è numerabile $(\mathbb{R} \nsim \N)$
 \end{theor}
 \begin{proof}
 	Suddividiamo la dimostrazione in 3 punti: 
 	\begin{enumerate}
 		\item dimostriamo che $\mathbb{R} \sim (0,1)$
 		
-        \item dimostriamo che $\mathbb{N} \nsim (0,1)$
+        \item dimostriamo che $\N \nsim (0,1)$
 		
-        \item $\mathbb{N} \nsim (0,1) \sim \mathbb{R} \implies \mathbb{N} \nsim \mathbb{R}$ (per transitività di $\sim$)
+        \item $\N \nsim (0,1) \sim \mathbb{R} \implies \N \nsim \mathbb{R}$ (per transitività di $\sim$)
 	\end{enumerate}
 	
 	Per dimostrare che $\mathbb{R} \sim (0,1)$ serve trovare una biezione tra $\mathbb{R}$ e $(0,1)$. 
@@ -282,9 +282,9 @@ Gli insiemi non numerabili sono insiemi a cardinalità infinita ma non listabili
 	
 	Questo approccio permette di dire che $\mathbb{R}$ è isomorfo a qualsiasi segmento di lunghezza maggiore di $0$. La stessa biezione vale anche sull'intervallo chiuso $[0,1]$ (e di conseguenza qualsiasi intervallo chiuso), usando la "compattificazione" $\mathbb{R} = \mathbb{R} \cup \{\pm \infty\}$ e mappando $0$ su $-\infty$ e 1 su $+ \infty$.
 	
-	Continuiamo dimostrando che $\mathbb{N} \nsim (0,1)$: serve dimostrare che l'intervallo $(0,1)$ non è listabile, quindi che ogni lista manca di almeno un elemento. Proviamo a "costruire" un elemento che andrà a mancare. 
+	Continuiamo dimostrando che $\N \nsim (0,1)$: serve dimostrare che l'intervallo $(0,1)$ non è listabile, quindi che ogni lista manca di almeno un elemento. Proviamo a "costruire" un elemento che andrà a mancare. 
     
-    Per assurdo, sia $\mathbb{N} \sim (0,1)$, allora possiamo listare gli elementi di $(0,1)$ come
+    Per assurdo, sia $\N \sim (0,1)$, allora possiamo listare gli elementi di $(0,1)$ come
 	$$ 
 	\begin{array}{c c c c c}
 		0. & a_{00} & a_{01} & a_{02} & \dots \\
@@ -301,30 +301,30 @@ Gli insiemi non numerabili sono insiemi a cardinalità infinita ma non listabili
 		3 & \text{ se } a_{ii} = 2 \\
 	\end{cases}$$
 	
-	Viene costruito "guardando" le cifre sulla diagonale principale, apparterrà sicuramente a $(0,1)$ ma differirà per almeno una posizione (quella sulla diagonale principale) da ogni numero presente all'interno della lista. Questo è assurdo sotto l'assunzione che $(0,1)$ è numerabile, quindi abbiamo provato che $\mathbb{N} \nsim (0,1)$.
+	Viene costruito "guardando" le cifre sulla diagonale principale, apparterrà sicuramente a $(0,1)$ ma differirà per almeno una posizione (quella sulla diagonale principale) da ogni numero presente all'interno della lista. Questo è assurdo sotto l'assunzione che $(0,1)$ è numerabile, quindi abbiamo provato che $\N \nsim (0,1)$.
 	
-	Il terzo punto $\mathbb{R} \nsim \mathbb{N}$ si dimostra per transitività. Più in generale, non si riesce a listare nessun segmento di lunghezza maggiore di 0. \\
+	Il terzo punto $\mathbb{R} \nsim \N$ si dimostra per transitività. Più in generale, non si riesce a listare nessun segmento di lunghezza maggiore di 0. \\
 \end{proof}
 
 Questa dimostrazione (punto 2 in particolare) è detta \textbf{dimostrazione per diagonalizzazione}. L'insieme $\mathbb{R}$ viene detto \textbf{insieme continuo} e tutti gli insiemi isomorfi a $\mathbb{R}$ si dicono continui a loro volta.
 
 \subsection{Insieme delle Parti}
-L'\textbf{insieme delle parti} di $\mathbb{N}$ (anche detto \textit{power set}), è definito come
-$$ P(\mathbb{N}) = 2^{\mathbb{N}} = \{S \mid S \text{ è sottoinsieme di } \mathbb{N}\} $$
+L'\textbf{insieme delle parti} di $\N$ (anche detto \textit{power set}), è definito come
+$$ P(\N) = 2^{\N} = \{S \mid S \text{ è sottoinsieme di } \N\} $$
 
 \begin{theor}
-	$P(\mathbb{N}) \nsim \mathbb{N}$.
+	$P(\N) \nsim \N$.
 \end{theor}
 \begin{proof}
 	Possiamo dimostrare questo teorema tramite diagonalizzazione. Il vettore caratteristico di un sottoinsieme è un vettore che nella posizione $p_i$ ha 1 se $i \in A$, 0 altrimenti (tipo vettore di incidenza).
 	
-	Rappresentiamo $A \subseteq \mathbb{N}$ sfruttando il suo vettore caratteristico
+	Rappresentiamo $A \subseteq \N$ sfruttando il suo vettore caratteristico
 	$$ \begin{array}{c c c c c c c c c}
-		\mathbb{N}: & 0 & 1 & 2 & 3 & 4 & 5 & 6 & \dots \\
+		\N: & 0 & 1 & 2 & 3 & 4 & 5 & 6 & \dots \\
 		A: & 0 & 1 & 1 & 0 & 1 & 1 & 0 & \dots \\
 	\end{array}$$
 	
-	Supponiamo, per assurdo, che $P (\mathbb{N})$ sia numerabile. Vista questa proprietà, possiamo listare tutti i vettori caratteristiche che appartengono a $P(\mathbb{N})$ come
+	Supponiamo, per assurdo, che $P (\N)$ sia numerabile. Vista questa proprietà, possiamo listare tutti i vettori caratteristiche che appartengono a $P(\N)$ come
 	$$ 
 	\begin{array}{c c c c c c}
 		b_0 & = & b_{00} & b_{01} & b_{02} & \dots \\
@@ -333,30 +333,30 @@ $$ P(\mathbb{N}) = 2^{\mathbb{N}} = \{S \mid S \text{ è sottoinsieme di } \math
 	\end{array}
 	$$
     
-	Vogliamo quindi costruire un vettore che appartiene a $P(\mathbb{N})$ ma non presente nella lista precedente. Definiamo
+	Vogliamo quindi costruire un vettore che appartiene a $P(\N)$ ma non presente nella lista precedente. Definiamo
 	$$ c = \bar{b_{00}} \, \bar{b_{11}} \, \bar{b_{22}} \dots $$
 	ovvero il vettore che contiene in posizione $c_i$ il complemento di $b_{ii}$.
 
-	Questo vettore appartiene a $P(\mathbb{N})$, in quanto sicuramente sottoinsieme di $\mathbb{N}$, ma non è presente nella lista precedente perché diverso da ogni elemento almeno di una cifra (quella sulla diagonale principale). 
+	Questo vettore appartiene a $P(\N)$, in quanto sicuramente sottoinsieme di $\N$, ma non è presente nella lista precedente perché diverso da ogni elemento almeno di una cifra (quella sulla diagonale principale). 
     
-    Questo è assurdo per l'assunzione che $P(\mathbb{N})$ è numerabile, quindi $P(\mathbb{N}) \nsim \mathbb{N}$.\\
+    Questo è assurdo per l'assunzione che $P(\N)$ è numerabile, quindi $P(\N) \nsim \N$.\\
 \end{proof}
 
 \subsubsection{Insieme delle funzioni}
 
-L'\textbf{insieme delle funzioni} da $\mathbb{N}$ a $\mathbb{N}$ è definito come
-$$ \mathbb{N}^{\mathbb{N}}_\bot = \{f: \mathbb{N} \rightarrow \mathbb{N}_{\bot} \} $$
+L'\textbf{insieme delle funzioni} da $\N$ a $\N$ è definito come
+$$ \N^{\N}_\bot = \{f: \N \rightarrow \N_{\bot} \} $$
 
 \begin{theor}
-	$\mathbb{N}_\bot^{\mathbb{N}} \nsim \mathbb{N}$.
+	$\N_\bot^{\N} \nsim \N$.
 \end{theor}
 \begin{proof}
-	Diagonalizzazione strikes again. Assumiamo, per assurdo, che $\mathbb{N}_\bot^{\mathbb{N}}$ sia numerabile. Possiamo quindi listare $\mathbb{N}_\bot^{\mathbb{N}}$ come $\{f_0, f_1, f_2, \dots\}$
+	Diagonalizzazione strikes again. Assumiamo, per assurdo, che $\N_\bot^{\N}$ sia numerabile. Possiamo quindi listare $\N_\bot^{\N}$ come $\{f_0, f_1, f_2, \dots\}$
 	$$
 	\renewcommand{\arraystretch}{2}
 	\begin{array}{|m{1cm}|m{1cm}|m{1cm}|m{1cm}|m{1cm}|m{1cm}|m{1cm}|}
 		\hline
-		& $0$ & $1$ & $2$ & $3$ & $\dots$ & $\mathbb{N}$ \\
+		& $0$ & $1$ & $2$ & $3$ & $\dots$ & $\N$ \\
 		\hline
 		$f_0$ & $f_0 (0)$ & $f_0 (1)$ & $f_0 (2)$ & $f_0 (3)$ & $\dots$ & $\dots$ \\
 		\hline
@@ -369,7 +369,7 @@ $$ \mathbb{N}^{\mathbb{N}}_\bot = \{f: \mathbb{N} \rightarrow \mathbb{N}_{\bot} 
 	\end{array}
 	$$
 	
-	Costruiamo una funzione $\varphi: \mathbb{N} \rightarrow \mathbb{N}_\bot$ per dimostrare l'assurdo. Un'idea potrebbe essere $\varphi(n) = f_n(n) + 1$, "spostando" la diagonale, ma non tiene in considerazione il caso $f_n (n) = \bot$ in quanto non sapremmo dare un valore a $\varphi (n) = \bot +1$. 
+	Costruiamo una funzione $\varphi: \N \rightarrow \N_\bot$ per dimostrare l'assurdo. Un'idea potrebbe essere $\varphi(n) = f_n(n) + 1$, "spostando" la diagonale, ma non tiene in considerazione il caso $f_n (n) = \bot$ in quanto non sapremmo dare un valore a $\varphi (n) = \bot +1$. 
     
     Definiamo quindi
 	$$ 
@@ -380,14 +380,14 @@ $$ \mathbb{N}^{\mathbb{N}}_\bot = \{f: \mathbb{N} \rightarrow \mathbb{N}_{\bot} 
 	$$
 	(la stessa cosa, ma gestendo il caso di $f_n(n) = \bot$).
     
-	Questa funzione appartiene a $\mathbb{N}_\bot^{\mathbb{N}}$, ma non è presente nella lista precedente, infatti $\forall k \in \mathbb{N}$ si ottiene 
+	Questa funzione appartiene a $\N_\bot^{\N}$, ma non è presente nella lista precedente, infatti $\forall k \in \N$ si ottiene 
 	$$ 
 	\varphi(k) = \begin{cases}
 		1 \neq f_k (k) = \bot & \text{ se } f_k (k) = \bot \\
 		f_k(k) + 1 \neq f_k (k) & \text{ se } f_k (k) \downarrow
 	\end{cases}
 	$$
-	Questo è assurdo sotto l'assunzione che $\mathbb{N}_\bot^{\mathbb{N}}$ è numerabile, quindi $\mathbb{N}_\bot^{\mathbb{N}} \nsim \mathbb{N}$.\\
+	Questo è assurdo sotto l'assunzione che $\N_\bot^{\N}$ è numerabile, quindi $\N_\bot^{\N} \nsim \N$.\\
 \end{proof}
 
 \section{Potenza Computazionale di un sistema di calcolo}
@@ -399,20 +399,20 @@ $$ F(\C) \subseteq \dati_\bot^{\dati} $$
 
 Due intuizioni, da dimostrare, sono: 
 \begin{itemize}
-	\item $\prog \sim \mathbb{N}$: ogni programma può essere identificato con un numero, come la sua codifica in binario
+	\item $\prog \sim \N$: ogni programma può essere identificato con un numero, come la sua codifica in binario
 	
-    \item $\dati \sim \mathbb{N}$: anche ogni dato può essere identificato tramite la sua codifica in binario
+    \item $\dati \sim \N$: anche ogni dato può essere identificato tramite la sua codifica in binario
 \end{itemize}
 
 Da questo possiamo dire che
-$$ F(\C) \sim \prog \sim \mathbb{N} \nsim \mathbb{N}_\bot^{\mathbb{N}} \sim \dati_\bot^{\dati} $$
+$$ F(\C) \sim \prog \sim \N \nsim \N_\bot^{\N} \sim \dati_\bot^{\dati} $$
 (non banale, assumiamo che $F(\C)$ sia infinito numerabile).
 
 Questo dimostra che \textbf{esistono funzioni non calcolabili}, ci sono troppe funzioni e troppi pochi programmi. 
 
-Dobbiamo dimostrare le due assunzioni $\prog \sim \mathbb{N}$ e $\dati \sim \mathbb{N}$. Si può fare tramite tecniche di aritmetizzazione (o godelizzazione) di strutture, tecniche che rappresentano delle strutture tramite un numero.
+Dobbiamo dimostrare le due assunzioni $\prog \sim \N$ e $\dati \sim \N$. Si può fare tramite tecniche di aritmetizzazione (o godelizzazione) di strutture, tecniche che rappresentano delle strutture tramite un numero.
 
-\section{$\dati \sim \mathbb{N}$}
+\section{$\dati \sim \N$}
 
 Serve trovare una legge che
 \begin{enumerate}
@@ -426,13 +426,13 @@ Serve trovare una legge che
 \subsection{Funzione Coppia di Cantor}
 
 La \textbf{funzione coppia di Cantor} è la funzione
-$$ \langle \_ , \_ \rangle: \mathbb{N} \times \mathbb{N} \rightarrow \mathbb{N}^+ $$
+$$ \langle \_ , \_ \rangle: \N \times \N \rightarrow \N^+ $$
 
 E sfrutta le due "sotto-funzioni" 
 $$
 \begin{array}{r c}
-	\sin: & \mathbb{N}^+ \rightarrow \mathbb{N} \\
-	\des: & \mathbb{N}^+ \rightarrow \mathbb{N}
+	\sin: & \N^+ \rightarrow \N \\
+	\des: & \N^+ \rightarrow \N
 \end{array}
 $$
 
@@ -473,7 +473,7 @@ Il valore $\langle x,y \rangle$ rappresenta l'incrocio tra la $x$-esima riga e l
 La funzione e' ovviamente:
 \begin{itemize}
 	\item iniettiva: non ci possono essere celle con lo stesso numero
-	\item suriettiva: ogni numero in $\mathbb{N}^+$ deve comparire
+	\item suriettiva: ogni numero in $\N^+$ deve comparire
 \end{itemize}
 Entrambe le proprietà sono soddisfatte, in quanto la numerazione avviene in maniera incrementale, quindi ogni numero prima o poi compare in una cella e di conseguenza ho una coppia che lo genera.
 
@@ -511,7 +511,7 @@ $$ \begin{array}{r c l}
 \end{array} $$
 
 Trovando il valore di $\gamma$ possiamo trovare $x$ e $y$. Notiamo come $\gamma$ sia il più grande valore che, quando calcolato sulla prima colonna ($\langle \gamma, 0 \rangle$) non supera $n$, ovvero
-$$ \gamma = \max \{z \in \mathbb{N} \mid \langle z, 0 \rangle \leq n \} $$
+$$ \gamma = \max \{z \in \N \mid \langle z, 0 \rangle \leq n \} $$
 
 Intuitivamente, si tratta dell'inizio della diagonale che contiene $n$, è "l'inverso" dell'osservazione fatta in precedenza per la quale $ \langle x,y \rangle = \langle x + y,0 \rangle + y $.
 
@@ -535,26 +535,26 @@ $$
 $$
 
 \begin{theor}
-	$\mathbb{N} \times \mathbb{N} \sim \mathbb{N}^+$
+	$\N \times \N \sim \N^+$
 \end{theor}
 \begin{proof}
-	La funzione di Cantor è una funzione biettiva tra l'insieme $\mathbb{N} \times \mathbb{N}$ e l'insieme $\mathbb{N}^+$, quindi i due insiemi sono isomorfi. \\
+	La funzione di Cantor è una funzione biettiva tra l'insieme $\N \times \N$ e l'insieme $\N^+$, quindi i due insiemi sono isomorfi. \\
 \end{proof}
 
-Possiamo estendere il risultato all'interno dell'insieme $\mathbb{N}$, ovvero:
+Possiamo estendere il risultato all'interno dell'insieme $\N$, ovvero:
 
 \begin{theor}
-	$\mathbb{N} \times \mathbb{N} \sim \mathbb{N}$
+	$\N \times \N \sim \N$
 \end{theor}
 \begin{proof}
 	Definiamo la funzione 
-	$$ [\_ , \_]: \mathbb{N} \times \mathbb{N} \rightarrow \mathbb{N} $$
+	$$ [\_ , \_]: \N \times \N \rightarrow \N $$
 	tale che
 	$$ [x,y] = \langle x,y \rangle - 1$$
 	Questa funzione è anch'essa biettiva, quindi i due insiemi sono isomorfi. \\
 \end{proof}
 
-Grazie a questo è possibile dimostrare anche che $\mathbb{Q} \sim \mathbb{N}$, infatti i numeri razionali si possono rappresentare come coppie (num, den) e, in generale, tutte le tuple finite sono isomorfe a $\mathbb{N}$, basta iterare in qualche modo la funzione coppia di Cantor.
+Grazie a questo è possibile dimostrare anche che $\mathbb{Q} \sim \N$, infatti i numeri razionali si possono rappresentare come coppie (num, den) e, in generale, tutte le tuple finite sono isomorfe a $\N$, basta iterare in qualche modo la funzione coppia di Cantor.
 
 \subsection{Applicazione alle strutture dati}
 
@@ -600,18 +600,18 @@ Ad esempio:
 \end{itemize}
 
 Abbiamo visto come i dati possano essere sostituiti da delle codifiche numeriche; di conseguenza possiamo sostituire tutte le funzioni
-$$ f: \dati \rightarrow \dati_{\bot} \;\; \text{ con funzioni } \;\; f': \mathbb{N} \rightarrow \mathbb{N}_\bot $$
+$$ f: \dati \rightarrow \dati_{\bot} \;\; \text{ con funzioni } \;\; f': \N \rightarrow \N_\bot $$
 
-In altre parole, l'universo dei problemi per i quali cerchiamo una soluzione automatica è rappresentabile da $\mathbb{N}_\bot^{\mathbb{N}}$.
+In altre parole, l'universo dei problemi per i quali cerchiamo una soluzione automatica è rappresentabile da $\N_\bot^{\N}$.
 
-\section{$\prog \sim \mathbb{N}$}
+\section{$\prog \sim \N$}
 
 Adesso lavoriamo sulla parte della relazione che afferma 
-$$ F(\C) \sim \prog \sim \mathbb{N} $$
+$$ F(\C) \sim \prog \sim \N $$
 
 Da notare che la prima parte è più complicata di quanto non sembri, in verità una funzione può avere più programmi associati ma entrambi gli insiemi sono infiniti numerabili, quindi in principio esiste una biezione.
 
-Vogliamo affermare che la potenza computazionale (l'insieme dei programmi che un sistema di calcolo $\C$ riesce a calcolare, $F(\C)$) è isomorfa all'insieme di tutti i programmi, a loro volta isomorfi a $\mathbb{N}$. 
+Vogliamo affermare che la potenza computazionale (l'insieme dei programmi che un sistema di calcolo $\C$ riesce a calcolare, $F(\C)$) è isomorfa all'insieme di tutti i programmi, a loro volta isomorfi a $\N$. 
 
 Vogliamo arrivare a ricavare un numero dato un programma e viceversa. Per farlo servirà vedere l'insieme $\prog$ come l'insieme dei programmi scritti in un certo linguaggio di programmazione.
 
@@ -637,7 +637,7 @@ Il secondo caso è più promettente e, in quel caso, l'obiettivo diventerebbe tr
 
 Il sistema di calcolo $\ram$ è un sistema semplice che permette di definire rigorosamente: 
 \begin{itemize}
-	\item $\prog \sim \mathbb{N}$
+	\item $\prog \sim \N$
 
 	\item la \textbf{semantica} dei programmi eseguibili, ovvero $\C(P,\_)$, con $\C = \ram$, ottenendo $\ram (P,\_)$
 
@@ -705,7 +705,7 @@ L'esecuzione di un programma su una macchina RAM segue i passi:
 	$$
 \end{enumerate}
 
-Con $\varphi_P: \mathbb{N} \rightarrow \mathbb{N}_\bot$ indichiamo la semantica del programma $P$. Con $\C(P,\_)$ indicavamo la semantica di $P$ nel sistema di calcolo $\C$, quindi con $\ram(P,\_) = \varphi_P$ indichiamo la semantica di $P$ nel sistema di calcolo $\ram$.
+Con $\varphi_P: \N \rightarrow \N_\bot$ indichiamo la semantica del programma $P$. Con $\C(P,\_)$ indicavamo la semantica di $P$ nel sistema di calcolo $\C$, quindi con $\ram(P,\_) = \varphi_P$ indichiamo la semantica di $P$ nel sistema di calcolo $\ram$.
 
 \subsubsection{Semantica Operazionale}
 
@@ -725,7 +725,7 @@ Uno stato deve descrivere completamente la situazione della macchina in un certo
 
 La \textbf{computazione} del programma $P$ è una sequenza di stati $\st_i$, ognuno generato dall'esecuzione di un'istruzione del programma; $P$ induce una sequenza di stati $\st_i$, se questa è formata da un numero infinito di stati, allora il programma è andato in loop; in caso contrario, nel registro $R_0$ si trova il risultato $y$ della computazione di $P$.
 $$ 
-\varphi_P: \mathbb{N} \rightarrow \mathbb{N}_\bot \tc \varphi_P(n) = \begin{cases}
+\varphi_P: \N \rightarrow \N_\bot \tc \varphi_P(n) = \begin{cases}
 	y & \text{ se } \exists \st_{fin} \\
 	\bot & \text{ altrimenti}
 \end{cases}
@@ -736,18 +736,18 @@ Quindi, se il programma finisce, la semantica di quest'ultimo è il risultato de
 Per definire come passare da uno stato all'altro, definiamo formalmente: 
 \begin{itemize}
 	\item \textbf{Stato}: istantanea di tutte le componenti della macchina, è una funzione 
-	$$ \st: \{L, R_i\} \rightarrow \mathbb{N} $$
+	$$ \st: \{L, R_i\} \rightarrow \N $$
 	tale che $\st (R_k)$ restituisce il contenuto del registro $R_k$ quando la macchina si trova nello stato $\st$. Gli stati possibili di una macchina appartengono all'insieme 
-	$$ \stati = \{f: \{L, R_i\} \rightarrow \mathbb{N}\} = \mathbb{N}^{\{L,R_i\}} $$
+	$$ \stati = \{f: \{L, R_i\} \rightarrow \N\} = \N^{\{L,R_i\}} $$
 	
     Questa rappresentazione permette un numero di registri potenzialmente infinito; se così non fosse, avremmo tuple per indicare tutti i possibili registri al posto dell'insieme $\{L,R_i\}$
 
 	\item \textbf{Stato Finale}: uno stato finale $\st_{fin}$ è un qualsiasi stato $\st$ tale che $\st (L) = 0$
 	
-    \item \textbf{Dati}: già dimostrato come $\dati \sim \mathbb{N}$
+    \item \textbf{Dati}: già dimostrato come $\dati \sim \N$
 	
     \item \textbf{Inizializzazione}: serve una funzione che, preso l'input, restituisca lo stato iniziale della macchina: 
-	$$ \text{in}: \mathbb{N} \rightarrow \stati \tc \text{in}(n) = \st_{init}$$
+	$$ \text{in}: \N \rightarrow \stati \tc \text{in}(n) = \st_{init}$$
     
 	Lo stato iniziale $\st_{init}$ è tale che
 	$$ 
@@ -803,7 +803,7 @@ La funzione $\delta (\st, P) = \st'$ è tale che
 	\end{itemize}
 \end{itemize}
 
-L'esecuzione di un programma $P \in \prog$ su input $n \in \mathbb{N}$ genera una sequenza di stati
+L'esecuzione di un programma $P \in \prog$ su input $n \in \N$ genera una sequenza di stati
 $$ \st_0, \st_1, \dots, \st_i, \st_{i+1}, \dots $$
 tali che:
 $$
@@ -824,12 +824,12 @@ $$
 $$
 
 La potenza computazionale del sistema $\ram$ è 
-$$ F(\ram) = \left\{f \in \mathbb{N}^{\mathbb{N}}_\bot \ | \ \exists P \in \prog \text{ s.t. } \varphi_P = f \right\} = \left\{\varphi_P \ | \ P \in \prog \right\} \subsetneq \mathbb{N}^{\mathbb{N}}_\bot $$
-L'insieme è formato da tutte le funzioni $f: \mathbb{N} \rightarrow \mathbb{N}_\bot$ che hanno un programma che le calcola in un sistema $\ram$. \lcomment{Guarda slide per esempi esercizi 6:10 in poi} % TODO Commento
+$$ F(\ram) = \left\{f \in \N^{\N}_\bot \mid \exists P \in \prog \text{ s.t. } \varphi_P = f \right\} = \left\{\varphi_P \mid P \in \prog \right\} \subsetneq \N^{\N}_\bot $$
+L'insieme è formato da tutte le funzioni $f: \N \rightarrow \N_\bot$ che hanno un programma che le calcola in un sistema $\ram$. \lcomment{Guarda slide per esempi esercizi 6:10 in poi} % TODO Commento
 
 \subsection{Aritmetizzazione di un programma}
 
-Per verificare che $\prog \sim \mathbb{N}$ basterebbe trovare una funzione che permetta di codificare i programmi in numeri in modo biunivoco. Data una lista di istruzioni semplici $P \equiv \text{Istr}_1, \dots, \text{Istr}_m$ se questa fosse codificata come una lista di interi potremmo sfruttare la funzione coppia di Cantor per ottenere un numero associato al programma $P$. Quindi vogliamo trovare una funzione $Ar$ che associ a ogni istruzione $I_k$ la sua codifica numerica $c_k$. Se la funzione trovata è anche biunivoca siamo sicuri di poter trovare anche la sua inversa, ovvero la funzione che ci permette di ricavare $I_k$ da $c_k$.
+Per verificare che $\prog \sim \N$ basterebbe trovare una funzione che permetta di codificare i programmi in numeri in modo biunivoco. Data una lista di istruzioni semplici $P \equiv \text{Istr}_1, \dots, \text{Istr}_m$ se questa fosse codificata come una lista di interi potremmo sfruttare la funzione coppia di Cantor per ottenere un numero associato al programma $P$. Quindi vogliamo trovare una funzione $Ar$ che associ a ogni istruzione $I_k$ la sua codifica numerica $c_k$. Se la funzione trovata è anche biunivoca siamo sicuri di poter trovare anche la sua inversa, ovvero la funzione che ci permette di ricavare $I_k$ da $c_k$.
 
 Riassumendo, vogliamo trasformare la lista di istruzioni un una lista di numeri su cui successivamente applicare la funzione coppia di Cantor. Vorremmo anche ottenere la lista di istruzioni originale data la codifica.
 \begin{center}
@@ -859,7 +859,7 @@ Ar^{-1} (n) = \begin{cases}
 $$
 
 Per tornare indietro devo prima invertire la funzione coppia di Cantor e poi invertire la funzione $Ar$.
-La lunghezza del programma $P$, indicata con $|P|$, si calcola come $len(cod(P))$. Abbiamo quindi dimostrato che $\prog \sim \mathbb{N}$. \lcomment{Guarda le prime slide fino a 7:5 per esempi} % TODO Commento
+La lunghezza del programma $P$, indicata con $|P|$, si calcola come $len(cod(P))$. Abbiamo quindi dimostrato che $\prog \sim \N$. \lcomment{Guarda le prime slide fino a 7:5 per esempi} % TODO Commento
 
 \subsubsection{Osservazioni}
 Avendo $n = cod(P)$ si può scrivere
@@ -869,9 +869,9 @@ Ovvero, la semantica di $P$ è uguale alla semantica della sua codifica. I numer
 Si può scrivere l'insieme 
 $$ F(\ram) = \{\varphi_P: P \in \prog \}$$
 come 
-$$ F(\ram) = \{\varphi_i\}_{i \in \mathbb{N}} $$
-L'insieme, grazie alla dimostrazione di $\prog \sim \mathbb{N}$, è numerabile. Abbiamo dimostrato rigorosamente che:
-$$ F(\ram) \sim \mathbb{N} \nsim \mathbb{N}^{\mathbb{N}}_\bot $$
+$$ F(\ram) = \{\varphi_i\}_{i \in \N} $$
+L'insieme, grazie alla dimostrazione di $\prog \sim \N$, è numerabile. Abbiamo dimostrato rigorosamente che:
+$$ F(\ram) \sim \N \nsim \N^{\N}_\bot $$
 Di conseguenza, anche nel sistema di calcolo $\ram$ esistono funzioni non calcolabili.
 
 La $\ram$ è troppo elementare affinché $F(\ram)$ rappresenti formalmente la "classe dei problemi risolubili automaticamente", quindi considerando un sistema di calcolo $\C$ più sofisticato, ma comunque trattabile rigorosamente come il sistema $\ram$, potremmo dare un'idea formale di "ciò che è calcolabile automaticamente". 
@@ -917,7 +917,7 @@ Dove i vari $C_i$ sono, come prima, assegnamenti, comandi while o comandi compos
 $$ W\text{-}\prog = \{\prog \text{ scritti in linguaggio } \while \} \lcomment{Guarda le slide ci sono degli esempi} $$
 
 Chiamiamo
-$$ \Psi_W : \mathbb{N} \rightarrow \mathbb{N}_\bot $$
+$$ \Psi_W : \N \rightarrow \N_\bot $$
 la \textbf{semantica} del programma $W \in W-\prog$.
 
 Per dimostrare una proprietà $P$ di un programma $W \in \wprog$, data la definizione induttiva del linguaggio $\while$, è naturale procedere induttivamente:
@@ -958,9 +958,9 @@ Come per i programmi $\ram$, serve una definizione formale per la semantica di u
 \begin{itemize}
 	\item \textbf{Stato}: una tupla grande quanto il numero di variabili, dove quindi $\underline{x} = (c_0, \dots, c_{20})$ rappresenta uno stato, con $c_i$ rappresentante il contenuto della variabile $i$
 	
-    \item \textbf{$\wstati$}: Insieme di tutti gli stati possibili, contenuto in $\mathbb{N}^{21}$ vista la definizione degli stati 
+    \item \textbf{$\wstati$}: Insieme di tutti gli stati possibili, contenuto in $\N^{21}$ vista la definizione degli stati 
 	
-    \item \textbf{Dati}: già visto che $\dati \sim \mathbb{N}$
+    \item \textbf{Dati}: già visto che $\dati \sim \N$
 	
     \item \textbf{Inizializzazione}: Lo stato iniziale è descritto dalla funzione 
 	$$ w\text{-}in(n) = (0, n, 0, \dots, 0) $$
@@ -1012,14 +1012,14 @@ Proseguiamo con il \textbf{passo induttivo}:
 \end{itemize}
 
 Definita la semantica operazionale, manca solo da definire cos'è la \textbf{semantica del programma} $W$ su input $n$. Questa è la funzione
-$$ \Psi_W: \N \rightarrow \mathbb{N}_\bot \mid \Psi_W (n) = \text{Pro}\left(0, \llbracket W \rrbracket (w\text{-}in(n))\right) \lcomment{bisognerebbe fare funzione a tratti contando anche il caso $\bot$} $$
+$$ \Psi_W: \N \rightarrow \N_\bot \mid \Psi_W (n) = \text{Pro}\left(0, \llbracket W \rrbracket (w\text{-}in(n))\right) \lcomment{bisognerebbe fare funzione a tratti contando anche il caso $\bot$} $$
 
 Questo è valido in quanto $W$ programma $\while$ è un programma composto, e abbiamo definito come deve comportarsi la funzione $\llbracket \_ \rrbracket (\_)$ sui comandi composti.
 
 Stiamo praticamente dicendo che la semantica del programma $W$, visto come comando composto, è il risultato, ovvero il contenuto del registro $x_0$, dell'applicazione del comando $W$ allo stato iniziale.
 
 \paragraph{Potenza Computazionale:} La potenza computazionale del sistema di calcolo $\while$ è l'insieme 
-$$ F(\while) = \left\{f \in \mathbb{N}^{\mathbb{N}}_\bot \mid  \exists W \in \wprog , f = \Psi_W \right\} = \left\{\Psi_W : W \in \wprog \right\}$$
+$$ F(\while) = \left\{f \in \N^{\N}_\bot \mid  \exists W \in \wprog , f = \Psi_W \right\} = \left\{\Psi_W : W \in \wprog \right\}$$
 
 Ovvero, l'insieme formato da tutte le funzioni che possono essere calcolate con un programma in $\wprog$.
 
@@ -1037,8 +1037,8 @@ Viene naturale confrontare i due sistemi presentati per capire il "\textit{più 
 \end{itemize}
 
 \paragraph{Confronto tra sistemi di calcolo:} Ponendo di avere $\C_1$ e $\C_2$ sistemi di calcolo con programmi in $\cprog{1}$ e $\cprog{2}$ e le relative potenze computazionali
-$$ F(\C_1) = \left\{f: \mathbb{N} \rightarrow \mathbb{N}_\bot \mid \exists P_1 \in \cprog{1} \mid f = \Psi_{P_1} \right\} = \left\{\Psi_{P_1}: P_1 \in \cprog{1} \right\} $$
-$$ F(\C_2) = \left\{f: \mathbb{N} \rightarrow \mathbb{N}_\bot \mid \exists P_2 \in \cprog{2} \mid f = \varphi_{P_2} \right\} = \left\{\varphi_{P_2}: P_2 \in \cprog{2} \right\} $$
+$$ F(\C_1) = \left\{f: \N \rightarrow \N_\bot \mid \exists P_1 \in \cprog{1} \mid f = \Psi_{P_1} \right\} = \left\{\Psi_{P_1}: P_1 \in \cprog{1} \right\} $$
+$$ F(\C_2) = \left\{f: \N \rightarrow \N_\bot \mid \exists P_2 \in \cprog{2} \mid f = \varphi_{P_2} \right\} = \left\{\varphi_{P_2}: P_2 \in \cprog{2} \right\} $$
 
 Mostrare che il primo sistema non è più potente del secondo $F(\C_1) \subseteq F(\C_2)$ vuol dire dimostrare che ogni elemento nel primo insieme deve stare anche nel secondo
 $$ \forall f \in F(\C_1) \implies f \in F(C_2) $$
@@ -1237,7 +1237,7 @@ Abbiamo mostrato che una macchina $\while$ non è più potente di una macchina $
 
 Introduciamo il concetto di \textbf{interprete}. Chiamiamo $I_W$ l'interprete scritto in linguaggio $\while$ per programmi scritti in linguaggio $\ram$.
 
-$I_W$ prende in input un programma $P \in \prog$ e un dato $x \in \mathbb{N}$ e restituisce "\textit{l'esecuzione}" di $P$ sull'input $x$. Più formalmente, restituisce la semantica di $P$ su $x$, quindi $\varphi_P (x)$.
+$I_W$ prende in input un programma $P \in \prog$ e un dato $x \in \N$ e restituisce "\textit{l'esecuzione}" di $P$ sull'input $x$. Più formalmente, restituisce la semantica di $P$ su $x$, quindi $\varphi_P (x)$.
 
 \begin{center}
 	\input{img/calc/interprete1}
@@ -1247,7 +1247,7 @@ Notiamo come l'interprete non crei dei prodotti intermedi, ma si limita a esegui
 
 Due problemi principali: 
 \begin{enumerate}
-	\item Il primo riguarda il tipo di input della macchina $\while$ in quanto questa non sa leggere il programma $P$ (listato di istruzioni $\ram$), sa leggere solo numeri. Dobbiamo modificare $I_W$ in modo che non passi più $P$ ma la sua codifica $cod(P) = n \in \mathbb{N}$. Questo restituisce la semantica del programma codificato con $n$, che è $P$, quindi $\varphi_n (x) = \varphi_P (x)$
+	\item Il primo riguarda il tipo di input della macchina $\while$ in quanto questa non sa leggere il programma $P$ (listato di istruzioni $\ram$), sa leggere solo numeri. Dobbiamo modificare $I_W$ in modo che non passi più $P$ ma la sua codifica $cod(P) = n \in \N$. Questo restituisce la semantica del programma codificato con $n$, che è $P$, quindi $\varphi_n (x) = \varphi_P (x)$
 	
     \item Il secondo problema riguarda la quantità di dati in input alla macchina $\while$: questa legge l'input da un singolo registro, mentre qui ne stiamo passando due. Bisogna modificare $I_W$, condensando l'input tramite la funzione coppia di Cantor, che diventa $\langle x,n \rangle$
 \end{enumerate}
@@ -1258,7 +1258,7 @@ Quindi
 \end{center}
 
 La semantica di $I_W$ diventa
-$$ \forall x,n \in \mathbb{N} \;\;\;\; \Psi_{I_W} \left(\langle x,n \rangle \right) = \varphi_n (x) = \varphi_P (x) $$
+$$ \forall x,n \in \N \;\;\;\; \Psi_{I_W} \left(\langle x,n \rangle \right) = \varphi_n (x) = \varphi_P (x) $$
 
 Similmente a prima, useremo per comodità il linguaggio \textbf{macro-$\while$}, che include alcune macro comode nella scrittura di $I_W$. Viene modificata solo la sintassi e di conseguenza non la potenza del linguaggio.
 
@@ -1399,7 +1399,7 @@ Inoltre abbiamo di conseguenza dimostrato che
 	\Downarrow \\
 	F(\ram) = F(\while) \\
 	\Downarrow \\
-	F(\ram) = F(\while) \sim \prog \sim \mathbb{N} \nsim \mathbb{N}^\mathbb{N}_\bot
+	F(\ram) = F(\while) \sim \prog \sim \N \nsim \N^\N_\bot
 \end{gather*}
 
 Quindi, abbiamo dimostrato che i sistemi $\ram$ e $\while$ sono in grado di \textbf{calcolare le stesse cose}, oltre al fatto che \textbf{esistono funzioni non calcolabili}, ovvero la parte destra della catena.
@@ -1411,7 +1411,7 @@ $$ \comp: \wprog \rightarrow \prog $$
 sul programma $I_W$, otteniamo
 $$ \U = \comp(I_W) \in \prog $$
 E la sua semantica è 
-$$ \varphi_\U (\langle x,n \rangle) = \Psi_{I_W} (\langle x,n \rangle) = \varphi_n(x) $$
+$$ \varphi_\U (\langle x,n \rangle) = \Psi_{I_W} (\langle x,n \rangle) = \varphi_n (x) $$
 dove $n$ è la codifica del programma $\ram$ e $x$ il dato di input.
 
 Abbiamo mostrato che esiste un programma $\ram$ in grado di \textbf{simulare} tutti gli altri programmi $\ram$. Questo programma viene detto \textbf{interprete universale}.
@@ -1513,9 +1513,9 @@ In seguito alla definizione di $\cp$ ci sarà da domandarci se questa idea di ca
 Definiamo $\elem$ con le seguenti funzioni
 \begin{center}
 	\begin{tabular}{r c r l c l}
-		$\elem = $ & $\{$ & successore: & $s(x) = x + 1$, & $x \in \mathbb{N}$ & \\
-		&& zero: & $0^n (x_1, \dots, x_n) = 0$, & $x_i \in \mathbb{N}$ & \\
-		&& proiettori: & $\pro_k^n (x_1, \dots, x_n) = x_k$, & $x_i \in \mathbb{N}$& $\}$ \\
+		$\elem = $ & $\{$ & successore: & $s(x) = x + 1$, & $x \in \N$ & \\
+		&& zero: & $0^n (x_1, \dots, x_n) = 0$, & $x_i \in \N$ & \\
+		&& proiettori: & $\pro_k^n (x_1, \dots, x_n) = x_k$, & $x_i \in \N$& $\}$ \\
 	\end{tabular}
 \end{center}
 
@@ -1529,15 +1529,15 @@ Definiamo ora un insieme $\Omega$ di operazioni che permettano di ampliare le fu
 
 Il primo operatore è quello di \textbf{composizione}. Siano
 \begin{itemize}
-	\item $h: \mathbb{N}^k \rightarrow \mathbb{N}$ funzione di composizione
+	\item $h: \N^k \rightarrow \N$ funzione di composizione
 
-	\item $g_1, \dots, g_k: \mathbb{N}^n \rightarrow \mathbb{N}$ "funzioni intermedie"
+	\item $g_1, \dots, g_k: \N^n \rightarrow \N$ "funzioni intermedie"
 
-	\item $\underline{x} \in \mathbb{N}^n$ input
+	\item $\underline{x} \in \N^n$ input
 \end{itemize}
 
 Allora definiamo 
-$$ \com (h, g_1, \dots, g_k): \mathbb{N}^n \rightarrow \mathbb{N} $$
+$$ \com (h, g_1, \dots, g_k): \N^n \rightarrow \N $$
 
 La funzione tale che
 $$ \com (h, g_1, \dots, g_k) (\underline{x}) = h(g_1(\underline{x}), \dots, g_k (\underline{x})) $$
@@ -1561,11 +1561,11 @@ Definiamo un'operazione che permetta di \textbf{iterare} sull'operatore di compo
 
 Siano:
 \begin{itemize}
-	\item $g: \mathbb{N}^n \rightarrow \mathbb{N}$ funzione \textbf{caso base}
+	\item $g: \N^n \rightarrow \N$ funzione \textbf{caso base}
 
-	\item $h: \mathbb{N}^{n+2} \rightarrow \mathbb{N}$ funzione \textbf{passo ricorsivo}
+	\item $h: \N^{n+2} \rightarrow \N$ funzione \textbf{passo ricorsivo}
 
-	\item $\underline{x} \in \mathbb{N}^n$ \textbf{input}
+	\item $\underline{x} \in \N^n$ \textbf{input}
 \end{itemize}
 
 Definiamo
@@ -1621,20 +1621,19 @@ $\ricprim$ è definito come:
 	
     \item Se $g,h \in \ricprim \implies \rp (g,h) \in \ricprim$ \hfill PASSI
 	
-    \item Nient'altro sta in $\ricprim$ \\
+    \item Nient'altro sta in $\ricprim$
 \end{itemize}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% TODO From Here
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+In breve, a $\elem$ si aggiungono solamente le funzioni calcolabili tramite composizione e ricorsione primitiva. \\
 
 \begin{theor}
 	$\ricprim \subseteq F(\while)$
 \end{theor}
-\begin{proof} \hspace{1cm} \\
+\begin{proof}
 	\textbf{Passo Base:} Le funzioni di $\elem$ sono ovviamente while-programmabili.
 	
-	\textbf{Passo Induttivo:} Per $\com$, assumiamo per ipotesi induttiva che $h,g_1, \dots, g_k \in \ricprim$ siano while-programmabili, allora esistono $H, G_1, \dots, G_K \in \wprog$ tali che $\Psi_H = h$, $\Psi_{G_1} = g_1, \dots$, $\Psi_{G_k} = g_k$.\\
+	\textbf{Passo Induttivo:} Per $\com$, assumiamo per ipotesi induttiva che $h,g_1, \dots, g_k \in \ricprim$ siano while-programmabili, allora esistono $H, G_1, \dots, G_K \in \wprog$ tali che $\Psi_H = h$, $\Psi_{G_1} = g_1, \dots$, $\Psi_{G_k} = g_k$.
+    
 	Un programma $W$ $\while$ che calcola $\com$ è
 	
 	\begin{center}
@@ -1662,7 +1661,9 @@ $\ricprim$ è definito come:
 	
 	Quindi abbiamo $\Psi_W (\underline{x}) = \com (h, g_1, \dots, g_k) (\underline{x})$.
 	
-	Per $\rp$, assumiamo che $h,g \in \ricprim$ siano while-programmabili, allora esistono $H,G \in \wprog$ tali che $\Psi_H = h$ e $\Psi_G = g$. Le funzioni ricorsive primitive le possiamo vedere come delle iterazioni che, partendo dal caso base $G$, mano a mano compongono con $H$ fino a quando non si raggiunge $y$ (escluso). Mostriamo un programma $\while$ che calcola
+	Per $\rp$, assumiamo che $h,g \in \ricprim$ siano while-programmabili, allora esistono $H,G \in \wprog$ tali che $\Psi_H = h$ e $\Psi_G = g$. Le funzioni ricorsive primitive le possiamo vedere come delle iterazioni che, partendo dal caso base $G$, mano a mano compongono con $H$ fino a quando non viene raggiunto $y$ (escluso). 
+    
+    Mostriamo un programma $\while$ che calcola
 	$$ 
 	\rp (h,g) = f(\underline{x}, y) = \begin{cases}
 		g(\underline{x}) & \text{ se } y = 0 \\
@@ -1697,10 +1698,12 @@ $\ricprim$ è definito come:
 		\end{minipage}
 	\end{center}
 	
-	Quindi $\Psi_W (\langle x,y \rangle) = \rp (h,g) (\underline{x}, y)$.\\
+	Quindi $\Psi_W (\langle x,y \rangle) = \rp (h,g) (\underline{x}, y)$. \\
 \end{proof}
 
-Abbiamo dimostrato che $\ricprim \subseteq F(\while)$ e possiamo anche dire che l'\textit{inclusione è propria}: nel linguaggio $\while$ si possono avere cicli infiniti mentre in $\ricprim$ no in quanto contiene solo funzioni totali (si dimostra per induzione strutturale) mentre $\while$ contiene anche delle funzioni parziali. Di conseguenza
+Abbiamo dimostrato che $\ricprim \subseteq F(\while)$ e possiamo anche dire che l'\textit{inclusione è propria}: nel linguaggio $\while$ si possono avere cicli infiniti mentre in $\ricprim$ no in quanto contiene solo funzioni totali (si dimostra per induzione strutturale) mentre $\while$ contiene anche delle funzioni parziali. 
+
+Di conseguenza
 $$ \ricprim \subsetneq F(\while) $$
 
 \subsubsection{Sistema di calcolo $\for$}
@@ -1755,7 +1758,9 @@ Siamo nella "\textit{direzione giusta}" non avendo cose che non avremmo catturat
 
 \subsubsection{Minimalizzazione}
 
-Introduciamo un operatore per permettere la presenza di funzioni parziali: \textbf{minimalizzazione}. Sia $f: \mathbb{N}^{n+1} \rightarrow \mathbb{N}$ con $f(\underline{x}, y)$ e $\underline{x} \in \mathbb{N}^n$, allora: 
+Introduciamo un operatore per permettere la presenza di funzioni parziali: \textbf{minimalizzazione}. 
+
+Sia $f: \N^{n+1} \rightarrow \N$ con $f(\underline{x}, y)$ e $\underline{x} \in \N^n$, allora: 
 $$
 \MIN (f) (\underline{x}) = g(\underline{x}) = \begin{cases}
 	y & \text{ se } f(\underline{x}, y) = 0 \wedge (\forall y' < y, f(\underline{x}, y') \downarrow \wedge f(\underline{x}, y') \neq 0) \\
@@ -1768,7 +1773,7 @@ $$ \mu_y (f(\underline{x}, y) = 0)$$
 
 Informalmente, restituisce il più piccolo valore di $y$ che azzera $f(\underline{x},y)$, ovunque precedentemente definita su $y'$.
 
-Alcuni esempi con $f: \mathbb{N}^2 \rightarrow \mathbb{N}$
+Alcuni esempi con $f: \N^2 \rightarrow \N$
 \begin{center}
 	\begin{tabular}{c|c}
 		$\bm{f(x,y)}$ & $\bm{\MIN(f)(x)=g(x)}$ \\ 
@@ -1782,7 +1787,8 @@ Alcuni esempi con $f: \mathbb{N}^2 \rightarrow \mathbb{N}$
 \end{center}
 
 \subsection{Classe $\cp$}
-Ampliamo $\ricprim$ chiudendolo con l'operazione $\MIN$
+
+Ampliamo $\ricprim$ chiudendolo anche rispetto all'operazione $\MIN$
 $$ \elem^{\{\com, \rp, \MIN\}} = \cp = \{\text{Funzioni Ricorsive Parziali}\}$$
 Abbiamo ottenuto la classe delle \textbf{funzioni ricorsive parziali}.
 
@@ -1796,21 +1802,28 @@ Vogliamo ora analizzare come $\cp$ si pone rispetto a $F(\while)$, sapendo che \
 \begin{proof}
 	$\cp$ è definito per chiusura, ma si può anche definire induttivamente:
 	\begin{itemize}
-		\item le funzioni $\elem$ sono in $\cp$
-		\item se $h, g_1, \dots, g_k \in \cp$ allora $\com (h, g_1, \dots, g_k) \in \cp$
-		\item se $h,g \in \cp$ allora $\rp (h,g) \in \cp$
-		\item se $f \in \cp$ allora $\MIN(f) \in \cp$
-		\item nient'altro in $\cp$
+		\item Se $f \in \elem$, allora $f \in \cp$
+        
+		\item Se $h, g_1, \dots, g_k \in \cp$ allora $\com (h, g_1, \dots, g_k) \in \cp$
+		
+        \item Se $h,g \in \cp$ allora $\rp (h,g) \in \cp$
+		
+        \item Se $f \in \cp$ allora $\MIN(f) \in \cp$
+		
+        \item Nient'altro in $\cp$
 	\end{itemize}
 	
 	Di conseguenza, per induzione strutturale su $\cp$ dimostriamo:
 	\begin{itemize}
 		\item \textbf{Passo base:} le funzioni elementari sono while-programmabili, come già dimostrato
-		\item \textbf{Passi induttivi:}
+		
+        \item \textbf{Passi induttivi:}
 		\begin{itemize}
-			\item siano $h,g_1, \dots, g_k \in \cp$ while-programmabili per I.H., allora mostro che $\com (h, g_1, \dots, g_k)$ è while-programmabile; già fatto per $\ricprim$
-			\item siano $h,g \in \cp$ while-programmabili per I.H., mostro che $\rp(h,g)$ è while-programmabile; già fatto per $\ricprim$
-			\item sia $f \in \cp$ while-programmabile e sia $f$ calcolabile nel programma $\while$ per I.H., mostro che $\MIN(f)$ è while-programmabile. Devo trovare un programma $\while$ che calcoli la minimizzazione:
+			\item Siano $h,g_1, \dots, g_k \in \cp$ while-programmabili per I.H., allora mostro che $\com (h, g_1, \dots, g_k)$ è while-programmabile; già fatto per $\ricprim$
+		
+        	\item Siano $h,g \in \cp$ while-programmabili per I.H., mostro che $\rp(h,g)$ è while-programmabile; già fatto per $\ricprim$
+		
+        	\item Sia $f \in \cp$ while-programmabile e sia $f$ calcolabile nel programma $\while$ per I.H., mostro che $\MIN(f)$ è while-programmabile. Devo trovare un programma $\while$ che calcoli la minimizzazione:
 			\begin{center}
 				\begin{minipage}{.85\textwidth}
 					\begin{tcolorbox}[colback=white,sharp corners,boxrule=.3mm]
@@ -1833,6 +1846,7 @@ Vogliamo ora analizzare come $\cp$ si pone rispetto a $F(\while)$, sapendo che \
 			\end{center}
 			Questo è un programma che calcola la minimizzazione: se non esiste $y$ che azzeri $f(\underline{x}, y)$ il programma va in loop (i.e., incrementa di 1 ad ogni iterazione e termina quando azzera la funzione), quindi la semantica di $P$ è $\bot$ secondo $\MIN$
 		\end{itemize}
+        
 		Concludiamo quindi che $\cp \subseteq F(\while)$.
 	\end{itemize}
   \end{proof}
@@ -1847,13 +1861,14 @@ Viene naturale chiedersi se vale la relazione inversa.
 \begin{proof}
 	Sappiamo che
 	$$ F(\while) = \{\Psi_W: W \in \wprog\}$$
-	Consideriamo $\Psi_W \in F(\while)$ e mostriamo che $\Psi_W \in \cp$, facendo vedere che può essere espressa come composizione, ricorsione primitiva e minimalizzazione a partire dalle funzioni in $\elem$.\\
+	Consideriamo $\Psi_W \in F(\while)$ e mostriamo che $\Psi_W \in \cp$, facendo vedere che può essere espressa come composizione, ricorsione primitiva e minimalizzazione a partire dalle funzioni in $\elem$.
 	
 	Le funzioni in $\wprog$ sono nella forma
 	$$ \Psi_W = \pro_0^{21} \left( \llbracket W \rrbracket (W\text{-in}(\underline{x})) \right) $$
+    
 	Dove: 
 	\begin{itemize}
-		\item $\llbracket C \rrbracket (\underline{x}) = \underline{y}$ la funzione che restituisce lo stato prossimo $\underline{y} \in \mathbb{N}^{21}$ a seguito dell'esecuzione del comando $C$ a partire dallo stato corrente $\underline{x} \in \mathbb{N}^{21}$
+		\item $\llbracket C \rrbracket (\underline{x}) = \underline{y}$ la funzione che restituisce lo stato prossimo $\underline{y} \in \N^{21}$ a seguito dell'esecuzione del comando $C$ a partire dallo stato corrente $\underline{x} \in \N^{21}$
 		
 		\item La funzione $W\text{-in}(n)$ restituisce lo stato iniziale della macchina $\while$ su input $n$
 		
@@ -1867,26 +1882,28 @@ Viene naturale chiedersi se vale la relazione inversa.
 	\end{enumerate}
 	Di conseguenza, se dimostro che la funzione di stato prossimo $\llbracket C \rrbracket$ è ricorsiva parziale $\in \cp$ allora anche $\Psi_W \in \cp$, per la definizione induttiva di $\cp$.
 	
-	La funzione di stato prossimo $\llbracket \rrbracket (): \mathbb{N}^{21} \rightarrow \mathbb{N}^{21}$ restituisce elementi in $\mathbb{N}^{21}$, mentre gli elementi in $\cp$ hanno codominio $\mathbb{N}$.
+	La funzione di stato prossimo $\llbracket \_ \rrbracket (\_): \N^{21} \rightarrow \N^{21}$ restituisce elementi in $\N^{21}$, mentre gli elementi in $\cp$ hanno codominio $\N$.
 	
 	Per risolvere il problema si definisce la \textbf{funzione $f_C$ numero prossimo} in cui viene applicato Cantor sull'array degli stati.
-	$$ \llbracket C \rrbracket \underline{x} = \underline{y} \quad \text{con }
-	\ \ \underline{x},\underline{y}\in \mathbb{N}^{21}$$
+	$$ \llbracket C \rrbracket (\underline{x}) = \underline{y} \quad \text{con }
+	\ \ \underline{x},\underline{y}\in \N^{21}$$
 	$$ f_C(x)=y \quad \text{con }
-	\ \ x=[ \underline{x} ] ,\ y= [ \underline{y} ]$$
-	Si noti che per passare da $\llbracket C \rrbracket (\underline{x})$ a $f_C(x)$ 
+	\ \ x=[ \underline{x} ] ,\ y= [ \underline{y} ] $$
+	
+    Si noti che per passare da $\llbracket C \rrbracket (\underline{x})$ a $f_C(x)$ 
 	si usano operazioni ricorsive parziali:
 	$$\begin{aligned}
 		f_C(x)&=y \\
 		{\color{red}\pro \in \cp}\quad &
 		\mathlarger{{\color{red}\downarrow}{\color{blue}\uparrow}}
-		\quad\color{blue} [ \ ] \in \cp \\
+		\quad\color{blue} [ \_ ] \in \cp \\
 		\llbracket C \rrbracket (\pro(0,x),\dots,\pro(20,x))& =(\pro(0,y),\dots,\pro(20,y))
 	\end{aligned}$$
 	
 	Quindi si ha che $f_C$ si comporta come $\llbracket C \rrbracket (\underline{x})$ sullo stato prossimo. Basterà ora dimostrare che $f_C$ è effettivamente una funzione ricorsiva parziale:
 	$$ f_C\in \cp \ \ \Leftrightarrow \ \ \llbracket C \rrbracket (\underline{x}) \in \cp $$
-	Dimostriamo, tramite induzione strutturale, sul comando $\while$ $C$:
+	
+    Dimostriamo, tramite induzione strutturale, sul comando $\while$ $C$:
 	\begin{itemize}
 		\item \textbf{Passo base}: azzeramento e incremento/decremento
 		\begin{itemize}
@@ -1968,21 +1985,27 @@ Viene naturale chiedersi se vale la relazione inversa.
 \end{proof}
 Visti i risultati ottenuti dai due teoremi precedenti, possiamo concludere che: 
 $$ F(\while) = \cp $$
-La classe delle funzioni ricorsive parziali, ovvero l'idea di \textit{calcolabile} in termini matematici, coincide con l'idea di \textit{calcolabile} proveniente dall'insieme di problemi per i quali vediamo una macchina che li risolva.\\
+
+La classe delle funzioni ricorsive parziali, ovvero l'idea di \textit{calcolabile} in termini matematici, coincide con l'idea di \textit{calcolabile} proveniente dall'insieme di problemi per i quali vediamo una macchina che li risolva.
 
 \subsection{Tesi di Church-Turing}
+
 Il risultato principale di questo studio è aver trovato due classi di funzioni importanti: 
 \begin{itemize}
 	\item $\cp$ insieme delle \textbf{funzioni ricorsive parziali}
+
 	\item $\mathcal{T}$ insieme delle \textbf{funzioni ricorsive totali}
 \end{itemize}
 
 Il primo insieme contiene anche tutte le funzioni del secondo, quindi
 $$ \mathcal{T} \subset \cp $$
+
 Inoltre abbiamo visto (ad esempio tramite la funzione di Ackermann) che
 $$ \ricprim \subset \mathcal{T} $$
-L'insieme $\cp$ cattura tutti i sistemi di calcolo esistenti: $\while$, $\ram$, Macchine di Turing, Lambda-calcolo di Church, \dots\\
-Tutti i modelli di calcolo proposti alla fine individuano sempre la classe delle funzioni ricorsive parziali. Visti questi risultati, Church e Turing decidono di enunciare un risultato molto importante.
+
+L'insieme $\cp$ cattura tutti i sistemi di calcolo esistenti: $\while$, $\ram$, Macchine di Turing, Lambda-calcolo di Church, \dots
+
+Tutti i modelli di calcolo proposti, alla fine, individuano sempre la classe delle funzioni ricorsive parziali. Visti questi risultati, Church e Turing decidono di enunciare un risultato molto importante.
 
 \paragraph{Tesi di Church-Turing:} La classe delle funzioni intuitivamente calcolabili coincide con la classe $\cp$ delle funzioni ricorsive parziali.
 
@@ -1991,50 +2014,60 @@ Questa è una tesi e non un teorema, si tratta di una \textit{congettura}, un'op
 Per noi un problema è \textit{calcolabile} quando esiste un modello di calcolo che riesce a risolverlo ragionevolmente. Se volessimo aderire alla tesi di Church-Turing, potremmo dire, in maniera più formale, che:
 \begin{itemize}
 	\item \textit{problema ricorsivo parziale} è sinonimo di calcolabile
+    
 	\item \textit{problema ricorsivo totale} è sinonimo di calcolabile da un programma che si arresta su ogni input
 \end{itemize}
 
 \section{Assiomatizzazione dei Sistemi di Calcolo}
 
-Per ora ci si è concentrati sull'analisi della \textit{potenza computazionale} dei sistemi di programmazione visti, affermando che ognuno di questi ha come potenza computazionale $\cp$ grazie alla tesi di Church-Turing.
+Per ora ci si è concentrati sull'analisi della \textit{potenza computazionale} dei sistemi di programmazione visti, affermando che ognuno di questi ha come potenza computazionale $\cp$, grazie alla tesi di Church-Turing.
 
-Vorremmo sapere altro sui sistemi di programmazione, vogliamo individuare alcune proprietà "buone" di un sistema di calcolo, dette \textbf{assiomi}. Tutti i sistemi di programmazione che rispettano questi assiomi si diranno sistemi di programmazione accettabili. In questo modo si potranno dimostrare proprietà non sul singolo sistema ma su tutti i sistemi accettabili utilizzando appunto solo questi assiomi.
+Vorremmo sapere altro sui sistemi di programmazione, vogliamo individuare alcune proprietà "\textit{buone}" di un sistema di calcolo, dette \textbf{assiomi}. 
+
+Tutti i sistemi di programmazione che rispettano questi assiomi si diranno sistemi di programmazione accettabili. In questo modo si potranno dimostrare proprietà non sul singolo sistema ma su tutti i sistemi accettabili utilizzando gli assiomi.
 
 Per indicare un sistema di programmazione si usa
-$$ \sisprog_{i \in \N}$$
+$$ \sisprog_{i \in \N} $$
 ovvero l'insieme delle semantiche (funzioni calcolabili) dal sistema. Il pedice indica i programmi codificati $i \in \N$ di quel sistema.
 
 \subsection{Assiomi di Rogers}
 
-Gli assiomi di Rogers vogliono essere quelle "buone" proprietà ricercate in un sistema di programmazione; in particolare si afferma che: un sistema di programmazione $\sisprog$ si dice \textbf{accettabile} (o \textbf{SPA}) se: \\
+Gli assiomi di Rogers vogliono essere quelle "buone" proprietà ricercate in un sistema di programmazione; in particolare si afferma che: un sistema di programmazione $\sisprog$ si dice \textbf{accettabile} (o \textbf{SPA}) se:
 \begin{enumerate}
 	\item Aderisce alla tesi di Church-Turing
-	\item Ammette interprete universale
-	\item Rispetta il teorema $S_n^m$
+	
+    \item Ammette interprete universale
+	
+    \item Rispetta il teorema $S_n^m$
 \end{enumerate}
 Si vedranno ora gli assiomi nel dettaglio.
 
 \subsubsection{Potenza computazionale}
+
 Dato il sistema $\sisprog$ vogliamo che
 $$ \sisprog = \cp $$
 ovvero, rispetta la tesi di Church-Turing. Come già dimostrato, il sistema $\ram$ rispetta il primo assioma
 $$ F(\ram) = \cp $$
+
 Non si vogliono considerare né sistemi troppo poco potenti (sotto $\cp$), né troppo potenti (oltre $\cp$).
 
 \subsubsection{Interprete universale}
+
 $\sisprog$ rispetta il secondo assioma se esiste un interprete universale, ovvero un programma $\mu \in \N$ tale che
 $$ \forall x,n \in \N \quad \varphi_\mu (\langle x,n \rangle) = \varphi_n (x) $$
-ovvero, un programma scritto in un certo linguaggio che riesce ad interpretare ogni altro programma $n$ scritto nello stesso linguaggio su qualsiasi input $x$.
+ovvero, un programma scritto in un certo linguaggio che riesce a interpretare ogni altro programma $n$ scritto nello stesso linguaggio su qualsiasi input $x$.
 
 La presenza di un interprete universale permette un'algebra sui programmi, quindi la trasformazione di quest'ultimi.
 
 \subsubsection{Teorema $S_n^m$}
+
 $\sisprog$ rispetta il terzo assioma se rispetta il teorema $S_n^m$. Si vedrà prima un teorema più specifico $S_1^1$. \\
 
 \begin{theor}[$S_1^1$]
 	Dato $\sisprog$ $\ram$ esiste una funzione $S_1^1 \in \T$ tale che
 	$$ \forall n,x,y \in \N \quad \varphi_n(\langle x,y \rangle) = \varphi_{S_1^1 (n,y)} (x) $$
-In altre parole, è possibile costruire automaticamente programmi specifici da programmi più generali, ottenuti fissando alcuni input.
+    
+    In altre parole, è possibile costruire automaticamente programmi specifici da programmi più generali, ottenuti fissando alcuni input.
 \end{theor}
 
 \begin{proof}
@@ -2043,7 +2076,8 @@ In altre parole, è possibile costruire automaticamente programmi specifici da p
 	dove:
 	\begin{itemize}
 		\item $n$ è la codifica del programma $P$ a due variabili di input $x,y$
-		\item $\bar{n}$ è la codifica del programma $\bar{P}$ a una variabile, la cui semantica è identica a quella di $P$ a cui fisso a $y$ il secondo input
+		
+        \item $\bar{n}$ è la codifica del programma $\bar{P}$ a una variabile, la cui semantica è identica a quella di $P$ a cui fisso a $y$ il secondo input
 	\end{itemize}
 
 	Analizzando il sistema $\ram$ si prenda un programma $P$ a due variabili
@@ -2062,7 +2096,7 @@ In altre parole, è possibile costruire automaticamente programmi specifici da p
 		$$ \varphi_P(\langle x,y \rangle) = x + y $$
 	\end{minipage}
 
-	Si vuole produrre un programma $\bar{P}$ con un solo input $x$ che restituisca $x + 3$, partendo da $P$. Si fissa quindi la seconda variabile di $P$ a 3. La funzione $S_1^1$ dovrà restituire $\bar{P}$
+	Si vuole produrre un programma $\bar{P}$ con un singolo input $x$ che restituisca $x + 3$, partendo da $P$. Si fissa quindi la seconda variabile di $P$ a 3. La funzione $S_1^1$ dovrà restituire $\bar{P}$
 
 	\begin{minipage}{.46\textwidth}
 		\begin{center}
@@ -2143,7 +2177,8 @@ In altre parole, è possibile costruire automaticamente programmi specifici da p
 	Si può quindi notare che $S_1^1$ è
 	\begin{enumerate}
 		\item Una funzione totale
-		\item Programmabile
+		
+        \item Programmabile
 	\end{enumerate}
 	Di conseguenza
 	$$ S_1^1 \in \T $$
@@ -2151,17 +2186,20 @@ In altre parole, è possibile costruire automaticamente programmi specifici da p
 
 In sintesi, per $\ram$, esiste una funzione $S_1^1$ ricorsiva totale che accetta come argomenti
 \begin{itemize}
-	\item il codice $n$ di un programma con 2 input
-	\item un valore $y$ a cui fissare il secondo input
+	\item Il codice $n$ di un programma con 2 input
+    
+	\item Un valore $y$ a cui fissare il secondo input
 \end{itemize}
-e produce il codice $\bar{n} = S^1_1 (n,y)$ di un programma che si comporta come $n$ nel caso in cui il secondo input è fissato a $y$. \lcomment{Il Teorema $S^1_1$ da solo garantisce una ``algebra sui programi'' }
+e produce il codice $\bar{n} = S^1_1 (n,y)$ di un programma che si comporta come $n$ nel caso in cui il secondo input è fissato a $y$. 
+
+Il Teorema $S^1_1$ da solo garantisce una "algebra sui programi".
 
 Questo teorema ha anche una forma generale $S_n^m$ che riguarda i programmi a $m+n$ input in cui si prefissano $n$ input e si lasciano variare i primi $m$.\\
 
 \begin{theor}[$S_n^m$]
 	Dato $\sisprog$ $\ram$, esiste una funzione $S_n^m \in \T$ tale che
-	$$ \forall  \in \N, \underline{x} \in \N^m, \underline{y} \in \N^n \quad \varphi_k (\langle \underline{x}, \underline{y} \rangle) = \varphi_{S_n^m (k, \underline{y})} (\langle \underline{x} \rangle) $$
-	Ovvero, per ogni programma $k \in \N$ e ogni input $\underline{x} \in \N^m, \underline{y} \in \N^n$ vale la proprietà specificata. Anche la dimostrazione è una semplice generalizzazione di quella di $S_1^1$.\\
+	$$ \forall k \in \N, \underline{x} \in \N^m, \underline{y} \in \N^n \quad \varphi_k (\langle \underline{x}, \underline{y} \rangle) = \varphi_{S_n^m (k, \underline{y})} (\langle \underline{x} \rangle) $$
+	Ovvero, per ogni programma $k \in \N$ e ogni input $\underline{x} \in \N^m, \underline{y} \in \N^n$ vale la proprietà specificata. Anche la dimostrazione è una semplice generalizzazione di quella di $S_1^1$.
 \end{theor}
 
 Le tre caratteristiche identificate formano gli \textbf{assiomi di Rogers} (1953). Questi caratterizzano i sistemi di programmazione su cui ci concentreremo, chiamati \textit{Sistemi di Programmazione Accettabili}. Questi assiomi non sono restrittivi: di fatto, tutti i modelli di calcolo ragionevoli sono SPA.
@@ -2170,9 +2208,11 @@ Le tre caratteristiche identificate formano gli \textbf{assiomi di Rogers} (1953
 
 Dati gli SPA $\{\varphi_i\}$ e $\{\Psi_i\}$, un compilatore dal primo al secondo è una funzione $t : \N \rightarrow \N$ che soddisfa le proprietà di
 \begin{enumerate}
-	\item \textbf{programmabilità}: esiste un programma che implementa $t$
-	\item \textbf{completezza}: $t$ compila ogni $i \in \N$
-	\item \textbf{correttezza}: $\forall i \in \N$ vale $\varphi_i = \Psi_{t(i)}$
+	\item \textbf{Programmabilità}: esiste un programma che implementa $t$
+    
+	\item \textbf{Completezza}: $t$ compila ogni $i \in \N$
+    
+	\item \textbf{Correttezza}: $\forall i \in \N$ vale $\varphi_i = \Psi_{t(i)}$
 \end{enumerate}
 
 Visto quanto fatto fin'ora, si può dire che i primi due punti possono essere scritti come $t \in \T$.\\
@@ -2184,8 +2224,10 @@ Visto quanto fatto fin'ora, si può dire che i primi due punti possono essere sc
 	Consideriamo $\{\varphi_i\}$ e $\{\Psi_i\}$ due SPA; valgono i tre assiomi di Rogers:
 	\begin{enumerate}
 		\item $\{\varphi_i\} = \cp$
-		\item $\exists u: \varphi_u (\langle x,n \rangle) = \varphi_n (x)$
-		\item $\exists S_1^1 \in \T: \varphi_n (\langle x,y \rangle ) = \varphi_{S^1_1 (n,y)} (x)$
+		
+        \item $\exists u: \varphi_u (\langle x,n \rangle) = \varphi_n (x)$
+		
+        \item $\exists S_1^1 \in \T: \varphi_n (\langle x,y \rangle ) = \varphi_{S^1_1 (n,y)} (x)$
 	\end{enumerate}
 
 	Voglio trovare un compilatore $t \in \T$ che sia corretto. Ma allora
@@ -2194,14 +2236,15 @@ Visto quanto fatto fin'ora, si può dire che i primi due punti possono essere sc
 	Ovvero, il compilatore cercato è la funzione $t(i) = S^1_1 (e,i)$ per ogni $i \in \N$. Infatti:
 	\begin{itemize}
 		\item $t \in \T$ in quanto $S_1^1 \in \T$
-		\item $t$ corretto perché $\varphi_i = \Psi_{t(i)}$
+		
+        \item $t$ corretto perché $\varphi_i = \Psi_{t(i)}$
 	\end{itemize}
 \end{proof}
 
 Da notare che questo teorema è molto generale, specifica solamente che il compilatore esiste, non determina quale sia. \\
 
 \begin{coroll}
-	Dati gli SPA $A,B,C \ \ \exists$sempre un compilare da $A$ a $B$ scritto nel linguaggio $C$.
+	Dati gli SPA $A,B,C \ \ \exists$ sempre un compilare da $A$ a $B$ scritto nel linguaggio $C$.
 \end{coroll}
 \begin{proof}
 	Per il teorema precedente esiste un compilatore $t \in \T$ da $A$ a $B$. $C$ è un SPA, quindi contiene programmi per tutte le funzioni ricorsive parziali, dunque ne contiene uno anche per $t$, che è una funzione ricorsiva totale. \\
@@ -2212,9 +2255,11 @@ Nella pratica, vuol dire che per qualunque coppia di linguaggi, sarà sempre pos
 \begin{theor}[Teorema di isomorfismo tra SPA]
 	Dati due SPA $\{\varphi_i\}$ e $\{\Psi_i\}$, esiste $t: \N \rightarrow \N$ tale che:
 	\begin{enumerate}
-		\item $t \in \T$ \lcomment{Teorema Precedente}
-		\item $\forall i \in \N$, $\varphi_i = \Psi_{t(i)}$ \lcomment{Teorema Precedente}
-		\item $t$ è invertibile, quindi $t^{-1}$ può essere visto come un decompilatore
+		\item $t \in \T$ %\lcomment{Teorema Precedente}
+		
+        \item $\forall i \in \N$, $\varphi_i = \Psi_{t(i)}$ %\lcomment{Teorema Precedente}
+		
+        \item $t$ è invertibile, quindi $t^{-1}$ può essere visto come un decompilatore
 	\end{enumerate}
 \end{theor}
 
@@ -2231,8 +2276,9 @@ Il teorema di ricorsione è un risultato utile a rispondere ad alcuni quesiti su
 
 Per dare una chiave di lettura a questo teorema:
 \begin{itemize}
-	\item consideriamo $t$ come un programma che prende in input un programma $n$ è lo trasforma in $t(n)$
-	\item il teorema dice che, qualsiasi sia la natura di $t$, esisterà sempre almeno un programma il cui significato non sarà stravolto da $t$
+	\item Consideriamo $t$ come un programma che prende in input un programma $n$ è lo trasforma in $t(n)$
+    
+	\item Il teorema dice che, qualsiasi sia la natura di $t$, esisterà sempre almeno un programma il cui significato non sarà stravolto da $t$
 \end{itemize}
 
 \begin{proof}
@@ -2325,7 +2371,7 @@ Per il teorema di ricorsione
 $$ \exists j \in \N \mid \varphi_j (x) = \varphi_{Z (j)} (x) = j $$
 Quindi effettivamente esiste un programma $j$ la cui semantica è proprio quella di stampare se stesso.
 
-La risposta alla prima domanda è quindi \si! per $\ram$, ma lo è in generale per tutti i SPA che ammettono una codifica per i propri programmi.
+La risposta alla prima domanda è quindi \si per $\ram$, ma lo è in generale per tutti i SPA che ammettono una codifica per i propri programmi.
 
 \subsubsection{Seconda domanda: compilatori completamente errati}
 
@@ -2340,23 +2386,30 @@ $$ (\ast \ast) \quad \quad \exists i \in \N \mid \varphi_i = \varphi_{g(i)} $$
 Unendo $(\ast)$ e $(\ast \ast)$ otteniamo
 $$ \exists i \in \N \mid \Psi_{t(i)} \stackrel{(\ast)}{=} \varphi_{g(i)} \stackrel{(\ast \ast)}{=} \varphi_i \quad \forall t \in \T $$
 
-Di conseguenza, la risposta alla seconda domanda è \no!.
+Di conseguenza, la risposta alla seconda domanda è \no.
 
 \subsection{Equazioni su SPA}
+
 \subsubsection{Strategia}
 
 La portata del teorema di ricorsione è molto ampia: permette di risolvere \textbf{equazioni su SPA} in cui si chiede l'esistenza di certi programmi in SPA.
 
 Per esempio, dato un SPA $\{\varphi_i\}$ ci chiediamo se
 $$ \exists n \in \N \mid \varphi_n (x) = \varphi_x \left(n + \varphi_{\varphi_n (0)} (x) \right) $$
+
 La strategia da seguire per risolvere questo tipo di richieste è analoga a quella seguita per la dimostrazione del teorema di ricorsione, riassumibile in:
 \begin{enumerate}
 	\item Trasformare il membro di destra dell'equazione in una funzione $f(x,n)$
-	\item Mostrare che $f(x,n)$ è ricorsiva parziale e quindi che $f(x,n) = \varphi_e (x,n)$
-	\item L'equazione iniziale diventa $\varphi_n (x) = \varphi_e (x, n) = \varphi_{S^1_1 (e,n)} (x)$
-	\item So che $S^1_1 (e,n)$ è una funzione ricorsiva totale che dipende da $n$
-	\item La domanda iniziale è diventata $\exists n \in \N \mid \varphi_n (x) = \varphi_{S_1^1 (e,n)} (x)$?
-	\item La risposta è \si, per il teorema di ricorsione
+	
+    \item Mostrare che $f(x,n)$ è ricorsiva parziale e quindi che $f(x,n) = \varphi_e (x,n)$
+	
+    \item L'equazione iniziale diventa $\varphi_n (x) = \varphi_e (x, n) = \varphi_{S^1_1 (e,n)} (x)$
+	
+    \item So che $S^1_1 (e,n)$ è una funzione ricorsiva totale che dipende da $n$
+	
+    \item La domanda iniziale è diventata $\exists n \in \N \mid \varphi_n (x) = \varphi_{S_1^1 (e,n)} (x)$?
+	
+    \item La risposta è \si, per il teorema di ricorsione
 \end{enumerate}
 
 Riprendendo l'esempio e cominciando con trasformare la parte di destra:
@@ -2441,26 +2494,32 @@ $$ \exists n \in \N \mid \varphi_n (x) = \varphi_x (n + 2) + \left(\varphi_{\var
 Un \textbf{problema di decisione} è una domanda a cui rispondere \si\ o \no. Sono costituiti da tre elementi principali:
 \begin{itemize}
 	\item \textbf{Nome}: del problema
+    
 	\item \textbf{Istanza}: dominio degli oggetti che verranno considerati
-	\item \textbf{Domanda}: proprietà che gli oggetti del dominio possono soddisfare o meno. Dato un oggetto del dominio, la risposta sarà \si\ se soddisfa la proprietà, \no\ altrimenti. In altre parole, è la specifica del problema di decisione
+	
+    \item \textbf{Domanda}: proprietà che gli oggetti del dominio possono soddisfare o meno. Dato un oggetto del dominio, la risposta sarà \si\ se soddisfa la proprietà, \no\ altrimenti. In altre parole, è la specifica del problema di decisione
 \end{itemize}
 
 Una definizione più formale:
 \begin{itemize}
 	\item \textbf{Nome} $\Pi$
-	\item \textbf{Istanza} $x \in D$ input
-	\item \textbf{Domanda} $p(x)$ proprietà che $x \in D$ può soddisfare o meno
+	
+    \item \textbf{Istanza} $x \in D$ input
+	
+    \item \textbf{Domanda} $p(x)$ proprietà che $x \in D$ può soddisfare o meno
 \end{itemize}
 
-Non bisogna esibire una struttura come risultato (cosa che puo' accadere nei problemi di ricerca od ottimizzazione), ma solo una risposta \si/\no.
+Non bisogna esibire una struttura come risultato (cosa che può accadere nei problemi di ricerca od ottimizzazione), ma solo una risposta \si/\no.
 
 \vspace{-1em}
 
 \paragraph{Esempio:} Un esempio di problema di decisione è quello di stabilire se un grafo ammette un circuito hamiltoniano:
 \begin{itemize}
 	\item Nome: Circuito hamiltoniano
-	\item Istanza: grafo $G = (V,E)$
-	\item Domanda: $\exists \gamma$ circuito hamiltoniano nel grafo $G$?
+	
+    \item Istanza: grafo $G = (V,E)$
+	
+    \item Domanda: $\exists \gamma$ circuito hamiltoniano nel grafo $G$?
 \end{itemize} \lcomment{altri esempi nelle slide}
 
 \vspace{-0.5em}
@@ -2482,8 +2541,9 @@ Questa funzione deve essere programmabile e deve terminare sempre; ma allora $\P
 
 I due approcci per \textbf{definire la decidibilità} sono equivalenti:
 \begin{itemize}
-	\item il programma $P_\Pi$ calcola $\Phi_\Pi$, quindi $\Phi_\Pi \in \T$
-	\item se $\Phi_\Pi \in \T$, allora esiste un programma che la calcola e che ha il comportamento di $P_\Pi$
+	\item Il programma $P_\Pi$ calcola $\Phi_\Pi$, quindi $\Phi_\Pi \in \T$
+    
+	\item Se $\Phi_\Pi \in \T$, allora esiste un programma che la calcola e che ha il comportamento di $P_\Pi$
 \end{itemize}
 
 Quindi, definire la decidibilità partendo da un programma o da una funzione ricorsiva totale è indifferente: una definizione implica l'altra.
@@ -2491,15 +2551,18 @@ Quindi, definire la decidibilità partendo da un programma o da una funzione ric
 Si può sfruttare questo fatto per sviluppare due \textbf{tecniche di risoluzione} del problema di decidibilità:
 \begin{itemize}
 	\item Esibire un \textbf{algoritmo di soluzione} $P_\Pi$ (anche inefficiente, basta che esista)
+    
 	\item Mostrare che $\Phi_\Pi$ è \textbf{ricorsiva totale}
 \end{itemize}
 
 \paragraph{Esempio:} Sull'esempio precedente, dovendo visitare ogni nodo una e una sola volta, il circuito genera una permutazione dei vertici in $V$. L'algoritmo di soluzione deve:
 \begin{enumerate}
 	\item generare l'insieme $P$ di tutte le permutazioni di $V$
-	\item data la permutazione $p_i \in P$, se è un c.h. rispondo \si
-	\item se nessuna permutazione $p_i \in P$ è un c.h. rispondo \no
-\end{enumerate} \lcomment{Guarda slide per robe in piu'}
+	
+    \item data la permutazione $p_i \in P$, se è un c.h. rispondo \si
+	
+    \item se nessuna permutazione $p_i \in P$ è un c.h. rispondo \no
+\end{enumerate} \lcomment{Guarda slide per robe in più}
 
 \vspace{-0.25em}
 
@@ -2509,10 +2572,14 @@ Esistono dei \textbf{problemi indecidibili}? \si: se esistono programmi che non 
 
 \subsubsection{Problema dell'arresto ristretto}
 
-Il \textbf{problema dell'arresto ristretto} per un programma $P$ è un esempio di problema indecidibile. Fissato un programma $P$, il problema è il seguente:
+Il \textbf{problema dell'arresto ristretto} per un programma $P$ è un esempio di problema indecidibile. 
+
+Fissato un programma $P$, il problema è il seguente:
 \begin{itemize}
 	\item Nome: $\arp$
+
 	\item Istanza: $x \in \N$
+
 	\item Domanda: $\varphi_P (x) \downarrow$?
 \end{itemize}
 
@@ -2532,8 +2599,10 @@ E definiamo di conseguenza il problema $\arph$:
 $$ \varphi_{\hat{P}}(x) = \varphi_{U}(x,x) = \varphi_{x}(x) $$
 \begin{itemize}
 	\item Nome $\arph$
-	\item Istanza $ x \in \N$
-	\item Domanda: $\varphi_{\hat{P}}(x) = \varphi_x(x) \downarrow ?$
+	
+    \item Istanza $ x \in \N$
+	
+    \item Domanda: $\varphi_{\hat{P}}(x) = \varphi_x(x) \downarrow ?$
 \end{itemize}
 
 Abbiamo, quindi, un programma $x$ che lavora su un altro programma (\textit{se stesso} in questo caso). Nulla di strano: compilatori, debugger, interpreti sono programmi che lavorano su programmi.
@@ -2550,7 +2619,7 @@ La domanda è se $\varphi_x$ su input $x$ termina. Il programma $P$ non è fissa
 		1 & \text{ se } \varphi_{\hat{P}} (x) = \varphi_x (x) \downarrow \\
 		0 & \text{ se } \varphi_{\hat{P}} (x) = \varphi_x (x) \uparrow \\
 	\end{cases}
-	\in \T
+	\ \in \T
 	$$
 	calcolabile da un programma che termina sempre. Visto che $\Phi_{\arph} \in \T$ anche la funzione
 	$$
@@ -2571,8 +2640,9 @@ La domanda è se $\varphi_x$ su input $x$ termina. Il programma $P$ non è fissa
 
 	Tale funzione non può esistere, infatti:
 	\begin{itemize}
-		\item nel primo caso ho $\varphi_\alpha (\alpha) = 0$ se $\varphi_\alpha(\alpha) \uparrow$, ma è una contraddizione
-		\item nel secondo caso ho $\varphi_\alpha (\alpha) = \varphi(\alpha) + 1$ se termina, ma è una contraddizione perché questa relazione non vale per nessun naturale
+		\item Nel primo caso ho $\varphi_\alpha (\alpha) = 0$ se $\varphi_\alpha(\alpha) \uparrow$, ma è una contraddizione
+		
+        \item Nel secondo caso ho $\varphi_\alpha (\alpha) = \varphi(\alpha) + 1$ se termina, ma è una contraddizione perché questa relazione non vale per nessun naturale
 	\end{itemize}
 
 	Siamo a un assurdo, quindi $\arph$ è indecidibile. \\
@@ -2609,9 +2679,11 @@ La versione generale del problema dell'arresto ristretto è il \textbf{problema 
 
 Vogliamo fornire un \textit{livello di risoluzione} dei problemi, stabilendo se un problema:
 \begin{itemize}
-	\item può essere risolto
-	\item non può essere risolto completamente
-	\item non può essere risolto
+	\item Può essere risolto
+    
+	\item Non può essere risolto completamente
+	
+    \item Non può essere risolto
 \end{itemize}
 
 Costruiamo un programma che classifichi gli elementi di un insieme, per quindi dire se un certo numero naturale appartiene o meno all'insieme.
@@ -2625,16 +2697,18 @@ x \in \N \rightsquigarrow P_A (x) = \begin{cases}
 $$
 Il programma $P$ deve essere:
 \begin{itemize}
-	\item \textbf{corretto}: classifica correttamente gli elementi che riceve in input
-	\item \textbf{completo}: classifica  tutti gli elementi di $\N$, nessuno escluso
+	\item \textbf{Corretto}: classifica correttamente gli elementi che riceve in input
+    
+	\item \textbf{Completo}: classifica  tutti gli elementi di $\N$, nessuno escluso
 \end{itemize}
 
 \textit{Tutti gli insiemi sono automaticamente riconoscibili? Quali insiemi sono automaticamente riconoscibili?}
 
 Sicuramente non tutti gli insiemi sono automaticamente riconoscibili, questo grazie al concetto di \textit{cardinalità}, infatti:
 \begin{itemize}
-	\item i sottoinsiemi di $\N$ sono \textit{densi quanto} $\R$
-	\item non esistono $|\R|$ programmi
+	\item I sottoinsiemi di $\N$ sono \textit{densi quanto} $\R$
+    
+	\item Non esistono $|\R|$ programmi
 \end{itemize}
 Di conseguenza devono esistere insiemi non automaticamente riconoscibili.
 
@@ -2657,7 +2731,8 @@ Che $\X_A$ sia \textbf{totale} è banale: tutte le funzioni caratteristiche devo
 
 Le due definizioni date sono equivalenti:
 \begin{itemize}
-	\item il programma $P_A$ implementa $\X_A$, quindi $\X_A \in \T$ perché esiste un programma che la calcola
+	\item Il programma $P_A$ implementa $\X_A$, quindi $\X_A \in \T$ perché esiste un programma che la calcola
+    
 	\item $\X_A \in \T$ quindi esiste un programma $P_A$ che la implementa e soddisfa la definizione sopra
 \end{itemize}
 
@@ -2666,8 +2741,10 @@ Le due definizioni date sono equivalenti:
 Spesso si dice che \textit{un insieme ricorsivo è un insieme decidibile}, ma è solo abuso di notazione. Questo è dovuto al fatto che a ogni insieme $A \subseteq \N$ possiamo associare il suo \textbf{problema di riconoscimento}, definito come:
 \begin{itemize}
 	\item Nome: $\ric_A$
-	\item Istanza: $x \in \N$
-	\item Domanda: $x \in A$?
+	
+    \item Istanza: $x \in \N$
+	
+    \item Domanda: $x \in A$?
 \end{itemize}
 
 La sua funzione soluzione
@@ -2689,13 +2766,14 @@ Simmetricamente, sempre con abuso di notazione, si dice che \textit{un problema 
 Dato il problema:
 \begin{itemize}
 	\item Nome: $\Pi$
+    
 	\item Istanza: $x \in D$
-	\item Domanda: $p(x)$?
+	
+    \item Domanda: $p(x)$?
 \end{itemize}
 
 Definiamo
 $$ A_\Pi = \left\{x \in D \mid \Psi_\Pi (x) = 1\right\} \text{ con } \Psi_\Pi (x) = 1 \equiv p(x) $$
-
 insieme delle istanze con risposta positiva di $\Pi$. Si può notare che, se $\Pi$ è decidibile, allora $\Psi_\Pi \in \T$, quindi esiste un programma che calcoli questa funzione. La funzione in questione è quella che riconosce automaticamente l'insieme $A_\Pi$, quindi $A_\Pi$ è ricorsivo.
 
 \subsection{Insiemi Non Ricorsivi}
@@ -2703,20 +2781,23 @@ insieme delle istanze con risposta positiva di $\Pi$. Si può notare che, se $\P
 Per trovare degli insiemi non ricorsivi si può cercare nei problemi di decisione non decidibili. L'unico problema di decisione non decidibile visto fin'ora è il \textbf{problema dell'arresto ristretto} $\arph$. Definizione:
 \begin{itemize}
 	\item Nome: $\arph$
+    
 	\item Istanza: $x \in \N$
-	\item Domanda: $\varphi_{\hat{P}} (x) = \varphi_x (x) \downarrow$?
+	
+    \item Domanda: $\varphi_{\hat{P}} (x) = \varphi_x (x) \downarrow$?
 \end{itemize}
 
 Definiamo l'insieme delle istanze con risposta positiva di $\arph$:
-$$ A = \left\{x \in \N \mid \varphi_x (x) \downarrow \right\}$$
+$$ A = \left\{ x \in \N \mid \varphi_x (x) \downarrow \right\}$$
 Questo non può essere ricorsivo: se lo fosse, avrei un programma ricorsivo totale che mi classifica correttamente se $x$ appartiene o meno ad $A$, ma già dimostrato che il problema dell'arresto ristretto non è decidibile, quindi $A$ non è ricorsivo.
 
 \subsection{Relazioni Ricorsive}
 
 Una relazione $R \subseteq \N \times \N$ è una \textbf{relazione ricorsiva} se e solo se l'insieme $R$ è ricorsivo, ovvero:
 \begin{itemize}
-	\item la sua funzione caratteristica $\X_R$ è tale che $\X_R \in \T$, oppure
-	\item esiste un programma $P_R$ che, presi in ingresso $x,y \in \N$ restituisce 1 se $(xRy)$, 0 altrimenti
+	\item La sua funzione caratteristica $\X_R$ è tale che $\X_R \in \T$, oppure
+    
+	\item Esiste un programma $P_R$ che, presi in ingresso $x,y \in \N$ restituisce 1 se $(xRy)$, 0 altrimenti
 \end{itemize}
 
 Un'importante relazione ricorsiva è
@@ -2724,8 +2805,10 @@ $$ R_P = \left\{(x,y) \in \N^2 \mid P \text{ su input } x \text{ termina in } y 
 Simile al problema dell'arresto, ma non chiede solo la terminazione, specifica un numero di passi $y$ in cui deve terminare. Questa relazione è ricorsiva e per dimostrarlo costruiamo un programma che classifica $R_P$ usando:
 \begin{itemize}
 	\item $U$ interprete universale
+    
 	\item \textbf{clock} per contare i passi di interpretazione che si incrementa di 1 ad ogni passo di interpretazione
-	\item \textbf{check del clock} per controllare l'arrivo alla quota $y$ (time-out sul tempo di interpretazione)
+	
+    \item \textbf{check del clock} per controllare l'arrivo alla quota $y$ (time-out sul tempo di interpretazione)
 \end{itemize}
 
 Definiamo quindi il programma
@@ -2740,7 +2823,7 @@ tale che:
     \SetAlgoNoEnd
     \SetKwSty{texttt}
     \SetInd{1em}{1em}
-    \SetKwFor{PerOgni}{Ad ogni}{:}{}
+    \SetKwFor{PerOgni}{A ogni}{:}{}
 
     $\tilde U \equiv$ input($x,y$) \\
     $U(P,x) + $ clock \\
@@ -2766,7 +2849,8 @@ $$ B = \left\{x \in \N \mid \exists y \in \N \ \left(xR_{\hat{P}}y\right)\right\
 Si può notare come $A = B$:
 \begin{itemize}
 	\item $A \subseteq B$: se $x \in A$ il programma codificato con $x$ su input $x$ termina in un certo numero di passi; chiamiamo $y$ il numero di passi; $\hat{P}(x)$ termina in $y$ passi, ma allora $xR_{\hat{P}} y$, quindi $x \in B$
-	\item $B \subseteq A$: se $x \in B$ esiste $y$ tale che $xR_{\hat{P}}y$, quindi $\hat{P}(x)$ termina in $y$ passi, ma allora il programma $\hat{P} = x$ su input $x$ termina, quindi $x \in A$
+	
+    \item $B \subseteq A$: se $x \in B$ esiste $y$ tale che $xR_{\hat{P}}y$, quindi $\hat{P}(x)$ termina in $y$ passi, ma allora il programma $\hat{P} = x$ su input $x$ termina, quindi $x \in A$
 \end{itemize}
 
 \subsection{Insiemi Ricorsivamente Numerabili}
@@ -2847,6 +2931,7 @@ Vista la natura di questa funzione, gli insiemi ricorsivamente numerabili sono a
 L'insieme $A \subseteq \N$ è \textbf{ricorsivamente numerabile} se e solo se:
 \begin{itemize}
 	\item $A = \emptyset$ oppure
+    
 	\item $A = \Im_f$, con $f: \N \rightarrow \N \in \T$, ovvero $A = \{f(0), f(1), \dots\}$
 \end{itemize}
 
@@ -2860,14 +2945,16 @@ Si può comparare a un \textit{libro con infinite pagine}, su ognuna delle quali
 	Le seguenti definizioni sono equivalenti:
 	\begin{enumerate}
 		\item $A$ è ricorsivamente numerabile, $A = \Im_f$ con $f \in \T$ funzione ricorsiva totale
-		\item $A = \Dom_f$ con $f \in \cp$ funzione ricorsiva parziale
-		\item Esiste una relazione $R \subseteq \N^2$ ricorsiva tale che $A = \left\{x \in \N \mid \exists y \in \N \mid (x,y) \in R \right\}$
+		
+        \item $A = \Dom_f$ con $f \in \cp$ funzione ricorsiva parziale
+		
+        \item Esiste una relazione $R \subseteq \N^2$ ricorsiva tale che $A = \left\{x \in \N \mid \exists y \in \N \mid (x,y) \in R \right\}$
 	\end{enumerate}
 \end{theor}
 \begin{proof}
 	Per dimostrare questi teoremi dimostriamo che $1 \implies 2 \implies 3 \implies 1$, creando un'implicazione ciclica.
 
-	$1 \implies 2$: Sappiamo che $A = \Im_f$, con $f \in \T$, è ricorsivamente numerabile, quindi esistono la sua routine di calcolo $f$ è il suo algoritmo parziale di riconoscimento $P$, definiti in precedenza. Vista la definizione di $P$, si ha che
+	\paragraph{$1 \implies 2$:} Sappiamo che $A = \Im_f$, con $f \in \T$, è ricorsivamente numerabile, quindi esistono la sua routine di calcolo $f$ è il suo algoritmo parziale di riconoscimento $P$, definiti in precedenza. Vista la definizione di $P$, si ha che
 	$$
 	\varphi_P (x) = \begin{cases}
 		1 & \text{ se } x \in A \\
@@ -2876,17 +2963,18 @@ Si può comparare a un \textit{libro con infinite pagine}, su ognuna delle quali
 	$$
 	ma allora $A = \Dom_{\varphi_P}$: il dominio è l'insieme dei valori dove la funzione è definita, in questo caso proprio l'insieme $A$. Inoltre $\varphi_P \in \cp$ perché abbiamo mostrato che esiste un programma $P$ che la calcola.
 
-	$2 \implies 3$: Sappiamo che $A = \Dom_f$, con $f \in \cp$, quindi esiste un programma $P$ tale che $\varphi_P = f$. Considerando la relazione
+	\paragraph{$2 \implies 3$:} Sappiamo che $A = \Dom_f$, con $f \in \cp$, quindi esiste un programma $P$ tale che $\varphi_P = f$. Considerando la relazione
 	$$ R_P = \left\{(x,y) \in \N^2 \mid P \text{ su input } x \text{ termina in } y \text{ passi}\right\}$$
 	che abbiamo dimostrato essere ricorsiva. Definiamo
-	$$ B = \left\{x \in \N \mid \exists y \tc (x,y) \in \R_P \right\} $$
-	Dimostriamo che $A=B$, infatti:
+	$$ B = \left\{x \in \N \mid \exists y \tc (x,y) \in R_P \right\} $$
+	Dimostriamo che $A = B$, infatti:
 	\begin{itemize}
 		\item $A \subseteq B$: se $x \in A$ allora su input $x$ il programma $P$ termina in un certo numero di passi $y$, visto che $x$ è nel "dominio" di tale programma. Vale allora $(x,y) \in R_P$ e quindi $x \in B$
+        
 		\item $B \subseteq A$: se $x \in B$ allora per un certo $y$ ho $(x,y) \in R_P$, quindi $P$ su input $x$ termina in $y$ passi, ma visto che $\varphi_P (x) \downarrow$, allora $x$ rientra nel dominio di $f = \varphi_P$, quindi $x \in A$
 	\end{itemize}
 
-	$3 \implies 1$: Sappiamo che $A = \left\{x \in \N \mid \exists y \in \N \mid (x,y) \in R \right\}$, con $R$ relazione ricorsiva.
+	\paragraph{$3 \implies 1$:} Sappiamo che $A = \left\{x \in \N \mid \exists y \in \N \tc (x,y) \in R \right\}$, con $R$ relazione ricorsiva.
 
 	Assumiamo che $A \neq \emptyset$ e scegliamo $a \in A$, sfruttando l'assioma della scelta. Definiamo ora la funzione $t: \N \rightarrow \N$ come
 	$$
@@ -2933,41 +3021,45 @@ Si può comparare a un \textit{libro con infinite pagine}, su ognuna delle quali
 	Dimostriamo che $A = \Im_t$. Infatti:
 	\begin{itemize}
 		\item $A \subseteq \Im_t$: se $x \in A$ allora $(x,y) \in R$, ma allora $t (\langle x,y \rangle) = x$, quindi $x \in \Im_t$
+        
 		\item $\Im_t \subseteq A$: se $x \in \Im_t$ allora
 		\begin{itemize}
 			\item se $x = a$ per l'assioma della scelta $a \in A$, quindi $x \in A$
-			\item se $x = \sin(n)$ con $n = \langle x,y \rangle$ per qualche $y$ tale che $(x,y) \in R$ allora $x \in A$ per definizione di $A$
+		
+        	\item se $x = \sin(n)$ con $n = \langle x,y \rangle$ per qualche $y$ tale che $(x,y) \in R$ allora $x \in A$ per definizione di $A$
 		\end{itemize}
 	\end{itemize}
-
 \end{proof}
 
 Grazie a questo teorema abbiamo tre caratterizzazioni per gli insiemi ricorsivamente numerabili e possiamo sfruttare la formulazione che risulta più comoda.
 
 Per usare il punto 2, in ordine:
 \begin{enumerate}
-	\item scrivo un programma $P$ che restituisce 1 su input $x \in \N$, altrimenti va in loop se $x \notin A$
+	\item Scrivo un programma $P$ che restituisce 1 su input $x \in \N$, altrimenti va in loop se $x \notin A$
 	$$
 	P(x) = \begin{cases}
 		1 & \text{ se } x \in A \\
 		\bot & \text{ se } x \notin A
 	\end{cases}
 	$$
-	\item la semantica di $P$ è quindi tale che
+    
+	\item La semantica di $P$ è quindi tale che
 	$$
 	\varphi_P (x) = \begin{cases}
 		1 & \text{ se } x \in A \\
 		\bot & \text{ se } x \notin A
 	\end{cases}
 	$$
-	\item la funzione calcolata è tale che
+	
+    \item La funzione calcolata è tale che
 	$$ \varphi_P \in \cp $$
 	visto che il programma che la calcola è proprio $P$, mentre l'insieme $A$ è tale che
 	$$ A = \Dom_{\varphi_P}$$
-	\item $A$ è ricorsivamente numerabile per il punto 2.
+	
+    \item $A$ è ricorsivamente numerabile per il punto 2.
 \end{enumerate}
 
-\subsection{Insiemi Ricorsivamente numerabili ma non ricorsivi}
+\subsection{Insiemi ricorsivamente numerabili ma non ricorsivi}
 
 Un esempio di insieme che non è ricorsivo, ma è ricorsivamente numerabile lo si può identificare dal problema dell'arresto ristretto. Infatti, l'insieme:
 $$ A = \{x \in \N \mid \varphi_x (x) \downarrow\}$$
@@ -3017,7 +3109,7 @@ con
 $$
 R_{\hat{P}} = \left\{(x,y) \mid \hat{P} \text{ su input } x \text{ termina entro } y \text{ passi}\right\}
 $$
-relazione ricorsiva. Qui è possibile sfruttare la terza caratterizzazione degli insiemi ricorsivamente numerabili.
+relazione ricorsiva. Qui è possibile sfruttare la terza caratterizzazione degli insiemi ricorsivamente numerabili. \\
 
 \begin{theor}
 	Se $A \subseteq \N$ è ricorsivo, allora è ricorsivamente numerabile.
@@ -3170,8 +3262,10 @@ $$ A^C = \left\{x \in \N \mid \varphi_x (x) \uparrow \right\}$$
 	Allo stesso modo si possono trovare le funzioni caratteristiche delle tre operazioni:
 	\begin{itemize}
 		\item $\X_{A^C} (x) = 1 \dotminus \X_A (x)$
-		\item $\X_{A \cap B} = \X_A (x) \cdot \X_B (x)$
-		\item $\X_{A \cup B} = 1 \dotminus (1 \dotminus \X_A (x)) (1 \dotminus \X_B (x))$
+		
+        \item $\X_{A \cap B} = \X_A (x) \cdot \X_B (x)$
+		
+        \item $\X_{A \cup B} = 1 \dotminus (1 \dotminus \X_A (x)) (1 \dotminus \X_B (x))$
 	\end{itemize}
 \end{proof}
 
@@ -3183,13 +3277,14 @@ Ora un risultato importante riguardante il complemento dell'insieme dell'arresto
 \begin{proof}
 	Se $A^C$ fosse ricorsivo, per la proprietà di chiusura dimostrata nel teorema precedente, avremmo
 	$$ \left(A^C\right)^C = A $$
-	Quindi $A$ sarebbe ricorsivo, il che è assurdo.
+	Quindi $A$ sarebbe ricorsivo, il che è assurdo. \\
 \end{proof}
 
 Ricapitolando:
 \begin{itemize}
 	\item $A = \left\{x: \varphi_x (x) \downarrow\right\}$ ricorsivamente numerabile, ma non ricorsivo
-	\item $A^C = \left\{x: \varphi_x (x) \uparrow\right\}$ non ricorsivo
+	
+    \item $A^C = \left\{x: \varphi_x (x) \uparrow\right\}$ non ricorsivo
 \end{itemize}
 \textit{Ma $A^C$ può essere ricorsivamente numerabile?}\\
 
@@ -3202,17 +3297,22 @@ Ricapitolando:
 	Per decidere l'appartenenza di $x$ ad $A$ possiamo usare il procedimento:
 	\begin{enumerate}
 		\item input$(x)$
+        
 		\item apriamo i due libri alla prima pagina:
 		\begin{itemize}
 			\item se $x$ compare nel libro di $A$, stampa $1$
-			\item se $x$ compare nel libro di $A^C$, stampa $0$
-			\item se $x$ non compare su nessuna delle due pagine, volta pagina e ricomincia
+		
+        	\item se $x$ compare nel libro di $A^C$, stampa $0$
+		
+        	\item se $x$ non compare su nessuna delle due pagine, volta pagina e ricomincia
 		\end{itemize}
 	\end{enumerate}
 
-	Questo algoritmo termina sempre dato che $x$ o sta in $A$ o sta in $A^C$, quindi prima o poi verrà trovato su uno dei due libri. Ma allora questo algoritmo riconosce $A$, quindi $A$ è ricorsivo.\\
+	Questo algoritmo termina sempre dato che $x$ o sta in $A$ o sta in $A^C$, quindi prima o poi verrà trovato su uno dei due libri. Ma allora questo algoritmo riconosce $A$, quindi $A$ è ricorsivo.
 
-	\textbf{Formale:} Con $A$ e $A^C$ ricorsivamente numerabili, esistono $f,g \in \T$ tali che $A = \Im_f \wedge A^C = \Im_g$. Sia $f$ implementata nel programma $F$ e $g$ dal programma $G$. Il seguente programma riconosce $A$:
+	\textbf{Formale:} Con $A$ e $A^C$ ricorsivamente numerabili, esistono $f,g \in \T$ tali che $A = \Im_f \wedge A^C = \Im_g$. Sia $f$ implementata nel programma $F$ e $g$ dal programma $G$. 
+    
+    Il seguente programma riconosce $A$:
 	\begin{center}
 		\begin{minipage}{.5\textwidth}
 			\begin{tcolorbox}[
@@ -3249,9 +3349,11 @@ Si può concludere che $A^C$ \textbf{non} può essere ricorsivamente numerabile.
 
 In generale, questo teorema fornisce uno strumento che permette di studiare le caratteristiche della riconoscibilità di un insieme $A$:
 \begin{itemize}
-	\item se $A$ non è ricorsivo, potrebbe essere ricorsivamente numerabile
-	\item se non riesco a mostrarlo, provo a studiare $A^C$
-	\item se $A^C$ è ricorsivamente numerabile, allora per il teorema possiamo concludere che $A$ non è ricorsivamente numerabile
+	\item Se $A$ non è ricorsivo, potrebbe essere ricorsivamente numerabile
+	
+    \item Se non riesco a mostrarlo, provo a studiare $A^C$
+	
+    \item Se $A^C$ è ricorsivamente numerabile, allora per il teorema possiamo concludere che $A$ non è ricorsivamente numerabile
 \end{itemize}
 
 \subsection{Chiusura degli insiemi ricorsivamente numerabili}
@@ -3260,7 +3362,7 @@ In generale, questo teorema fornisce uno strumento che permette di studiare le c
 	La classe degli insiemi ricorsivamente numerabili è chiusa per unione e intersezione, ma non per complemento.
 \end{theor}
 \begin{proof}
-	Per complemento, abbiamo mostrato che $A=\{x: \varphi_x (x) \downarrow\}$ è ricorsivamente numerabile, mentre $A^C = \left\{x: \varphi_x (x) \uparrow\right\}$ non lo è.
+	Per complemento, abbiamo mostrato che $A= \left\{ x: \varphi_x (x) \downarrow \right\}$ è ricorsivamente numerabile, mentre $A^C = \left\{x: \varphi_x (x) \uparrow\right\}$ non lo è.
 
 	Siano $A,B$ insiemi ricorsivamente numerabili. Esistono quindi $f,g \in \T$ tali che $A = \Im_f \wedge B = \Im_g$. Sia $f$ implementata da $F$ e $g$ implementata da $G$. Siano
 	\begin{center}
@@ -3360,8 +3462,9 @@ $$
 
 \begin{theor}[Teorema di Rice]
 	Sia $I \subseteq \N$ un insieme che rispetta le funzioni. Allora $I$ è ricorsivo solo se $I = \emptyset$ oppure $I = \N$.
-\lcomment{Questo teorema dice che gli insiemi che rispettano le funzioni non sono mai ricorsivi, tolti i casi banali $\emptyset$ e $\N$.}
 \end{theor}
+
+Questo teorema dice che gli insiemi che rispettano le funzioni non sono mai ricorsivi, tolti i casi banali $\emptyset$ e $\N$.
 
 \begin{proof}
 	Sia $I$ insieme che rispetta le funzioni con $I \neq \emptyset$ e $I \neq \N$. Assumiamo, per assurdo, che $I$ sia ricorsivo. Dato che $I \neq \emptyset$, esiste almeno un elemento $a \in I$. Inoltre, dato che $I \neq \N$ esiste almeno un elemento $\bar{a} \notin I$.
@@ -3375,7 +3478,6 @@ $$
 	$$
 
 	Sappiamo che $t \in \T$ dato che è calcolabile dal seguente programma $P$
-	\lcomment{Sia $P_{I}$ il programma che decide $I$, sappiamo che esiste per assurdo}[1.8cm]
 	\begin{center}
 		\begin{minipage}{.45\textwidth}
 			\begin{tcolorbox}[
@@ -3400,28 +3502,33 @@ $$
 			\end{tcolorbox}
 		\end{minipage}
 	\end{center}
+    Sia $P_{I}$ il programma che decide $I$, sappiamo che esiste per assurdo.
+    
 	Visto che $t \in \T$, il \textit{teorema di ricorsione} assicura che in un SPA $\{\varphi_i\}$ esiste $d \in \N$ tale che
 	$$ \varphi_d = \varphi_{t(d)} $$
+    
 	Per tale $d$ ci sono solo due possibilità rispetto a $I$:
 	\begin{itemize}
-		\item se $d \in I$, visto che $I$ rispetta le funzioni $\varphi_d = \varphi_{t(d)}$, allora $t(d) \in I$. Ma $t(d \in I) = \bar{a} \notin I$, quindi ho un assurdo
-		\item se $d \notin I$, allora $t(d) = a \in I$, ma $I$ rispetta le funzioni, quindi sapendo che $\varphi_d = \varphi_{t(d)}$ deve essere che $d \in I$, quindi ho un assurdo
+		\item Se $d \in I$, visto che $I$ rispetta le funzioni $\varphi_d = \varphi_{t(d)}$, allora $t(d) \in I$. Ma $t(d \in I) = \bar{a} \notin I$, quindi ho un assurdo
+		
+        \item Se $d \notin I$, allora $t(d) = a \in I$, ma $I$ rispetta le funzioni, quindi sapendo che $\varphi_d = \varphi_{t(d)}$ deve essere che $d \in I$, quindi ho un assurdo
 	\end{itemize}
 	Quindi $I$ non è ricorsivo.\\
   \end{proof}
-
-\vspace{-0.3cm}
 
 \subsubsection{Applicazione}
 
 Il teorema di Rice suggerisce un approccio per stabilire se un insieme $A \subseteq \N$ non è ricorsivo:
 \begin{enumerate}
-	\item mostrare che $A$ rispetta le funzioni
-	\item mostrare che $A \neq \emptyset$ e $A \neq \N$
-	\item $A$ non è ricorsivo per Rice
+	\item Mostrare che $A$ rispetta le funzioni
+	
+    \item Mostrare che $A \neq \emptyset$ e $A \neq \N$
+	
+    \item $A$ non è ricorsivo per Rice
 \end{enumerate}
 
 \subsubsection{Limiti alla verifica automatica del software}
+
 Definiamo le \textbf{specifiche}: descrizione di un problema e richiesta per i programmi che devono risolverlo automaticamente. Un programma è \textit{corretto} se risponde alle specifiche.
 
 \textbf{Problema}: posso scrivere un programma $V$ che testa automaticamente se un programma sia corretto o meno? Il programma che vogliamo scrivere ha semantica:
@@ -3444,9 +3551,7 @@ Ma allora $\pc$ non è ricorsivo. Dato ciò, la correttezza dei programmi non pu
 
 Entrambi gli insiemi $\pc$ sono ovviamente ricorsivi e quindi possono essere testati automaticamente.
 
-Questo risultato mostra che non è possibile verificare automaticamente le proprietà semantiche dei programmi (\textit{a meno di proprietà banali}).\\
-
-%p55
+Questo risultato mostra che non è possibile verificare automaticamente le proprietà semantiche dei programmi (\textit{a meno di proprietà banali}).
 
 %%% Local Variables:
 %%% TeX-master: "../it.tex"
