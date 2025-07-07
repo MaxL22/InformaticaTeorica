@@ -1,0 +1,365 @@
+% !TeX spellcheck = it_IT
+\documentclass[12pt, answers]{exam}
+
+\usepackage[hidelinks]{hyperref}
+\usepackage[autostyle, english = american]{csquotes}
+\MakeOuterQuote{"}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsthm}
+\usepackage{dutchcal}
+
+\title{Domande Informatica Teorica}
+\author{Massimo Perego}
+\date{}
+
+\theoremstyle{plain}
+\newtheorem{theor}{Teorema}[section]
+\newtheorem{coroll}{Corollario}[section]
+
+\renewcommand{\proofname}{Dimostrazione}
+
+\DeclareMathOperator{\des}{des}
+\DeclareMathOperator{\op}{op}
+\DeclareMathOperator{\somma}{somma}
+\DeclareMathOperator{\prodotto}{prodotto}
+\DeclareMathOperator{\predecessore}{predecessore}
+\DeclareMathOperator{\MIN}{MIN}
+
+\renewcommand{\Im}{\text{Im}}
+\newcommand{\ImSet}{\text{Im}}
+\newcommand{\Dom}{\text{Dom}}
+\newcommand{\tc}{\; \text{ t.c. } \;}
+\newcommand{\bat}{B^A_\bot}
+\newcommand{\dati}{\text{DATI}}
+\newcommand{\prog}{\text{PROG}}
+\newcommand{\dtime}{\text{DTIME}}
+\newcommand{\ftime}{\text{FTIME}}
+\newcommand{\dspace}{\text{DSPACE}}
+\newcommand{\fspace}{\text{FSPACE}}
+\newcommand{\exptime}{\text{EXPTIME}}
+\newcommand{\ntime}{\text{NTIME}}
+\newcommand{\ram}{\text{RAM}}
+\newcommand{\while}{\text{WHILE}}
+\newcommand{\for}{\text{FOR}}
+\newcommand{\stati}{\text{STATI}}
+\newcommand{\elem}{\text{ELEM}}
+\newcommand{\elemo}{\text{ELEM}^\Omega}
+\newcommand{\wstati}{W\text{-STATI}}
+\newcommand{\wcom}{W\text{-COM}}
+\newcommand{\wprog}{W\text{-PROG}}
+\newcommand{\comp}{\text{Comp}}
+\newcommand{\com}{\text{COMP}}
+\newcommand{\rp}{\text{RP}}
+\newcommand{\pc}{\text{PC}}
+\newcommand{\ricprim}{\text{RICPRIM}}
+\newcommand{\ric}{\text{RIC}}
+\newcommand{\C}{\mathcal{C}}
+\newcommand{\U}{\mathcal{U}}
+\newcommand{\cp}{\mathcal{P}}
+\newcommand{\st}{\mathcal{S}}
+\newcommand{\T}{\mathcal{T}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\X}{\mathcal{X}}
+\newcommand{\cprog}[1]{\C_{#1}\text{-}\prog}
+\newcommand{\proj}{\text{Proj}}
+\newcommand{\pro}{\text{Pro}}
+\newcommand{\incr}{\text{incr}}
+\newcommand{\decr}{\text{decr}}
+\newcommand{\sisprog}{\ensuremath{\{\varphi_i\}}}
+\newcommand{\fin}{\stackrel{\text{TR}}{=} \text{OK}}
+\newcommand{\ar}{\text{AR}}
+\newcommand{\arp}{\text{AR}_P}
+\newcommand{\arph}{\text{AR}_{\hat{P}}}
+\newcommand{\cent}{\text{\textcent}}
+
+\makeatletter
+\newcommand{\dotminus}{\mathbin{\text{\@dotminus}}}
+
+\newcommand{\@dotminus}{%
+    \ooalign{\hidewidth\raise1ex\hbox{.}\hidewidth\cr$\m@th-$\cr}%
+}
+\makeatother
+
+%%%%% Dal sito
+%Struttura e istruzioni WHILE
+%Relazione tra RAM e WHILE, con dimostrazione che il secondo è contenuto nel primo
+%F(RAM) incluso in F(WHILE)
+%Differenza tra compilatore e interprete
+%Come passare un programma RAM all’interprete
+%Perché è impossibile che il destro di una coppia di cantor sia 0, a meno che non sia l’ultima istruzione codificata
+%Gerarchia classi di complessità, scegliere una di cui parlare
+%Descrizione DTM per calcolare lo spazio
+%Com’è definita la computazione in una DTM
+%Qual è la condizione di terminazione in una DTM
+%TODO definizione ricorsive primitive partendo da elem
+%RICPRIM = F(for)
+%dimostrare che tutte le funzioni ricprim sono totali
+%TODO definizione ricorsive parziali
+%radice quadrata come ricorsiva parziale e while
+%relazione tra P e F(while)
+%Perché ha senso il corso di informatica teorica. Perché ha senso studiare la teoria di calcolabilità
+%Definire potenza di calcolo
+%Cosa significa che N non è isomorfo a N^N
+%Come abbiamo definito le funzioni calcolabili
+%Quali sono le funzioni in ELEM
+%Operatore di composizione
+%Operatore di ricorsione primitiva
+%Quale è il nome dell’insieme ottenuto dopo la ricorsione primitiva
+%RICPRIM sottoinsieme di F(WHILE)
+%proprietà di RICPRIM (sono totali, come lo dimostreresti)
+%Operatore di minimalizzazione
+%Dimostrare una F(WHILE) sottoinsieme P
+%dimostra F(WHILE) incluso in P
+%SPA
+%Teorema di ricorsione con dimostrazione
+%differenza tra funzioni totali e funzioni ricorsive totali
+%Struttura dui una macchina di turing deterministica
+%Complessità temporale
+%Complessità spaziale
+%relazione tra DTIME e NTIME
+%la classe degli insiemi riconosciuti dalle macchine di touring coincie con? (la classe dei ricorsivamente numerabili)
+%Convincimi del fatto che esistono Quine negli spa
+%Enunciato del teorema di ricorsione totale
+%Per cosa abbiamo usato il teorema di ricorsione
+%Risolvi una funzione con il TR
+%Teorema di Rice (enunciato e dimostrazione)
+%Cosa dice Rice a proposito di un insieme che rispetta le funzioni
+%Il teorema di Rice ci dice quando certi insiemi non sono ricorsivi. Mi fai un esempio di insieme che non rispetta le funzioni? Inventatene uno.
+%Questo che hai inventato è ricorsivo?
+%Può avere anche altre caratteristiche questo insieme (essere ricorsivamente numerabile o altro? )
+
+\begin{document}
+    
+    \section*{Domande Informatica Teorica}
+    
+    \begin{questions}
+        \question Cos'è un problema di decisione?
+        
+        \begin{solution}
+            Un problema di decisione è una domanda a cui rispondere \textit{Sì} o \textit{No}. 
+            
+            Formalmente, è costituito da 3 elementi:
+            \begin{itemize}
+                \item Nome del problema
+                
+                \item Istanza degli oggetti considerati
+                
+                \item Domanda, ovvero proprietà che gli oggetti possono o meno soddisfare
+            \end{itemize}
+        \end{solution}
+        
+        \item Come dimostrare l'esistenza di problemi non decidibili, senza mostrarne un esempio?
+        
+        \begin{solution}
+            Per studiare la decidibilità di un problema $\Pi$ ci sono due possibili approcci:
+            \begin{itemize}
+                \item Trovare un programma $P_\Pi$ che calcola la funzione soluzione
+                $$ \Phi_\Pi : D \rightarrow \{0,1\} \tc \Phi_\Pi (x) = \begin{cases}
+                    1 & \text{ se } p(x) \\
+                    0 & \text{ se } \neg p(x)
+                \end{cases}$$
+                di conseguenza $\Phi_\Pi \in \T$
+                
+                \item Se $\Phi_\Pi \in \T$, allora esiste un programma che la calcola
+            \end{itemize}
+            
+            Di conseguenza, i problemi risolvibili $\prog$ sono isomorfi alle funzioni calcolabili, quindi numerabili, mentre tutti i possibili problemi sono rappresentati dalle funzioni da $\N$ a $\N$ (dato quanto già visto), isomorfe a $\N_\bot^\N$, quindi:
+            $$ \dati \sim \prog \sim \N \nsim \N_\bot^\N $$
+            
+            Per dimostrare che $\dati \sim \N$: serve una funzione tale che permetta una biezione tra dati e $\N$, come la funzione coppia di Cantor
+            $$ \langle \_, \_ \rangle: \N \times \N \rightarrow \N^+ $$
+            (banalmente estendibile a tutto $\N$).
+            
+            Per dimostrare che $\prog \sim \N$: una volta definito un sistema di calcolo e i relativi comandi, si può mostrare una codifica per questi che porta a una biezione con $\N$.
+            
+            Alternativamente, un problema di decisione può essere comparato al riconoscimento di un linguaggio $L \subseteq \Sigma^\ast$, per un alfabeto $\Sigma$ di conseguenza: 
+            \begin{itemize}
+                \item Il numero possibile di linguaggi è $P(\Sigma^\ast) \sim \R$
+                
+                \item I sistemi di calcolo sono in quantità $\prog \sim \N$
+            \end{itemize}
+            
+            Per forza devono esistere linguaggi non decidibili.
+        \end{solution}
+        
+        \question Il problema dell'arresto: definizione e dimostrazione.
+        
+        \begin{solution}
+            Definizione del problema dell'arresto: 
+            \begin{itemize}
+                \item Nome: $\ar$
+                
+                \item Istanza: $x,y \in \N$
+                
+                \item Domanda: $\varphi_y (x) \downarrow$?
+            \end{itemize}
+            
+            \begin{theor}
+                $\ar$ è indecidibile.
+            \end{theor}
+            \begin{proof}
+                Assumiamo per assurdo che $\ar$ sia decidibile, allora esiste una funzione soluzione
+                $$
+                \Phi_{\ar} (x,y) = \begin{cases}
+                    0 & \text{ se } \varphi_y (x) \uparrow \\
+                    1 & \text{ se } \varphi_y (x) \downarrow \\
+                \end{cases}
+                $$
+                
+                Valutando il caso in cui $x = y$
+                $$
+                \Phi_{\ar} (x,x) = \begin{cases}
+                    0 & \text{ se } \varphi_x (x) \uparrow \\
+                    1 & \text{ se } \varphi_x (x) \downarrow \\
+                \end{cases}
+                $$
+                
+                Visto che $\Phi_{\ar} \in \T$, anche la funzione
+                $$
+                f(x) = \begin{cases}
+                    0 & \text{ se } \Phi_{\ar} (x) = 0 \equiv \varphi_x (x) \uparrow \\
+                    \varphi_x (x) + 1 & \text{ se } \Phi_{\ar} (x) = 1 \equiv \varphi_x (x) \downarrow \\
+                \end{cases}
+                \in \T
+                $$
+                
+                Sia $\alpha \in \N$ la codifica di $A$ tale che $\varphi_\alpha = f$. Valutiamo $\varphi_\alpha$ in $\alpha$:
+                $$
+                \varphi_\alpha (\alpha) = \begin{cases}
+                    0 & \text{ se } \varphi_\alpha (\alpha) \uparrow \\
+                    \varphi_\alpha (\alpha) + 1 & \text{ se } \varphi_\alpha (\alpha) \downarrow
+                \end{cases}
+                $$
+                Ma tale funzione non può esistere: 
+                \begin{itemize}
+                    \item Nel primo caso $\varphi_\alpha (\alpha) = 0$ se $\varphi_\alpha (\alpha) \uparrow$, ma è una contraddizione
+                    
+                    \item Nel secondo caso $\varphi_\alpha (\alpha) = \varphi_\alpha (\alpha) + 1$, ma tale relazione non vale per nessun naturale
+                \end{itemize}
+                
+                Siamo a un assurdo, $\ar$ è indecidibile. \\
+            \end{proof}
+        \end{solution}
+        
+        \question Sistemi di calcolo visti in Teoria della Calcolabilità.
+        
+        \begin{solution}
+            I sistemi di calcolo visti sono: 
+            \begin{itemize}
+                \item Sistema $\ram$: infiniti registri, $R_0$ contiene l'output, $R_1$ l'input, si ha un program counter $L$, le istruzioni sono
+                \begin{itemize}
+                    \item Incremento: $R_k \leftarrow R_k + 1$
+                    
+                    \item Decremento: $R_k \leftarrow R_k \dotminus 1$
+                    
+                    \item Salto condizionato: \texttt{if} $R_k = 0$ \texttt{goto} $m$, con $m \in \left\{1, \dots, |P|\right\}$
+                \end{itemize}
+                
+                \item Sistema $\while$: 21 registri, $x_0$ output, $x_1$ input, sono presenti dei comandi base: 
+                \begin{itemize}
+                    \item $x_k := x_j + 1$
+                    
+                    \item $x_k := x_j \dotminus 1$
+                    
+                    \item $x_k := 0$
+                \end{itemize}
+                e dei comandi definiti induttivamente:
+                \begin{itemize}
+                    \item Comando composto
+                    \begin{center}
+                        \texttt{begin} $C_1, \dots, C_n$ \texttt{end}
+                    \end{center}
+                    dove ogni $C_i$ è un qualsiasi comando
+                    
+                    \item Comando while
+                    \begin{center}
+                        \texttt{while} $x_k \neq 0$ \texttt{do} $C$
+                    \end{center}
+                    dove $C$ è un qualsiasi comando
+                \end{itemize}
+                Di conseguenza, un programma $\while$ è un comando composto
+            \end{itemize}
+        \end{solution}
+        
+        \question Approfondimento su RAM (struttura, istruzioni, stato prossimo, computazione)
+        
+        \begin{solution}
+            Il sistema $\ram$ permette infiniti registri, tra i quali $R_0$ contiene l'output e $R_1$ l'input, si ha inoltre un program counter $L$ per tenere traccia dell'istruzione da eseguire. Un programma $P$ è un insieme ordinato di istruzioni. 
+            
+            Le istruzioni sono: 
+            \begin{itemize}
+                \item Incremento: $R_k \leftarrow R_k + 1$
+                
+                \item Decremento: $R_k \leftarrow R_k \dotminus 1$
+                
+                \item Salto condizionato: \texttt{if} $R_k = 0$ \texttt{goto} $m$, con $m \in \left\{1, \dots, |P|\right\}$
+            \end{itemize}
+            
+            Ogni istruzione fa passare la macchina da uno stato a un altro; la semantica operazione di un'istruzione è formata dalla coppia degli stati prima e dopo l'istruzione.
+            
+            La computazione del programma $P$ è una sequenza di stati $\st_i$, infinita se non termina, altrimenti si ha uno stato finale $\st_{fin}$ in cui viene posto in $R_0$ il risultato della computazione.
+            
+            Lo stato è una funzione
+            $$ \st: \left\{L, R_i\right\} \rightarrow \N $$
+            ovvero, che dato un registro e un valore del program counter $L$, restituisce il contenuto del registro.
+            
+            Uno stato finale $\st_{fin}$ è un qualsiasi stato tale che $\st(L) = 0$.
+            
+            Lo stato iniziale è tale che
+            $$ 
+            \st_{init} (R_i) = \begin{cases}
+                1 & \text{ se } R_i = L \\
+                n & \text{ se } R_i = R_1 \\
+                0 & \text{ altrimenti}
+            \end{cases}
+            $$
+            
+            Per definire l'esecuzione del programma si usa la funzione stato prossimo
+            $$ \delta: \stati \times \prog \rightarrow \stati_\bot $$
+            tale che 
+            $$ \delta (\st, P) = \st'$$
+            Dove $\st$ rappresenta lo stato in seguito all'esecuzione del comando $P$.
+            
+            La funzione è tale che: 
+            \begin{itemize}
+                \item Se $\st(L) = 0$, $\st' = \bot$ in quanto l'esecuzione è terminata
+                
+                \item Se $\st(L) > |P|$ non si ha una terminazione esplicita, quindi
+                $$ \st' (R) = \begin{cases}
+                    0 & \text{ se } R = L \\
+                    \st(R_i) & \text{ altrimenti}
+                \end{cases} $$
+                
+                \item Se $1 \leq \st (L) \leq |P|$, si considera l'istruzione $\st(L)$-esima:
+                \begin{itemize}
+                    \item incremento/decremento su $R_k$:
+                    $$
+                    \st' (R) = \begin{cases}
+                        \st (R) + 1 & \text{ se } R = L \\ 
+                        \st (R) \pm 1 & \text{ se } R = R_k \\
+                        \st (R) & \text{ altrimenti}
+                    \end{cases}
+                    $$
+                    
+                    \item salto condizionato su $R_k$
+                    $$
+                    \st' (R) = \begin{cases}
+                        m & \text{ se } R = L \wedge R_k = 0 \\
+                        \st (L) + 1 & \text{ se } R = L \wedge R_k \neq 0 \\
+                        \st (R) & \text{ altrimenti}
+                    \end{cases}
+                    $$
+                \end{itemize}
+            \end{itemize}
+            
+            L'esecuzione di un programma genera una sequenza di stati, definita secondo la funzione $\delta$.
+        \end{solution}
+        
+        %TODO ?????
+        \question Come abbiamo definito la potenza computazionale $F(\ram)$.
+\end{questions}
+    
+\end{document}
