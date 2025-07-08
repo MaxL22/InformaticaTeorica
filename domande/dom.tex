@@ -9,6 +9,7 @@
 \usepackage{amsfonts}
 \usepackage{amsthm}
 \usepackage{dutchcal}
+\usepackage{stmaryrd}
 
 \title{Domande Informatica Teorica}
 \author{Massimo Perego}
@@ -74,7 +75,7 @@
 \newcommand{\arp}{\text{AR}_P}
 \newcommand{\arph}{\text{AR}_{\hat{P}}}
 \newcommand{\cent}{\text{\textcent}}
-
+\newcommand{\win}{w\text{-}in}
 \makeatletter
 \newcommand{\dotminus}{\mathbin{\text{\@dotminus}}}
 
@@ -83,23 +84,14 @@
 }
 \makeatother
 
+%TODO:
+% Cosa si intende con "definire le ricorsive parziali/totali"?
+% Come abbiamo definito la potenza computazionale $F(\ram)$.
+% Dimostrare che tutte le funzioni $\ricprim$ sono totali.
+% Radice quadrata come ricorsiva parziale e whiles
+
 %%%%% Dal sito
-%Struttura e istruzioni WHILE
-%Relazione tra RAM e WHILE, con dimostrazione che il secondo è contenuto nel primo
-%F(RAM) incluso in F(WHILE)
-%Differenza tra compilatore e interprete
-%Come passare un programma RAM all’interprete
-%Perché è impossibile che il destro di una coppia di cantor sia 0, a meno che non sia l’ultima istruzione codificata
-%Gerarchia classi di complessità, scegliere una di cui parlare
-%Descrizione DTM per calcolare lo spazio
-%Com’è definita la computazione in una DTM
-%Qual è la condizione di terminazione in una DTM
-%TODO definizione ricorsive primitive partendo da elem
-%RICPRIM = F(for)
-%dimostrare che tutte le funzioni ricprim sono totali
-%TODO definizione ricorsive parziali
-%radice quadrata come ricorsiva parziale e while
-%relazione tra P e F(while)
+%
 %Perché ha senso il corso di informatica teorica. Perché ha senso studiare la teoria di calcolabilità
 %Definire potenza di calcolo
 %Cosa significa che N non è isomorfo a N^N
@@ -358,8 +350,303 @@
             L'esecuzione di un programma genera una sequenza di stati, definita secondo la funzione $\delta$.
         \end{solution}
         
-        %TODO ?????
-        \question Come abbiamo definito la potenza computazionale $F(\ram)$.
-\end{questions}
-    
+        \question Struttura e istruzioni $\while$.
+        
+        \begin{solution}
+            Il sistema di calcolo $\while$ usa esattamente 21 registri ed è strutturato, quindi non necessita di program counter. Sono presenti istruzioni base e istruzioni definite induttivamente. Comandi base: 
+            \begin{itemize}
+                \item $x_k := x_j + 1$
+                
+                \item $x_k := x_j \dotminus 1$
+                
+                \item $x_k := 0$
+            \end{itemize}
+            
+            Comandi induttivi: 
+            \begin{itemize}
+                \item Comando composto
+                \begin{center}
+                    \texttt{begin} $C_1; \dots; C_n$ \texttt{end}
+                \end{center}
+                dove ogni $C_i$ è un qualsiasi tipo di comando
+                
+                \item Comando while
+                \begin{center}
+                    \texttt{while} $x_k \neq 0$ \texttt{do} $C$
+                \end{center}
+                dove $C$ è un qualsiasi comando
+            \end{itemize}
+            
+            Per dimostrare proprietà di un programma $P \in \wprog$ la si verifica prima sui comandi base, poi induttivamente su comando composto e while.
+            
+            Dati comando da eseguire e stato corrente, la funzione stato prossimo restituisce lo stato successivo: 
+            $$  \llbracket \_ \rrbracket ( \_ ): \wcom \times \wstati \rightarrow \wstati_\bot $$
+            
+            Si può definire la semantica induttivamente, a partire dagli assegnamenti: 
+            $$
+            \llbracket x_k := x_j \pm 1 \rrbracket (\underline{x}) = \begin{cases}
+                x_i & \text{ se } i \neq k \\
+                x_j \pm 1 & \text{ se } i = k
+            \end{cases}
+            $$
+            $$
+            \llbracket x_k := 0 \rrbracket (\underline{x}) = \begin{cases}
+                x_i & \text{ se } i \neq k \\
+                0 & \text{ se } i  = k
+            \end{cases}
+            $$
+            Mentre per i comandi induttivi, partendo dal comando composto: 
+            $$ \llbracket \text{\texttt{begin }} C_1; \dots; C_n \text{\texttt{ end}}\rrbracket (\underline{x}) = \left(\llbracket C_n \rrbracket \circ \dots \circ \llbracket C_1 \rrbracket \right) (\underline{x}) $$
+            dove i comandi $C_i$ sono noti per I.H. 
+            
+            Per il comando while: 
+            $$
+            \llbracket \text{\texttt{while }} x_k \neq 0 \text{\texttt{ do }} C \rrbracket (\underline{x}) = \begin{cases}
+                \llbracket C \rrbracket^e (\underline{x}) & \text{ se } \exists e \tc \llbracket C \rrbracket^e (\underline{x}) [k] = 0 \\
+                \bot & \text{ altrimenti}
+            \end{cases}
+            $$
+            
+            Di conseguenza, dato che un programma while $W \in \wprog$ è un comando composto, si può rappresentare la semantica del programma come
+            $$ \Psi_W (n) = \pro^{21}_0 \left(\llbracket W \rrbracket (\win(n))\right) $$
+            dove $\win (n)$ restituisce lo stato iniziale della macchina con input $n$.
+        \end{solution}
+        
+        \question Relazione tra $\ram$ e $\while$, con dimostrazione che il secondo è contenuto nel primo e viceversa.
+        
+        \begin{solution}
+            Si può dimostrare che le funzioni calcolabili dai due sistemi sono le stesse, ovvero che $F(\ram) = F(\while)$. Per dimostrarlo si deve mostrare che $F(\while) \subseteq F(\ram)$ e $F(\ram) \subseteq F(\while)$.
+            
+            Dati due sistemi di calcolo $\C_1$ e $\C_2$, si definisce traduzione una funzione che associa i programmi di uno ai programmi dell'altro, con le proprietà di programmabilità, correttezza e completezza, rispetto ai programmi presenti nei due insiemi. Se esiste un traduttore da $\C_1$ a $\C_2$ allora $F(\C_1) \subseteq F(C_2)$, dato che per ogni programma $P_1$ del primo sistema di calcolo esiste (per completezza) $P_2 = t(P_1)$ nel secondo con la stessa semantica (per correttezza).
+            
+            Per dimostrare che $F(\while) \subseteq F(\ram)$, costruiamo un compilatore $C: \wprog \rightarrow \prog$. Si può definire induttivamente il compilatore, in quanto $\while$ è definito induttivamente. I 21 registri vengono mappati nei primi 21 $\ram$, dato che sono infiniti non ci sono problemi.
+            
+            Passo base: gli assegnamenti
+            \begin{itemize}
+                \item $x_k := 0$, si itera sul registro da azzerare finché è diverso da 0 (usando $R_{21} = 0$ come condizione di coda del ciclo)
+                
+                \item $x_k = x_j \pm 1$, se $k = j$ è banale, altrimenti bisogna
+                \begin{itemize}
+                    \item Spostare il valore di $R_j$ in $R_{22}$, azzerandolo
+                    
+                    \item Azzerare $R_k$
+                    
+                    \item Rigenerare $R_j$ e $R_k$ a partire da $R_{22}$
+                    
+                    \item Effettuare l'incremento/decremento effettivo
+                \end{itemize}
+            \end{itemize}
+            
+            Passo induttivo: 
+            \begin{itemize}
+                \item Il comando composto è una composizione di comandi noti per I.H.
+                
+                \item Il comando while si può compilare come un ciclo che esegue il comando, noto per I.H., finché $R_k \neq 0$
+            \end{itemize}
+            
+            Il compilatore così definito è programmabile, compila ogni $W \in \wprog$ e mantiene la semantica, di conseguenza
+            $$ F(\while) \subseteq F(\ram) $$
+            
+            Per mostrare che $F(\ram) \subseteq F(\while)$ vogliamo scrivere un interprete $I_W$ che prende in input un programma $P \in \prog$ e $x \in \N$ e restituisce l'esecuzione di $P$ su $x$, ovvero $\varphi_P (x)$. Non crea nulla di intermedio, si limita a eseguire il programma. 
+            
+            Dovendo prendere due input ($P$ e $x$), bisogna condensarli tramite Cantor, quindi, con $n = cod(P)$, l'input diventa $\langle x, n \rangle$. Di conseguenza: 
+            $$ \forall x, n \in \N, \ \Psi_{I_W} (\langle x, n \rangle) = \varphi_n (x) = \varphi_P (x) $$
+            
+            Come salvare lo stato della macchina nell'interprete? Un problema sono i registri, in $\ram$ possono essere infiniti, ma non ne verranno mai usati veramente infiniti, quindi il contenuto di questi può essere rappresentato tramite una lista $\langle R_0, \dots, R_n \rangle$.
+            
+            L'interprete $I_W$ salva lo stato della macchina nel modo: 
+            \begin{itemize}
+                \item $x_0 \leftarrow \langle R_0, \dots, R_n \rangle$
+                
+                \item $x_1 \leftarrow L$
+                
+                \item $x_2 \leftarrow y$, dato su cui lavora $P$
+                
+                \item $x_3 \leftarrow n$, "listato" del codice
+                
+                \item $x_4 \leftarrow I$, istruzione attuale, prelevata dal listato grazie al PC
+            \end{itemize}
+            
+            Inizialmente l'input $\langle x, n \rangle$ si trova in $x_1$. L'interprete deve quindi solamente estrarre, nell'ordine stabilito dal PC, le istruzioni dal listato, decodificare ed eseguirle, finché il PC è diverso da zero, ovvero $x_1 \neq 0$.
+            
+            Avendo l'interprete, si può costruire un compilatore $C: \prog \rightarrow \wprog$ semplicemente chiamando l'interprete dopo aver posto in $x_1$ l'input $\langle x_1, x_2 \rangle$, dove $x_1$ contiene l'input di $P$ e $x_2$ contiene $cod(P)$.
+            
+            Abbiamo quindi trovato un compilatore programmabile, completo e corretto da $\ram$ a $\while$, mostrando che
+            $$ F(\ram) \subseteq F(\while) $$
+            
+            Di conseguenza
+            $$ F(\ram) = F(\while) $$
+        \end{solution}
+        
+        \question Differenza tra compilatore e interprete.
+        
+        \begin{solution}
+            Un compilatore prende in input un programma e lo trasforma in un altro in un sistema di calcolo destinazione, mantenendone la semantica. 
+            
+            Un interprete è una funzione che prende come argomenti un programma e un input e simula l'esecuzione del programma passo passo, restituendo l'esecuzione del programma originale sull'input fornito.
+        \end{solution}
+        
+        \question Come passare un programma $\ram$ all'interprete.
+        
+        \begin{solution}
+            L'interprete accetta in input la codifica del programma (quindi un numero, dato che $\prog \sim \N$) e ricava l'istruzione da prelevare grazie al valore del PC, per poi decodificarla.
+        \end{solution}
+        
+        \question Perché è impossibile che il destro di una coppia di Cantor sia 0, a meno che non sia l'ultima istruzione codificata.
+        
+        \begin{solution}
+            Dopo aver applicato iterativamente Cantor su una lista $\langle x_1, \langle \dots \langle x_n, 0 \rangle \dots \rangle \rangle$, quando vengono estratti i valori, come $\sin$ verrà estratto l'ultimo valore inserito, come $\des$ rimarrà la codifica di tutti gli altri valori della lista, che quindi potrà essere 0 solo nel caso in cui questa è l'ultima istruzione codificata.
+        \end{solution}
+        
+        \question Gerarchia classi di complessità e descrizione.
+        
+        \begin{solution}
+            Le classi di complessità sono
+            $$ L \subseteq P \subseteq NP \subseteq \exptime \subseteq \cp $$
+            E sono definite come:
+            \begin{itemize}
+                \item $L = \dspace \left(\log n\right)$
+                
+                \item $P = \dtime \left(n^k \right)$
+                
+                \item $NP = \ntime \left(n^k \right)$
+                
+                \item $\exptime = \dtime \left(2^{n^k}\right)$
+                
+                \item $\cp$ tutte le funzioni calcolabili
+            \end{itemize}
+        \end{solution}
+        
+        \question Descrizione DTM per calcolare lo spazio.
+        
+        \begin{solution}
+            Data la DTM $M = (Q, \Sigma, \Gamma, \delta, q_0, F)$ si definisce $S(x)$ il numero di celle occupate sul nastro di memoria durante la computazione di $M$ su $x$. 
+            
+            La complessità in spazio viene conseguentemente definita come
+            $$ s(x) = \max \left\{S (x) \mid x \in \Sigma^\ast \wedge |x| = n\right\}$$ 
+            ovvero come il massimo numero di celle usate per il calcolo di un input, per ogni taglia di input.
+            
+            Ma in questo modo viene considerato anche lo spazio dedicato all'input, non permettendo complessità sublineari. Per risolvere, si aggiunge un altro nastro dedicato all'input, con dei terminatori $\notin \Sigma$. Si deve modificare la funzione di transizione per gestire il moto delle due testine e permettere di leggere sia da nastro di input che di lavoro.
+            
+            Per ogni $x \in \Sigma^\ast$, $S(x)$ è ora dato solo dal numero di celle usate solamente sul nastro di lavoro, non considerando così l'interferenza dovuta all'input.
+            
+            Il linguaggio $L \in \Sigma^\ast$ è riconosciuto in spazio deterministico $f(n)$ se e solo se esiste una DTM $M$ tale che $L = L_M$ e $s(n) \leq f(n)$.
+        \end{solution}
+        
+        \question Com'è definita la computazione in una DTM.
+        
+        \begin{solution}
+            La computazione è una sequenza di mosse (passo che, dato lo stato corrente e simbolo letto, porta a un nuovo stato, con eventuale scrittura e spostamento) dettate dalla funzione di transizione. 
+            
+            La funzione di transizione è definita come
+            $$ \delta: Q \times \Gamma \rightarrow Q \times (\Gamma \setminus \left\{ blank \right\}) \times \left\{-1, 0, 1\right\} $$
+        \end{solution}
+        
+        \question Qual è la condizione di terminazione in una DTM.
+        
+        \begin{solution}
+            Una DTM termina quando entra in uno stato finale, ovvero con $\delta (q, \gamma) = \bot$, oppure quando la funzione di transizione non è definita (si tratta di una funzione parziale).
+        \end{solution}
+        
+        \question Definizione ricorsive primitive partendo da $\elem$.
+        
+        \begin{solution}
+            L'insieme $\elem$ contiene solo le operazioni di successore, proiettore e azzeramento. Aggiungendo l'operatore di composizione 
+            $$ \comp (h, g_1, \dots, g_k): \N^n \rightarrow \N \mid \comp (h, g_1, \dots, g_k) (\underline{x}) = h(g_1 (\underline{x}) \circ \dots \circ g_n (\underline{x})) $$
+            e l'operatore di ricorsione primitiva
+            $$ \rp (h, g) = f(\underline{x}, y) = \begin{cases}
+                g(\underline{x}) & \text{ se } y = 0 \\
+                h(f(\underline{x}, y), y-1, \underline{x}) & \text{ se } y > 0 
+            \end{cases}$$
+            per poi chiudere l'insieme rispetto alle due operazioni, si ottiene l'insieme $\ricprim$
+            $$ \elem^{\left\{\comp, \rp\right\}} = \ricprim $$
+        \end{solution}
+        
+        \question Definizione ricorsive parziali.
+        
+        \begin{solution}
+            A partire da $\ricprim$ (definito sopra), per aggiungere all'insieme delle funzioni calcolabili le ricorsive parziali si usa l'operatore di minimalizzazione: 
+            $$ \MIN (f) (\underline{x}) = \mu_y (f(\underline{x}, y) = 0) = \begin{cases}
+                y & \text{ se } f(\underline{x}, y) = 0 \wedge (\forall y' \leq y, f(\underline{x}, y) \downarrow \wedge f(\underline{x}, y') \neq 0) \\
+                \bot & \text{ altrimenti}
+            \end{cases} $$
+            
+            Informalmente, restituisce il più piccolo valore di $y$ che azzera $f(\underline x, y)$, ovunque precedentemente definita su $y'$. Questo operatore permette le presenza di funzioni parziali e chiudere $\ricprim$ rispetto alla minimalizzazione permette di ottenere
+            $$ \elem^{\left\{\comp, \rp, \MIN\right\}} = \cp $$
+            ovvero l'insieme delle funzioni ricorsive parziali.
+        \end{solution}
+        
+        % TODO ????
+        \question $\ricprim = F(\for)$
+        
+        \begin{solution}
+            Tutte le funzioni in $\ricprim$ hanno inizio e fine ben definiti, sono tutte funzioni totali (ma non rappresenta tutte le funzioni totali), quindi sulla base di questo si può definire il costrutto $\for$ che si serve di una variabile di controllo che parte da un valore ed arriva a un valore limite. 
+            
+            Le funzioni calcolabili tramite $\for$ sono funzioni totali con numero di iterazioni noto, esattamente come per $\ricprim$.
+        \end{solution}
+        
+        \question Relazione tra $\cp$ e $F(\while)$.
+        
+        \begin{solution}
+            Per confrontare $\cp$ e $F(\while)$ si può cominciare dal domandarsi se $\cp \subseteq F(\while)$. L'insieme $\cp$ può essere visto come definito induttivamente, ovvero
+            \begin{itemize}
+                \item Se $f \in \elem$ allora $f \in \cp$
+                
+                \item Se $h, g_1, \dots, g_k \in \cp$ allora $\comp(h, g_1, \dots, g_k) \in \cp$
+                
+                \item Se $h, g \in \cp$ allora $\rp(h,g) \in \cp$ 
+                
+                \item Se $f \in \cp$, allora $\MIN (f) \in \cp$
+            \end{itemize}
+            
+             Di conseguenza, proviamo per induzione strutturale su $\cp$ che le funzioni sono while-programmabili: 
+            \begin{itemize}
+                \item Passo base: le funzioni elementari sono semplicemente programmabili tramite while
+                
+                \item Passi induttivi: 
+                \begin{itemize}
+                    \item Per $\comp (h,g_1, \dots, g_k) \in \cp$: si tratta di una composizione di istruzioni base, programmabili per I.H.
+                    
+                    \item Per $\rp (h, g) = f(\underline{x}, y)$: si usa un comando while e una variabile di controllo per iterare un singolo comando, programmabile per I.H., finché la variabile di controllo non ha raggiunto il valore di $y$
+                    
+                    \item Per $\MIN(f) \in \cp$: un ciclo while può incrementare il valore di 1 finché non azzera la funzione, ottenendo la stessa semantica della minimalizzazione
+                \end{itemize}
+            \end{itemize}
+            Quindi $\cp \subseteq F(\while)$.
+            
+            Per $F(\while) \subseteq \cp$: si può rappresentare la semantica di un programma $W \in \wprog$ con 
+            $$ \Psi_W = \pro^{21}_0 (\llbracket W \rrbracket (\win (x))) $$
+            Quindi, sapendo che l'operatore di proiezione è $\in \cp$, se la funzione di stato prossimo è ricorsiva parziale abbiamo verificato l'inclusione. 
+            
+            Definiamo la funzione numero prossimo $f_C$ che applica Cantor all'array degli stati; si può passare da $\llbracket C \rrbracket (x)$ a $f_C (x)$ usando solo funzioni ricorsive parziali. Verifichiamo che $f_C$ sia ricorsiva parziale per induzione strutturale: 
+            \begin{itemize}
+                \item Passo base:
+                
+                \begin{itemize}
+                    \item $C \equiv x_k :=0$
+                    $$ f_C = \left[ \pro^{21}_0 (x), \dots, 0, \dots, \pro^{21}_20 (x) \right] $$
+                    con lo 0 in posizione $k$
+                    
+                    \item $C \equiv x_k := x_j \pm 1$
+                    $$ f_C = \left[\pro^{21}_0 (x), \dots, \pro^{21}_j (x) + 1, \dots, \pro^{21}_20 (x) \right] $$
+                \end{itemize}
+                Avendo usato solo funzioni $\in \cp$, i due comandi sono $\in \cp$
+                
+                \item Passo induttivo: 
+                \begin{itemize}
+                    \item $C \equiv \text{\texttt{begin }} C_1; \dots; C_n; \text{\texttt{ end}}$
+                    $$ f_C = f_{C_n} ( \dots f_{C_1}(x) \dots )$$
+                    
+                    \item $C \equiv \text{\texttt{while }} x_k \neq 0 \text{\texttt{ do }} C_b$
+                    $$ f_C (x) = f_{C_b}^{e(x)} (x) \text{ con } e(x) = \mu_y (\pro(k, f_{C_b}^y (x))) $$
+                    $e(x)$ non è costante, ma si può definire $T(x,y) = f_{C_b}^y (x)$, facilmente implementabile tramite ricorsione primitiva, quindi $\in \cp$, facendo diventare $e(x)$ una minimalizzazione di funzioni $\in \cp$, quindi $e(x) \in \cp$. 
+                \end{itemize}
+                Quindi anche questi sono $\in \cp$
+            \end{itemize}
+            Abbiamo provato anche che $F(\while) \in \cp$.
+            
+            Di conseguenza, in totale
+            $$ \cp = F(\while) $$ 
+        \end{solution}
+    \end{questions}
 \end{document}
