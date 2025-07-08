@@ -470,9 +470,10 @@ Il valore $\langle x,y \rangle$ rappresenta l'incrocio tra la $x$-esima riga e l
     \item si incrementa $x$ di $1$ e si ripete dal punto precedente
 \end{enumerate}
 
-La funzione e' ovviamente:
+La funzione è ovviamente:
 \begin{itemize}
 	\item iniettiva: non ci possono essere celle con lo stesso numero
+    
 	\item suriettiva: ogni numero in $\N^+$ deve comparire
 \end{itemize}
 Entrambe le proprietà sono soddisfatte, in quanto la numerazione avviene in maniera incrementale, quindi ogni numero prima o poi compare in una cella e di conseguenza ho una coppia che lo genera.
@@ -1192,7 +1193,7 @@ Per I.H. sappiamo come compilare $C$. Possiamo calcolare la compilazione del com
 		$\comp(\text{\texttt{while }} x_k \neq 0 \texttt{ do } C) = $ & \texttt{LOOP:} & \texttt{IF $R_k = 0$ THEN GOTO EXIT} \\
 		&& $\comp(C)$ \\
 		&& \texttt{IF $R_{21} = 0$ THEN GOTO LOOP} \\
-		& \texttt{EXIT:} & $R_k \leftarrow R_k \dotminus 1$ \lcomment{Questa istruzione e' un po come un \texttt{pass}/\texttt{nop} in quanto $R_{k}$ è sicuramente 0} \\
+		& \texttt{EXIT:} & $R_k \leftarrow R_k \dotminus 1$ \lcomment{Questa istruzione è un po come un \texttt{pass}/\texttt{nop} in quanto $R_{k}$ è sicuramente 0} \\
 		\cline{2-3}
 	\end{tabular}
 \end{center}

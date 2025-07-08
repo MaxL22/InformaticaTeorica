@@ -10,6 +10,7 @@
 \usepackage{amsthm}
 \usepackage{dutchcal}
 \usepackage{stmaryrd}
+\usepackage[normalem]{ulem}
 
 \title{Domande Informatica Teorica}
 \author{Massimo Perego}
@@ -89,26 +90,12 @@
 % Come abbiamo definito la potenza computazionale $F(\ram)$.
 % Dimostrare che tutte le funzioni $\ricprim$ sono totali.
 % Radice quadrata come ricorsiva parziale e whiles
+% Proprietà di $\ricprim$; sono totali, come lo dimostreresti?
 
 %%%%% Dal sito
-%
-%Perché ha senso il corso di informatica teorica. Perché ha senso studiare la teoria di calcolabilità
-%Definire potenza di calcolo
-%Cosa significa che N non è isomorfo a N^N
-%Come abbiamo definito le funzioni calcolabili
-%Quali sono le funzioni in ELEM
-%Operatore di composizione
-%Operatore di ricorsione primitiva
-%Quale è il nome dell’insieme ottenuto dopo la ricorsione primitiva
-%RICPRIM sottoinsieme di F(WHILE)
-%proprietà di RICPRIM (sono totali, come lo dimostreresti)
-%Operatore di minimalizzazione
-%Dimostrare una F(WHILE) sottoinsieme P
-%dimostra F(WHILE) incluso in P
-%SPA
 %Teorema di ricorsione con dimostrazione
 %differenza tra funzioni totali e funzioni ricorsive totali
-%Struttura dui una macchina di turing deterministica
+%Struttura di una macchina di turing deterministica
 %Complessità temporale
 %Complessità spaziale
 %relazione tra DTIME e NTIME
@@ -121,7 +108,7 @@
 %Cosa dice Rice a proposito di un insieme che rispetta le funzioni
 %Il teorema di Rice ci dice quando certi insiemi non sono ricorsivi. Mi fai un esempio di insieme che non rispetta le funzioni? Inventatene uno.
 %Questo che hai inventato è ricorsivo?
-%Può avere anche altre caratteristiche questo insieme (essere ricorsivamente numerabile o altro? )
+%Può avere anche altre caratteristiche questo insieme (essere ricorsivamente numerabile o altro?)
 
 \begin{document}
     
@@ -562,18 +549,20 @@
             $$ \elem^{\left\{\comp, \rp\right\}} = \ricprim $$
         \end{solution}
         
-        \question Definizione ricorsive parziali.
+        \question Definizione ricorsive parziali. Come abbiamo definito le funzioni calcolabili?
         
         \begin{solution}
             A partire da $\ricprim$ (definito sopra), per aggiungere all'insieme delle funzioni calcolabili le ricorsive parziali si usa l'operatore di minimalizzazione: 
             $$ \MIN (f) (\underline{x}) = \mu_y (f(\underline{x}, y) = 0) = \begin{cases}
-                y & \text{ se } f(\underline{x}, y) = 0 \wedge (\forall y' \leq y, f(\underline{x}, y) \downarrow \wedge f(\underline{x}, y') \neq 0) \\
-                \bot & \text{ altrimenti}
+                y & \text{se } f(\underline{x}, y) = 0 \wedge (\forall y' < y, f(\underline{x}, y) \downarrow \wedge f(\underline{x}, y') \neq 0) \\
+                \bot & \text{altrimenti}
             \end{cases} $$
             
             Informalmente, restituisce il più piccolo valore di $y$ che azzera $f(\underline x, y)$, ovunque precedentemente definita su $y'$. Questo operatore permette le presenza di funzioni parziali e chiudere $\ricprim$ rispetto alla minimalizzazione permette di ottenere
             $$ \elem^{\left\{\comp, \rp, \MIN\right\}} = \cp $$
             ovvero l'insieme delle funzioni ricorsive parziali.
+        
+            La tesi di Church-Turing sostiene che l'insieme delle funzioni intuitivamente calcolabili coincide con $\cp$ (alternativamente, le funzioni calcolabili tramite DTM).
         \end{solution}
         
         % TODO ????
@@ -647,6 +636,200 @@
             
             Di conseguenza, in totale
             $$ \cp = F(\while) $$ 
+        \end{solution}
+        
+        \question Perché ha senso il corso di informatica teorica? Perché ha senso studiare la teoria della calcolabilità?
+        
+        \begin{solution}
+            \sout{Perché mi servono credit} Il corso si pone le domande di \textit{cosa} è in grado di fare l'informatica e \textit{come} è in grado di farlo.
+            
+            La teoria della calcolabilità vuole dare una caratterizzazione generale, sotto forma matematica, di ciò che è calcolabile, ovvero i problemi risolvibili per via automatica. Ha l'obiettivo di delineare la portata dell'informatica stessa.
+        \end{solution}
+        
+        \question Definire la potenza di calcolo.
+        
+        \begin{solution}
+            La potenza di calcolo di un sistema è definita come l'insieme di tutte le funzioni che quel sistema è in grado di calcolare.
+            
+            Definendo un sistema di calcolo come 
+            $$ \C: \prog \rightarrow \dati, \text{ con } P \in \prog \tc P: \dati \rightarrow \dati_\bot $$
+            Con $\C(P,x)$ si indica la semantica del programma $P$ su input $x$ nel sistema di calcolo $\C$, ovvero il risultato dell'esecuzione.
+            
+            La potenza di calcolo è quindi definita come
+            $$ F(\C) = \left\{\C(P, \_) \mid P \in \prog \right\} $$
+        \end{solution}
+        
+        \question Cosa significa che $\N$ non è isomorfo a $\N_\bot^\N$?
+        
+        \begin{solution}
+            Quando due insiemi sono isomorfi vuol dire che si può avere una biezione tra essi, $\N$ è "meno numeroso" di $\N_\bot^\N$, di conseguenza non si può avere una biezione.
+            
+            Per dimostrarlo: per assurdo, supponiamo che $\N \sim \N_\bot^\N$, ovvero entrambi gli insiemi sono numerabili e di conseguenza listabili. Ricordando la definizione
+            $$ \N_\bot^\N = \left\{f: \N \rightarrow \N_\bot \right\} $$
+            
+            Possiamo listare tutte le funzioni: 
+            \begin{itemize}
+                \item Sulla prima riga $f_0(0)$, $f_0(1)$, $f_0(2)$, \dots
+                
+                \item Sulla seconda riga $f_1(0)$, $f_1(1)$, $f_1(2)$, \dots
+                
+                \item \dots
+            \end{itemize}
+            
+            Costruiamo una funzione $\varphi: \N \rightarrow \N_\bot$ tale che
+            $$ \varphi (x) = \begin{cases}
+                1 & \text{ se } f_x(x) = \bot \\
+                f_x(x) + 1 & \text{ se } f_x(x) \downarrow
+            \end{cases}$$
+            Questa funzione appartiene a $\N_\bot^\N$ ma non alla lista definita precedentemente, assurdo sotto l'assunzione che $\N_\bot^\N$, di conseguenza
+            $$ \N_\bot^\N \nsim \N $$
+        \end{solution}
+        
+        \question Quali sono le funzioni in $\elem$?
+        
+        \begin{solution}
+            Le funzioni all'interno di $\elem$ sono
+            \begin{center}
+                \begin{tabular}{r c r l c l}
+                    $\elem = $ & $\{$ & successore: & $s(x) = x + 1$, & $x \in \N$ & \\
+                    && zero: & $0^n (x_1, \dots, x_n) = 0$, & $x_i \in \N$ & \\
+                    && proiettori: & $\pro_k^n (x_1, \dots, x_n) = x_k$, & $x_i \in \N$& $\}$ \\
+                \end{tabular}
+            \end{center}
+            
+            Queste sono funzioni "basilari" che qualunque idea di calcolabilità deve considerare come calcolabili.
+        \end{solution}
+        
+        \question Operatore di composizione, operatore di ricorsione primitiva. Quale è il nome dell'insieme ottenuto dopo la ricorsione primitiva?
+        
+        \begin{solution}
+            L'operatore di composizione è definito come
+            $$ \comp (h, g_1, \dots, g_k) (\underline{x}) = h(g_1 (\underline{x}) \circ \dots \circ g_k (\underline{x})) $$
+            
+            L'operatore di ricorsione primitiva è definito come
+            $$
+            \rp(h,g) = f(\underline{x}, y) = \begin{cases}
+                g(\underline{x}) & \text{ se } y = 0 \\
+                h(f(\underline{x}, y-1), y-1, \underline{x}) & \text{ se } y > 0 
+            \end{cases}
+            $$
+            
+            Chiudendo l'insieme $\elem$ rispetto alle operazioni di composizione e ricorsione primitiva si ottiene
+            $$ \elem^{\left\{\comp, \rp\right\}} = \ricprim $$
+        \end{solution}
+        
+        \question $\ricprim \subseteq F(\while)$
+        
+        \begin{solution}
+            Per dimostrare che $\ricprim \subseteq F(\while)$ consideriamo una definizione induttiva di $\ricprim$, questo è definibile come
+            \begin{itemize}
+                \item Se $f \in \elem$, $f \in \ricprim$
+                
+                \item Se $h,g_1, \dots, g_k \in \ricprim$, $\comp(h, g_1, \dots, g_k) \in \ricprim$
+                
+                \item Se $h,g \in \ricprim$, $\rp (h,g) \in \ricprim$
+                
+                \item Nient'altro in $\ricprim$
+            \end{itemize}
+            
+            Di conseguenza mostrare per induzione strutturale che ognuno di questi punti è while-programmabile permette di verificare l'inclusione.
+            
+            Passo base: le funzioni $\in \elem$ sono banalmente $\in \wprog$.
+            
+            Passo induttivo:
+            \begin{itemize}
+                \item La composizione di funzioni è un susseguirsi di comandi base, $\in \wprog$ per I.H., di conseguenza implementabile in $\while$
+                
+                \item La ricorsione primitiva è una forma di iterazione definita (implementabile tramite comando while e una variabile di controllo) che esegue un comando, quest'ultimo $\in \wprog$ per I.H.
+            \end{itemize}
+            
+            Di conseguenza abbiamo verificato che
+            $$ \ricprim \subseteq F(\while) $$
+        \end{solution}
+        
+        \question Operatore di minimalizzazione.
+        
+        \begin{solution}
+            L'operatore di minimalizzazione consiste, informalmente, del più piccolo valore che permette di azzerare una funzione, ovunque precedentemente definita. 
+            
+            Formalmente
+            $$ \MIN (f) (\underline{x}) = \begin{cases}
+                y & \text{se } f(\underline{x}, y) = 0 \wedge (\forall y' < y, f(\underline{x}, y') \neq 0 \wedge f(\underline{x}, y') \downarrow) \\
+                \bot & \text{altrimenti}
+            \end{cases}$$
+        \end{solution}
+        
+        \question Dimostrare $F(\while) \subseteq \cp$.
+        
+        \begin{solution}
+            Per dimostrare che $F (\while) \subseteq \cp$ bisogna mostrare che la semantica di ogni programma $\in \wprog$ è esprimibile sotto forma di operazioni $\in \cp$. 
+            
+            Sapendo che un programma while  $W$ è definibile come funzione stato prossimo sul programma stesso, la semantica su input $x$ è esprimibile come
+            $$ \Psi_W = \pro_0^{21} \llbracket W \rrbracket (\win (x)) $$
+            Dove: 
+            \begin{itemize}
+                \item La funzione $\llbracket C \rrbracket (x)$ restituisce lo stato della macchina in seguito all'esecuzione del comando $C$ (una tupla)
+                
+                \item $\pro_0^{21}$ restituisce il valore del primo registro (quello di output), a partire dalla tupla contenente lo stato della macchina
+                
+                \item $\win(x)$ definisce lo stato iniziale della macchina con input $x$
+            \end{itemize}
+            
+            Di conseguenza, mostrando che la funzione di stato prossimo è ricorsiva parziale viene verificata l'inclusione. 
+            
+            Il primo problema è che $\llbracket \_ \rrbracket (\_)$ lavora su $\N^{21}$, mentre gli elementi di $\cp$ hanno codominio $\N$. Per risolvere viene definita la funzione "numero prossimo" $f_C$, che condensa lo stato della macchina in un singolo valore tramite Cantor (useremo notazione $\left[\_\right]$).
+            
+            Vogliamo quindi mostrare che $f_C \in \cp$. Lo si può fare per induzione strutturale: 
+            \begin{itemize}
+                \item Passo base: assegnamenti:
+                \begin{itemize}
+                    \item $C \equiv x_k := 0$
+                    $$ f_C (x) = \left[\pro (0, x), \dots, 0, \dots, \pro (20, x) \right] $$
+                    dove lo 0 è in posizione $k$
+                    
+                    \item $C \equiv x_k := x_j \pm 1$
+                    $$ f_C (x) = \left[\pro (0, x), \dots, \pro (j, x) \pm 1, \dots, \pro(20, x) \right] $$
+                    sempre lavorando sulla posizione $k$
+                \end{itemize}
+                Si può notare che, per ora, $f_C$ è composta da solo funzioni $\in \cp$
+                
+                \item Passo induttivo:
+                \begin{itemize}
+                    \item $C \equiv \text{\texttt{begin }} C_1; \dots; C_k; \text{\texttt{ end}}$
+                    $$ f_C (x) = f_{c_k}( \dots f_{C_1}(x) \dots) $$
+                    
+                    \item $C \equiv \text{\texttt{while }} x_k \neq 0 \text{ do } C_b$
+                    $$ f_C (x) = f_{C_b}^{e(x)} (x) \ \text{ con } \ e(x) = \mu_y (\pro (k, f_{C_b}^y (x)) = 0) $$
+                    ma $e(x)$ non è costante. Si può definire però $ T(x,y) = f_{C_b}^y (x) $, implementabile tramite ricorsione primitiva:
+                    $$ T(x, y) = \begin{cases}
+                        x & \text{ se } y = 0 \\
+                        f_{C_b} (T (x, y-1)) & \text{ se } y > 0
+                    \end{cases}$$
+                    
+                    Di conseguenza $T(x,y) \in \T$, quindi
+                    $$ e(x) = \mu_y (\pro (k, f_{C_b}^y (x)) = 0) = \mu_y (\pro (k, T(x,y)) = 0) \in \T $$
+                    
+                    In conclusione
+                    $$ f_C (x) = T(x, e(x))$$
+                    quindi anche questo rientra $\in \cp$
+                \end{itemize}
+            \end{itemize}
+        \end{solution}
+        
+        \question SPA.
+        
+        \begin{solution}
+            Un Sistema di Programmazione Accettabile SPA è un sistema di calcolo $\C$ che rispetta gli assiomi di Rogers, ovvero
+            \begin{enumerate}
+                \item Aderisce alla tesi di Church-Turing
+                $$ F(\C) = \cp $$
+                
+                \item Ammette interprete universale
+                $$ \exists u \in \N \tc \forall x,y \in \N, \ \varphi_u (\langle x,y \rangle) = \varphi_y (x) $$
+                
+                \item Rispetta il teorema $S^m_n$, ovvero esiste $S^m_n \in \T$ tale che
+                $$ \forall n \in \N, \underline{x} \in \N^m, \underline{y} \in \N^n, \ \varphi_n (\langle \underline{x}, \underline{y} \rangle) = \varphi_{S^m_n (n, \underline{y})} (\underline{x}) $$
+            \end{enumerate}
         \end{solution}
     \end{questions}
 \end{document}
