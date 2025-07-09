@@ -87,28 +87,12 @@
 
 %TODO:
 % Cosa si intende con "definire le ricorsive parziali/totali"?
-% Come abbiamo definito la potenza computazionale $F(\ram)$.
 % Dimostrare che tutte le funzioni $\ricprim$ sono totali.
-% Radice quadrata come ricorsiva parziale e whiles
+% Radice quadrata come ricorsiva parziale e while
 % Proprietà di $\ricprim$; sono totali, come lo dimostreresti?
-
-%%%%% Dal sito
-%Teorema di ricorsione con dimostrazione
-%differenza tra funzioni totali e funzioni ricorsive totali
-%Struttura di una macchina di turing deterministica
-%Complessità temporale
-%Complessità spaziale
-%relazione tra DTIME e NTIME
-%la classe degli insiemi riconosciuti dalle macchine di touring coincie con? (la classe dei ricorsivamente numerabili)
-%Convincimi del fatto che esistono Quine negli spa
-%Enunciato del teorema di ricorsione totale
-%Per cosa abbiamo usato il teorema di ricorsione
-%Risolvi una funzione con il TR
-%Teorema di Rice (enunciato e dimostrazione)
-%Cosa dice Rice a proposito di un insieme che rispetta le funzioni
-%Il teorema di Rice ci dice quando certi insiemi non sono ricorsivi. Mi fai un esempio di insieme che non rispetta le funzioni? Inventatene uno.
-%Questo che hai inventato è ricorsivo?
-%Può avere anche altre caratteristiche questo insieme (essere ricorsivamente numerabile o altro?)
+% Differenza tra funzioni totali e funzioni ricorsive totali
+% Enunciato del teorema di ricorsione totale
+% Per cosa abbiamo usato il teorema di ricorsione
 
 \begin{document}
     
@@ -565,6 +549,13 @@
             La tesi di Church-Turing sostiene che l'insieme delle funzioni intuitivamente calcolabili coincide con $\cp$ (alternativamente, le funzioni calcolabili tramite DTM).
         \end{solution}
         
+        \question Come abbiamo definito la potenza computazionale $F(\ram)$?
+        
+        \begin{solution}
+            La potenza computazionale del sistema $\ram$ è definibile come
+            $$ F(\ram) = \left\{f \in \N_\bot^\N \mid \exists P \in \prog \tc \varphi_P = f \right\} = \left\{\varphi_P \mid P \in \prog \right\}$$
+        \end{solution}
+        
         % TODO ????
         \question $\ricprim = F(\for)$
         
@@ -830,6 +821,169 @@
                 \item Rispetta il teorema $S^m_n$, ovvero esiste $S^m_n \in \T$ tale che
                 $$ \forall n \in \N, \underline{x} \in \N^m, \underline{y} \in \N^n, \ \varphi_n (\langle \underline{x}, \underline{y} \rangle) = \varphi_{S^m_n (n, \underline{y})} (\underline{x}) $$
             \end{enumerate}
+        \end{solution}
+        
+        \question Teorema di ricorsione con dimostrazione.
+        
+        \begin{solution}
+            Il teorema di ricorsione dice che, dato un SPA $\varphi_i$, $\forall t: \N \rightarrow \N$ vale che
+            $$ \exists n \in \N \tc \varphi_n = \varphi_{t(n)} $$
+            
+            Ovvero, qualunque sia la natura di $t$, esisterà sempre un programma che mantiene la semantica in seguito alla trasformazione.
+            
+            \begin{proof}
+                Partiamo mostrando che
+                $$ \varphi_{\varphi_i (i)} (x) \stackrel{(2)}{=} \varphi_{\varphi_u (i,i)} (x) \stackrel{(2)}{=} \varphi_u (x, \varphi_u (i, i)) \rightsquigarrow f(x, i) \in \cp $$
+                
+                Di conseguenza
+                $$ \rightsquigarrow f(x,i) \stackrel{(1)}{=} \varphi_e (x, i) \stackrel{(3)}{=} \varphi_{S^1_1 (e, i)} (x) \quad (\dag)$$
+                
+                Consideriamo la funzione $t\left(S^1_1 (e,i)\right) \in \cp$, di conseguenza
+                $$ \exists m \in \N \tc t \left(S^1_1 (e, i) \right) = \varphi_m (i) \quad (\dag \dag) $$
+                
+                Poniamo ora $n = S^1_1 (e, m)$
+                $$ \varphi_{t(n)} (x) = \varphi_{t \left(S_1^1 (e, m)\right)} (x) \stackrel{(\dag \dag)}{=} \varphi_{\varphi_m (m)} (x) $$
+                $$ \varphi_n (x) = \varphi_{S^1_1 (e, m)} (x) \stackrel{(\dag)}{=} \varphi_{\varphi_m (m)} (x) $$
+                
+                $$ \implies \varphi_n (x) = \varphi_{t(n)} (x) $$
+            \end{proof}
+        \end{solution}
+        
+        \question Struttura di una DTM.
+        
+        \begin{solution}
+            Una macchina di Turing deterministica DTM è un dispositivo formato da un nastro potenzialmente infinito su cui leggere/scrivere e da un controllo a stati finiti. Può essere definita tramite la sestupla
+            $$ M = \left(Q, \Sigma, \Gamma, \delta, q_0, F \right) $$
+            Dove 
+            \begin{itemize}
+                \item $Q$ è l'insieme degli stati che può assumere la macchina
+                
+                \item $\Sigma$ è l'alfabeto di input
+                
+                \item $\Gamma$ è l'alfabeto di lavoro
+                
+                \item $\delta: Q \times \Gamma \rightarrow Q \times \Gamma \setminus \{blank\} \times \{1, 0, -1 \}$ è la funzione di transizione che, dato uno stato e un simbolo letto, definisce lo stato successivo, il simbolo scritto e il movimento sul nastro
+                
+                \item $q_0$ è lo stato iniziale
+                
+                \item $F \subseteq Q$ è l'insieme di stati finali in cui la macchina si arresta
+            \end{itemize}
+            
+            Per descrivere lo stato di una DTM si usa una configurazione $C = (q, k, w)$, dove
+            \begin{itemize}
+                \item $q$ è lo stato della macchina
+                
+                \item $k$ è la posizione della testina
+                
+                \item $w$ è il contenuto (non $blank$) del nastro
+            \end{itemize}
+            
+            La principale funzionalità di una DTM è riconoscere linguaggi, un linguaggio $L \subseteq \Sigma^\ast$ è riconoscibile da una DTM se solo se esiste una DTM $M$ tale che $L = L_M$. Di conseguenza, codificando insiemi in un linguaggio, si possono riconoscere insiemi e problemi di decisione. Le DTM sono anche in grado di calcolare funzioni, la computazione termina con $f(x)$ sul nastro se $f(x) \downarrow$, va in loop altrimenti.
+        \end{solution}
+        
+        \question Complessità temporale.
+        
+        \begin{solution}
+            Data una DTM $M$, con $T(x)$ si intende il numero di mosse della computazione di $M$ su $x$, la complessità in tempo è definita di conseguenza come
+            $$ t: \N \rightarrow \N \tc t(n) = \max \{T(x) \mid x \in \Sigma^\ast \wedge |x| = n\} $$
+            ovvero il tempo peggiore sugli input di una certa taglia. 
+            
+            Si dice che il linguaggio $L \subseteq \Sigma^\ast$ è riconoscibile in tempo deterministico $f(n)$ se esiste una DTM $M$ tale che $L = L_M$ e $t(n) \leq f(n)$.
+        \end{solution}
+        
+        \question Complessità spaziale.
+        
+        \begin{solution}
+            Data una DTM $M$, con $S(x)$ si intende il  numero di celle occupate sul nastro di lavoro durante la computazione di $M$ su $x$, la complessità in spazio è definita di conseguenza come
+            $$ s: \N \rightarrow \N \tc s(n) = \max \{S(x) \mid x \in \Sigma^\ast \wedge |x| = n \} $$
+            ovvero il maggior spazio occupato per la computazione di una certa taglia di input.
+            
+            Si dice che il linguaggio $L \subseteq \Sigma^\ast$ è riconoscibile in spazio deterministico $f(n)$ se esiste una DTM $M$ tale che $L = L_M$ e $s(n) \leq f(n)$.
+        \end{solution}
+        
+        \question Relazione tra $\dtime$ e $\ntime$.
+        
+        \begin{solution}
+            Si può facilmente notare che 
+            $$ \dtime \left(f(n)\right) \subseteq \ntime \left(f(n) \right) $$
+            
+            In quanto, data una DTM $M$, una NDTM si può comportare esattamente come $M$ ignorando la parte non deterministica della computazione.
+            
+            Per la relazione inversa, l'idea è quella di far generare e riconoscere a una DTM tutte le strutture che potrebbe considerare una NDTM, di conseguenza deve verificare in tempo $O(f(n))$ un numero di strutture generate $|\Gamma|^{O(f(n))}$, quindi il tempo richiesto diventa
+            $$ t(n) = O(f(n)) \cdot |\Gamma|^{O(f(n))} = O\left(f(n) \cdot 2^{O(f(n))}\right) $$
+            $$ \implies \ntime(f(n)) \subseteq \dtime \left(f(n) \cdot 2^{O(f(n))}\right) $$
+        \end{solution}
+        
+        \question La classe degli insiemi riconosciuti dalle macchine di Turing coincide con?
+        
+        \begin{solution}
+            La classe degli insiemi riconosciuti da una DTM coincide con la classe degli insiemi ricorsivamente numerabili. Dato un insieme $A$, consideriamo la codifica dell'insieme $L_A$, allora l'insieme è riconoscibile da una DTM se esiste $M$ tale che $L_A = L_M$. Il risultato della computazione può essere: 
+            \begin{itemize}
+                \item $x \in A$: $M$ si arresta
+                
+                \item $x \notin A$: $M$ va in loop (se ricorsivamente numerabile) o si arresta rifiutando (l'insieme è ricorsivo)
+            \end{itemize} 
+            
+            Un algoritmo deterministico per il riconoscimento di $A \subseteq \N$ è una DTM $M$ tale che $L_A = L_M$ e la computazione si arresta su ogni input. La classe degli insiemi riconosciuti da algoritmi deterministici coincide con la classe degli insiemi ricorsivi.
+        \end{solution}
+        
+        \question Convincimi del fatto che esistono Quine nei SPA.
+        
+        \begin{solution}
+            I programmi di Quine sono programmi che hanno loro stessi come semantica, ovvero $\varphi_j (x) = j$, la domanda quindi diventa
+            $$ \exists j \in \N \tc \varphi_j (x) = j, \ \forall x \in \N? $$
+            
+            Sappiamo che esiste un programma $P$ tale che $\varphi_P (x) = j$, di conseguenza si può codificare $P$ tramite una funzione ricorsiva totale $cod(P) = g(j)$. Per il teorema di ricorsione vale quindi che 
+            $$\exists j \in \N \tc \varphi_{g(j)} (x)  = \varphi_j (x) = j $$
+            
+            Quindi la risposta alla domanda è sì.
+        \end{solution}
+        
+        \question Teorema di Rice (enunciato e dimostrazione).
+        
+        \begin{solution}
+            Un insieme di programmi $I \subseteq \N$ rispetta le funzioni se è chiuso per semantica, ovvero
+            $$ (a \in I \wedge \varphi_a = \varphi_b) \implies b \in I $$
+            
+            Il teorema di Rice dice che un insieme $I \subseteq \N$ che rispetta le funzioni non è ricorsivo, a meno che $I = \emptyset$ o $I = \N$.
+            
+            \begin{proof}
+                Per assurdo, supponiamo che $I \neq \emptyset$ e $I \neq \N$ con $I$ ricorsivo, vuol dire che esistono $a \in I$ e $b \notin I$. Definiamo quindi la funzione
+                $$ t:\N \rightarrow \N \tc t(x) = \begin{cases}
+                    a & \text{ se } x \notin I \\
+                    b & \text{ se } x \in I 
+                \end{cases} $$
+                
+                E questa funzione è $\in \T$ e calcolabile grazie al programma $P_I$ che decide $I$, il quale esiste per assurdo. Per il teorema di ricorsione sappiamo che
+                $$ \exists d \in \N \tc \varphi_d = \varphi_{t(d)} $$
+                Quindi, per $d$ ci sono due possibilità:
+                \begin{itemize}
+                    \item $d \in I \implies t(d) \in I \implies b \notin I$, assurdo
+                    
+                    \item $d \notin I \implies t(d) \notin I$ e $t(d) = a \in I$, ma $I$ rispetta le funzioni quindi $d \in I$, assurdo
+                \end{itemize}
+            \end{proof}
+        \end{solution}
+        
+        %TODO Aggiungine uno non ricorsivo
+        \question Il teorema di Rice dice quando certi insiemi non sono ricorsivi. Fai un esempio di insieme che non rispetta le funzioni? Inventane uno. Questo è ricorsivo? Può avere anche altre caratteristiche questo insieme (essere ricorsivamente numerabile o altro)?
+        
+        \begin{solution}
+            Degli esempi di insiemi che non rispettano le funzioni sono:
+            $$ A = \left\{ P \mid cod(P) \leq 100 \right\} $$
+            
+            In generale, se l'appartenenza all'insieme è determinata dalla struttura dei valori al posto che dalla loro semantica l'insieme non rispetta le funzioni (molto generalmente).
+            
+            L'insieme $A$ si può notare che non rispetta le funzioni (facilmente dimostrabile per TR), ed è ricorsivo: si può trovare un programma che calcola la codifica di un programma input e si arresta sempre determinando l'appartenenza o meno di tale input all'insieme (ovvero un programma che implementa la funzione caratteristica $\X_A \in \T$). Dato che è ricorsivo, è anche ricorsivamente numerabile.
+        \end{solution}
+        
+        %TODO check
+        \question Che linguaggi sono i $\dspace(1)$ e cosa si usa per riconoscerli? Perché basta un'automa e non tutta la DTM?
+        
+        \begin{solution}
+            La classe dei linguaggi in $\dspace (1)$ sono quelli riconoscibili in spazio costante da una DTM, ovvero la classe dei linguaggi regolari. 
+            
+            Per definizione, un linguaggio è regolare se esiste un'automa che lo riconosce. Una DTM che usa spazio costante non può mantenere informazioni sulla computazione diverse dallo stato attuale, ovvero esattamente come una DFA, il quale si basa solo su stato attuale e simbolo letto. I linguaggi regolari non richiedono confronti tra parti non contigue della parola o conteggi non limitati.
         \end{solution}
     \end{questions}
 \end{document}
