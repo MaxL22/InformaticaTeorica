@@ -523,7 +523,7 @@
         
         \begin{solution}
             L'insieme $\elem$ contiene solo le operazioni di successore, proiettore e azzeramento. Aggiungendo l'operatore di composizione 
-            $$ \comp (h, g_1, \dots, g_k): \N^n \rightarrow \N \mid \comp (h, g_1, \dots, g_k) (\underline{x}) = h(g_1 (\underline{x}) \circ \dots \circ g_n (\underline{x})) $$
+            $$ \comp (h, g_1, \dots, g_k): \N^n \rightarrow \N \mid \comp (h, g_1, \dots, g_k) (\underline{x}) = h(g_1 (\underline{x}), \dots, g_n (\underline{x})) $$
             e l'operatore di ricorsione primitiva
             $$ \rp (h, g) = f(\underline{x}, y) = \begin{cases}
                 g(\underline{x}) & \text{ se } y = 0 \\
@@ -695,7 +695,7 @@
         
         \begin{solution}
             L'operatore di composizione è definito come
-            $$ \comp (h, g_1, \dots, g_k) (\underline{x}) = h(g_1 (\underline{x}) \circ \dots \circ g_k (\underline{x})) $$
+            $$ \comp (h, g_1, \dots, g_k) (\underline{x}) = h(g_1 (\underline{x}), \dots, g_k (\underline{x})) $$
             
             L'operatore di ricorsione primitiva è definito come
             $$
